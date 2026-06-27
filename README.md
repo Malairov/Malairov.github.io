@@ -5,7 +5,7 @@ Static site, no build step, no dependencies beyond Google Fonts. Three files do 
 ## Before you publish — replace these placeholders
 
 In `index.html`:
-- `you@example.com` (appears twice)
+- `pavlomalairov@gmail.com` (appears twice)
 - `https://linkedin.com/in/yourprofile` (appears twice)
 - The "Download PDF" resume link `href="#"` — point it at your actual resume file once you add it to the repo, e.g. `resume.pdf`
 - Hero metrics and case-study numbers are pulled from your verified figures — double check them against your latest resume before publishing, in case anything has changed since this was written.
