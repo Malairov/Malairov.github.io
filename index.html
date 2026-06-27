@@ -1,280 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pavlo Malairov — Operations &amp; Implementation</title>
-<meta name="description" content="Operations and implementation builder. Stabilizes immature operations and builds the systems, controls, and automation that run them — without stopping the business.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+(function () {
+  const historyInput = document.getElementById('usage-history');
+  const historyOut = document.getElementById('usage-history-out');
+  const onsiteInput = document.getElementById('item-age');
+  const onsiteOut = document.getElementById('item-age-out');
+  const oldResult = document.getElementById('old-result');
+  const newResult = document.getElementById('new-result');
+  const oldStatus = document.getElementById('old-status');
+  const newStatus = document.getElementById('new-status');
+  const oldFormula = document.getElementById('old-formula');
+  const newFormula = document.getElementById('new-formula');
 
-<div class="grid-overlay" aria-hidden="true"></div>
+  function render() {
+    const weeksOfHistory = Number(historyInput.value);
+    const itemAgeWeeks = Number(onsiteInput.value);
+    historyOut.textContent = weeksOfHistory + ' wk';
+    onsiteOut.textContent = itemAgeWeeks + ' wk';
 
-<header class="site-header">
-  <div class="wrap">
-    <div class="logo"><span class="dot" aria-hidden="true"></span>P. MALAIROV</div>
-    <nav class="site-nav">
-      <a href="#cases">Cases</a>
-      <a href="#lab">Lab</a>
-      <a href="#background">Background</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
+    // Legacy formula: rolling average usage over a fixed lookback window.
+    // New items with < lookback weeks of history get an artificially low
+    // denominator-driven average because missing weeks count as zero usage.
+    const lookback = 12;
+    const observedUsage = 8; // arbitrary stand-in average weekly draw once it ramps up
+    const legacyAvg = (observedUsage * Math.min(weeksOfHistory, lookback)) / lookback;
+    const legacySafetyStock = Math.round(legacyAvg * 1.5);
 
-<section class="hero">
-  <div class="wrap">
-    <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span>Embedded on-site &middot; Winnipeg, MB</div>
-    <h1>I build the operational systems that keep a <span class="accent">regulated supply chain</span> running while no one stops the line.</h1>
-    <p class="lede">Operations &amp; implementation specialist. I walk into immature programs, stabilize what's running today, and build the master data, controls, and automation that let it scale tomorrow — without a gap in coverage.</p>
+    // Corrected formula: classify by tenure first. Anything under a
+    // configurable threshold is flagged NO-USAGE and routed to manual
+    // reorder review instead of being scored against thin history.
+    const noUsageThreshold = 6;
+    const isNoUsage = itemAgeWeeks < noUsageThreshold;
+    const correctedAvg = isNoUsage ? null : (observedUsage * Math.min(weeksOfHistory, lookback)) / lookback;
+    const correctedSafetyStock = isNoUsage ? 'flagged' : Math.round(correctedAvg * 1.5);
 
-    <div class="hero-meta">
-      <div class="item"><strong>1,800+</strong>active SKUs under management</div>
-      <div class="item"><strong>~30 min</strong>manual ordering effort, down from ~5 hrs</div>
-      <div class="item"><strong>460+</strong>installed locations on a prior platform rollout</div>
-    </div>
+    oldResult.textContent = legacySafetyStock + ' units';
+    if (legacySafetyStock <= 1) {
+      oldStatus.textContent = 'excluded from reorder review';
+      oldStatus.style.color = 'var(--warn)';
+    } else {
+      oldStatus.textContent = 'included in reorder review';
+      oldStatus.style.color = 'var(--ok)';
+    }
 
-    <div class="hero-cta">
-      <a class="btn primary" href="#cases">View case studies</a>
-      <a class="btn" href="#contact">Get in touch</a>
-    </div>
-  </div>
-</section>
+    if (isNoUsage) {
+      newResult.textContent = 'NO-USAGE';
+      newStatus.textContent = 'routed to manual review queue';
+      newStatus.style.color = 'var(--amber)';
+    } else {
+      newResult.textContent = correctedSafetyStock + ' units';
+      newStatus.textContent = 'included in reorder review';
+      newStatus.style.color = 'var(--ok)';
+    }
 
-<section id="cases">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="tag">Case studies</div>
-        <h2>Systems built on-site</h2>
-      </div>
-      <div class="count">04 documented cases</div>
-    </div>
+    oldFormula.textContent = `= AVG(usage, last ${lookback}wk window) x 1.5  ->  ${legacyAvg.toFixed(2)} x 1.5`;
+    newFormula.textContent = isNoUsage
+      ? `tenure ${itemAgeWeeks}wk < ${noUsageThreshold}wk threshold -> classify NO-USAGE, skip averaging`
+      : `tenure OK -> = AVG(usage, last ${lookback}wk window) x 1.5  ->  ${correctedAvg.toFixed(2)} x 1.5`;
+  }
 
-    <div class="cases">
-
-      <div class="case reveal">
-        <div class="case-id">
-          <span class="num">01</span>
-          Anchor case
-          <span class="tag-pill">Process design</span>
-        </div>
-        <div class="body">
-          <h3>Four parallel operating loops</h3>
-          <p>Inherited a single-threaded consignment program with no separation between demand signal, physical verification, vendor performance, and cost control. Designed and ran four concurrent operating loops — floor supervisor feedback, slot-economics auditing, JIT tuning, and billing-state tracking — so each function could improve independently without waiting on the others.</p>
-          <div class="metric-row">
-            <div class="metric"><div class="val">4</div><div class="label">concurrent loops</div></div>
-            <div class="metric"><div class="val">0</div><div class="label">coverage gaps during rollout</div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="case reveal">
-        <div class="case-id">
-          <span class="num">02</span>
-          Vendor governance
-          <span class="tag-pill">Multi-tier control</span>
-        </div>
-        <div class="body">
-          <h3>Multi-tier vendor &amp; spec governance</h3>
-          <p>Built a qualification structure spanning distributor, manufacturer, and OEM-spec tiers to keep substitutions inside customer-mandated tooling specifications. Constraint-first funnel: every proposed item passes spec-control gates before it's eligible for sourcing, not after.</p>
-          <div class="metric-row">
-            <div class="metric"><div class="val">~50%</div><div class="label">fewer spec exceptions reaching the floor</div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="case reveal">
-        <div class="case-id">
-          <span class="num">03</span>
-          Root cause
-          <span class="tag-pill">Diagnosis</span>
-        </div>
-        <div class="body">
-          <h3>Safety-stock formula silently excluding new items</h3>
-          <p>New SKUs were vanishing from reorder review. Traced the fault across three layers — a hub formula, the query logic feeding it, and a classification macro — to find new items being scored against thin usage history and misrouted to a dead-stock bucket. Full breakdown and a live version of the fix logic below.</p>
-          <div class="metric-row">
-            <div class="metric"><div class="val">3</div><div class="label">compounding root causes found</div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="case reveal">
-        <div class="case-id">
-          <span class="num">04</span>
-          Tracking build
-          <span class="tag-pill">System build</span>
-        </div>
-        <div class="body">
-          <h3>MWO tracking system, built from nothing</h3>
-          <p>No structured way to track tooling shortages back to root cause. Built a tracking system that ties shortage events to specific work orders and vendors, turning a list of complaints into a dataset that points at where the program actually breaks.</p>
-          <div class="metric-row">
-            <div class="metric"><div class="val">~1 wk</div><div class="label">avg. gap duration, down from ~16 days</div></div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section id="loops-detail">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="tag">How the anchor case works</div>
-        <h2>Four loops, one program</h2>
-      </div>
-    </div>
-    <div class="loops">
-      <div class="loop reveal">
-        <div class="loop-num">LOOP 01</div>
-        <h4>Floor supervisor feedback</h4>
-        <p>Direct signal from the people using the parts before it shows up as a shortage.</p>
-      </div>
-      <div class="loop reveal">
-        <div class="loop-num">LOOP 02</div>
-        <h4>Slot-economics auditing</h4>
-        <p>Checks whether the cost of holding a slot is still justified by what moves through it.</p>
-      </div>
-      <div class="loop reveal">
-        <div class="loop-num">LOOP 03</div>
-        <h4>JIT tuning</h4>
-        <p>Adjusts replenishment cadence against actual draw, not the original install assumption.</p>
-      </div>
-      <div class="loop reveal">
-        <div class="loop-num">LOOP 04</div>
-        <h4>Billing-state tracking</h4>
-        <p>Keeps consumption events reconciled with what's actually billable, on a rolling basis.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="lab">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="tag">Technical lab</div>
-        <h2>Safety-stock fix, live</h2>
-      </div>
-      <div class="count">reconstructed logic &middot; sample data</div>
-    </div>
-
-    <div class="lab-frame">
-      <div class="lab-intro">
-        <p>This reproduces the actual defect from case 03 using a simplified, anonymized version of the formula — no real SKUs, vendor names, or client data. Move the sliders to see why new items disappeared from reorder review, and how the fix catches them.</p>
-        <p class="note">Original system: SharePoint hub formula -&gt; Power Query (M) -&gt; VBA classification macro. This demo isolates the core averaging logic that caused the failure.</p>
-      </div>
-
-      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 32px;" id="lab-controls-grid">
-        <div>
-          <label style="font-family: var(--mono); font-size: 12px; color: var(--steel-light); display:block; margin-bottom: 8px;">Weeks of usage history available</label>
-          <div style="display:flex; align-items:center; gap: 12px;">
-            <input type="range" id="usage-history" min="0" max="12" value="2" step="1" style="flex:1;">
-            <span id="usage-history-out" style="font-family: var(--mono); font-size: 13px; min-width: 40px;">2 wk</span>
-          </div>
-        </div>
-        <div>
-          <label style="font-family: var(--mono); font-size: 12px; color: var(--steel-light); display:block; margin-bottom: 8px;">Item age (time on the program)</label>
-          <div style="display:flex; align-items:center; gap: 12px;">
-            <input type="range" id="item-age" min="0" max="12" value="2" step="1" style="flex:1;">
-            <span id="item-age-out" style="font-family: var(--mono); font-size: 13px; min-width: 40px;">2 wk</span>
-          </div>
-        </div>
-      </div>
-
-      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1px; border: 1px solid var(--line);">
-        <div style="background: var(--paper); padding: 22px;">
-          <div style="font-family: var(--mono); font-size: 11px; color: var(--steel-light); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px;">Legacy formula</div>
-          <div id="old-result" style="font-size: 26px; font-weight: 600; margin-bottom: 6px;">—</div>
-          <div id="old-status" style="font-size: 13px; font-weight: 500; margin-bottom: 14px;">—</div>
-          <div id="old-formula" style="font-family: var(--mono); font-size: 12px; color: var(--steel); line-height: 1.6;">—</div>
-        </div>
-        <div style="background: var(--paper); padding: 22px;">
-          <div style="font-family: var(--mono); font-size: 11px; color: var(--amber); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px;">Corrected formula</div>
-          <div id="new-result" style="font-size: 26px; font-weight: 600; margin-bottom: 6px;">—</div>
-          <div id="new-status" style="font-size: 13px; font-weight: 500; margin-bottom: 14px;">—</div>
-          <div id="new-formula" style="font-family: var(--mono); font-size: 12px; color: var(--steel); line-height: 1.6;">—</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="background">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="tag">Background</div>
-        <h2>Where this approach comes from</h2>
-      </div>
-    </div>
-
-    <div class="skill-grid">
-      <div class="skill-block reveal">
-        <div class="tag">Current</div>
-        <ul>
-          <li>In-Plant Solution Specialist — MSC Industrial Supply</li>
-          <li>Embedded full-time at an aerospace manufacturing site</li>
-          <li>Sole on-site rep for a multi-million-$ consignment program</li>
-          <li>PMP certified</li>
-        </ul>
-      </div>
-      <div class="skill-block reveal">
-        <div class="tag">Prior</div>
-        <ul>
-          <li>Project Manager — SmartC (AI / computer vision, remote)</li>
-          <li>Platform scaled to 460+ installed locations</li>
-          <li>Lean Six Sigma Green Belt — in progress</li>
-        </ul>
-      </div>
-      <div class="skill-block reveal">
-        <div class="tag">Foundation</div>
-        <ul>
-          <li>8 years maritime operations</li>
-          <li>Officer in charge of a navigational watch, vessels &gt;500GRT</li>
-          <li>Delegated functional leadership of ~20-person crews</li>
-          <li>Vessels up to 40,000 GT</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="contact" style="border-bottom: none;">
-  <div class="wrap">
-    <div class="contact-grid">
-      <div>
-        <h2>Working on a process that's outgrown its system?</h2>
-        <p class="lede">I'm looking at implementation, operations, and service delivery roles across aerospace, manufacturing, MRO, and industrial — anywhere a process has outgrown the system that was supposed to run it.</p>
-      </div>
-      <div class="contact-card">
-        <div class="row"><span>Location</span><span>Winnipeg, MB</span></div>
-        <div class="row"><span>Email</span><a href="mailto:you@example.com">you@example.com</a></div>
-        <div class="row"><span>LinkedIn</span><a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">linkedin.com/in/yourprofile</a></div>
-        <div class="row"><span>Resume</span><a href="#">Download PDF</a></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <div class="f-links">
-      <a href="mailto:you@example.com">Email</a>
-      <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="#">Resume</a>
-    </div>
-    <div class="f-meta">Built and deployed from source &middot; no template</div>
-  </div>
-</footer>
-
-<script src="js/lab.js"></script>
-<script src="js/reveal.js"></script>
-</body>
-</html>
+  historyInput.addEventListener('input', render);
+  onsiteInput.addEventListener('input', render);
+  render();
+})();
