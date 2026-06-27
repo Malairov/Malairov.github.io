@@ -1,87 +1,30 @@
-(function () {
-  const skus = [
-    { id: 'new', label: 'New item · week 1', touches: ['intake'] },
-    { id: 'active', label: 'Active · steady draw', touches: ['floor', 'slot', 'jit'] },
-    { id: 'flagged', label: 'Flagged by supervisor', touches: ['floor', 'slot'] },
-    { id: 'prepaid', label: 'MAW prepaid batch', touches: ['billing'] },
-    { id: 'overstocked', label: 'Slow mover · overstocked', touches: ['slot', 'jit'] }
-  ];
+# Portfolio site — v2 (ops console redesign)
 
-  const loops = [
-    {
-      id: 'floor', num: '01', title: 'Floor supervisor feedback', tag: 'weekly · 60+ supervisors',
-      body: 'Every week, floor supervisors flag items that are wrong, missing, or unnecessary at their station. This is the fastest signal in the system — it surfaces a problem before it shows up as a shortage or a dead-stock report.',
-      inputs: 'INPUTS: supervisor flags, usage complaints',
-      outputs: 'FEEDS: SKU weeding decisions, slot-economics review'
-    },
-    {
-      id: 'slot', num: '02', title: 'Slot-economics audit', tag: 'ongoing · vending hardware ~$1M/unit',
-      body: 'Vending hardware slots are expensive and finite. This loop asks whether each item still earns its physical space — weighing draw rate against the cost of holding that slot, and against contractual overstock limits that carry their own financial risk.',
-      inputs: 'INPUTS: floor feedback, draw rate, overstock limits',
-      outputs: 'FEEDS: JIT tuning, item removal decisions'
-    },
-    {
-      id: 'jit', num: '03', title: 'JIT tuning', tag: 'analytical · hard-floor constrained',
-      body: 'Replenishment timing gets tuned against actual draw, not the original install assumption. The constraint that matters: minimum order quantities and lead times set a hard floor this loop can\'t optimize past, no matter how clean the demand signal is.',
-      inputs: 'INPUTS: slot-economics output, usage history, lead times',
-      outputs: 'FEEDS: reorder timing, safety-stock levels'
-    },
-    {
-      id: 'billing', num: '04', title: 'Billing-state tracking', tag: 'continuous · MAW tag tracking',
-      body: 'New items enter on a MAW tag — prepaid, first batch, excluded from invoicing. The same tag that gets an item onto the program has to come off cleanly once it moves to standard consignment billing, or the client gets billed for stock they already paid for.',
-      inputs: 'INPUTS: item lifecycle stage, intake batch records',
-      outputs: 'FEEDS: billing accuracy, support team handoff'
-    }
-  ];
+Dark, instrumentation-panel aesthetic. Static site, no build step, no dependencies beyond Google Fonts.
 
-  const skuPicker = document.getElementById('sku-picker');
-  const mechContainer = document.getElementById('loops-mech');
-  if (!skuPicker || !mechContainer) return;
+## Before you publish
 
-  skus.forEach((s) => {
-    const btn = document.createElement('button');
-    btn.className = 'sku-btn';
-    btn.textContent = s.label;
-    btn.dataset.id = s.id;
-    btn.addEventListener('click', () => selectSku(s.id));
-    skuPicker.appendChild(btn);
-  });
+In `index.html`, replace the resume link placeholder:
+- `href="#"` on "Download PDF" — point it at your actual resume file once added to the repo.
 
-  loops.forEach((l) => {
-    const panel = document.createElement('div');
-    panel.className = 'loop-mech-panel';
-    panel.id = 'mech-panel-' + l.id;
-    panel.innerHTML =
-      '<div class="loop-mech-head">' +
-        '<div class="title-block"><span class="num">' + l.num + '</span><h4>' + l.title + '</h4></div>' +
-        '<div class="tag">' + l.tag + '</div>' +
-      '</div>' +
-      '<div class="loop-mech-detail" id="mech-detail-' + l.id + '">' +
-        '<p>' + l.body + '</p>' +
-        '<div class="io">' + l.inputs + '<br>' + l.outputs + '</div>' +
-      '</div>';
-    panel.addEventListener('click', () => toggleDetail(l.id));
-    mechContainer.appendChild(panel);
-  });
+Email and LinkedIn are already filled in with your real details.
 
-  function toggleDetail(id) {
-    const detail = document.getElementById('mech-detail-' + id);
-    if (detail) detail.classList.toggle('show');
-  }
+## Files
 
-  function selectSku(id) {
-    const buttons = skuPicker.querySelectorAll('.sku-btn');
-    buttons.forEach((b) => b.classList.toggle('active', b.dataset.id === id));
+- `index.html` — all page content and structure
+- `css/base.css` — full design system: dark console theme, all sections
+- `js/node-graph.js` — hero's live animated node graph (signature element)
+- `js/cases.js` — expandable case study cards
+- `js/architecture.js` — expandable system map with status LEDs
+- `js/lab.js` — live safety-stock formula demo
+- `js/reveal.js` — scroll-reveal animations + mobile nav toggle
 
-    const sku = skus.find((s) => s.id === id);
-    loops.forEach((l) => {
-      const panel = document.getElementById('mech-panel-' + l.id);
-      if (!panel) return;
-      const touched = sku.touches.includes(l.id);
-      panel.classList.toggle('dim', !touched);
-      panel.classList.toggle('active', touched);
-    });
-  }
+## Deploy to GitHub Pages (free)
 
-  selectSku('active');
-})();
+1. In your repo, replace these exact files: `index.html`, `css/base.css` (this replaces the old `css/style.css` — delete the old one if it's still in the repo), and all 5 files in `js/`.
+2. Delete any old JS files from the previous version that aren't listed above, if present (e.g. `loops.js` is no longer used).
+3. Commit. GitHub Pages rebuilds automatically within a minute or two.
+
+## Notes on the redesign
+
+This replaces the previous light "industrial paper" theme with a dark technical console aesthetic — animated node-graph hero, expandable case cards with problem/intervention/result structure, a system map with live status indicators, and a redesigned lab section with clearer risk-status panels. All original content and metrics are preserved; only presentation changed.

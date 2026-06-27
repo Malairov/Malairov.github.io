@@ -1,73 +1,75 @@
 (function () {
   const systems = [
     {
-      id: 'anchor', num: '01 — anchor system', title: 'Four parallel operating loops',
-      tag: 'Process design · runs continuously',
+      id: 'anchor', num: '01 // ANCHOR', title: 'Four parallel operating loops',
+      tag: 'runs continuously',
       body: 'A single-threaded consignment program had no separation between demand signal, physical verification, vendor performance, and cost control. Designed and ran four concurrent loops — floor feedback, slot economics, JIT tuning, billing state — so each function improves independently without waiting on the others.',
-      metrics: [['4', 'concurrent loops'], ['0', 'coverage gaps during rollout']]
+      metrics: [['4', 'concurrent loops'], ['0', 'coverage gaps during rollout']],
+      connector: 'governs what enters the loops'
     },
     {
-      id: 'governance', num: '02 — governance layer', title: 'Multi-tier vendor and spec control',
-      tag: 'Multi-tier control · gates every new item',
-      body: 'A qualification structure spanning distributor, manufacturer, and OEM-spec tiers keeps substitutions inside customer-mandated tooling specifications. Constraint-first funnel: every proposed item passes spec-control gates before it is eligible for sourcing, not after. This layer decides which items are even allowed to enter the loops in system 01.',
-      metrics: [['~50%', 'fewer spec exceptions reaching the floor']]
+      id: 'governance', num: '02 // GOVERNANCE', title: 'Multi-tier vendor and spec control',
+      tag: 'gates every new item',
+      body: 'A qualification structure spanning distributor, manufacturer, and OEM-spec tiers keeps substitutions inside customer-mandated tooling specifications. Constraint-first funnel: every proposed item passes spec-control gates before it is eligible for sourcing, not after.',
+      metrics: [['~50%', 'fewer spec exceptions reaching the floor']],
+      connector: 'feeds the JIT-tuning loop'
     },
     {
-      id: 'diagnosis', num: '03 — diagnostic case', title: 'Safety-stock root-cause finding',
-      tag: 'Diagnosis · feeds back into JIT tuning',
+      id: 'diagnosis', num: '03 // DIAGNOSTIC', title: 'Safety-stock root-cause finding',
+      tag: 'feeds back into loop 01',
       body: 'New SKUs were vanishing from reorder review. The fault traced across three layers — a hub formula, the query logic feeding it, and a classification macro — to new items being scored against thin usage history and misrouted to a dead-stock bucket. The fix now lives inside the JIT-tuning loop from system 01.',
-      metrics: [['3', 'compounding root causes found']]
+      metrics: [['3', 'compounding root causes found']],
+      connector: 'feeds the slot-economics audit'
     },
     {
-      id: 'tracking', num: '04 — tracking system', title: 'MWO tooling shortage tracking',
-      tag: 'System build · informs slot economics',
+      id: 'tracking', num: '04 // TRACKING', title: 'MWO tooling shortage tracking',
+      tag: 'informs slot economics',
       body: 'No structured way existed to trace tooling shortages back to root cause. Built a tracking system that ties shortage events to specific work orders and vendors, turning a list of complaints into a dataset that feeds the slot-economics audit in system 01.',
-      metrics: [['~1 wk', 'avg. gap duration, down from ~16 days']]
+      metrics: [['~1 wk', 'avg. gap duration, down from ~16 days']],
+      connector: null
     }
   ];
 
-  const list = document.getElementById('arch-list');
+  const list = document.getElementById('arch-map');
   if (!list) return;
 
   systems.forEach((s, i) => {
-    if (i > 0) {
-      const conn = document.createElement('div');
-      conn.className = 'arch-conn';
-      conn.innerHTML = '<div class="arch-conn-line"></div>';
-      list.appendChild(conn);
-    }
-
-    const card = document.createElement('div');
-    card.className = 'arch-card';
-    card.id = 'arch-' + s.id;
+    const node = document.createElement('div');
+    node.className = 'arch-node';
+    node.id = 'arch-' + s.id;
 
     const metricsHtml = s.metrics
-      .map((m) => '<span class="arch-metric"><strong>' + m[0] + '</strong><span>' + m[1] + '</span></span>')
+      .map((m) => '<div class="case-metric"><div class="m-val">' + m[0] + '</div><div class="m-label">' + m[1] + '</div></div>')
       .join('');
 
-    card.innerHTML =
-      '<div class="arch-head">' +
-        '<div>' +
-          '<div class="arch-num">' + s.num + '</div>' +
-          '<div class="arch-title">' + s.title + '</div>' +
-          '<div class="arch-tag">' + s.tag + '</div>' +
-        '</div>' +
-        '<span class="arch-chevron">&rsaquo;</span>' +
+    node.innerHTML =
+      '<div class="arch-node-head">' +
+        '<span class="arch-status-led"></span>' +
+        '<span class="arch-node-num">' + s.num + '</span>' +
+        '<span class="arch-node-title">' + s.title + '</span>' +
+        '<span class="arch-node-tag">' + s.tag + '</span>' +
+        '<span class="arch-node-chevron">&rsaquo;</span>' +
       '</div>' +
-      '<div class="arch-detail" id="arch-detail-' + s.id + '">' +
+      '<div class="arch-node-body" id="arch-body-' + s.id + '">' +
         '<p>' + s.body + '</p>' +
-        '<div class="arch-metric-row">' + metricsHtml + '</div>' +
+        '<div class="arch-node-metrics">' + metricsHtml + '</div>' +
       '</div>';
 
-    card.addEventListener('click', () => {
-      card.classList.toggle('open');
-      const detail = document.getElementById('arch-detail-' + s.id);
-      if (detail) detail.classList.toggle('show');
+    node.addEventListener('click', () => {
+      node.classList.toggle('open');
+      document.getElementById('arch-body-' + s.id).classList.toggle('show');
     });
 
-    list.appendChild(card);
+    list.appendChild(node);
+
+    if (s.connector) {
+      const conn = document.createElement('div');
+      conn.className = 'arch-connector';
+      conn.innerHTML = '<div class="arch-connector-line"></div><span class="arch-connector-label">' + s.connector + '</span>';
+      list.appendChild(conn);
+    }
   });
 
-  const anchorCard = document.getElementById('arch-anchor');
-  if (anchorCard) anchorCard.click();
+  const anchor = document.getElementById('arch-anchor');
+  if (anchor) anchor.click();
 })();
