@@ -19,6 +19,7 @@
     <div class="logo"><span class="dot" aria-hidden="true"></span>P. MALAIROV</div>
     <nav class="site-nav">
       <a href="#cases">Cases</a>
+      <a href="#architecture">Architecture</a>
       <a href="#lab">Lab</a>
       <a href="#background">Background</a>
       <a href="#contact">Contact</a>
@@ -122,11 +123,27 @@
   </div>
 </section>
 
+<section id="architecture">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="tag">System map</div>
+        <h2>The full operations architecture</h2>
+      </div>
+      <div class="count">04 connected systems</div>
+    </div>
+
+    <p style="font-size: 0.95rem; color: var(--steel); max-width: 600px; margin-bottom: 32px;">Click any system below to expand it. All four run on the same consignment program — the governance layer decides what enters, the diagnostic and tracking work feed directly back into the anchor loops.</p>
+
+    <div class="arch-list" id="arch-list"></div>
+  </div>
+</section>
+
 <section id="loops-detail">
   <div class="wrap">
     <div class="section-head">
       <div>
-        <div class="tag">How the anchor case works</div>
+        <div class="tag">Zoom in — system 01</div>
         <h2>Four loops, one SKU base</h2>
       </div>
     </div>
@@ -327,6 +344,7 @@
   </div>
 </footer>
 
+<script src="js/architecture.js"></script>
 <script src="js/loops.js"></script>
 <script src="js/lab.js"></script>
 <script src="js/reveal.js"></script>
