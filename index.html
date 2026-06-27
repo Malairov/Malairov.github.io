@@ -1,63 +1,87 @@
 (function () {
-  const historyInput = document.getElementById('usage-history');
-  const historyOut = document.getElementById('usage-history-out');
-  const onsiteInput = document.getElementById('item-age');
-  const onsiteOut = document.getElementById('item-age-out');
-  const oldResult = document.getElementById('old-result');
-  const newResult = document.getElementById('new-result');
-  const oldStatus = document.getElementById('old-status');
-  const newStatus = document.getElementById('new-status');
-  const oldFormula = document.getElementById('old-formula');
-  const newFormula = document.getElementById('new-formula');
+  const skus = [
+    { id: 'new', label: 'New item · week 1', touches: ['intake'] },
+    { id: 'active', label: 'Active · steady draw', touches: ['floor', 'slot', 'jit'] },
+    { id: 'flagged', label: 'Flagged by supervisor', touches: ['floor', 'slot'] },
+    { id: 'prepaid', label: 'MAW prepaid batch', touches: ['billing'] },
+    { id: 'overstocked', label: 'Slow mover · overstocked', touches: ['slot', 'jit'] }
+  ];
 
-  function render() {
-    const weeksOfHistory = Number(historyInput.value);
-    const itemAgeWeeks = Number(onsiteInput.value);
-    historyOut.textContent = weeksOfHistory + ' wk';
-    onsiteOut.textContent = itemAgeWeeks + ' wk';
-
-    // Legacy formula: rolling average usage over a fixed lookback window.
-    // New items with < lookback weeks of history get an artificially low
-    // denominator-driven average because missing weeks count as zero usage.
-    const lookback = 12;
-    const observedUsage = 8; // arbitrary stand-in average weekly draw once it ramps up
-    const legacyAvg = (observedUsage * Math.min(weeksOfHistory, lookback)) / lookback;
-    const legacySafetyStock = Math.round(legacyAvg * 1.5);
-
-    // Corrected formula: classify by tenure first. Anything under a
-    // configurable threshold is flagged NO-USAGE and routed to manual
-    // reorder review instead of being scored against thin history.
-    const noUsageThreshold = 6;
-    const isNoUsage = itemAgeWeeks < noUsageThreshold;
-    const correctedAvg = isNoUsage ? null : (observedUsage * Math.min(weeksOfHistory, lookback)) / lookback;
-    const correctedSafetyStock = isNoUsage ? 'flagged' : Math.round(correctedAvg * 1.5);
-
-    oldResult.textContent = legacySafetyStock + ' units';
-    if (legacySafetyStock <= 1) {
-      oldStatus.textContent = 'excluded from reorder review';
-      oldStatus.style.color = 'var(--warn)';
-    } else {
-      oldStatus.textContent = 'included in reorder review';
-      oldStatus.style.color = 'var(--ok)';
+  const loops = [
+    {
+      id: 'floor', num: '01', title: 'Floor supervisor feedback', tag: 'weekly · 60+ supervisors',
+      body: 'Every week, floor supervisors flag items that are wrong, missing, or unnecessary at their station. This is the fastest signal in the system — it surfaces a problem before it shows up as a shortage or a dead-stock report.',
+      inputs: 'INPUTS: supervisor flags, usage complaints',
+      outputs: 'FEEDS: SKU weeding decisions, slot-economics review'
+    },
+    {
+      id: 'slot', num: '02', title: 'Slot-economics audit', tag: 'ongoing · vending hardware ~$1M/unit',
+      body: 'Vending hardware slots are expensive and finite. This loop asks whether each item still earns its physical space — weighing draw rate against the cost of holding that slot, and against contractual overstock limits that carry their own financial risk.',
+      inputs: 'INPUTS: floor feedback, draw rate, overstock limits',
+      outputs: 'FEEDS: JIT tuning, item removal decisions'
+    },
+    {
+      id: 'jit', num: '03', title: 'JIT tuning', tag: 'analytical · hard-floor constrained',
+      body: 'Replenishment timing gets tuned against actual draw, not the original install assumption. The constraint that matters: minimum order quantities and lead times set a hard floor this loop can\'t optimize past, no matter how clean the demand signal is.',
+      inputs: 'INPUTS: slot-economics output, usage history, lead times',
+      outputs: 'FEEDS: reorder timing, safety-stock levels'
+    },
+    {
+      id: 'billing', num: '04', title: 'Billing-state tracking', tag: 'continuous · MAW tag tracking',
+      body: 'New items enter on a MAW tag — prepaid, first batch, excluded from invoicing. The same tag that gets an item onto the program has to come off cleanly once it moves to standard consignment billing, or the client gets billed for stock they already paid for.',
+      inputs: 'INPUTS: item lifecycle stage, intake batch records',
+      outputs: 'FEEDS: billing accuracy, support team handoff'
     }
+  ];
 
-    if (isNoUsage) {
-      newResult.textContent = 'NO-USAGE';
-      newStatus.textContent = 'routed to manual review queue';
-      newStatus.style.color = 'var(--amber)';
-    } else {
-      newResult.textContent = correctedSafetyStock + ' units';
-      newStatus.textContent = 'included in reorder review';
-      newStatus.style.color = 'var(--ok)';
-    }
+  const skuPicker = document.getElementById('sku-picker');
+  const mechContainer = document.getElementById('loops-mech');
+  if (!skuPicker || !mechContainer) return;
 
-    oldFormula.textContent = `= AVG(usage, last ${lookback}wk window) x 1.5  ->  ${legacyAvg.toFixed(2)} x 1.5`;
-    newFormula.textContent = isNoUsage
-      ? `tenure ${itemAgeWeeks}wk < ${noUsageThreshold}wk threshold -> classify NO-USAGE, skip averaging`
-      : `tenure OK -> = AVG(usage, last ${lookback}wk window) x 1.5  ->  ${correctedAvg.toFixed(2)} x 1.5`;
+  skus.forEach((s) => {
+    const btn = document.createElement('button');
+    btn.className = 'sku-btn';
+    btn.textContent = s.label;
+    btn.dataset.id = s.id;
+    btn.addEventListener('click', () => selectSku(s.id));
+    skuPicker.appendChild(btn);
+  });
+
+  loops.forEach((l) => {
+    const panel = document.createElement('div');
+    panel.className = 'loop-mech-panel';
+    panel.id = 'mech-panel-' + l.id;
+    panel.innerHTML =
+      '<div class="loop-mech-head">' +
+        '<div class="title-block"><span class="num">' + l.num + '</span><h4>' + l.title + '</h4></div>' +
+        '<div class="tag">' + l.tag + '</div>' +
+      '</div>' +
+      '<div class="loop-mech-detail" id="mech-detail-' + l.id + '">' +
+        '<p>' + l.body + '</p>' +
+        '<div class="io">' + l.inputs + '<br>' + l.outputs + '</div>' +
+      '</div>';
+    panel.addEventListener('click', () => toggleDetail(l.id));
+    mechContainer.appendChild(panel);
+  });
+
+  function toggleDetail(id) {
+    const detail = document.getElementById('mech-detail-' + id);
+    if (detail) detail.classList.toggle('show');
   }
 
-  historyInput.addEventListener('input', render);
-  onsiteInput.addEventListener('input', render);
-  render();
+  function selectSku(id) {
+    const buttons = skuPicker.querySelectorAll('.sku-btn');
+    buttons.forEach((b) => b.classList.toggle('active', b.dataset.id === id));
+
+    const sku = skus.find((s) => s.id === id);
+    loops.forEach((l) => {
+      const panel = document.getElementById('mech-panel-' + l.id);
+      if (!panel) return;
+      const touched = sku.touches.includes(l.id);
+      panel.classList.toggle('dim', !touched);
+      panel.classList.toggle('active', touched);
+    });
+  }
+
+  selectSku('active');
 })();

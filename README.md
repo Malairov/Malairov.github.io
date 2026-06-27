@@ -1,87 +1,334 @@
-(function () {
-  const skus = [
-    { id: 'new', label: 'New item · week 1', touches: ['intake'] },
-    { id: 'active', label: 'Active · steady draw', touches: ['floor', 'slot', 'jit'] },
-    { id: 'flagged', label: 'Flagged by supervisor', touches: ['floor', 'slot'] },
-    { id: 'prepaid', label: 'MAW prepaid batch', touches: ['billing'] },
-    { id: 'overstocked', label: 'Slow mover · overstocked', touches: ['slot', 'jit'] }
-  ];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pavlo Malairov — Operations &amp; Implementation</title>
+<meta name="description" content="Operations and implementation builder. Stabilizes immature operations and builds the systems, controls, and automation that run them — without stopping the business.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
-  const loops = [
-    {
-      id: 'floor', num: '01', title: 'Floor supervisor feedback', tag: 'weekly · 60+ supervisors',
-      body: 'Every week, floor supervisors flag items that are wrong, missing, or unnecessary at their station. This is the fastest signal in the system — it surfaces a problem before it shows up as a shortage or a dead-stock report.',
-      inputs: 'INPUTS: supervisor flags, usage complaints',
-      outputs: 'FEEDS: SKU weeding decisions, slot-economics review'
-    },
-    {
-      id: 'slot', num: '02', title: 'Slot-economics audit', tag: 'ongoing · vending hardware ~$1M/unit',
-      body: 'Vending hardware slots are expensive and finite. This loop asks whether each item still earns its physical space — weighing draw rate against the cost of holding that slot, and against contractual overstock limits that carry their own financial risk.',
-      inputs: 'INPUTS: floor feedback, draw rate, overstock limits',
-      outputs: 'FEEDS: JIT tuning, item removal decisions'
-    },
-    {
-      id: 'jit', num: '03', title: 'JIT tuning', tag: 'analytical · hard-floor constrained',
-      body: 'Replenishment timing gets tuned against actual draw, not the original install assumption. The constraint that matters: minimum order quantities and lead times set a hard floor this loop can\'t optimize past, no matter how clean the demand signal is.',
-      inputs: 'INPUTS: slot-economics output, usage history, lead times',
-      outputs: 'FEEDS: reorder timing, safety-stock levels'
-    },
-    {
-      id: 'billing', num: '04', title: 'Billing-state tracking', tag: 'continuous · MAW tag tracking',
-      body: 'New items enter on a MAW tag — prepaid, first batch, excluded from invoicing. The same tag that gets an item onto the program has to come off cleanly once it moves to standard consignment billing, or the client gets billed for stock they already paid for.',
-      inputs: 'INPUTS: item lifecycle stage, intake batch records',
-      outputs: 'FEEDS: billing accuracy, support team handoff'
-    }
-  ];
+<div class="grid-overlay" aria-hidden="true"></div>
 
-  const skuPicker = document.getElementById('sku-picker');
-  const mechContainer = document.getElementById('loops-mech');
-  if (!skuPicker || !mechContainer) return;
+<header class="site-header">
+  <div class="wrap">
+    <div class="logo"><span class="dot" aria-hidden="true"></span>P. MALAIROV</div>
+    <nav class="site-nav">
+      <a href="#cases">Cases</a>
+      <a href="#lab">Lab</a>
+      <a href="#background">Background</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
 
-  skus.forEach((s) => {
-    const btn = document.createElement('button');
-    btn.className = 'sku-btn';
-    btn.textContent = s.label;
-    btn.dataset.id = s.id;
-    btn.addEventListener('click', () => selectSku(s.id));
-    skuPicker.appendChild(btn);
-  });
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span>Embedded on-site &middot; Winnipeg, MB</div>
+    <h1>I build the operational systems that keep a <span class="accent">regulated supply chain</span> running while no one stops the line.</h1>
+    <p class="lede">Operations &amp; implementation specialist. I walk into immature programs, stabilize what's running today, and build the master data, controls, and automation that let it scale tomorrow — without a gap in coverage.</p>
 
-  loops.forEach((l) => {
-    const panel = document.createElement('div');
-    panel.className = 'loop-mech-panel';
-    panel.id = 'mech-panel-' + l.id;
-    panel.innerHTML =
-      '<div class="loop-mech-head">' +
-        '<div class="title-block"><span class="num">' + l.num + '</span><h4>' + l.title + '</h4></div>' +
-        '<div class="tag">' + l.tag + '</div>' +
-      '</div>' +
-      '<div class="loop-mech-detail" id="mech-detail-' + l.id + '">' +
-        '<p>' + l.body + '</p>' +
-        '<div class="io">' + l.inputs + '<br>' + l.outputs + '</div>' +
-      '</div>';
-    panel.addEventListener('click', () => toggleDetail(l.id));
-    mechContainer.appendChild(panel);
-  });
+    <div class="hero-meta">
+      <div class="item"><strong>1,800+</strong>active SKUs under management</div>
+      <div class="item"><strong>~30 min</strong>manual ordering effort, down from ~5 hrs</div>
+      <div class="item"><strong>460+</strong>installed locations on a prior platform rollout</div>
+    </div>
 
-  function toggleDetail(id) {
-    const detail = document.getElementById('mech-detail-' + id);
-    if (detail) detail.classList.toggle('show');
-  }
+    <div class="hero-cta">
+      <a class="btn primary" href="#cases">View case studies</a>
+      <a class="btn" href="#contact">Get in touch</a>
+    </div>
+  </div>
+</section>
 
-  function selectSku(id) {
-    const buttons = skuPicker.querySelectorAll('.sku-btn');
-    buttons.forEach((b) => b.classList.toggle('active', b.dataset.id === id));
+<section id="cases">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="tag">Case studies</div>
+        <h2>Systems built on-site</h2>
+      </div>
+      <div class="count">04 documented cases</div>
+    </div>
 
-    const sku = skus.find((s) => s.id === id);
-    loops.forEach((l) => {
-      const panel = document.getElementById('mech-panel-' + l.id);
-      if (!panel) return;
-      const touched = sku.touches.includes(l.id);
-      panel.classList.toggle('dim', !touched);
-      panel.classList.toggle('active', touched);
-    });
-  }
+    <div class="cases">
 
-  selectSku('active');
-})();
+      <div class="case reveal">
+        <div class="case-id">
+          <span class="num">01</span>
+          Anchor case
+          <span class="tag-pill">Process design</span>
+        </div>
+        <div class="body">
+          <h3>Four parallel operating loops</h3>
+          <p>Inherited a single-threaded consignment program with no separation between demand signal, physical verification, vendor performance, and cost control. Designed and ran four concurrent operating loops — floor supervisor feedback, slot-economics auditing, JIT tuning, and billing-state tracking — so each function could improve independently without waiting on the others.</p>
+          <div class="metric-row">
+            <div class="metric"><div class="val">4</div><div class="label">concurrent loops</div></div>
+            <div class="metric"><div class="val">0</div><div class="label">coverage gaps during rollout</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case reveal">
+        <div class="case-id">
+          <span class="num">02</span>
+          Vendor governance
+          <span class="tag-pill">Multi-tier control</span>
+        </div>
+        <div class="body">
+          <h3>Multi-tier vendor &amp; spec governance</h3>
+          <p>Built a qualification structure spanning distributor, manufacturer, and OEM-spec tiers to keep substitutions inside customer-mandated tooling specifications. Constraint-first funnel: every proposed item passes spec-control gates before it's eligible for sourcing, not after.</p>
+          <div class="metric-row">
+            <div class="metric"><div class="val">~50%</div><div class="label">fewer spec exceptions reaching the floor</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case reveal">
+        <div class="case-id">
+          <span class="num">03</span>
+          Root cause
+          <span class="tag-pill">Diagnosis</span>
+        </div>
+        <div class="body">
+          <h3>Safety-stock formula silently excluding new items</h3>
+          <p>New SKUs were vanishing from reorder review. Traced the fault across three layers — a hub formula, the query logic feeding it, and a classification macro — to find new items being scored against thin usage history and misrouted to a dead-stock bucket. Full breakdown and a live version of the fix logic below.</p>
+          <div class="metric-row">
+            <div class="metric"><div class="val">3</div><div class="label">compounding root causes found</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case reveal">
+        <div class="case-id">
+          <span class="num">04</span>
+          Tracking build
+          <span class="tag-pill">System build</span>
+        </div>
+        <div class="body">
+          <h3>MWO tracking system, built from nothing</h3>
+          <p>No structured way to track tooling shortages back to root cause. Built a tracking system that ties shortage events to specific work orders and vendors, turning a list of complaints into a dataset that points at where the program actually breaks.</p>
+          <div class="metric-row">
+            <div class="metric"><div class="val">~1 wk</div><div class="label">avg. gap duration, down from ~16 days</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="loops-detail">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="tag">How the anchor case works</div>
+        <h2>Four loops, one SKU base</h2>
+      </div>
+    </div>
+
+    <div class="flowchart-frame">
+      <svg width="100%" viewBox="0 0 680 700" role="img">
+        <title>Flow chart of a SKU moving through four parallel operating loops</title>
+        <desc>A new SKU enters the program, then is acted on by four loops in sequence: floor supervisor feedback, slot-economics audit, JIT tuning, and billing-state tracking, ending in a stable operating state that re-enters the cycle weekly.</desc>
+        <defs>
+          <marker id="fc-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="#3a4a5c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+
+        <rect x="250" y="16" width="180" height="44" rx="4" fill="#fbfaf6" stroke="#b8b29c" stroke-width="0.5"/>
+        <text x="340" y="38" text-anchor="middle" dominant-baseline="central" font-family="JetBrains Mono, monospace" font-size="13" fill="#10151c">new SKU intake</text>
+        <line x1="340" y1="60" x2="340" y2="92" stroke="#3a4a5c" stroke-width="0.5" marker-end="url(#fc-arrow)"/>
+
+        <rect x="180" y="92" width="320" height="56" rx="4" fill="#fbfaf6" stroke="#b5651d" stroke-width="0.5"/>
+        <text x="340" y="112" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#10151c">01 — floor supervisor feedback</text>
+        <text x="340" y="132" text-anchor="middle" dominant-baseline="central" font-family="JetBrains Mono, monospace" font-size="12" fill="#3a4a5c">weekly · 60+ supervisors flag issues</text>
+        <line x1="340" y1="148" x2="340" y2="184" stroke="#3a4a5c" stroke-width="0.5" marker-end="url(#fc-arrow)"/>
+
+        <rect x="180" y="184" width="320" height="56" rx="4" fill="#fbfaf6" stroke="#b5651d" stroke-width="0.5"/>
+        <text x="340" y="204" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#10151c">02 — slot-economics audit</text>
+        <text x="340" y="224" text-anchor="middle" dominant-baseline="central" font-family="JetBrains Mono, monospace" font-size="12" fill="#3a4a5c">does the item earn its ~$1M slot</text>
+
+        <path d="M260 240 L200 240 L200 282" fill="none" stroke="#3a4a5c" stroke-width="0.5" marker-end="url(#fc-arrow)"/>
+        <path d="M420 240 L480 240 L480 282" fill="none" stroke="#3a4a5c" stroke-width="0.5" marker-end="url(#fc-arrow)"/>
+        <text x="190" y="266" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#6b7d8f">fails audit</text>
+        <text x="490" y="266" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#6b7d8f">passes audit</text>
+
+        <rect x="80" y="282" width="240" height="56" rx="4" fill="#f4f2ec" stroke="#b8b29c" stroke-width="0.5"/>
+        <text x="200" y="302" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#10151c">removed from program</text>
+        <text x="200" y="322" text-anchor="middle" dominant-baseline="central" font-family="JetBrains Mono, monospace" font-size="12" fill="#3a4a5c">slot freed for next candidate</text>
+
+        <rect x="360" y="282" width="240" height="56" rx="4" fill="#fbfaf6" stroke="#b5651d" stroke-width="0.5"/>
+        <text x="480" y="302" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#10151c">03 — JIT tuning</text>
+        <text x="480" y="322" text-anchor="middle" dominant-baseline="central" font-family="JetBrains Mono, monospace" font-size="12" fill="#3a4a5c">reorder timing vs. hard floor</text>
+
+        <line x1="480" y1="338" x2="480" y2="374" stroke="#3a4a5c" stroke-width="0.5" marker-end="url(#fc-arrow)"/>
+
+        <rect x="360" y="374" width="240" height="56" rx="4" fill="#fbfaf6" stroke="#b5651d" stroke-width="0.5"/>
+        <text x="480" y="394" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#10151c">04 — billing-state tracking</text>
+        <text x="480" y="414" text-anchor="middle" dominant-baseline="central" font-family="JetBrains Mono, monospace" font-size="12" fill="#3a4a5c">MAW tag clears on first standard cycle</text>
+
+        <line x1="480" y1="430" x2="480" y2="466" stroke="#3a4a5c" stroke-width="0.5" marker-end="url(#fc-arrow)"/>
+
+        <rect x="380" y="466" width="200" height="44" rx="4" fill="#fbfaf6" stroke="#b8b29c" stroke-width="0.5"/>
+        <text x="480" y="488" text-anchor="middle" dominant-baseline="central" font-family="JetBrains Mono, monospace" font-size="13" fill="#10151c">steady-state SKU</text>
+
+        <path d="M480 510 L480 540 L495 540" fill="none" stroke="#3a4a5c" stroke-width="0.5" stroke-dasharray="4 4" marker-end="url(#fc-arrow)"/>
+        <text x="500" y="544" font-family="JetBrains Mono, monospace" font-size="11" fill="#6b7d8f">re-enters loop 01 next week</text>
+
+        <rect x="40" y="580" width="600" height="100" rx="4" fill="none" stroke="#d8d3c4" stroke-width="0.5"/>
+        <text x="60" y="604" font-size="13" font-weight="600" fill="#10151c">Legend</text>
+        <rect x="60" y="622" width="12" height="12" rx="2" fill="none" stroke="#b5651d" stroke-width="1"/>
+        <text x="80" y="632" font-family="JetBrains Mono, monospace" font-size="11" fill="#3a4a5c">active loop, runs on schedule</text>
+        <rect x="350" y="622" width="12" height="12" rx="2" fill="#f4f2ec" stroke="#b8b29c" stroke-width="0.5"/>
+        <text x="370" y="632" font-family="JetBrains Mono, monospace" font-size="11" fill="#3a4a5c">terminal or stable state</text>
+        <text x="60" y="658" font-family="JetBrains Mono, monospace" font-size="11" fill="#6b7d8f">All four loops can act on the same SKU within the same week —</text>
+        <text x="60" y="674" font-family="JetBrains Mono, monospace" font-size="11" fill="#6b7d8f">the diagram above shows the sequence, not a strict handoff.</text>
+      </svg>
+    </div>
+
+    <div class="section-head" style="margin-top: 56px;">
+      <div>
+        <div class="tag">Try it</div>
+        <h2>Which loops touch a SKU right now</h2>
+      </div>
+      <div class="count">pick a SKU state below</div>
+    </div>
+
+    <div class="sku-picker" id="sku-picker"></div>
+
+    <div class="loops-mech" id="loops-mech"></div>
+
+    <p style="font-size: 0.88rem; color: var(--steel); margin-top: 20px; max-width: 640px;">A SKU can be touched by more than one loop in the same week. Click any loop below for the inputs it reads and what it feeds downstream.</p>
+  </div>
+</section>
+
+<section id="lab">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="tag">Technical lab</div>
+        <h2>Safety-stock fix, live</h2>
+      </div>
+      <div class="count">reconstructed logic &middot; sample data</div>
+    </div>
+
+    <div class="lab-frame">
+      <div class="lab-intro">
+        <p>This reproduces the actual defect from case 03 using a simplified, anonymized version of the formula — no real SKUs, vendor names, or client data. Move the sliders to see why new items disappeared from reorder review, and how the fix catches them.</p>
+        <p class="note">Original system: SharePoint hub formula -&gt; Power Query (M) -&gt; VBA classification macro. This demo isolates the core averaging logic that caused the failure.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 32px;" id="lab-controls-grid">
+        <div>
+          <label style="font-family: var(--mono); font-size: 12px; color: var(--steel-light); display:block; margin-bottom: 8px;">Weeks of usage history available</label>
+          <div style="display:flex; align-items:center; gap: 12px;">
+            <input type="range" id="usage-history" min="0" max="12" value="2" step="1" style="flex:1;">
+            <span id="usage-history-out" style="font-family: var(--mono); font-size: 13px; min-width: 40px;">2 wk</span>
+          </div>
+        </div>
+        <div>
+          <label style="font-family: var(--mono); font-size: 12px; color: var(--steel-light); display:block; margin-bottom: 8px;">Item age (time on the program)</label>
+          <div style="display:flex; align-items:center; gap: 12px;">
+            <input type="range" id="item-age" min="0" max="12" value="2" step="1" style="flex:1;">
+            <span id="item-age-out" style="font-family: var(--mono); font-size: 13px; min-width: 40px;">2 wk</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1px; border: 1px solid var(--line);">
+        <div style="background: var(--paper); padding: 22px;">
+          <div style="font-family: var(--mono); font-size: 11px; color: var(--steel-light); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px;">Legacy formula</div>
+          <div id="old-result" style="font-size: 26px; font-weight: 600; margin-bottom: 6px;">—</div>
+          <div id="old-status" style="font-size: 13px; font-weight: 500; margin-bottom: 14px;">—</div>
+          <div id="old-formula" style="font-family: var(--mono); font-size: 12px; color: var(--steel); line-height: 1.6;">—</div>
+        </div>
+        <div style="background: var(--paper); padding: 22px;">
+          <div style="font-family: var(--mono); font-size: 11px; color: var(--amber); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px;">Corrected formula</div>
+          <div id="new-result" style="font-size: 26px; font-weight: 600; margin-bottom: 6px;">—</div>
+          <div id="new-status" style="font-size: 13px; font-weight: 500; margin-bottom: 14px;">—</div>
+          <div id="new-formula" style="font-family: var(--mono); font-size: 12px; color: var(--steel); line-height: 1.6;">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="background">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="tag">Background</div>
+        <h2>Where this approach comes from</h2>
+      </div>
+    </div>
+
+    <div class="skill-grid">
+      <div class="skill-block reveal">
+        <div class="tag">Current</div>
+        <ul>
+          <li>In-Plant Solution Specialist — MSC Industrial Supply</li>
+          <li>Embedded full-time at an aerospace manufacturing site</li>
+          <li>Sole on-site rep for a multi-million-$ consignment program</li>
+          <li>PMP certified</li>
+        </ul>
+      </div>
+      <div class="skill-block reveal">
+        <div class="tag">Prior</div>
+        <ul>
+          <li>Project Manager — SmartC (AI / computer vision, remote)</li>
+          <li>Platform scaled to 460+ installed locations</li>
+          <li>Lean Six Sigma Green Belt — in progress</li>
+        </ul>
+      </div>
+      <div class="skill-block reveal">
+        <div class="tag">Foundation</div>
+        <ul>
+          <li>8 years maritime operations</li>
+          <li>Officer in charge of a navigational watch, vessels &gt;500GRT</li>
+          <li>Delegated functional leadership of ~20-person crews</li>
+          <li>Vessels up to 40,000 GT</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="border-bottom: none;">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <h2>Working on a process that's outgrown its system?</h2>
+        <p class="lede">I'm looking at implementation, operations, and service delivery roles across aerospace, manufacturing, MRO, and industrial — anywhere a process has outgrown the system that was supposed to run it.</p>
+      </div>
+      <div class="contact-card">
+        <div class="row"><span>Location</span><span>Winnipeg, MB</span></div>
+        <div class="row"><span>Email</span><a href="mailto:pavlomalairov@gmail.com">pavlomalairov@gmail.com</a></div>
+        <div class="row"><span>LinkedIn</span><a href="https://www.linkedin.com/in/pavlo-malairov-b51840219" target="_blank" rel="noopener">linkedin.com/in/pavlo-malairov-b51840219</a></div>
+        <div class="row"><span>Resume</span><a href="#">Download PDF</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-links">
+      <a href="mailto:pavlomalairov@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/pavlo-malairov-b51840219" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#">Resume</a>
+    </div>
+    <div class="f-meta">Built and deployed from source &middot; no template</div>
+  </div>
+</footer>
+
+<script src="js/loops.js"></script>
+<script src="js/lab.js"></script>
+<script src="js/reveal.js"></script>
+</body>
+</html>
