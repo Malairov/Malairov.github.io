@@ -2,24 +2,24 @@ window.PORTFOLIO_DATA = {
   audienceLens: {
     recruiter: {
       title: "Recruiter scan",
-      headline: "PMP-certified Operations / Implementation PM for regulated technical work.",
-      summary: "The fit is strongest for Operations PM, Implementation PM, Technical Operations PM, Service Delivery, Process Improvement, manufacturing service delivery, and regulated industrial operations.",
+      headline: "PMP-certified Operations & Implementation Project Manager for regulated technical environments.",
+      summary: "Best fit: Operations PM, Implementation PM, Technical Operations PM, Service Delivery, Process Improvement, manufacturing service delivery, and regulated industrial operations.",
       bullets: ["PMP-certified positioning", "Aerospace manufacturing service delivery", "AI-enabled infrastructure delivery", "Regulated maritime operations foundation"],
-      cta: "Open resume after the first 60 seconds."
+      cta: "Open the resume after the quick scan."
     },
     manager: {
       title: "Hiring manager scan",
-      headline: "Delivery evidence is shown as systems built, not duties performed.",
+      headline: "Delivery evidence is shown through systems built, not generic duties.",
       summary: "The site demonstrates how fragmented work was converted into control loops, dashboards, workflows, issue tracking, readiness logic, and stakeholder-visible execution.",
       bullets: ["Four concurrent operating loops", "5h → 30m ordering workflow", "~16d → ~1w critical gap duration", "SmartC delivery path to 460+ installed locations"],
-      cta: "Inspect Architecture, SmartC, and Diagnostic sections."
+      cta: "Review Architecture, SmartC, and Diagnostic sections."
     },
     technical: {
       title: "Technical reviewer scan",
-      headline: "The value is diagnostic control under constraints.",
+      headline: "The technical value is control under constraints.",
       summary: "The deeper layers expose inputs, outputs, constraints, failure modes, governance gates, lifecycle states, and recovery logic without inflating authority or technical authorship.",
       bullets: ["Signal path visualization", "Root-cause failure chain", "Spec-governance funnel", "No-history / macro / Power Query control logic"],
-      cta: "Use the interactive nodes and replay buttons."
+      cta: "Use the interactive nodes to inspect the logic."
     }
   },
 

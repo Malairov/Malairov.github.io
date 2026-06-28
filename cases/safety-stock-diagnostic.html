@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Safety-Stock Diagnostic — Pavlo Malairov Portfolio</title>
+  <meta name="description" content="Interactive deep-dive case study on safety-stock root-cause diagnosis." />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/case-pages.css" />
+</head>
+<body class="case-page-body">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" aria-label="Primary navigation">
+    <div class="shell nav-shell glass tilt-subtle">
+      <a class="brand" href="../index.html" aria-label="Pavlo Malairov portfolio home">
+        <span class="brand-mark">PM</span>
+        <span class="brand-copy">
+          <strong>Pavlo Malairov</strong>
+          <span>Operations & Implementation Project Manager</span>
+        </span>
+      </a>
+      
+      <nav class="nav-links" aria-label="Section navigation">
+        <a href="../index.html#quickscan">Scan</a>
+        <a href="../index.html#architecture">Architecture</a>
+        <a href="../index.html#smartc">SmartC</a>
+        <a href="../index.html#cases">Cases</a>
+      </nav>
+      <div class="nav-actions">
+        <span class="micro-pill">Diagnostic</span>
+        <a class="nav-cta" href="../assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
+      </div>
+    </div>
+  </header>
+  <main id="main" class="case-page-main">
+    
+<section class="case-hero">
+  <div class="shell case-hero-grid">
+    <div class="case-hero-copy">
+      <p class="eyebrow">Diagnostic case</p>
+      <h1>Safety-Stock Diagnostic</h1>
+      <p>The issue was not one bad formula. New SKUs disappeared from reorder review because several weak control layers interacted: formula behavior, extraction logic, classification logic, filters, workbook governance, and active macro version control.</p>
+      <div class="case-hero-actions">
+        <a class="button button-primary" href="#lab">Open diagnostic lab</a>
+        <a class="button button-secondary" href="../index.html#diagnostic">Back to simulator</a>
+      </div>
+    </div>
+    <aside class="case-proof-panel">
+      <span class="case-proof-kicker">What this proves</span>
+      <strong>Root-cause diagnosis across data, workbook, and automation layers.</strong>
+      <p>This case demonstrates process-improvement depth: diagnosing why a system produces a bad outcome, then redesigning controls so the outcome cannot silently recur.</p>
+      <div class="case-proof-metrics">
+        <article><span>Root causes</span><b>3+</b></article>
+        <article><span>Tool layers</span><b>Formula / PQ / VBA</b></article>
+        <article><span>Fix</span><b>NO-USAGE</b></article>
+        <article><span>Control</span><b>dynamic headers</b></article>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="shell case-layout">
+    <aside class="case-side-nav">
+      <strong>Diagnostic path</strong>
+      <a href="#symptom">Symptom</a>
+      <a href="#lab">Failure chain</a>
+      <a href="#fix">Fix pattern</a>
+      <a href="#transfer">Transferability</a>
+    </aside>
+    <div class="case-content">
+      <section id="symptom" class="case-section-card">
+        <h2>Symptom: new items vanished from review without obvious errors.</h2>
+        <p>New SKUs with no usage history were being treated as inactive or hidden. The visible symptom looked like a replenishment issue. The real issue was a multi-layer control failure.</p>
+        <div class="case-grid-3">
+          <article class="case-mini-card"><span>Formula</span><strong>No usage history can collapse calculated safety stock.</strong><small>Near-zero output created false confidence.</small></article>
+          <article class="case-mini-card"><span>Macro</span><strong>Zero usage was classified as DEAD.</strong><small>No explicit no-history state existed.</small></article>
+          <article class="case-mini-card"><span>Workbook</span><strong>Active logic was not always the edited logic.</strong><small>A workbook-embedded macro version kept old behavior alive.</small></article>
+        </div>
+      </section>
+
+      <section id="lab" class="case-section-card dark">
+        <h2>Interactive failure-chain lab</h2>
+        <p>Click each failure mode. The output explains how the system could fail silently.</p>
+        <div class="diagnostic-deep-chain">
+          <button data-failure="history" data-title="No usage history" data-detail="A new item can be required for service continuity even when historical draw is empty. Treating empty history as dead demand is a control failure."><span>01</span><strong>No usage history</strong></button>
+          <button data-failure="formula" data-title="Formula returns near-zero" data-detail="A statistical safety-stock formula can output near-zero when the usage history is absent or sparse, creating false confidence in zero demand."><span>02</span><strong>Near-zero formula</strong></button>
+          <button data-failure="macro" data-title="Macro routes item to DEAD" data-detail="The VBA classification had no explicit new-item/no-history state, so zero usage could be routed into DEAD status instead of exception review."><span>03</span><strong>DEAD classification</strong></button>
+          <button data-failure="filter" data-title="Hardcoded AutoFilter hides items" data-detail="A hardcoded field number can silently hide valid items if the table structure shifts. Dynamic header-name lookup is safer."><span>04</span><strong>Hardcoded filter</strong></button>
+          <button data-failure="overwrite" data-title="Formula cells overwritten" data-detail="Static values replacing formulas freeze calculations, so improved logic appears not to work even after the code is corrected."><span>05</span><strong>Formula overwrite</strong></button>
+          <button data-failure="version" data-title="Wrong macro version active" data-detail="A workbook-embedded VBA version different from edited .bas files can keep old behavior running while fixes appear ineffective."><span>06</span><strong>Wrong macro version</strong></button>
+        </div>
+        <div class="diagnostic-lab-output" id="diagnosticDeepOutput" aria-live="polite"></div>
+      </section>
+
+      <section id="fix" class="case-section-card">
+        <h2>Fix pattern</h2>
+        <div class="case-grid-2">
+          <article class="case-mini-card"><span>Logic</span><strong>Rebuild fragile logic in Power Query.</strong><small>Less vulnerable to overwritten worksheet formulas.</small></article>
+          <article class="case-mini-card"><span>Classification</span><strong>Add NO-USAGE state.</strong><small>New/no-history items require exception review, not dead-demand routing.</small></article>
+          <article class="case-mini-card"><span>Resilience</span><strong>Use dynamic header lookup.</strong><small>Avoid silent filter failure from column shifts.</small></article>
+          <article class="case-mini-card"><span>Debugging</span><strong>Add diagnostic columns.</strong><small>Make intermediate logic visible during troubleshooting.</small></article>
+        </div>
+      </section>
+
+      <section id="transfer" class="case-section-card dark">
+        <h2>Transferability</h2>
+        <p>This is relevant wherever operating decisions depend on fragile spreadsheets, inherited tools, partial automation, exception logic, and unclear ownership of data quality.</p>
+        <div class="case-pills"><span>Root-cause analysis</span><span>Data controls</span><span>Power Query</span><span>VBA governance</span><span>Exception logic</span></div>
+      </section>
+    </div>
+  </div>
+</section>
+<section class="section-pad"><div class="shell related-cases"><a href="four-operating-loops.html"><span>Signature case</span><strong>Four Operating Loops</strong></a><a href="smartc-ai-delivery.html"><span>Technical delivery</span><strong>SmartC AI Delivery</strong></a><a href="../index.html#cases"><span>Back</span><strong>Case library</strong></a></div></section>
+
+  </main>
+  <script src="../js/case-pages.js"></script>
+</body>
+</html>
