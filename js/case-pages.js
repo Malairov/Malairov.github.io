@@ -56,7 +56,11 @@ function setupCaseStage() {
     if (!nodes.length || !detail) return;
 
     function activate(node) {
-      nodes.forEach((n) => n.classList.toggle("active", n === node));
+      nodes.forEach((n) => {
+        const active = n === node;
+        n.classList.toggle("active", active);
+        n.setAttribute("aria-pressed", active ? "true" : "false");
+      });
 
       const title = node.dataset.title || "Selected loop";
       const tag = node.dataset.tag || "Selected";
@@ -86,6 +90,8 @@ function setupCaseStage() {
     }
 
     nodes.forEach((node) => {
+      node.setAttribute("type", "button");
+      node.setAttribute("aria-pressed", "false");
       node.addEventListener("click", () => activate(node));
       node.addEventListener("keydown", (event) => {
         if (event.key === "Enter" || event.key === " ") {

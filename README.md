@@ -1,9 +1,11 @@
-# Pavlo Malairov Portfolio - v29 Positioning + Loop Detail Fix
+# Pavlo Malairov Portfolio - v30 Typography + Overlap Fix
 
 ## Purpose
-This version fixes two critical issues:
-1. Removes defensive hero-side wording.
-2. Refactors the operating-loop map so the clicked detail panel no longer overlays the map.
+This version fixes the issues visible in screenshots:
+- oversized serif headings;
+- broken sentence wrapping;
+- cards/nodes visually colliding in Four Operating Loops;
+- defensive SmartC preview headline.
 
 ## Changed files
 - index.html
@@ -16,9 +18,8 @@ This version fixes two critical issues:
 ## QA status
 - JS syntax: passed.
 - Local links: passed.
-- Defensive phrase removed: yes.
-- External loop detail panel: yes.
-- Resume exact-term scan: clean.
+- Bad-term check: passed.
+- Map no-overlay behavior: passed.
 
 ## Deployment
 Upload the root contents to the GitHub Pages repository root. `index.html` must be at the root.
