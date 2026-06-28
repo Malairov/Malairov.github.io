@@ -51,19 +51,50 @@ function setupMobileNav() {
 function setupCaseStage() {
   $$(".stage").forEach((stage) => {
     const nodes = $$(".stage-node", stage);
-    const detail = $(".stage-detail", stage);
+    const container = stage.closest(".operating-model-grid") || stage.parentElement || document;
+    const detail = $(".loop-detail-panel", container) || $(".stage-detail", stage);
     if (!nodes.length || !detail) return;
 
     function activate(node) {
       nodes.forEach((n) => n.classList.toggle("active", n === node));
-      detail.innerHTML = `
-        <span class="mono-label">${node.dataset.tag || "Layer"}</span>
-        <h3>${node.dataset.title || ""}</h3>
-        <p>${node.dataset.detail || ""}</p>
-      `;
+
+      const title = node.dataset.title || "Selected loop";
+      const tag = node.dataset.tag || "Selected";
+      const problem = node.dataset.problem || "";
+      const control = node.dataset.control || node.dataset.detail || "";
+      const impact = node.dataset.impact || "";
+      const relevance = node.dataset.relevance || "";
+
+      if (problem || impact || relevance) {
+        detail.innerHTML = `
+          <span class="mono-label">${tag}</span>
+          <h3>Selected loop: ${title}</h3>
+          <dl class="loop-detail-list">
+            ${problem ? `<div><dt>Problem</dt><dd>${problem}</dd></div>` : ""}
+            ${control ? `<div><dt>Control built</dt><dd>${control}</dd></div>` : ""}
+            ${impact ? `<div><dt>Why it mattered</dt><dd>${impact}</dd></div>` : ""}
+            ${relevance ? `<div><dt>PM relevance</dt><dd>${relevance}</dd></div>` : ""}
+          </dl>
+        `;
+      } else {
+        detail.innerHTML = `
+          <span class="mono-label">${tag}</span>
+          <h3>${title}</h3>
+          <p>${control}</p>
+        `;
+      }
     }
 
-    nodes.forEach((node) => node.addEventListener("click", () => activate(node)));
+    nodes.forEach((node) => {
+      node.addEventListener("click", () => activate(node));
+      node.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          activate(node);
+        }
+      });
+    });
+
     activate(nodes[0]);
   });
 }

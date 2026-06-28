@@ -97,18 +97,20 @@
     <section id="model" class="content-card card card-pad">
       <h2>Interactive operating model</h2>
       <p>Click a node to inspect the loop. The interaction shows the control-system logic behind the work.</p>
-      <div class="stage">
+      <div class="operating-model-grid">
+      <div class="stage loop-map">
         <svg class="stage-svg" viewBox="0 0 1000 620" aria-hidden="true"><path d="M500 92 C770 96 890 260 825 335 C760 493 615 528 500 528 C385 528 240 493 175 335 C110 260 230 96 500 92"/><path d="M170 158 C320 248 680 248 830 158"/><path d="M190 470 C350 365 650 365 810 470"/></svg>
         <div class="stage-core">Control<br>System</div>
-        <button class="stage-node n1" data-tag="Loop 01" data-title="Floor Supervisor Feedback" data-detail="Captures operational friction before it becomes formal shortage escalation. Converts floor signal into SKU review and service-delivery visibility."><span>Loop 01</span><strong>Floor Feedback</strong></button>
-        <button class="stage-node n2" data-tag="Loop 02" data-title="Slot-Economics Audit" data-detail="Treats vending/storage capacity as a control point. Items need to justify physical footprint against service value and usage behavior."><span>Loop 02</span><strong>Slot Economics</strong></button>
-        <button class="stage-node n3" data-tag="Loop 03" data-title="JIT / Safety-Stock Logic" data-detail="Ties replenishment planning to usage, lead time, package size, MOQ, no-history exceptions, and service-risk visibility."><span>Loop 03</span><strong>JIT Logic</strong></button>
-        <button class="stage-node n4" data-tag="Loop 04" data-title="Billing-State Tracking" data-detail="Controls transition from first-batch/prepaid state into standard consignment billing to avoid ambiguity and duplicate handling."><span>Loop 04</span><strong>Billing State</strong></button>
-        <button class="stage-node n5" data-tag="Layer" data-title="Vendor / Spec Governance" data-detail="Separates available products from approved substitutions through customer/OEM-controlled specification gates."><span>Layer</span><strong>Spec Governance</strong></button>
-        <button class="stage-node n6" data-tag="Gate" data-title="New SKU Intake" data-detail="Keeps uncontrolled items out of the operating system until need, spec constraints, and initial state are clear."><span>Gate</span><strong>New SKU Intake</strong></button>
-        <button class="stage-node n7" data-tag="Layer" data-title="MWO Shortage Tracking" data-detail="Turns shortage complaints into traceable events tied to item, work order, vendor state, delay reason, and closure timing."><span>Layer</span><strong>MWO Tracking</strong></button>
-        <aside class="stage-detail" aria-live="polite"></aside>
+        <button class="stage-node n1" data-tag="Loop 01" data-title="Floor Supervisor Feedback" data-problem="Operational friction could stay informal until it became a shortage escalation." data-control="Converted floor feedback into a visible SKU review and service-delivery signal." data-impact="Earlier visibility improved follow-up discipline and reduced hidden operating noise." data-relevance="Stakeholder coordination, service-delivery visibility, and issue prevention."><span>Loop 01</span><strong>Floor Feedback</strong></button>
+        <button class="stage-node n2" data-tag="Loop 02" data-title="Slot-Economics Audit" data-problem="Physical vending and storage capacity could be consumed by items without enough service-value justification." data-control="Treated slot capacity as an operating control point tied to usage behavior and service value." data-impact="Improved prioritization of limited space and reduced low-value capacity pressure." data-relevance="Capacity governance, prioritization, and process improvement."><span>Loop 02</span><strong>Slot Economics</strong></button>
+        <button class="stage-node n3" data-tag="Loop 03" data-title="JIT / Safety-Stock Logic" data-problem="Replenishment decisions could miss lead-time, package-size, MOQ, and no-history exception behavior." data-control="Tied replenishment planning to usage, lead time, package size, MOQ, exception states, and service-risk visibility." data-impact="Made reorder review more exception-based and reduced manual interpretation effort." data-relevance="Replenishment planning logic, operational control, and process discipline."><span>Loop 03</span><strong>JIT Logic</strong></button>
+        <button class="stage-node n4" data-tag="Loop 04" data-title="Billing-State Tracking" data-problem="Transition ambiguity between first-batch / prepaid status and standard consignment billing created execution noise." data-control="Defined billing-state logic to keep lifecycle state visible and reduce duplicate handling risk." data-impact="Improved transaction clarity during operating transition." data-relevance="Process control, implementation governance, and issue prevention."><span>Loop 04</span><strong>Billing State</strong></button>
+        <button class="stage-node n5" data-tag="Layer" data-title="Vendor / Spec Governance" data-problem="Available products and approved substitutions could be confused when specification constraints were not visible." data-control="Separated available items from approved substitutions through customer/OEM-controlled specification gates." data-impact="Reduced ambiguity in supplier follow-up and protected regulated service-delivery constraints." data-relevance="Vendor coordination, regulated service delivery, and governance control."><span>Layer</span><strong>Spec Governance</strong></button>
+        <button class="stage-node n6" data-tag="Gate" data-title="New SKU Intake" data-problem="New items could enter the operating system before need, specification constraints, and initial state were clear." data-control="Used intake gating to clarify need, state, and constraints before the item entered the control model." data-impact="Reduced uncontrolled complexity and improved downstream review quality." data-relevance="Implementation discipline, intake control, and operating-system design."><span>Gate</span><strong>New SKU Intake</strong></button>
+        <button class="stage-node n7" data-tag="Layer" data-title="MWO Shortage Tracking" data-problem="Shortage complaints could remain anecdotal without a traceable event structure." data-control="Converted shortage events into records tied to item, work order, vendor state, delay reason, and closure timing." data-impact="Improved escalation visibility and made recurring issues easier to review." data-relevance="Issue escalation workflow, reporting infrastructure, and service-delivery visibility."><span>Layer</span><strong>MWO Tracking</strong></button>
       </div>
+      <aside class="loop-detail-panel card" id="loopDetailPanel" aria-live="polite"></aside>
+    </div>
     </section>
     <section id="controls" class="content-card card card-pad">
       <h2>Actions taken and controls built</h2>
@@ -150,7 +152,7 @@
       <nav aria-label="Footer navigation">
         <a href="../assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Download portfolio resume</a>
         <a href="https://www.linkedin.com/in/pavlo-malairov-b51840219" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
-        <a href="mailto:pmalairov@gmail.com">Discuss Operations / Implementation PM fit</a>
+        <a href="mailto:pmalairov@gmail.com?subject=Operations%20%2F%20Implementation%20PM%20Opportunity">Discuss Operations / Implementation PM fit</a>
       </nav>
     </div>
   </footer>
