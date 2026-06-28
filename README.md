@@ -1,4 +1,4 @@
-# Pavlo Malairov Portfolio — v5 Immersive UI 2026
+# Pavlo Malairov Portfolio — v5.1 Visual Correction
 
 Static interactive portfolio for Operations / Implementation Project Management.
 

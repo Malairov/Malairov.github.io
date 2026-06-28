@@ -423,3 +423,143 @@ img { max-width: 100%; display: block; }
   .cta-actions, .hero-actions { width: 100%; }
   .button { width: 100%; }
 }
+
+
+
+/* === v5.1 visual correction patch: hero balance + visible command cockpit === */
+.nav-actions {
+  gap: 10px;
+}
+
+.micro-pill {
+  background: rgba(20, 62, 105, 0.08);
+  border: 1px solid rgba(20, 62, 105, 0.14);
+  color: var(--navy);
+}
+
+.hero {
+  padding-top: 58px;
+}
+
+.hero-grid {
+  grid-template-columns: minmax(0, 0.92fr) minmax(520px, 1.08fr);
+  gap: 44px;
+  align-items: center;
+}
+
+.hero-copy h1 {
+  max-width: 720px;
+  font-size: clamp(2.6rem, 5vw, 4.25rem);
+  line-height: 0.96;
+}
+
+.hero-lede {
+  max-width: 660px;
+}
+
+.hero-stage {
+  min-height: 560px;
+  grid-template-columns: minmax(0, 1.08fr) minmax(240px, 0.92fr);
+  grid-template-rows: 1fr auto;
+  gap: 18px;
+}
+
+.stage-panel {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.68)),
+    radial-gradient(circle at 20% 10%, rgba(255,201,117,.22), transparent 36%),
+    radial-gradient(circle at 90% 20%, rgba(141,196,255,.20), transparent 34%);
+  border: 1px solid rgba(20, 62, 105, 0.16);
+  box-shadow: 0 28px 70px rgba(17, 34, 58, 0.16);
+}
+
+.panel-main {
+  background:
+    linear-gradient(160deg, rgba(14,26,43,.96), rgba(20,62,105,.92)),
+    radial-gradient(circle at 30% 20%, rgba(255,201,117,.26), transparent 36%),
+    radial-gradient(circle at 70% 60%, rgba(141,196,255,.24), transparent 34%);
+  color: #f8fbff;
+  border: 1px solid rgba(255,255,255,.16);
+}
+
+.panel-main .panel-title,
+.panel-main .panel-code {
+  color: rgba(255,255,255,.86);
+}
+
+.panel-main .panel-code {
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.10);
+}
+
+.panel-main .mini-system-step {
+  background: rgba(255,255,255,.10);
+  border-color: rgba(255,255,255,.14);
+  color: rgba(255,255,255,.82);
+}
+
+.panel-main .mini-system-step.active {
+  background: linear-gradient(135deg, var(--amber), #f2a23a);
+  color: #15110a;
+}
+
+.panel-main .mini-system-line {
+  background: linear-gradient(90deg, rgba(255,201,117,.75), rgba(141,196,255,.62));
+}
+
+.radar-wrap {
+  max-width: 350px;
+  margin-top: 28px;
+}
+
+.radar-ring {
+  border-color: rgba(255,255,255,.20);
+}
+
+.radar-wrap::after {
+  background: radial-gradient(circle, rgba(255,255,255,.10), rgba(255,255,255,.04));
+  border-color: rgba(255,255,255,.16);
+}
+
+.panel-side,
+.panel-bottom {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.70)),
+    radial-gradient(circle at 90% 10%, rgba(141,196,255,.18), transparent 34%);
+}
+
+.panel-side {
+  min-height: 250px;
+}
+
+.panel-bottom {
+  min-height: 150px;
+}
+
+.stack-item {
+  background: rgba(255,255,255,.76);
+  border-color: rgba(20, 62, 105, .12);
+}
+
+.stack-item strong {
+  color: var(--navy);
+}
+
+@media (max-width: 1180px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-copy h1 {
+    max-width: 900px;
+  }
+  .hero-stage {
+    grid-template-columns: minmax(0, 1.1fr) minmax(260px, .9fr);
+  }
+}
+
+@media (max-width: 920px) {
+  .hero-stage {
+    grid-template-columns: 1fr;
+  }
+}
