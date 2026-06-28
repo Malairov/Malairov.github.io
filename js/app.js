@@ -10,6 +10,7 @@ const state = {
   smartcPhase: 0,
   smartcTrack: 0,
   smartcReplayTimer: null,
+  smartcMode: 'flow',
 };
 
 function renderHeroMetrics() {
@@ -172,6 +173,11 @@ function renderSmartC() {
 
   const active = smartc.phases[state.smartcPhase] || smartc.phases[0];
   const currentMetric = smartc.metrics[state.smartcPhase % smartc.metrics.length];
+  const smartcStage = qs('.smartc-stage');
+  if (smartcStage) {
+    smartcStage.classList.remove('smartc-mode-flow', 'smartc-mode-workstreams', 'smartc-mode-evidence');
+    smartcStage.classList.add(`smartc-mode-${state.smartcMode}`);
+  }
 
   commandRoot.innerHTML = `
     <div class="smartc-command-head">
@@ -190,19 +196,48 @@ function renderSmartC() {
         <span class="core-signal sig-c"></span>
       </div>
       <div class="smartc-command-stack">
-        <div class="smartc-chip-row">${smartc.highlights.map(h => `<span class="smartc-signal-chip">${h}</span>`).join('')}</div>
+        <div class="smartc-chip-row">${smartc.highlights.map((h, idx) => `<button type="button" class="smartc-signal-chip" data-smartc-quick="${idx}">${h}</button>`).join('')}</div>
         <div class="smartc-command-focus">
           <span>Phase spotlight</span>
           <strong>${active.title}</strong>
           <small>${active.axis} · ${currentMetric.value} ${currentMetric.label}</small>
         </div>
+        <div class="smartc-mode-switch" aria-label="SmartC view mode">
+          <button type="button" class="${state.smartcMode === 'flow' ? 'active' : ''}" data-smartc-mode="flow">Flow</button>
+          <button type="button" class="${state.smartcMode === 'workstreams' ? 'active' : ''}" data-smartc-mode="workstreams">Workstreams</button>
+          <button type="button" class="${state.smartcMode === 'evidence' ? 'active' : ''}" data-smartc-mode="evidence">Evidence</button>
+        </div>
       </div>
     </div>
     <div class="smartc-command-foot">
-      <article><span>Current axis</span><strong>${active.axis}</strong></article>
-      <article><span>Control</span><strong>${active.control}</strong></article>
-      <article><span>Outcome</span><strong>${active.outcome}</strong></article>
+      <button type="button" data-smartc-mode="flow"><span>Current axis</span><strong>${active.axis}</strong></button>
+      <button type="button" data-smartc-mode="workstreams"><span>Control</span><strong>${active.control}</strong></button>
+      <button type="button" data-smartc-mode="evidence"><span>Outcome</span><strong>${active.outcome}</strong></button>
     </div>`;
+
+  qsa('[data-smartc-quick]', commandRoot).forEach(btn => btn.addEventListener('click', () => {
+    const idx = Number(btn.dataset.smartcQuick);
+    const quickMap = [
+      { phase: 1, track: 1, mode: 'flow' },
+      { phase: 2, track: 4, mode: 'workstreams' },
+      { phase: 3, track: 2, mode: 'flow' },
+      { phase: 5, track: 5, mode: 'evidence' }
+    ];
+    const target = quickMap[idx] || quickMap[0];
+    state.smartcPhase = target.phase;
+    state.smartcTrack = target.track;
+    state.smartcMode = target.mode;
+    renderSmartC();
+  }));
+
+  qsa('[data-smartc-mode]', commandRoot).forEach(btn => btn.addEventListener('click', () => {
+    state.smartcMode = btn.dataset.smartcMode;
+    renderSmartC();
+    const focusTarget = state.smartcMode === 'workstreams' ? qs('#smartcTracks') : state.smartcMode === 'evidence' ? qs('#smartcEvidence') : qs('#smartcFlow');
+    if (focusTarget && typeof focusTarget.scrollIntoView === 'function') {
+      focusTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+    }
+  }));
 
   flowRoot.innerHTML = smartcWireSvg() + smartc.phases.map((phase, idx) => `
     <button class="smartc-phase phase-${idx + 1} ${idx === state.smartcPhase ? 'active' : ''}" type="button" data-smartc-phase="${idx}" aria-pressed="${idx === state.smartcPhase}">
