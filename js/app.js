@@ -1,224 +1,260 @@
-const data = window.PORTFOLIO_DATA;
+const qs = (s, el = document) => el.querySelector(s);
+const qsa = (s, el = document) => Array.from(el.querySelectorAll(s));
 
-const q = (selector, root = document) => root.querySelector(selector);
-const qa = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+const state = {
+  arch: 'feedback',
+  flow: 0,
+  filter: 'All',
+  diagnostic: new Set(),
+};
 
-function html(strings, ...values) {
-  return strings.map((s, i) => s + (values[i] ?? "")).join("");
+function renderHeroMetrics() {
+  const root = qs('#heroMetrics');
+  root.innerHTML = PORTFOLIO_DATA.metrics.slice(0, 4).map(m => `
+    <article class="kpi-tile glass tilt-subtle">
+      <div class="kpi-kicker">${m.label}</div>
+      <div class="kpi-value">${m.value}</div>
+      <div class="kpi-caption">${m.note}</div>
+    </article>`).join('');
 }
 
-function renderMetrics() {
-  q("#heroMetrics").innerHTML = data.heroMetrics.map(metric => html`
-    <div class="kpi-card">
-      <strong>${metric.value}</strong>
-      <span>${metric.label}</span>
-    </div>
-  `).join("");
-
-  q("#metricStrip").innerHTML = data.metrics.map(metric => html`
-    <article class="metric-tile">
-      <div class="value">${metric.value}</div>
-      <div class="label">${metric.label}</div>
-      <div class="context">${metric.context}</div>
-    </article>
-  `).join("");
+function renderMetricStrip() {
+  const root = qs('#metricStrip');
+  root.innerHTML = PORTFOLIO_DATA.metrics.map(m => `
+    <article class="metric-card glass tilt-subtle reveal-child">
+      <div class="metric-top">${m.label}</div>
+      <div class="metric-value">${m.value}</div>
+      <div class="metric-note">${m.note}</div>
+    </article>`).join('');
 }
 
-function renderArchitecture() {
-  data.architecture.forEach(node => {
-    const target = q(`[data-arch="${node.id}"]`);
-    if (!target) return;
-    target.setAttribute("role", "button");
-    target.setAttribute("tabindex", "0");
-    target.setAttribute("aria-label", `Open ${node.title}`);
-    target.innerHTML = html`
-      <span class="tag">${node.tag}</span>
-      <strong>${node.title}</strong>
-      <span>${node.subtitle}</span>
-    `;
-  });
-
-  const setDetail = (id) => {
-    const node = data.architecture.find(item => item.id === id) ?? data.architecture[0];
-    qa(".arch-node").forEach(el => el.classList.toggle("active", el.dataset.arch === node.id));
-    q("#archDetail").innerHTML = html`
-      <p class="eyebrow">${node.tag} · ${node.cadence}</p>
-      <h3>${node.title}</h3>
-      <p>${node.role}</p>
-      <div class="detail-meta">
-        <span class="chip">Cadence: ${node.cadence}</span>
-        <span class="chip">Metric: ${node.metric}</span>
-      </div>
-      <h4>Inputs</h4>
-      <ul class="detail-list">${node.inputs.map(input => `<li>${input}</li>`).join("")}</ul>
-      <h4>Outputs</h4>
-      <ul class="detail-list">${node.outputs.map(output => `<li>${output}</li>`).join("")}</ul>
-    `;
-  };
-
-  qa(".arch-node").forEach(el => {
-    el.addEventListener("click", () => setDetail(el.dataset.arch));
-    el.addEventListener("keydown", event => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        setDetail(el.dataset.arch);
-      }
+function hydrateArchNodes() {
+  const map = Object.fromEntries(PORTFOLIO_DATA.architecture.map(a => [a.id, a]));
+  qsa('.arch-node').forEach(node => {
+    const data = map[node.dataset.arch];
+    if (!data) return;
+    node.dataset.label = data.tag;
+    node.dataset.title = data.title;
+    node.addEventListener('click', () => {
+      state.arch = data.id;
+      renderArchDetail();
     });
   });
-
-  setDetail("feedback");
 }
 
-function renderSkuFlow() {
-  const flow = q("#skuFlow");
-  flow.innerHTML = data.skuFlow.map((step, index) => html`
-    <button class="flow-step" data-step="${index}" type="button">
-      <span class="step-no">STEP ${String(index + 1).padStart(2, "0")}</span>
-      <strong>${step.title}</strong>
-      <span>${step.subtitle}</span>
-    </button>
-  `).join("");
-
-  const setStep = (index) => {
-    const step = data.skuFlow[index];
-    qa(".flow-step").forEach((el, i) => el.classList.toggle("active", i === index));
-    q("#flowDetail").innerHTML = html`
-      <p class="eyebrow">Lifecycle step ${String(index + 1).padStart(2, "0")}</p>
-      <h3>${step.title}</h3>
-      <p>${step.detail}</p>
-      <span class="chip">${step.subtitle}</span>
-    `;
-  };
-
-  qa(".flow-step").forEach((button, index) => button.addEventListener("click", () => setStep(index)));
-  setStep(0);
-}
-
-function renderCases(filter = "All") {
-  const toolbar = q("#caseToolbar");
-  toolbar.innerHTML = data.filters.map(item => html`
-    <button class="filter-button ${item === filter ? "active" : ""}" type="button" data-filter="${item}">${item}</button>
-  `).join("");
-
-  const visibleCases = filter === "All" ? data.cases : data.cases.filter(item => item.category === filter);
-  q("#caseGrid").innerHTML = visibleCases.map((item, index) => html`
-    <article class="case-card">
-      <span class="case-type">${item.category}</span>
-      <h3>${item.title}</h3>
-      <p>${item.summary}</p>
-      <div class="case-metric">${item.metric}</div>
-      <div class="case-tabs">
-        ${["problem", "built", "result", "transfer"].map(key => html`
-          <div>
-            <button class="case-toggle" type="button" aria-expanded="false">
-              <span>${key === "built" ? "System built" : key.charAt(0).toUpperCase() + key.slice(1)}</span>
-              <span>+</span>
-            </button>
-            <div class="case-body">${item[key]}</div>
-          </div>
-        `).join("")}
+function renderArchDetail() {
+  const data = PORTFOLIO_DATA.architecture.find(x => x.id === state.arch) || PORTFOLIO_DATA.architecture[0];
+  qsa('.arch-node').forEach(node => node.classList.toggle('active', node.dataset.arch === data.id));
+  qs('#archDetail').innerHTML = `
+    <div class="detail-badge">${data.tag} · ${data.cadence}</div>
+    <h3>${data.title}</h3>
+    <div class="detail-sub">${data.subtitle}</div>
+    <p class="detail-copy">${data.role}</p>
+    <div class="meta-grid">
+      <div class="meta-card">
+        <strong>Inputs</strong>
+        <ul class="meta-list">${data.inputs.map(i => `<li>${i}</li>`).join('')}</ul>
       </div>
-    </article>
-  `).join("");
+      <div class="meta-card">
+        <strong>Outputs</strong>
+        <ul class="meta-list">${data.outputs.map(i => `<li>${i}</li>`).join('')}</ul>
+      </div>
+    </div>
+    <div class="detail-metric">
+      <span>Why it matters</span>
+      <div>${data.metric}</div>
+    </div>`;
+}
 
-  qa("#caseToolbar .filter-button").forEach(button => button.addEventListener("click", () => renderCases(button.dataset.filter)));
-  qa(".case-toggle").forEach(button => {
-    button.addEventListener("click", () => {
-      const body = button.nextElementSibling;
-      const isOpen = body.classList.toggle("open");
-      button.setAttribute("aria-expanded", String(isOpen));
-      button.lastElementChild.textContent = isOpen ? "−" : "+";
+function renderFlow() {
+  const root = qs('#skuFlow');
+  root.innerHTML = PORTFOLIO_DATA.skuFlow.map((step, idx) => `
+    <article class="flow-step ${idx === state.flow ? 'active' : ''} tilt-subtle" data-step="${idx}">
+      <span class="step-num">0${idx + 1}</span>
+      <small>${step.subtitle}</small>
+      <strong>${step.title}</strong>
+      <p>${step.detail}</p>
+    </article>`).join('');
+  qsa('.flow-step', root).forEach(card => card.addEventListener('click', () => {
+    state.flow = Number(card.dataset.step);
+    renderFlow();
+    renderFlowDetail();
+  }));
+  renderFlowDetail();
+}
+
+function renderFlowDetail() {
+  const step = PORTFOLIO_DATA.skuFlow[state.flow] || PORTFOLIO_DATA.skuFlow[0];
+  qs('#flowDetail').innerHTML = `
+    <div class="flow-badge">Step ${state.flow + 1} of ${PORTFOLIO_DATA.skuFlow.length}</div>
+    <h3>${step.title}</h3>
+    <div class="detail-sub">${step.subtitle}</div>
+    <p class="flow-copy">${step.detail}</p>
+    <div class="detail-metric">
+      <span>Lifecycle framing</span>
+      <div>This step exists to preserve governance visibility, not to let the item drift into the system without an explicit state.</div>
+    </div>`;
+}
+
+function renderFilters() {
+  const root = qs('#caseToolbar');
+  root.innerHTML = PORTFOLIO_DATA.filters.map(filter => `
+    <button class="filter-chip ${filter === state.filter ? 'active' : ''}" data-filter="${filter}">${filter}</button>
+  `).join('');
+  qsa('.filter-chip', root).forEach(btn => btn.addEventListener('click', () => {
+    state.filter = btn.dataset.filter;
+    renderFilters();
+    renderCases();
+  }));
+}
+
+function renderCases() {
+  const root = qs('#caseGrid');
+  const cases = PORTFOLIO_DATA.cases.filter(c => state.filter === 'All' || c.category === state.filter);
+  root.innerHTML = cases.map((c, idx) => `
+    <article class="case-card glass tilt-subtle" data-case="${idx}">
+      <div class="case-head">
+        <div>
+          <span class="case-tag">${c.category}</span>
+          <h3 class="case-title">${c.title}</h3>
+          <p class="case-summary">${c.summary}</p>
+        </div>
+        <div class="case-metric">
+          <span>Evidence</span>
+          <strong>${c.metric}</strong>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-columns">
+          <div class="case-mini"><strong>Problem</strong>${c.problem}</div>
+          <div class="case-mini"><strong>System built</strong>${c.built}</div>
+        </div>
+        <button class="case-expand">Open result and transferability</button>
+        <div class="case-extra">
+          <div class="case-columns">
+            <div class="case-mini"><strong>Result</strong>${c.result}</div>
+            <div class="case-mini"><strong>Transferability</strong>${c.transfer}</div>
+          </div>
+        </div>
+      </div>
+    </article>`).join('');
+  qsa('.case-card', root).forEach(card => {
+    const btn = qs('.case-expand', card);
+    btn.addEventListener('click', () => {
+      const open = card.classList.toggle('open');
+      btn.textContent = open ? 'Hide detail' : 'Open result and transferability';
     });
   });
 }
 
 function renderDiagnostic() {
-  const active = new Set(["noHistory", "formula", "classification"]);
-  const toggles = q("#diagnosticToggles");
-
-  const sync = () => {
-    toggles.innerHTML = data.diagnostic.map(item => html`
-      <button class="toggle-button ${active.has(item.id) ? "active" : ""}" data-fail="${item.id}" type="button">${item.label}</button>
-    `).join("");
-
-    const activeItems = data.diagnostic.filter(item => active.has(item.id));
-    const severity = activeItems.length === 0 ? "ok" : activeItems.length <= 2 ? "warn" : "fail";
-    const label = activeItems.length === 0 ? "Controlled" : activeItems.length <= 2 ? "Partial failure" : "Systemic failure";
-
-    q("#diagnosticStatus").innerHTML = html`
+  const toggleRoot = qs('#diagnosticToggles');
+  toggleRoot.innerHTML = PORTFOLIO_DATA.diagnostic.map(item => `
+    <label class="toggle-card ${state.diagnostic.has(item.id) ? 'active' : ''}">
+      <input type="checkbox" data-diag="${item.id}" ${state.diagnostic.has(item.id) ? 'checked' : ''} />
       <div>
-        <strong>${activeItems.length} active failure mode${activeItems.length === 1 ? "" : "s"}</strong>
-        <div style="color: var(--muted); font-size: .92rem; margin-top: 3px;">Toggle modes to inspect the failure chain.</div>
-      </div>
-      <span class="status-chip ${severity}">${label}</span>
-    `;
-
-    q("#failureChain").innerHTML = activeItems.length ? activeItems.map(item => html`
-      <div class="chain-item">
-        <strong>${item.title}</strong>
+        <strong>${item.label}</strong>
         <span>${item.effect}</span>
       </div>
-    `).join("") : html`
-      <div class="chain-item">
-        <strong>No active failure mode</strong>
-        <span>The item remains visible to the control process.</span>
-      </div>
-    `;
+    </label>`).join('');
+  qsa('input[data-diag]', toggleRoot).forEach(input => input.addEventListener('change', e => {
+    const id = e.target.dataset.diag;
+    if (e.target.checked) state.diagnostic.add(id); else state.diagnostic.delete(id);
+    renderDiagnostic();
+  }));
 
-    q("#fixBox").innerHTML = html`
-      <strong>Control fix</strong>
-      <span>Move critical classification logic into Power Query, add a NO-USAGE state with a configurable threshold, use dynamic header-name lookup, and keep diagnostic columns visible during testing.</span>
-    `;
+  const active = PORTFOLIO_DATA.diagnostic.filter(d => state.diagnostic.has(d.id));
+  const count = active.length;
+  const severity = count === 0 ? 'Stable view' : count <= 2 ? 'Emerging failure' : count <= 4 ? 'Compounding failure' : 'System-level breakdown';
+  const subtitle = count === 0
+    ? 'Turn on a failure mode to inspect the chain.'
+    : count === 1
+      ? 'One layer is degraded, but the system may still be recoverable.'
+      : 'Multiple layers are interacting. This is why the issue was hard to detect with one quick fix.';
 
-    qa("#diagnosticToggles .toggle-button").forEach(button => button.addEventListener("click", () => {
-      const id = button.dataset.fail;
-      if (active.has(id)) active.delete(id); else active.add(id);
-      sync();
-    }));
-  };
+  qs('#diagnosticStatus').innerHTML = `
+    <div class="diag-overline">Failure-state engine</div>
+    <div class="diag-title">${severity}</div>
+    <div class="diag-sub">${subtitle}</div>`;
 
-  sync();
+  qs('#failureChain').innerHTML = PORTFOLIO_DATA.diagnostic.map(item => `
+    <span class="chain-pill ${state.diagnostic.has(item.id) ? 'active' : ''}">${item.title}</span>`).join('');
+
+  qs('#fixBox').innerHTML = `
+    <strong>Fix pattern</strong>
+    <ul>
+      <li>Move fragile logic upstream into Power Query where possible.</li>
+      <li>Add an explicit no-history state instead of routing new items to dead demand.</li>
+      <li>Use dynamic header lookup instead of hardcoded column numbers.</li>
+      <li>Keep workbook governance strict so formulas are not overwritten with static values.</li>
+      <li>Verify the running macro version matches the code being edited.</li>
+    </ul>`;
 }
 
 function renderTimeline() {
-  q("#timelineList").innerHTML = data.timeline.map(item => html`
-    <article class="timeline-item">
-      <div class="timeline-year">${item.year}</div>
-      <div class="timeline-content">
-        <h3>${item.title}</h3>
-        <p><strong>${item.org}</strong></p>
-        <p>${item.body}</p>
-        <div class="chips">${item.chips.map(chip => `<span class="chip">${chip}</span>`).join("")}</div>
-      </div>
-    </article>
-  `).join("");
+  const root = qs('#timelineList');
+  root.innerHTML = PORTFOLIO_DATA.timeline.map(item => `
+    <article class="timeline-card glass tilt-subtle">
+      <span class="timeline-year">${item.year}</span>
+      <h3>${item.title}</h3>
+      <div class="timeline-org">${item.org}</div>
+      <p>${item.body}</p>
+      <div class="chip-list">${item.chips.map(chip => `<span class="chip">${chip}</span>`).join('')}</div>
+    </article>`).join('');
 }
 
-function revealOnScroll() {
-  const items = qa(".reveal");
-  if (!("IntersectionObserver" in window)) {
-    items.forEach(item => item.classList.add("in"));
-    return;
-  }
-  const observer = new IntersectionObserver(entries => {
+function setupReveal() {
+  const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("in");
-        observer.unobserve(entry.target);
-      }
+      if (entry.isIntersecting) entry.target.classList.add('visible');
     });
   }, { threshold: 0.12 });
-  items.forEach(item => observer.observe(item));
+  qsa('.reveal').forEach(el => io.observe(el));
+}
+
+function setupTilt() {
+  qsa('.tilt, .tilt-subtle').forEach(card => {
+    const max = card.classList.contains('tilt') ? 9 : 4.5;
+    card.addEventListener('mousemove', e => {
+      if (window.innerWidth < 900) return;
+      const rect = card.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width;
+      const py = (e.clientY - rect.top) / rect.height;
+      const rx = (0.5 - py) * max;
+      const ry = (px - 0.5) * max;
+      card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateY(-1px)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+}
+
+function setupSectionSpy() {
+  const links = qsa('.nav-links a');
+  const badge = qs('#sectionBadge');
+  const sections = links.map(link => qs(link.getAttribute('href'))).filter(Boolean);
+  const io = new IntersectionObserver(entries => {
+    const visible = entries.filter(e => e.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!visible) return;
+    const id = `#${visible.target.id}`;
+    links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === id));
+    badge.textContent = visible.target.id.charAt(0).toUpperCase() + visible.target.id.slice(1);
+  }, { rootMargin: '-35% 0px -50% 0px', threshold: [0.15, 0.35, 0.55] });
+  sections.forEach(sec => io.observe(sec));
 }
 
 function init() {
-  renderMetrics();
-  renderArchitecture();
-  renderSkuFlow();
+  renderHeroMetrics();
+  renderMetricStrip();
+  hydrateArchNodes();
+  renderArchDetail();
+  renderFlow();
+  renderFilters();
   renderCases();
   renderDiagnostic();
   renderTimeline();
-  revealOnScroll();
+  setupReveal();
+  setupTilt();
+  setupSectionSpy();
 }
 
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener('DOMContentLoaded', init);
