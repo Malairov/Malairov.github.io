@@ -1,11 +1,11 @@
-# Pavlo Malairov Portfolio — v11 SmartC Deluxe
+# Pavlo Malairov Portfolio — v14 Executive Polish
 
 Static interactive portfolio for Operations / Implementation Project Management.
 
 ## Structure
 - `index.html` — main page
-- `css/base.css` — theme, components, interactions
-- `js/data.js` — portfolio content data
+- `css/base.css` — theme, layout, components, interactions
+- `js/data.js` — portfolio data
 - `js/app.js` — rendering logic and interactions
 - `assets/` — resume and supporting files
 

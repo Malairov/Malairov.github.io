@@ -11,6 +11,7 @@ const state = {
   smartcTrack: 0,
   smartcReplayTimer: null,
   smartcMode: 'flow',
+  lens: 'recruiter',
 };
 
 function renderHeroMetrics() {
@@ -487,6 +488,34 @@ function replayFailureChain() {
   step();
 }
 
+
+function renderAudienceLens() {
+  const panel = qs('#lensPanel');
+  if (!panel || !PORTFOLIO_DATA.audienceLens) return;
+  const data = PORTFOLIO_DATA.audienceLens[state.lens] || PORTFOLIO_DATA.audienceLens.recruiter;
+  panel.innerHTML = `
+    <span class="lens-title">${data.title}</span>
+    <strong>${data.headline}</strong>
+    <p>${data.summary}</p>
+    <div class="lens-bullets">${data.bullets.map(item => `<span>${item}</span>`).join('')}</div>
+    <div class="lens-cta">${data.cta}</div>
+  `;
+  qsa('[data-lens]').forEach(btn => {
+    const active = btn.dataset.lens === state.lens;
+    btn.classList.toggle('active', active);
+    btn.setAttribute('aria-selected', active ? 'true' : 'false');
+  });
+}
+
+function setupAudienceLens() {
+  qsa('[data-lens]').forEach(btn => btn.addEventListener('click', () => {
+    state.lens = btn.dataset.lens;
+    renderAudienceLens();
+  }));
+  renderAudienceLens();
+}
+
+
 function renderTimeline() {
   const root = qs('#timelineList');
   root.innerHTML = PORTFOLIO_DATA.timeline.map(item => `
@@ -551,6 +580,7 @@ function init() {
   renderCases();
   renderDiagnostic();
   renderTimeline();
+  setupAudienceLens();
   setupReveal();
   setupTilt();
   setupSectionSpy();

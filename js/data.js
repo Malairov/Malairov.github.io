@@ -1,4 +1,28 @@
 window.PORTFOLIO_DATA = {
+  audienceLens: {
+    recruiter: {
+      title: "Recruiter scan",
+      headline: "PMP-certified Operations / Implementation PM for regulated technical work.",
+      summary: "The fit is strongest for Operations PM, Implementation PM, Technical Operations PM, Service Delivery, Process Improvement, manufacturing service delivery, and regulated industrial operations.",
+      bullets: ["PMP-certified positioning", "Aerospace manufacturing service delivery", "AI-enabled infrastructure delivery", "Regulated maritime operations foundation"],
+      cta: "Open resume after the first 60 seconds."
+    },
+    manager: {
+      title: "Hiring manager scan",
+      headline: "Delivery evidence is shown as systems built, not duties performed.",
+      summary: "The site demonstrates how fragmented work was converted into control loops, dashboards, workflows, issue tracking, readiness logic, and stakeholder-visible execution.",
+      bullets: ["Four concurrent operating loops", "5h → 30m ordering workflow", "~16d → ~1w critical gap duration", "SmartC delivery path to 460+ installed locations"],
+      cta: "Inspect Architecture, SmartC, and Diagnostic sections."
+    },
+    technical: {
+      title: "Technical reviewer scan",
+      headline: "The value is diagnostic control under constraints.",
+      summary: "The deeper layers expose inputs, outputs, constraints, failure modes, governance gates, lifecycle states, and recovery logic without inflating authority or technical authorship.",
+      bullets: ["Signal path visualization", "Root-cause failure chain", "Spec-governance funnel", "No-history / macro / Power Query control logic"],
+      cta: "Use the interactive nodes and replay buttons."
+    }
+  },
+
   metrics: [
     { value: "400 → 1,800+", label: "tracked item foundation", context: "Catalog expanded and structured; 1,500+ active SKUs standardized for traceability." },
     { value: "5h → 30m", label: "ordering workflow", context: "Exception-based planning controls replaced manual review work." },
