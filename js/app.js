@@ -6,6 +6,7 @@ const state = {
   flow: 0,
   filter: 'All',
   diagnostic: new Set(),
+  caseFocus: null,
 };
 
 function renderHeroMetrics() {
@@ -88,6 +89,53 @@ function renderFlowDetail() {
   if (next) next.addEventListener('click', () => { if (state.flow < steps.length - 1) { state.flow++; renderFlow(); } });
 }
 
+function getCaseLinks(c) {
+  const title = (c.title || '').toLowerCase();
+  const category = (c.category || '').toLowerCase();
+  if (title.includes('four parallel') || title.includes('operating loops')) return ['feedback', 'slot', 'jit', 'billing', 'core'];
+  if (title.includes('safety-stock') || title.includes('root-cause')) return ['jit', 'tracking', 'core'];
+  if (title.includes('vendor') || title.includes('spec') || category.includes('governance')) return ['governance', 'intake', 'feedback'];
+  if (title.includes('mwo') || title.includes('shortage')) return ['tracking', 'slot', 'jit'];
+  if (title.includes('smartc') || category.includes('technology')) return ['core', 'intake', 'feedback'];
+  if (title.includes('maritime') || category.includes('foundation')) return ['core', 'billing'];
+  return ['core'];
+}
+
+function getCaseDepth(c) {
+  const category = (c.category || '').toLowerCase();
+  if (category.includes('diagnostic')) return 'Diagnostic depth';
+  if (category.includes('governance')) return 'Control gate';
+  if (category.includes('technology')) return 'Implementation delivery';
+  if (category.includes('foundation')) return 'Regulated execution';
+  return 'Operating system layer';
+}
+
+function caseWireSvg() {
+  const main = 'M 100 92 C 320 30, 680 30, 900 92 C 970 170, 930 250, 780 290 C 620 332, 380 332, 220 290 C 70 250, 30 170, 100 92';
+  const crossA = 'M 160 150 C 380 260, 620 260, 840 150';
+  const crossB = 'M 160 420 C 380 300, 620 300, 840 420';
+  const vertical = 'M 500 70 C 470 210, 530 350, 500 520';
+  return `
+    <svg class="case-wires" viewBox="0 0 1000 560" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="caseWireGrad" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stop-color="#68e1ff" />
+          <stop offset="48%" stop-color="#4f8cff" />
+          <stop offset="100%" stop-color="#ffb454" />
+        </linearGradient>
+      </defs>
+      <path class="case-wire case-wire-main" d="${main}" />
+      <path class="case-wire case-wire-cross" d="${crossA}" />
+      <path class="case-wire case-wire-cross reverse" d="${crossB}" />
+      <path class="case-wire case-wire-vertical" d="${vertical}" />
+      <circle class="case-wire-pulse" r="5"><animateMotion dur="8.8s" repeatCount="indefinite" path="${main}" /></circle>
+      <circle class="case-wire-pulse amber" r="4"><animateMotion dur="6.7s" repeatCount="indefinite" begin="1.1s" path="${crossA}" /></circle>
+      <circle class="case-wire-pulse cyan" r="4"><animateMotion dur="7.4s" repeatCount="indefinite" begin=".5s" path="${crossB}" /></circle>
+      <circle class="case-wire-pulse" r="3.5"><animateMotion dur="6.2s" repeatCount="indefinite" begin=".8s" path="${vertical}" /></circle>
+    </svg>`;
+}
+
+
 function renderFilters() {
   const root = qs('#caseToolbar');
   root.innerHTML = PORTFOLIO_DATA.filters.map(filter => `
@@ -103,8 +151,12 @@ function renderFilters() {
 function renderCases() {
   const root = qs('#caseGrid');
   const cases = PORTFOLIO_DATA.cases.filter(c => state.filter === 'All' || c.category === state.filter);
-  root.innerHTML = cases.map((c, idx) => `
-    <article class="case-card glass tilt-subtle" data-case="${idx}">
+  root.innerHTML = caseWireSvg() + cases.map((c, idx) => {
+    const links = getCaseLinks(c);
+    const linkChips = links.map(x => `<span class="case-link-chip">${x.replace('-', ' ')}</span>`).join('');
+    return `
+    <article class="case-card glass tilt-subtle" data-case="${idx}" data-links="${links.join(',')}">
+      <div class="case-current" aria-hidden="true"><span></span></div>
       <div class="case-head">
         <div>
           <span class="case-tag">${c.category}</span>
@@ -118,11 +170,13 @@ function renderCases() {
         </div>
       </div>
       <div class="case-body">
+        <div class="case-link-row" aria-label="Connected architecture nodes">${linkChips}</div>
+        <div class="case-depth-meter"><span>${getCaseDepth(c)}</span><i></i></div>
         <div class="case-columns">
           <div class="case-mini"><strong>Problem</strong>${c.problem}</div>
           <div class="case-mini"><strong>System built</strong>${c.built}</div>
         </div>
-        <button class="case-expand">Open result and transferability</button>
+        <button class="case-expand" type="button">Inspect result and transferability</button>
         <div class="case-extra">
           <div class="case-columns">
             <div class="case-mini"><strong>Result</strong>${c.result}</div>
@@ -130,12 +184,32 @@ function renderCases() {
           </div>
         </div>
       </div>
-    </article>`).join('');
+    </article>`;
+  }).join('');
+
   qsa('.case-card', root).forEach(card => {
     const btn = qs('.case-expand', card);
+    const links = (card.dataset.links || '').split(',').filter(Boolean);
+    const focus = () => {
+      state.caseFocus = card.dataset.case;
+      root.dataset.focus = card.dataset.case;
+      card.classList.add('case-focus');
+      if (window.ArchSystem && ArchSystem.preview) ArchSystem.preview(links);
+    };
+    const clear = () => {
+      state.caseFocus = null;
+      delete root.dataset.focus;
+      card.classList.remove('case-focus');
+      if (window.ArchSystem && ArchSystem.clearPreview) ArchSystem.clearPreview();
+    };
+    card.addEventListener('mouseenter', focus);
+    card.addEventListener('focusin', focus);
+    card.addEventListener('mouseleave', clear);
+    card.addEventListener('focusout', (e) => { if (!card.contains(e.relatedTarget)) clear(); });
     btn.addEventListener('click', () => {
       const open = card.classList.toggle('open');
-      btn.textContent = open ? 'Hide detail' : 'Open result and transferability';
+      btn.textContent = open ? 'Collapse case' : 'Inspect result and transferability';
+      if (open && window.ArchSystem && ArchSystem.preview) ArchSystem.preview(links);
     });
   });
 }
@@ -264,6 +338,7 @@ function setupSectionSpy() {
 }
 
 function init() {
+  document.body.classList.add('deluxe-system');
   renderHeroMetrics();
   renderMetricStrip();
   if (window.ArchSystem) ArchSystem.init();
@@ -625,6 +700,23 @@ document.addEventListener('DOMContentLoaded', init);
     });
   }
 
+  function setExternalFocus(ids, ctx, on) {
+    if (!ctx) return;
+    const activeIds = Array.isArray(ids) ? ids : [];
+    const related = new Set();
+    activeIds.forEach((id) => (RELATED[id] || []).forEach((k) => related.add(k)));
+    Array.prototype.slice.call(ctx.svg.querySelectorAll('.arch-node-g')).forEach((n) => {
+      const id = n.getAttribute('data-arch');
+      n.classList.toggle('external-active', !!on && activeIds.includes(id));
+      n.classList.toggle('external-dim', !!on && activeIds.length > 0 && !activeIds.includes(id));
+    });
+    Object.keys(ctx.linkEls).forEach((key) => {
+      const lit = related.has(key);
+      ctx.linkEls[key].classList.toggle('external-lit', !!on && lit);
+      ctx.linkEls[key].classList.toggle('external-dim', !!on && activeIds.length > 0 && !lit);
+    });
+  }
+
   // Guided tour sequence: the 7-step walk through the system
   const TOUR = ['intake', 'feedback', 'slot', 'jit', 'billing', 'tracking', 'governance'];
   const TOUR_NOTE = {
@@ -641,6 +733,8 @@ document.addEventListener('DOMContentLoaded', init);
     init() {
       const ctx = build();
       if (!ctx) return;
+      window.ArchSystem.preview = function(ids) { setExternalFocus(ids, ctx, true); };
+      window.ArchSystem.clearPreview = function() { setExternalFocus([], ctx, false); };
 
       const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       let idleTimer = null;

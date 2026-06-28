@@ -1,65 +1,15 @@
-# Pavlo Malairov — Interactive Operations Portfolio (v6)
+# Pavlo Malairov Portfolio — v9 Deluxe Connected System
 
-Static site. No framework. Deploys on GitHub Pages from the repository root.
+Static interactive portfolio for Operations / Implementation Project Management.
 
 ## Structure
-- `index.html` — page structure (must stay in repo root)
-- `css/base.css` — all styling, motion, and the v6 operating-loop visuals
-- `js/data.js` — all content (metrics, architecture nodes, SKU flow, cases, diagnostic, timeline)
-- `js/app.js` — all interaction logic, including the v6 animated loop system
-- `assets/Pavlo_Malairov_Resume.pdf` — public resume (no phone number; email + LinkedIn only)
 
-## What's new in v6
-- The Four Operating Loops are now a live SVG system: a central "Operating System Core",
-  four loop modules in a ring, three supporting modules (governance, intake, tracking),
-  curved connector wires, traveling signal pulses, status LEDs, and a soft core pulse.
-- Hover a node: related wires brighten. Click a node (or press Enter/Space): it locks active,
-  related wires light, unrelated wires fade, and the right panel shows role, cadence,
-  inputs, outputs, and why it matters.
-- Node labels render as real SVG text (reliable across browsers).
-- Respects `prefers-reduced-motion`: pulses and the core pulse stop, reveals show instantly.
-- Keyboard accessible: each node is focusable and activatable.
+- `index.html` — main website page
+- `css/base.css` — layout, theme, components, motion
+- `js/data.js` — portfolio content data
+- `js/app.js` — rendering and interaction logic
+- `assets/` — resume and supporting files
 
-## Deploy to GitHub Pages
-1. Put these files in the repository root (not a subfolder): `index.html`, `css/`, `js/`, `assets/`.
-2. Replace any old files (e.g. delete a stray root-level `base.css`, `loops.js`, `style.css`,
-   or any duplicate JS from earlier versions — they are not used).
-3. Settings → Pages → Source: `main` branch, `/ (root)`.
-4. Live within a minute or two at your Pages URL.
+## Deployment
 
-## Privacy
-- The resume PDF contains no phone number — public contact is email + LinkedIn only.
-- The aerospace client is not named. Maritime is framed generically (no ships, owners, ports, flags).
-
-## Tradeoffs / limitations
-- The architecture animation uses SVG `animateMotion` + CSS, no WebGL, so it stays fast and
-  has no heavy dependency. If a browser disables SMIL, the wires and nodes still render fully;
-  only the moving pulse dots would be absent — comprehension is preserved without them.
-- The hero command panel and KPI tiles use IntersectionObserver-driven reveals; these work in
-  all current browsers.
-
-## v7 additions
-- Architecture: idle auto-cycle (loops highlight in sequence until you interact) and a
-  "Replay system flow" guided tour that walks the 7-step path with captions. Respects
-  prefers-reduced-motion (no auto-motion when reduced).
-- SKU lifecycle flow: Previous / Next step controls, a branch point at the slot-decision
-  step (fail → removed / pass → continue), and a weekly re-entry loopback note.
-- Case library: each case now shows a "Proves …" badge (process architecture, root-cause
-  diagnosis, governance under constraints, etc.).
-- Diagnostic simulator: "Replay failure chain" button that lights each failure layer in
-  sequence to show it was a multi-layer control failure, not one bad formula.
-
-## v8 — cinematic architecture scene
-- Rebuilt the operating-architecture board from a flat light diagram into an immersive
-  dark "operating system" scene: deep navy backdrop with a faint technical grid, animated
-  depth rings, and a much larger glowing core (radial-gradient body, amber rim, rotating
-  orbit dot, pulsing aura).
-- Wires are now layered: a dim base wire plus a bright flowing dashed wire on top, with
-  two staggered signal pulses per route for a denser, more alive feel.
-- Nodes have depth shadows, gradient fills, an accent edge bar, and a green active LED
-  with a pinging ring. Hover lifts the node and brightens its routes; unrelated routes fade.
-- Click (or keyboard Enter/Space) locks a node and runs a one-shot route-replay glow along
-  its connected wires. The guided tour replays each route as it steps through the system.
-- The detail panel now shows inputs and outputs as labelled chips with a flow arrow,
-  instead of plain bullet lists.
-- All new motion respects prefers-reduced-motion.
+Copy the root contents into the GitHub Pages repository root so that `index.html` is at the top level.
