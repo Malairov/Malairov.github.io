@@ -48,3 +48,18 @@ Static site. No framework. Deploys on GitHub Pages from the repository root.
   diagnosis, governance under constraints, etc.).
 - Diagnostic simulator: "Replay failure chain" button that lights each failure layer in
   sequence to show it was a multi-layer control failure, not one bad formula.
+
+## v8 — cinematic architecture scene
+- Rebuilt the operating-architecture board from a flat light diagram into an immersive
+  dark "operating system" scene: deep navy backdrop with a faint technical grid, animated
+  depth rings, and a much larger glowing core (radial-gradient body, amber rim, rotating
+  orbit dot, pulsing aura).
+- Wires are now layered: a dim base wire plus a bright flowing dashed wire on top, with
+  two staggered signal pulses per route for a denser, more alive feel.
+- Nodes have depth shadows, gradient fills, an accent edge bar, and a green active LED
+  with a pinging ring. Hover lifts the node and brightens its routes; unrelated routes fade.
+- Click (or keyboard Enter/Space) locks a node and runs a one-shot route-replay glow along
+  its connected wires. The guided tour replays each route as it steps through the system.
+- The detail panel now shows inputs and outputs as labelled chips with a flow arrow,
+  instead of plain bullet lists.
+- All new motion respects prefers-reduced-motion.

@@ -357,26 +357,74 @@ document.addEventListener('DOMContentLoaded', init);
     PORTFOLIO_DATA.architecture.forEach((a) => { dataMap[a.id] = a; });
 
     const svg = el('svg', {
-      viewBox: '0 0 1000 640',
+      viewBox: '0 0 1000 660',
       class: 'arch-svg',
       role: 'img',
-      'aria-label': 'Interactive operating architecture: four loops around a core with supporting governance, intake, and tracking modules.'
+      'aria-label': 'Interactive operating architecture: four loops around a glowing core with supporting governance, intake, and tracking modules.'
     });
 
-    // defs: gradients + glow filter
+    // ---- defs: gradients, glows, radial backdrop ----
     const defs = el('defs');
-    const grad = el('linearGradient', { id: 'wireGrad', x1: '0', x2: '1' });
-    grad.appendChild(el('stop', { offset: '0%', 'stop-color': '#f5a23c' }));
-    grad.appendChild(el('stop', { offset: '100%', 'stop-color': '#5aa0ff' }));
-    defs.appendChild(grad);
-    const glow = el('filter', { id: 'softGlow', x: '-50%', y: '-50%', width: '200%', height: '200%' });
-    glow.appendChild(el('feGaussianBlur', { stdDeviation: '4', result: 'b' }));
-    const merge = el('feMerge');
-    merge.appendChild(el('feMergeNode', { in: 'b' }));
-    merge.appendChild(el('feMergeNode', { in: 'SourceGraphic' }));
-    glow.appendChild(merge);
-    defs.appendChild(glow);
+
+    const wireGrad = el('linearGradient', { id: 'wireGrad', x1: '0', x2: '1', y1: '0', y2: '1' });
+    wireGrad.appendChild(el('stop', { offset: '0%', 'stop-color': '#ffb454' }));
+    wireGrad.appendChild(el('stop', { offset: '52%', 'stop-color': '#7fb2ff' }));
+    wireGrad.appendChild(el('stop', { offset: '100%', 'stop-color': '#4a86ff' }));
+    defs.appendChild(wireGrad);
+
+    const coreGrad = el('radialGradient', { id: 'coreGrad', cx: '40%', cy: '35%', r: '75%' });
+    coreGrad.appendChild(el('stop', { offset: '0%', 'stop-color': '#2f6fb0' }));
+    coreGrad.appendChild(el('stop', { offset: '55%', 'stop-color': '#173f6b' }));
+    coreGrad.appendChild(el('stop', { offset: '100%', 'stop-color': '#0c243f' }));
+    defs.appendChild(coreGrad);
+
+    const plateGrad = el('linearGradient', { id: 'plateGrad', x1: '0', x2: '0', y1: '0', y2: '1' });
+    plateGrad.appendChild(el('stop', { offset: '0%', 'stop-color': '#ffffff' }));
+    plateGrad.appendChild(el('stop', { offset: '100%', 'stop-color': '#eef3fb' }));
+    defs.appendChild(plateGrad);
+
+    const plateActiveGrad = el('linearGradient', { id: 'plateActiveGrad', x1: '0', x2: '0', y1: '0', y2: '1' });
+    plateActiveGrad.appendChild(el('stop', { offset: '0%', 'stop-color': '#fffaf0' }));
+    plateActiveGrad.appendChild(el('stop', { offset: '100%', 'stop-color': '#fde9c8' }));
+    defs.appendChild(plateActiveGrad);
+
+    const bgGlow = el('radialGradient', { id: 'bgGlow', cx: '50%', cy: '48%', r: '60%' });
+    bgGlow.appendChild(el('stop', { offset: '0%', 'stop-color': 'rgba(120,170,255,.16)' }));
+    bgGlow.appendChild(el('stop', { offset: '60%', 'stop-color': 'rgba(120,170,255,.04)' }));
+    bgGlow.appendChild(el('stop', { offset: '100%', 'stop-color': 'rgba(120,170,255,0)' }));
+    defs.appendChild(bgGlow);
+
+    const softGlow = el('filter', { id: 'softGlow', x: '-60%', y: '-60%', width: '220%', height: '220%' });
+    softGlow.appendChild(el('feGaussianBlur', { stdDeviation: '4', result: 'b' }));
+    const m1 = el('feMerge');
+    m1.appendChild(el('feMergeNode', { in: 'b' }));
+    m1.appendChild(el('feMergeNode', { in: 'SourceGraphic' }));
+    softGlow.appendChild(m1);
+    defs.appendChild(softGlow);
+
+    const coreGlow = el('filter', { id: 'coreGlow', x: '-80%', y: '-80%', width: '260%', height: '260%' });
+    coreGlow.appendChild(el('feGaussianBlur', { stdDeviation: '10', result: 'cb' }));
+    const m2 = el('feMerge');
+    m2.appendChild(el('feMergeNode', { in: 'cb' }));
+    m2.appendChild(el('feMergeNode', { in: 'SourceGraphic' }));
+    coreGlow.appendChild(m2);
+    defs.appendChild(coreGlow);
+
+    const plateShadow = el('filter', { id: 'plateShadow', x: '-40%', y: '-40%', width: '180%', height: '200%' });
+    const fe = el('feDropShadow', { dx: '0', dy: '12', stdDeviation: '14', 'flood-color': 'rgba(17,34,58,.28)' });
+    plateShadow.appendChild(fe);
+    defs.appendChild(plateShadow);
+
     svg.appendChild(defs);
+
+    // ---- ambient backdrop layers ----
+    const bg = el('g', { class: 'arch-bg' });
+    bg.appendChild(el('rect', { x: '0', y: '0', width: '1000', height: '660', fill: 'url(#bgGlow)' }));
+    // concentric guide rings around core for depth
+    [340, 270, 200].forEach((rr, idx) => {
+      bg.appendChild(el('circle', { cx: 500, cy: 320, r: rr, class: 'depth-ring', 'data-ring': idx }));
+    });
+    svg.appendChild(bg);
 
     const linkLayer = el('g', { class: 'arch-links' });
     const pulseLayer = el('g', { class: 'arch-pulses' });
@@ -386,45 +434,64 @@ document.addEventListener('DOMContentLoaded', init);
     svg.appendChild(nodeLayer);
 
     const linkEls = {};
+    const pulseEls = {};
 
     LINKS.forEach(([from, to, role], i) => {
       const a = POS[from], b = POS[to];
       const { d } = curve(a, b);
       const key = `${from}-${to}`;
 
-      const path = el('path', { d: d, class: `wire wire-${role}`, 'data-link': key, fill: 'none' });
-      linkLayer.appendChild(path);
-      linkEls[key] = path;
+      // base wire (dim) + flowing wire (animated dash) layered for depth
+      const base = el('path', { d: d, class: `wire wire-${role} wire-base`, 'data-link': key, fill: 'none' });
+      const flow = el('path', { d: d, class: `wire wire-${role} wire-flow`, 'data-link': key + '-flow', fill: 'none' });
+      linkLayer.appendChild(base);
+      linkLayer.appendChild(flow);
+      linkEls[key] = base;
 
-      // traveling pulse on loop + feed wires (not the spokes, to reduce noise)
       if (role !== 'spoke') {
-        const pulse = el('circle', { r: role === 'loop' ? '4.5' : '3.5', class: `pulse pulse-${role}` });
-        const mp = el('animateMotion', {
-          dur: (role === 'loop' ? 3.2 : 4.4) + 's',
-          repeatCount: 'indefinite',
-          begin: (i * 0.4) + 's',
-          path: d,
-          rotate: 'auto'
+        // two staggered pulses per wire for a denser, more alive feel
+        [0, 0.5].forEach((phase, pi) => {
+          const pulse = el('circle', { r: role === 'loop' ? '5' : '4', class: `pulse pulse-${role}` });
+          const dur = (role === 'loop' ? 3.4 : 4.6);
+          const mp = el('animateMotion', {
+            dur: dur + 's',
+            repeatCount: 'indefinite',
+            begin: (i * 0.35 + phase * dur) + 's',
+            path: d,
+            rotate: 'auto'
+          });
+          pulse.appendChild(mp);
+          pulseLayer.appendChild(pulse);
+          if (pi === 0) pulseEls[key] = mp;
         });
-        pulse.appendChild(mp);
-        pulseLayer.appendChild(pulse);
       }
     });
 
-    // Core node
+    // ---- Core node: large, glowing, layered ----
     const core = POS.core;
     const coreG = el('g', { class: 'arch-node-g core-node', 'data-arch': 'core', tabindex: '0', role: 'button', 'aria-label': 'Operating system core' });
-    coreG.appendChild(el('circle', { cx: core.x, cy: core.y, r: '58', class: 'core-halo' }));
-    coreG.appendChild(el('circle', { cx: core.x, cy: core.y, r: '46', class: 'core-ring' }));
-    const coreT1 = el('text', { x: core.x, y: core.y - 4, 'text-anchor': 'middle', class: 'core-label' });
-    coreT1.textContent = 'Operating';
-    const coreT2 = el('text', { x: core.x, y: core.y + 14, 'text-anchor': 'middle', class: 'core-label' });
-    coreT2.textContent = 'System Core';
+    coreG.appendChild(el('circle', { cx: core.x, cy: core.y, r: '92', class: 'core-aura' }));
+    coreG.appendChild(el('circle', { cx: core.x, cy: core.y, r: '78', class: 'core-halo' }));
+    coreG.appendChild(el('circle', { cx: core.x, cy: core.y, r: '64', class: 'core-orbit' }));
+    coreG.appendChild(el('circle', { cx: core.x, cy: core.y, r: '54', class: 'core-body', filter: 'url(#coreGlow)' }));
+    coreG.appendChild(el('circle', { cx: core.x, cy: core.y, r: '54', class: 'core-rim' }));
+    // orbiting accent dot
+    const orbitDot = el('circle', { cx: core.x, cy: core.y - 64, r: '4', class: 'core-orbit-dot' });
+    const orbAnim = el('animateTransform', { attributeName: 'transform', type: 'rotate', from: `0 ${core.x} ${core.y}`, to: `360 ${core.x} ${core.y}`, dur: '9s', repeatCount: 'indefinite' });
+    orbitDot.appendChild(orbAnim);
+    coreG.appendChild(orbitDot);
+    const coreT1 = el('text', { x: core.x, y: core.y - 6, 'text-anchor': 'middle', class: 'core-label core-label-lg' });
+    coreT1.textContent = 'OPERATING';
+    const coreT2 = el('text', { x: core.x, y: core.y + 12, 'text-anchor': 'middle', class: 'core-label core-label-lg' });
+    coreT2.textContent = 'SYSTEM CORE';
+    const coreT3 = el('text', { x: core.x, y: core.y + 30, 'text-anchor': 'middle', class: 'core-sub' });
+    coreT3.textContent = 'steady-state SKU control';
     coreG.appendChild(coreT1);
     coreG.appendChild(coreT2);
+    coreG.appendChild(coreT3);
     nodeLayer.appendChild(coreG);
 
-    // Other nodes
+    // ---- Surrounding nodes ----
     Object.keys(POS).forEach((id) => {
       if (id === 'core') return;
       const p = POS[id];
@@ -439,33 +506,36 @@ document.addEventListener('DOMContentLoaded', init);
         'aria-label': `${d.title}. ${d.tag}. Click to inspect.`
       });
 
-      const w = p.kind === 'loop' ? 150 : 138;
-      const h = p.kind === 'loop' ? 64 : 56;
-      const rx = 14;
+      const w = p.kind === 'loop' ? 166 : 148;
+      const h = p.kind === 'loop' ? 72 : 60;
+      const rx = 16;
+      const x0 = p.x - w / 2, y0 = p.y - h / 2;
 
-      // LED + glow plate
-      g.appendChild(el('rect', { x: p.x - w / 2, y: p.y - h / 2, width: w, height: h, rx: rx, class: 'node-plate' }));
-      g.appendChild(el('circle', { cx: p.x - w / 2 + 16, cy: p.y - h / 2 + 15, r: '4', class: 'node-led' }));
+      // depth shadow plate (offset, behind)
+      g.appendChild(el('rect', { x: x0, y: y0, width: w, height: h, rx: rx, class: 'node-plate', filter: 'url(#plateShadow)' }));
+      // accent edge bar (left)
+      g.appendChild(el('rect', { x: x0, y: y0, width: 5, height: h, rx: 2.5, class: 'node-edge' }));
+      // LED
+      g.appendChild(el('circle', { cx: x0 + 22, cy: y0 + 17, r: '4.5', class: 'node-led' }));
+      g.appendChild(el('circle', { cx: x0 + 22, cy: y0 + 17, r: '8', class: 'node-led-ring' }));
 
-      // tag (kicker)
-      const tag = el('text', { x: p.x - w / 2 + 28, y: p.y - h / 2 + 19, class: 'node-tag' });
+      const tag = el('text', { x: x0 + 36, y: y0 + 21, class: 'node-tag' });
       tag.textContent = d.tag.toUpperCase();
       g.appendChild(tag);
 
-      // title — wrap to two lines if long
+      // title wrap
       const words = d.title.split(' ');
       let line1 = d.title, line2 = '';
       if (d.title.length > 16) {
-        // split roughly in half on a space
-        let mid = Math.ceil(words.length / 2);
+        const mid = Math.ceil(words.length / 2);
         line1 = words.slice(0, mid).join(' ');
         line2 = words.slice(mid).join(' ');
       }
-      const t1 = el('text', { x: p.x - w / 2 + 14, y: p.y + (line2 ? 2 : 8), class: 'node-title' });
+      const t1 = el('text', { x: x0 + 18, y: p.y + (line2 ? 4 : 10), class: 'node-title' });
       t1.textContent = line1;
       g.appendChild(t1);
       if (line2) {
-        const t2 = el('text', { x: p.x - w / 2 + 14, y: p.y + 18, class: 'node-title' });
+        const t2 = el('text', { x: x0 + 18, y: p.y + 21, class: 'node-title' });
         t2.textContent = line2;
         g.appendChild(t2);
       }
@@ -476,17 +546,33 @@ document.addEventListener('DOMContentLoaded', init);
     board.innerHTML = '';
     board.appendChild(svg);
 
-    // caption
     const cap = document.createElement('div');
     cap.className = 'board-caption';
     cap.id = 'boardCaption';
-    cap.textContent = 'Idle: signal pulses cycle the loops. Click any node to lock it and read the logic.';
+    cap.textContent = 'Idle: signal pulses cycle the loops. Click any node — or replay the flow — to read the logic.';
     board.appendChild(cap);
 
-    return { svg, linkEls };
+    return { svg, linkEls, pulseEls };
   }
 
-  function setActive(id, ctx) {
+  function routeReplay(id, ctx) {
+    if (!ctx) return;
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
+    const related = RELATED[id] || [];
+    related.forEach((key) => {
+      const wire = ctx.svg.querySelector('.wire-flow[data-link="' + key + '-flow"]');
+      if (wire) {
+        wire.classList.remove('replay');
+        // force reflow to restart the animation
+        void wire.getBBox();
+        wire.classList.add('replay');
+        setTimeout(() => wire.classList.remove('replay'), 1200);
+      }
+    });
+  }
+
+  function setActive(id, ctx, opts) {
     if (!ctx) return;
     const data = PORTFOLIO_DATA.architecture.find((x) => x.id === id);
 
@@ -503,23 +589,23 @@ document.addEventListener('DOMContentLoaded', init);
       ctx.linkEls[key].classList.toggle('dim', related.length > 0 && !lit);
     });
 
-    // detail panel (reuse existing renderer markup style)
+    // route replay burst on the related paths
+    if (opts && opts.replay) routeReplay(id, ctx);
+
+    // detail panel with structured chips
     const panel = document.getElementById('archDetail');
     if (panel && data) {
+      const inChips = data.inputs.map((i) => `<span class="io-chip in-chip">${i}</span>`).join('');
+      const outChips = data.outputs.map((i) => `<span class="io-chip out-chip">${i}</span>`).join('');
       panel.innerHTML = `
         <div class="detail-badge">${data.tag} · ${data.cadence}</div>
         <h3>${data.title}</h3>
         <div class="detail-sub">${data.subtitle}</div>
         <p class="detail-copy">${data.role}</p>
-        <div class="meta-grid">
-          <div class="meta-card">
-            <strong>Inputs</strong>
-            <ul class="meta-list">${data.inputs.map((i) => `<li>${i}</li>`).join('')}</ul>
-          </div>
-          <div class="meta-card">
-            <strong>Outputs</strong>
-            <ul class="meta-list">${data.outputs.map((i) => `<li>${i}</li>`).join('')}</ul>
-          </div>
+        <div class="io-block">
+          <div class="io-row"><span class="io-label">Inputs</span><div class="io-chips">${inChips}</div></div>
+          <div class="io-flow-arrow" aria-hidden="true">&#8595;</div>
+          <div class="io-row"><span class="io-label">Outputs</span><div class="io-chips">${outChips}</div></div>
         </div>
         <div class="detail-metric">
           <span>Why it matters</span>
@@ -583,9 +669,9 @@ document.addEventListener('DOMContentLoaded', init);
 
       Array.prototype.slice.call(ctx.svg.querySelectorAll('.arch-node-g')).forEach((n) => {
         const id = n.getAttribute('data-arch');
-        n.addEventListener('click', () => { engage(); setActive(id, ctx); });
+        n.addEventListener('click', () => { engage(); setActive(id, ctx, { replay: true }); });
         n.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); engage(); setActive(id, ctx); }
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); engage(); setActive(id, ctx, { replay: true }); }
         });
         n.addEventListener('mouseenter', () => setHover(id, ctx, true));
         n.addEventListener('mouseleave', () => setHover(id, ctx, false));
@@ -604,7 +690,7 @@ document.addEventListener('DOMContentLoaded', init);
               return;
             }
             const id = TOUR[step];
-            setActive(id, ctx);
+            setActive(id, ctx, { replay: true });
             if (cap) cap.textContent = `Step ${step + 1}/${TOUR.length}: ${TOUR_NOTE[id]}`;
             step++;
             tourTimer = setTimeout(next, reduceMotion ? 0 : 2600);
