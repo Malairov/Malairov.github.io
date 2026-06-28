@@ -14,7 +14,7 @@ function renderHeroMetrics() {
     <article class="kpi-tile glass tilt-subtle">
       <div class="kpi-kicker">${m.label}</div>
       <div class="kpi-value">${m.value}</div>
-      <div class="kpi-caption">${m.note}</div>
+      <div class="kpi-caption">${m.context}</div>
     </article>`).join('');
 }
 
@@ -24,46 +24,8 @@ function renderMetricStrip() {
     <article class="metric-card glass tilt-subtle reveal-child">
       <div class="metric-top">${m.label}</div>
       <div class="metric-value">${m.value}</div>
-      <div class="metric-note">${m.note}</div>
+      <div class="metric-note">${m.context}</div>
     </article>`).join('');
-}
-
-function hydrateArchNodes() {
-  const map = Object.fromEntries(PORTFOLIO_DATA.architecture.map(a => [a.id, a]));
-  qsa('.arch-node').forEach(node => {
-    const data = map[node.dataset.arch];
-    if (!data) return;
-    node.dataset.label = data.tag;
-    node.dataset.title = data.title;
-    node.addEventListener('click', () => {
-      state.arch = data.id;
-      renderArchDetail();
-    });
-  });
-}
-
-function renderArchDetail() {
-  const data = PORTFOLIO_DATA.architecture.find(x => x.id === state.arch) || PORTFOLIO_DATA.architecture[0];
-  qsa('.arch-node').forEach(node => node.classList.toggle('active', node.dataset.arch === data.id));
-  qs('#archDetail').innerHTML = `
-    <div class="detail-badge">${data.tag} · ${data.cadence}</div>
-    <h3>${data.title}</h3>
-    <div class="detail-sub">${data.subtitle}</div>
-    <p class="detail-copy">${data.role}</p>
-    <div class="meta-grid">
-      <div class="meta-card">
-        <strong>Inputs</strong>
-        <ul class="meta-list">${data.inputs.map(i => `<li>${i}</li>`).join('')}</ul>
-      </div>
-      <div class="meta-card">
-        <strong>Outputs</strong>
-        <ul class="meta-list">${data.outputs.map(i => `<li>${i}</li>`).join('')}</ul>
-      </div>
-    </div>
-    <div class="detail-metric">
-      <span>Why it matters</span>
-      <div>${data.metric}</div>
-    </div>`;
 }
 
 function renderFlow() {
@@ -245,8 +207,7 @@ function setupSectionSpy() {
 function init() {
   renderHeroMetrics();
   renderMetricStrip();
-  hydrateArchNodes();
-  renderArchDetail();
+  if (window.ArchSystem) ArchSystem.init();
   renderFlow();
   renderFilters();
   renderCases();
@@ -258,3 +219,284 @@ function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+/* v6 Animated Operating Loop System
+   Generates a live SVG architecture: central core, 4 ring loops, 3 supporting
+   nodes, curved connectors, traveling signal pulses, hover/active states.
+   Renders real SVG <text> labels (not CSS pseudo-elements) for reliability. */
+
+(function () {
+  const SVGNS = 'http://www.w3.org/2000/svg';
+
+  // Layout geometry on a 1000 x 640 viewBox
+  const CX = 500, CY = 320;
+  const RING = 210; // radius of the 4 main loops around the core
+
+  // Node positions. Main loops sit on a ring (top, right, bottom, left).
+  // Supporting modules sit further out on the diagonals.
+  const POS = {
+    core:       { x: CX,        y: CY,        kind: 'core' },
+    feedback:   { x: CX,        y: CY - RING, kind: 'loop' }, // top
+    slot:       { x: CX + RING, y: CY,        kind: 'loop' }, // right
+    jit:        { x: CX,        y: CY + RING, kind: 'loop' }, // bottom
+    billing:    { x: CX - RING, y: CY,        kind: 'loop' }, // left
+    governance: { x: CX - 330,  y: CY - 250,  kind: 'support' }, // upper-left
+    intake:     { x: CX + 330,  y: CY - 250,  kind: 'support' }, // upper-right
+    tracking:   { x: CX + 330,  y: CY + 250,  kind: 'support' }  // lower-right
+  };
+
+  // Connectors: [from, to, role]. 'loop' = main cycle, 'feed' = supporting feed.
+  const LINKS = [
+    ['feedback', 'slot', 'loop'],
+    ['slot', 'jit', 'loop'],
+    ['jit', 'billing', 'loop'],
+    ['billing', 'feedback', 'loop'],
+    ['feedback', 'core', 'spoke'],
+    ['slot', 'core', 'spoke'],
+    ['jit', 'core', 'spoke'],
+    ['billing', 'core', 'spoke'],
+    ['governance', 'feedback', 'feed'],
+    ['intake', 'feedback', 'feed'],
+    ['tracking', 'slot', 'feed']
+  ];
+
+  // Which links light up when a given node is active
+  const RELATED = {
+    feedback:   ['feedback-slot', 'billing-feedback', 'feedback-core', 'governance-feedback', 'intake-feedback'],
+    slot:       ['feedback-slot', 'slot-jit', 'slot-core', 'tracking-slot'],
+    jit:        ['slot-jit', 'jit-billing', 'jit-core'],
+    billing:    ['jit-billing', 'billing-feedback', 'billing-core'],
+    governance: ['governance-feedback'],
+    intake:     ['intake-feedback'],
+    tracking:   ['tracking-slot'],
+    core:       ['feedback-core', 'slot-core', 'jit-core', 'billing-core']
+  };
+
+  function el(tag, attrs) {
+    const node = document.createElementNS(SVGNS, tag);
+    if (attrs) Object.keys(attrs).forEach((k) => node.setAttribute(k, attrs[k]));
+    return node;
+  }
+
+  function curve(a, b) {
+    // gentle curved path between two points
+    const mx = (a.x + b.x) / 2;
+    const my = (a.y + b.y) / 2;
+    // perpendicular offset for the control point, scaled by distance
+    const dx = b.x - a.x, dy = b.y - a.y;
+    const len = Math.sqrt(dx * dx + dy * dy) || 1;
+    const off = Math.min(70, len * 0.18);
+    const cxp = mx + (-dy / len) * off;
+    const cyp = my + (dx / len) * off;
+    return { d: `M${a.x} ${a.y} Q ${cxp} ${cyp} ${b.x} ${b.y}`, cxp, cyp };
+  }
+
+  function build() {
+    const board = document.getElementById('archBoard');
+    if (!board || !window.PORTFOLIO_DATA) return;
+
+    const dataMap = {};
+    PORTFOLIO_DATA.architecture.forEach((a) => { dataMap[a.id] = a; });
+
+    const svg = el('svg', {
+      viewBox: '0 0 1000 640',
+      class: 'arch-svg',
+      role: 'img',
+      'aria-label': 'Interactive operating architecture: four loops around a core with supporting governance, intake, and tracking modules.'
+    });
+
+    // defs: gradients + glow filter
+    const defs = el('defs');
+    const grad = el('linearGradient', { id: 'wireGrad', x1: '0', x2: '1' });
+    grad.appendChild(el('stop', { offset: '0%', 'stop-color': '#f5a23c' }));
+    grad.appendChild(el('stop', { offset: '100%', 'stop-color': '#5aa0ff' }));
+    defs.appendChild(grad);
+    const glow = el('filter', { id: 'softGlow', x: '-50%', y: '-50%', width: '200%', height: '200%' });
+    glow.appendChild(el('feGaussianBlur', { stdDeviation: '4', result: 'b' }));
+    const merge = el('feMerge');
+    merge.appendChild(el('feMergeNode', { in: 'b' }));
+    merge.appendChild(el('feMergeNode', { in: 'SourceGraphic' }));
+    glow.appendChild(merge);
+    defs.appendChild(glow);
+    svg.appendChild(defs);
+
+    const linkLayer = el('g', { class: 'arch-links' });
+    const pulseLayer = el('g', { class: 'arch-pulses' });
+    const nodeLayer = el('g', { class: 'arch-nodes' });
+    svg.appendChild(linkLayer);
+    svg.appendChild(pulseLayer);
+    svg.appendChild(nodeLayer);
+
+    const linkEls = {};
+
+    LINKS.forEach(([from, to, role], i) => {
+      const a = POS[from], b = POS[to];
+      const { d } = curve(a, b);
+      const key = `${from}-${to}`;
+
+      const path = el('path', { d: d, class: `wire wire-${role}`, 'data-link': key, fill: 'none' });
+      linkLayer.appendChild(path);
+      linkEls[key] = path;
+
+      // traveling pulse on loop + feed wires (not the spokes, to reduce noise)
+      if (role !== 'spoke') {
+        const pulse = el('circle', { r: role === 'loop' ? '4.5' : '3.5', class: `pulse pulse-${role}` });
+        const mp = el('animateMotion', {
+          dur: (role === 'loop' ? 3.2 : 4.4) + 's',
+          repeatCount: 'indefinite',
+          begin: (i * 0.4) + 's',
+          path: d,
+          rotate: 'auto'
+        });
+        pulse.appendChild(mp);
+        pulseLayer.appendChild(pulse);
+      }
+    });
+
+    // Core node
+    const core = POS.core;
+    const coreG = el('g', { class: 'arch-node-g core-node', 'data-arch': 'core', tabindex: '0', role: 'button', 'aria-label': 'Operating system core' });
+    coreG.appendChild(el('circle', { cx: core.x, cy: core.y, r: '58', class: 'core-halo' }));
+    coreG.appendChild(el('circle', { cx: core.x, cy: core.y, r: '46', class: 'core-ring' }));
+    const coreT1 = el('text', { x: core.x, y: core.y - 4, 'text-anchor': 'middle', class: 'core-label' });
+    coreT1.textContent = 'Operating';
+    const coreT2 = el('text', { x: core.x, y: core.y + 14, 'text-anchor': 'middle', class: 'core-label' });
+    coreT2.textContent = 'System Core';
+    coreG.appendChild(coreT1);
+    coreG.appendChild(coreT2);
+    nodeLayer.appendChild(coreG);
+
+    // Other nodes
+    Object.keys(POS).forEach((id) => {
+      if (id === 'core') return;
+      const p = POS[id];
+      const d = dataMap[id];
+      if (!d) return;
+
+      const g = el('g', {
+        class: `arch-node-g node-${p.kind}`,
+        'data-arch': id,
+        tabindex: '0',
+        role: 'button',
+        'aria-label': `${d.title}. ${d.tag}. Click to inspect.`
+      });
+
+      const w = p.kind === 'loop' ? 150 : 138;
+      const h = p.kind === 'loop' ? 64 : 56;
+      const rx = 14;
+
+      // LED + glow plate
+      g.appendChild(el('rect', { x: p.x - w / 2, y: p.y - h / 2, width: w, height: h, rx: rx, class: 'node-plate' }));
+      g.appendChild(el('circle', { cx: p.x - w / 2 + 16, cy: p.y - h / 2 + 15, r: '4', class: 'node-led' }));
+
+      // tag (kicker)
+      const tag = el('text', { x: p.x - w / 2 + 28, y: p.y - h / 2 + 19, class: 'node-tag' });
+      tag.textContent = d.tag.toUpperCase();
+      g.appendChild(tag);
+
+      // title — wrap to two lines if long
+      const words = d.title.split(' ');
+      let line1 = d.title, line2 = '';
+      if (d.title.length > 16) {
+        // split roughly in half on a space
+        let mid = Math.ceil(words.length / 2);
+        line1 = words.slice(0, mid).join(' ');
+        line2 = words.slice(mid).join(' ');
+      }
+      const t1 = el('text', { x: p.x - w / 2 + 14, y: p.y + (line2 ? 2 : 8), class: 'node-title' });
+      t1.textContent = line1;
+      g.appendChild(t1);
+      if (line2) {
+        const t2 = el('text', { x: p.x - w / 2 + 14, y: p.y + 18, class: 'node-title' });
+        t2.textContent = line2;
+        g.appendChild(t2);
+      }
+
+      nodeLayer.appendChild(g);
+    });
+
+    board.innerHTML = '';
+    board.appendChild(svg);
+
+    // caption
+    const cap = document.createElement('div');
+    cap.className = 'board-caption';
+    cap.id = 'boardCaption';
+    cap.textContent = 'Idle: signal pulses cycle the loops. Click any node to lock it and read the logic.';
+    board.appendChild(cap);
+
+    return { svg, linkEls };
+  }
+
+  function setActive(id, ctx) {
+    if (!ctx) return;
+    const data = PORTFOLIO_DATA.architecture.find((x) => x.id === id);
+
+    // node active states
+    Array.prototype.slice.call(ctx.svg.querySelectorAll('.arch-node-g')).forEach((n) => {
+      n.classList.toggle('active', n.getAttribute('data-arch') === id);
+    });
+
+    // link highlight / fade
+    const related = RELATED[id] || [];
+    Object.keys(ctx.linkEls).forEach((key) => {
+      const lit = related.includes(key);
+      ctx.linkEls[key].classList.toggle('lit', lit);
+      ctx.linkEls[key].classList.toggle('dim', related.length > 0 && !lit);
+    });
+
+    // detail panel (reuse existing renderer markup style)
+    const panel = document.getElementById('archDetail');
+    if (panel && data) {
+      panel.innerHTML = `
+        <div class="detail-badge">${data.tag} · ${data.cadence}</div>
+        <h3>${data.title}</h3>
+        <div class="detail-sub">${data.subtitle}</div>
+        <p class="detail-copy">${data.role}</p>
+        <div class="meta-grid">
+          <div class="meta-card">
+            <strong>Inputs</strong>
+            <ul class="meta-list">${data.inputs.map((i) => `<li>${i}</li>`).join('')}</ul>
+          </div>
+          <div class="meta-card">
+            <strong>Outputs</strong>
+            <ul class="meta-list">${data.outputs.map((i) => `<li>${i}</li>`).join('')}</ul>
+          </div>
+        </div>
+        <div class="detail-metric">
+          <span>Why it matters</span>
+          <div>${data.metric}</div>
+        </div>`;
+    }
+
+    const cap = document.getElementById('boardCaption');
+    if (cap && data) cap.textContent = `Active: ${data.title} — ${data.cadence}.`;
+  }
+
+  function setHover(id, ctx, on) {
+    if (!ctx) return;
+    const related = RELATED[id] || [];
+    Object.keys(ctx.linkEls).forEach((key) => {
+      ctx.linkEls[key].classList.toggle('hover-lit', on && related.includes(key));
+    });
+  }
+
+  window.ArchSystem = {
+    init() {
+      const ctx = build();
+      if (!ctx) return;
+
+      Array.prototype.slice.call(ctx.svg.querySelectorAll('.arch-node-g')).forEach((n) => {
+        const id = n.getAttribute('data-arch');
+        n.addEventListener('click', () => setActive(id, ctx));
+        n.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(id, ctx); }
+        });
+        n.addEventListener('mouseenter', () => setHover(id, ctx, true));
+        n.addEventListener('mouseleave', () => setHover(id, ctx, false));
+      });
+
+      // default selection
+      setActive('feedback', ctx);
+    }
+  };
+})();

@@ -61,7 +61,7 @@
                 <span class="status-dot"></span>
                 <span class="panel-title">OPERATING SYSTEM OVERVIEW</span>
               </div>
-              <span class="panel-code">UI 2026</span>
+              <span class="panel-code">LIVE</span>
             </div>
             <div class="radar-wrap">
               <div class="radar-ring ring-1"></div>
@@ -122,36 +122,14 @@
     <section id="architecture" class="section-pad" aria-labelledby="architecture-heading">
       <div class="shell">
         <div class="section-heading reveal">
-          <p class="eyebrow">3D operating architecture</p>
+          <p class="eyebrow">Operating architecture</p>
           <h2 id="architecture-heading">Four loops, connected governance, and adjacent control systems.</h2>
           <p>Click any node. The right panel explains role, cadence, inputs, outputs, and why that part exists. The goal is to show architecture, not just text.</p>
         </div>
 
         <div class="architecture-layout reveal">
-          <div class="arch-board glass tilt" aria-label="Clickable operating architecture map">
-            <svg class="arch-lines" viewBox="0 0 1000 620" role="img" aria-label="Architecture connectors">
-              <defs>
-                <linearGradient id="flowGrad" x1="0" x2="1">
-                  <stop offset="0%" stop-color="rgba(252,180,76,.3)" />
-                  <stop offset="100%" stop-color="rgba(84,149,255,.55)" />
-                </linearGradient>
-              </defs>
-              <path d="M120 95 C 250 95, 255 175, 390 175" />
-              <path d="M510 175 C 620 175, 620 255, 740 255" />
-              <path d="M740 320 C 620 320, 620 410, 510 410" />
-              <path d="M390 410 C 250 410, 250 500, 120 500" />
-              <path d="M220 500 C 135 420, 115 245, 120 95" />
-              <path d="M385 90 C 500 40, 620 70, 690 130" />
-              <path d="M690 450 C 555 555, 360 560, 220 500" />
-            </svg>
-            <div class="arch-node node-intake" data-arch="intake"></div>
-            <div class="arch-node node-feedback" data-arch="feedback"></div>
-            <div class="arch-node node-slot" data-arch="slot"></div>
-            <div class="arch-node node-jit" data-arch="jit"></div>
-            <div class="arch-node node-billing" data-arch="billing"></div>
-            <div class="arch-node node-governance" data-arch="governance"></div>
-            <div class="arch-node node-tracking" data-arch="tracking"></div>
-            <div class="board-caption">Select a node to inspect how the system works.</div>
+          <div class="arch-board glass" id="archBoard" aria-label="Clickable operating architecture map">
+            <div class="board-caption">Loading operating architecture…</div>
           </div>
           <aside class="detail-panel glass" id="archDetail" aria-live="polite"></aside>
         </div>
