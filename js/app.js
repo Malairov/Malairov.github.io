@@ -119,6 +119,30 @@ function setupLens() {
   renderLens();
 }
 
+
+function setupOpsRows() {
+  const rows = qsa(".ops-row");
+  rows.forEach((row) => {
+    row.addEventListener("click", () => {
+      const section = row.closest("section") || document;
+      const detail = qs(".ops-detail-card", section) || qs("#architectureDetail");
+      qsa(".ops-row", row.closest(".ops-table-card") || document).forEach((r) => r.classList.remove("active"));
+      row.classList.add("active");
+      if (!detail) return;
+      detail.innerHTML = `
+        <span class="mono-label">Selected loop</span>
+        <h3>${row.dataset.title || "Selected loop"}</h3>
+        <dl>
+          ${row.dataset.problem ? `<div><dt>Problem</dt><dd>${row.dataset.problem}</dd></div>` : ""}
+          ${row.dataset.control ? `<div><dt>Control built</dt><dd>${row.dataset.control}</dd></div>` : ""}
+          ${row.dataset.impact ? `<div><dt>Why it mattered</dt><dd>${row.dataset.impact}</dd></div>` : ""}
+          ${row.dataset.relevance ? `<div><dt>PM relevance</dt><dd>${row.dataset.relevance}</dd></div>` : ""}
+        </dl>
+      `;
+    });
+  });
+}
+
 function setupMobileNav() {
   const toggle = qs("#menuToggle");
   const nav = qs("#primaryNav");
@@ -178,5 +202,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCases();
   setupArchitecturalStagger();
   setupMobileNav();
+  setupOpsRows();
   setupReveal();
 });

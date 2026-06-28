@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pavlo Malairov, PMP - Operations & Implementation PM Portfolio</title>
   <meta name="description" content="Technical operations and implementation portfolio for Pavlo Malairov, PMP: Operations PM, Technical Operations PM, Implementation PM, Process Improvement PM." />
-  <link rel="stylesheet" href="css/base.css?v=31" />
-  <link rel="stylesheet" href="css/v31-readable-fix.css?v=31" />
+  <link rel="stylesheet" href="css/base.css?v=33" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -176,12 +175,62 @@
         <div class="section-head">
           <span class="mono-label">Operating-system design</span>
           <h2>Technical operations shown as a control model.</h2>
-          <p>Click a node. The goal is not decoration - it is to show how signals, constraints, controls, and evidence connect.</p>
+          <p>Clear loops, controls, and PM relevance. No decorative diagram. Each row shows how an operating signal becomes a managed control.</p>
         </div>
-        <div class="arch-grid">
-          <div class="map reveal" id="architectureMap" aria-label="Interactive operating control model"></div>
-          <aside class="card card-pad detail-panel reveal" id="architectureDetail" aria-live="polite"></aside>
+
+        <div class="ops-table-card reveal">
+          <div class="ops-table-head">
+            <span>Loop</span>
+            <span>Operating problem</span>
+            <span>Control built</span>
+            <span>PM relevance</span>
+          </div>
+
+          <button class="ops-row active" type="button" data-title="Floor Supervisor Feedback" data-problem="Operational friction could stay informal until it became a shortage escalation." data-control="Converted floor feedback into a visible SKU review and service-delivery signal." data-relevance="Stakeholder coordination and service-delivery visibility.">
+            <span class="ops-name"><small>Loop 01</small><strong>Floor Supervisor Feedback</strong></span>
+            <span>Informal floor issues could remain invisible too long.</span>
+            <span>Feedback became a structured SKU review signal.</span>
+            <span>Stakeholder coordination</span>
+          </button>
+
+          <button class="ops-row" type="button" data-title="Slot-Economics Audit" data-problem="Physical vending and storage capacity could be consumed by items without enough service-value justification." data-control="Treated slot capacity as an operating control point tied to usage behavior and service value." data-relevance="Capacity governance, prioritization, and process improvement.">
+            <span class="ops-name"><small>Loop 02</small><strong>Slot-Economics Audit</strong></span>
+            <span>Limited capacity needed better prioritization.</span>
+            <span>Slot use was tied to value and usage behavior.</span>
+            <span>Prioritization</span>
+          </button>
+
+          <button class="ops-row" type="button" data-title="JIT / Safety-Stock Logic" data-problem="Replenishment decisions could miss lead-time, package-size, MOQ, and no-history exception behavior." data-control="Tied replenishment planning to usage, lead time, package size, MOQ, exception states, and service-risk visibility." data-relevance="Replenishment planning logic, operational control, and process discipline.">
+            <span class="ops-name"><small>Loop 03</small><strong>JIT / Safety-Stock Logic</strong></span>
+            <span>Replenishment needed exception logic.</span>
+            <span>Usage, lead time, MOQ, and exceptions were connected.</span>
+            <span>Operational control</span>
+          </button>
+
+          <button class="ops-row" type="button" data-title="Billing-State Tracking" data-problem="Transition ambiguity between first-batch / prepaid status and standard consignment billing created execution noise." data-control="Defined billing-state logic to keep lifecycle state visible and reduce duplicate handling risk." data-relevance="Process control, implementation governance, and issue prevention.">
+            <span class="ops-name"><small>Loop 04</small><strong>Billing-State Tracking</strong></span>
+            <span>Billing-state ambiguity created execution noise.</span>
+            <span>Lifecycle state became visible and trackable.</span>
+            <span>Implementation governance</span>
+          </button>
+
+          <button class="ops-row" type="button" data-title="Vendor / Spec Governance" data-problem="Available products and approved substitutions could be confused when specification constraints were not visible." data-control="Separated available items from approved substitutions through customer/OEM-controlled specification gates." data-relevance="Vendor coordination, regulated service delivery, and governance control.">
+            <span class="ops-name"><small>Layer</small><strong>Vendor / Spec Governance</strong></span>
+            <span>Availability and approval were not the same thing.</span>
+            <span>Spec gates separated available from approved.</span>
+            <span>Governance control</span>
+          </button>
         </div>
+
+        <aside class="ops-detail-card reveal" id="architectureDetail" aria-live="polite">
+          <span class="mono-label">Selected loop</span>
+          <h3>Floor Supervisor Feedback</h3>
+          <dl>
+            <div><dt>Problem</dt><dd>Operational friction could stay informal until it became a shortage escalation.</dd></div>
+            <div><dt>Control built</dt><dd>Converted floor feedback into a visible SKU review and service-delivery signal.</dd></div>
+            <div><dt>PM relevance</dt><dd>Stakeholder coordination and service-delivery visibility.</dd></div>
+          </dl>
+        </aside>
       </div>
     </section>
 
@@ -262,7 +311,7 @@
     </div>
   </footer>
 
-  <script src="js/data.js?v=31"></script>
-  <script src="js/app.js?v=31"></script>
+  <script src="js/data.js?v=33"></script>
+  <script src="js/app.js?v=33"></script>
 </body>
 </html>
