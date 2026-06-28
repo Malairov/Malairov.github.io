@@ -3,122 +3,63 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Four Operating Loops — Pavlo Malairov Portfolio</title>
-  <meta name="description" content="Interactive deep-dive case study on four operating loops built by Pavlo Malairov." />
-  <link rel="stylesheet" href="../css/base.css" />
+  <title>Four Operating Loops — Pavlo Malairov</title>
+  <meta name="description" content="Interactive case study on four operating loops." />
   <link rel="stylesheet" href="../css/case-pages.css" />
 </head>
-<body class="case-page-body">
+<body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header" aria-label="Primary navigation">
-    <div class="shell nav-shell glass tilt-subtle">
-      <a class="brand" href="../index.html" aria-label="Pavlo Malairov portfolio home">
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="../index.html">
         <span class="brand-mark">PM</span>
-        <span class="brand-copy">
-          <strong>Pavlo Malairov</strong>
-          <span>Operations & Implementation Project Manager</span>
-        </span>
+        <span class="brand-copy"><strong>Pavlo Malairov</strong><span>Operations & Implementation Project Manager</span></span>
       </a>
-      
-      <nav class="nav-links" aria-label="Section navigation">
-        <a href="../index.html#quickscan">Scan</a>
+      <nav class="nav-links">
+        <a href="../index.html#scan">Scan</a>
         <a href="../index.html#architecture">Architecture</a>
-        <a href="../index.html#smartc">SmartC</a>
         <a href="../index.html#cases">Cases</a>
+        <a href="../index.html#diagnostic">Diagnostic</a>
       </nav>
-      <div class="nav-actions">
-        <span class="micro-pill">Four Loops</span>
-        <a class="nav-cta" href="../assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
-      </div>
+      <a class="nav-cta" href="../assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
     </div>
   </header>
-  <main id="main" class="case-page-main">
+  <main id="main">
     
 <section class="case-hero">
   <div class="shell case-hero-grid">
     <div class="case-hero-copy">
-      <p class="eyebrow">Signature case</p>
+      <span class="eyebrow">Signature case</span>
       <h1>Four Operating Loops</h1>
       <p>A single-threaded consignment program was redesigned into four concurrent control loops so demand signal, slot economics, reorder logic, and billing-state accuracy could improve independently.</p>
-      <div class="case-hero-actions">
-        <a class="button button-primary" href="#interactive">Open loop map</a>
-        <a class="button button-secondary" href="../index.html#architecture">Back to architecture</a>
-      </div>
+      <div class="button-row"><a class="button button-primary" href="#model">Open model</a><a class="button button-secondary" href="../index.html#cases">Back to cases</a></div>
     </div>
-    <aside class="case-proof-panel">
-      <span class="case-proof-kicker">What this proves</span>
-      <strong>Process architecture under live operating constraints.</strong>
+    <aside class="proof-panel">
+      <span class="eyebrow">What this proves</span>
+      <h2>Process architecture under live operating constraints.</h2>
       <p>This is the strongest evidence that the work was not inventory administration. It was a control-system build for a regulated technical service environment.</p>
-      <div class="case-proof-metrics">
-        <article><span>System</span><b>4 loops</b></article>
-        <article><span>Signal scale</span><b>60+ sources</b></article>
-        <article><span>Planning effort</span><b>5h → 30m</b></article>
-        <article><span>Gap duration</span><b>~16d → ~1w</b></article>
-      </div>
+      <div class="proof-metrics"><div><span>System</span><strong>4 loops</strong></div><div><span>Signal scale</span><strong>60+ sources</strong></div><div><span>Planning effort</span><strong>5h → 30m</strong></div><div><span>Gap duration</span><strong>~16d → ~1w</strong></div></div>
     </aside>
   </div>
 </section>
-
-<section class="section-pad">
-  <div class="shell case-layout">
-    <aside class="case-side-nav">
-      <strong>Case path</strong>
-      <a href="#problem">Problem</a>
-      <a href="#interactive">Interactive loop map</a>
-      <a href="#system">System built</a>
-      <a href="#transfer">Transferability</a>
-    </aside>
-    <div class="case-content">
-      <section id="problem" class="case-section-card">
-        <h2>The problem was not one shortage. It was one overloaded attention path.</h2>
-        <p>Demand signals, physical capacity, vendor behavior, reorder logic, and billing-state tracking were competing for the same operational attention. That made the system hard to audit, hard to tune, and vulnerable to recurring blind spots.</p>
-        <div class="case-grid-3">
-          <article class="case-mini-card"><span>Signal</span><strong>Floor friction arrived faster than formal reports.</strong><small>Supervisors saw wrong, missing, unnecessary, or difficult-to-find items first.</small></article>
-          <article class="case-mini-card"><span>Control</span><strong>Vending slots were expensive and finite.</strong><small>Every slot needed to earn its space through service value and draw behavior.</small></article>
-          <article class="case-mini-card"><span>State</span><strong>Onboarding and billing states needed control.</strong><small>First-batch/prepaid items needed clean transition to standard consignment billing.</small></article>
-        </div>
-      </section>
-
-      <section id="interactive" class="case-section-card dark">
-        <h2>Interactive loop map</h2>
-        <p>Click any loop to inspect its purpose. The system is cyclical: steady-state items keep re-entering feedback and audit logic instead of freezing around old assumptions.</p>
-        <div class="deep-loop-stage deep-stage" aria-label="Interactive four operating loops">
-          <svg class="deep-svg" viewBox="0 0 1000 620" aria-hidden="true">
-            <defs><linearGradient id="deepGrad" x1="0" x2="1"><stop offset="0%" stop-color="#ffb454"/><stop offset="50%" stop-color="#6ee7ff"/><stop offset="100%" stop-color="#4f8cff"/></linearGradient></defs>
-            <path class="deep-path" d="M500 112 C760 112, 850 260, 800 332 S615 520, 500 512 S200 410, 200 332 S270 112, 500 112"/>
-            <path class="deep-path alt" d="M500 112 C610 235, 610 390, 500 512"/>
-            <path class="deep-path alt" d="M200 332 C355 255, 645 255, 800 332"/>
-            <circle class="deep-pulse" r="5"><animateMotion dur="6.2s" repeatCount="indefinite" path="M500 112 C760 112, 850 260, 800 332 S615 520, 500 512 S200 410, 200 332 S270 112, 500 112"/></circle>
-            <circle class="deep-pulse amber" r="4"><animateMotion dur="7.4s" repeatCount="indefinite" begin="1s" path="M200 332 C355 255, 645 255, 800 332"/></circle>
-          </svg>
-          <div class="loop-core">Operating<br>System<br>Core</div>
-          <button class="deep-node loop-node-feedback" data-deep-node="feedback" data-tag="Loop 01" data-title="Floor Supervisor Feedback" data-detail="Weekly floor feedback captures user friction before it becomes a formal shortage event. It feeds SKU weeding and slot-economics decisions."><span>Loop 01</span><strong>Floor Feedback</strong><small>Fastest demand / friction signal.</small></button>
-          <button class="deep-node loop-node-slot" data-deep-node="slot" data-tag="Loop 02" data-title="Slot-Economics Audit" data-detail="This loop tests whether each item earns physical vending/storage space against draw rate, service value, and overstock constraints."><span>Loop 02</span><strong>Slot Economics</strong><small>Physical capacity as a control point.</small></button>
-          <button class="deep-node loop-node-jit" data-deep-node="jit" data-tag="Loop 03" data-title="JIT / Safety-Stock Logic" data-detail="This loop tunes reorder timing and safety-stock treatment using usage history, lead times, MOQ, package sizes, and no-history classification."><span>Loop 03</span><strong>JIT Tuning</strong><small>Demand timing under constraints.</small></button>
-          <button class="deep-node loop-node-billing" data-deep-node="billing" data-tag="Loop 04" data-title="Billing-State Tracking" data-detail="This loop protects lifecycle state accuracy so prepaid onboarding stock transitions cleanly into standard billing without duplicate charges."><span>Loop 04</span><strong>Billing State</strong><small>Lifecycle accuracy and handoff.</small></button>
-          <aside class="deep-detail" aria-live="polite"></aside>
-        </div>
-      </section>
-
-      <section id="system" class="case-section-card">
-        <h2>System built</h2>
-        <div class="case-grid-2">
-          <article class="case-mini-card"><span>Before</span><strong>Single-threaded operational attention.</strong><small>Problems surfaced as complaints, shortages, or manual exceptions.</small></article>
-          <article class="case-mini-card"><span>After</span><strong>Concurrent operating loops with distinct inputs and outputs.</strong><small>Each failure mode had a more visible signal path.</small></article>
-          <article class="case-mini-card"><span>Governance</span><strong>Adjacent spec and vendor controls.</strong><small>Eligibility gates reduced the risk of unacceptable substitutions entering the system.</small></article>
-          <article class="case-mini-card"><span>Tracking</span><strong>MWO shortage events became measurable.</strong><small>Complaints became traceable events tied to work orders, vendors, and closure timing.</small></article>
-        </div>
-      </section>
-
-      <section id="transfer" class="case-section-card dark">
-        <h2>Transferability</h2>
-        <p>The pattern transfers to Operations PM, Implementation PM, Process Improvement, Service Delivery, MRO, aerospace manufacturing, regulated procurement, and technical operations.</p>
-        <div class="case-pills"><span>Operating model design</span><span>Stakeholder signal capture</span><span>Control loops</span><span>Exception management</span><span>Execution visibility</span></div>
-      </section>
-    </div>
+<div class="shell case-layout">
+  <aside class="side-nav"><strong>Case path</strong><a href="#problem">Problem</a><a href="#model">Interactive model</a><a href="#controls">Controls built</a><a href="#transfer">Transferability</a></aside>
+  <div class="content">
+    <section id="problem" class="content-card"><h2>The issue was one overloaded attention path.</h2><p>Demand signals, physical capacity, vendor behavior, reorder logic, and billing-state tracking competed for the same operational attention. The fix was to split the work into clear loops with distinct inputs, outputs, and control logic.</p><div class="grid-3"><div class="mini-card"><span>Signal</span><strong>Floor friction appeared before formal shortage reports.</strong><small>Supervisors saw wrong, missing, unnecessary, or difficult-to-find items first.</small></div><div class="mini-card"><span>Capacity</span><strong>Vending and storage space were finite.</strong><small>Each item needed to earn its footprint.</small></div><div class="mini-card"><span>State</span><strong>Billing transitions needed control.</strong><small>First-batch/prepaid items needed clean transition to consignment.</small></div></div></section>
+    <section id="model" class="content-card dark"><h2>Interactive operating-loop model</h2><p>Click a loop to inspect what it controls. The 3D effect is intentionally subtle: depth, hover lift, and signal flow only.</p><div class="interactive-stage">
+      <svg class="stage-svg" viewBox="0 0 1000 620" aria-hidden="true"><path class="stage-wire" d="M500 104 C760 110, 860 260, 806 330 S630 520, 500 516 S194 410, 194 330 S270 110, 500 104"/><path class="stage-wire alt" d="M194 330 C355 245, 645 245, 806 330"/><circle class="stage-dot" r="5"><animateMotion dur="6s" repeatCount="indefinite" path="M500 104 C760 110, 860 260, 806 330 S630 520, 500 516 S194 410, 194 330 S270 110, 500 104"/></circle></svg>
+      <div class="stage-core">Operating<br>System<br>Core</div>
+      <button class="stage-node node-top" data-tag="Loop 01" data-title="Floor Supervisor Feedback" data-detail="Captures operational friction weekly and feeds SKU weeding, slot review, and shortage prevention."><span>Loop 01</span><strong>Floor Feedback</strong><small>Fastest demand signal.</small></button>
+      <button class="stage-node node-right" data-tag="Loop 02" data-title="Slot-Economics Audit" data-detail="Tests whether an item earns its physical footprint through draw behavior, service value, and capacity limits."><span>Loop 02</span><strong>Slot Economics</strong><small>Physical capacity control.</small></button>
+      <button class="stage-node node-bottom" data-tag="Loop 03" data-title="JIT / Safety-Stock Logic" data-detail="Tunes reorder timing against usage history, lead times, package size, MOQ, and no-history conditions."><span>Loop 03</span><strong>JIT Tuning</strong><small>Demand timing under constraints.</small></button>
+      <button class="stage-node node-left" data-tag="Loop 04" data-title="Billing-State Tracking" data-detail="Protects lifecycle-state accuracy through prepaid-to-consignment transition and support-team handoff."><span>Loop 04</span><strong>Billing State</strong><small>Lifecycle accuracy.</small></button>
+      <aside class="stage-detail" aria-live="polite"></aside>
+    </div></section>
+    <section id="controls" class="content-card"><h2>Controls built</h2><div class="grid-2"><div class="mini-card"><span>Before</span><strong>Single-threaded operational attention.</strong><small>Issues surfaced as complaints, shortages, or manual exceptions.</small></div><div class="mini-card"><span>After</span><strong>Concurrent loops with defined signal paths.</strong><small>Each failure mode had a clearer input and response path.</small></div><div class="mini-card"><span>Governance</span><strong>Spec and vendor controls supported the loops.</strong><small>Eligibility gates reduced unacceptable substitutions.</small></div><div class="mini-card"><span>Tracking</span><strong>MWO shortage events became measurable.</strong><small>Complaints became traceable events tied to work orders and closure timing.</small></div></div></section>
+    <section id="transfer" class="content-card dark"><h2>Transferability</h2><p>The pattern transfers to Operations PM, Implementation PM, Process Improvement, Service Delivery, MRO, aerospace manufacturing, regulated procurement, and technical operations.</p><div class="pills"><span>Operating model design</span><span>Control loops</span><span>Exception management</span><span>Stakeholder signal capture</span><span>Execution visibility</span></div></section>
   </div>
-</section>
-<section class="section-pad"><div class="shell related-cases"><a href="smartc-ai-delivery.html"><span>Next case</span><strong>SmartC AI Delivery</strong></a><a href="safety-stock-diagnostic.html"><span>Diagnostic case</span><strong>Safety-Stock Root Cause</strong></a><a href="../index.html#cases"><span>Back</span><strong>Case library</strong></a></div></section>
+</div>
+<div class="shell related"><a href="smartc-ai-delivery.html"><span>Next case</span><strong>SmartC AI Delivery</strong></a><a href="safety-stock-diagnostic.html"><span>Diagnostic case</span><strong>Safety-Stock Diagnostic</strong></a><a href="../index.html#cases"><span>Back</span><strong>Case library</strong></a></div>
 
   </main>
   <script src="../js/case-pages.js"></script>
