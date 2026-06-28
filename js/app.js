@@ -140,6 +140,20 @@ function setupMobileNav() {
   });
 }
 
+function setRevealDelays() {
+  const groups = [
+    ".metric-grid .reveal",
+    ".case-grid .reveal",
+    ".preview-list article",
+    ".fit-cards .fit-card"
+  ];
+  groups.forEach((selector) => {
+    qsa(selector).forEach((item, index) => {
+      item.style.setProperty("--reveal-delay", `${Math.min(index * 90, 360)}ms`);
+    });
+  });
+}
+
 function setupReveal() {
   const items = qsa(".reveal");
   if (!("IntersectionObserver" in window)) {
