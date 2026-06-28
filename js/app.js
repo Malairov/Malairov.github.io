@@ -209,6 +209,11 @@ function renderSmartC() {
         </div>
       </div>
     </div>
+    <div class="smartc-3d-rack" aria-label="SmartC 3D delivery stack">
+      <article class="rack-card rack-signal"><span>Signal</span><strong>field reliability gaps</strong></article>
+      <article class="rack-card rack-control"><span>Control</span><strong>governed redesign path</strong></article>
+      <article class="rack-card rack-evidence"><span>Evidence</span><strong>460+ installed locations</strong></article>
+    </div>
     <div class="smartc-command-foot">
       <button type="button" data-smartc-mode="flow"><span>Current axis</span><strong>${active.axis}</strong></button>
       <button type="button" data-smartc-mode="workstreams"><span>Control</span><strong>${active.control}</strong></button>
@@ -237,6 +242,19 @@ function renderSmartC() {
     if (focusTarget && typeof focusTarget.scrollIntoView === 'function') {
       focusTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
     }
+  }));
+
+  qsa('.rack-card', commandRoot).forEach((card, idx) => card.addEventListener('click', () => {
+    const rackMap = [
+      { phase: 0, track: 0, mode: 'flow' },
+      { phase: 2, track: 4, mode: 'workstreams' },
+      { phase: 5, track: 5, mode: 'evidence' }
+    ];
+    const target = rackMap[idx] || rackMap[0];
+    state.smartcPhase = target.phase;
+    state.smartcTrack = target.track;
+    state.smartcMode = target.mode;
+    renderSmartC();
   }));
 
   flowRoot.innerHTML = smartcWireSvg() + smartc.phases.map((phase, idx) => `
