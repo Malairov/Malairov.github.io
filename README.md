@@ -1,4 +1,4 @@
-# Pavlo Malairov Portfolio — v9 Deluxe Connected System
+# Pavlo Malairov Portfolio — v10 SmartC Expanded Interactive System
 
 Static interactive portfolio for Operations / Implementation Project Management.
 

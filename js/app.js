@@ -136,6 +136,95 @@ function caseWireSvg() {
 }
 
 
+
+function smartcWireSvg() {
+  return `
+    <svg class="smartc-wires" viewBox="0 0 1100 360" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="smartcWireGrad" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stop-color="#6ee7ff" />
+          <stop offset="50%" stop-color="#4f8cff" />
+          <stop offset="100%" stop-color="#ffb454" />
+        </linearGradient>
+      </defs>
+      <path class="smartc-wire main" d="M 55 178 C 205 58, 360 52, 512 172 S 810 300, 1040 162" />
+      <path class="smartc-wire secondary" d="M 90 270 C 260 340, 430 285, 540 210 S 760 40, 1010 92" />
+      <path class="smartc-wire vertical" d="M 550 30 C 510 130, 595 220, 550 330" />
+      <circle class="smartc-pulse" r="5"><animateMotion dur="7.2s" repeatCount="indefinite" path="M 55 178 C 205 58, 360 52, 512 172 S 810 300, 1040 162" /></circle>
+      <circle class="smartc-pulse amber" r="4"><animateMotion dur="6.4s" repeatCount="indefinite" begin="1.1s" path="M 90 270 C 260 340, 430 285, 540 210 S 760 40, 1010 92" /></circle>
+      <circle class="smartc-pulse cyan" r="4"><animateMotion dur="5.6s" repeatCount="indefinite" begin=".55s" path="M 550 30 C 510 130, 595 220, 550 330" /></circle>
+    </svg>`;
+}
+
+function renderSmartC() {
+  if (!PORTFOLIO_DATA.smartc) return;
+  const smartc = PORTFOLIO_DATA.smartc;
+  const flowRoot = qs('#smartcFlow');
+  const detailRoot = qs('#smartcDetail');
+  const tracksRoot = qs('#smartcTracks');
+  const artifactsRoot = qs('#smartcArtifacts');
+  if (!flowRoot || !detailRoot || !tracksRoot || !artifactsRoot) return;
+
+  flowRoot.innerHTML = smartcWireSvg() + smartc.phases.map((phase, idx) => `
+    <button class="smartc-phase ${idx === state.smartcPhase ? 'active' : ''}" type="button" data-smartc-phase="${idx}" aria-pressed="${idx === state.smartcPhase}">
+      <span class="smartc-phase-index">0${idx + 1}</span>
+      <span class="smartc-phase-tag">${phase.tag}</span>
+      <strong>${phase.title}</strong>
+      <small>${phase.subtitle}</small>
+    </button>
+  `).join('');
+
+  qsa('[data-smartc-phase]', flowRoot).forEach(btn => btn.addEventListener('click', () => {
+    state.smartcPhase = Number(btn.dataset.smartcPhase);
+    renderSmartC();
+  }));
+
+  const active = smartc.phases[state.smartcPhase] || smartc.phases[0];
+  detailRoot.innerHTML = `
+    <div class="smartc-detail-head">
+      <span>${active.tag}</span>
+      <strong>${active.title}</strong>
+    </div>
+    <p>${active.detail}</p>
+    <div class="smartc-proof"><span>What this proves</span><strong>${active.proof}</strong></div>
+    <div class="smartc-link-grid">${active.links.map(link => `<span>${link}</span>`).join('')}</div>
+    <div class="smartc-metrics">${smartc.metrics.map(m => `<article><strong>${m.value}</strong><span>${m.label}</span><small>${m.note}</small></article>`).join('')}</div>
+  `;
+
+  tracksRoot.innerHTML = `
+    <div class="smartc-panel-title">Workstream console</div>
+    <div class="smartc-track-tabs">${smartc.tracks.map((t, idx) => `<button type="button" class="smartc-track ${idx === state.smartcTrack ? 'active' : ''}" data-smartc-track="${idx}">${t.title}</button>`).join('')}</div>
+    <p class="smartc-track-body">${smartc.tracks[state.smartcTrack].body}</p>
+  `;
+  qsa('[data-smartc-track]', tracksRoot).forEach(btn => btn.addEventListener('click', () => {
+    state.smartcTrack = Number(btn.dataset.smartcTrack);
+    renderSmartC();
+  }));
+
+  artifactsRoot.innerHTML = `
+    <div class="smartc-panel-title">Delivery controls</div>
+    <div class="smartc-artifact-grid">${smartc.artifacts.map(a => `<span>${a}</span>`).join('')}</div>
+  `;
+}
+
+function replaySmartC() {
+  if (!PORTFOLIO_DATA.smartc) return;
+  clearInterval(state.smartcReplayTimer);
+  let i = 0;
+  state.smartcPhase = 0;
+  renderSmartC();
+  state.smartcReplayTimer = setInterval(() => {
+    i += 1;
+    if (i >= PORTFOLIO_DATA.smartc.phases.length) {
+      clearInterval(state.smartcReplayTimer);
+      state.smartcReplayTimer = null;
+      return;
+    }
+    state.smartcPhase = i;
+    renderSmartC();
+  }, 850);
+}
+
 function renderFilters() {
   const root = qs('#caseToolbar');
   root.innerHTML = PORTFOLIO_DATA.filters.map(filter => `
@@ -343,6 +432,9 @@ function init() {
   renderMetricStrip();
   if (window.ArchSystem) ArchSystem.init();
   renderFlow();
+  renderSmartC();
+  const smartcReplay = qs('#smartcReplay');
+  if (smartcReplay) smartcReplay.addEventListener('click', replaySmartC);
   renderFilters();
   renderCases();
   renderDiagnostic();
