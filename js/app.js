@@ -96,6 +96,19 @@ function renderCases() {
   `).join("");
 }
 
+
+function setupArchitecturalStagger() {
+  const selectors = [".metric-card", ".case-card", ".fit-card", ".preview-list article", ".card", ".detail-panel"];
+  let index = 0;
+  selectors.forEach((selector) => {
+    qsa(selector).forEach((item) => {
+      if (!item.classList.contains("reveal")) item.classList.add("reveal");
+      item.style.setProperty("--reveal-delay", `${Math.min(index * 45, 220)}ms`);
+      index += 1;
+    });
+  });
+}
+
 function setupLens() {
   qsa("[data-lens]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -149,6 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupLens();
   renderArchitecture();
   renderCases();
+  setupArchitecturalStagger();
   setupMobileNav();
   setupReveal();
 });

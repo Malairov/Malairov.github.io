@@ -1,29 +1,31 @@
-# Pavlo Malairov Portfolio - v25 SmartC Hiring-Manager Case
+# Pavlo Malairov Portfolio - v26 Vibia Architectural-Light Polish
 
 ## Focus
-This version refactors the SmartC AI Delivery page into a stronger hiring-manager case study while preserving the dark technical design system from v24.
+This version preserves v25 content and SmartC hiring-manager structure, while improving the visual atmosphere, interaction quality, animation, contact section, and mobile polish using a premium architectural-light direction.
 
-## Key changes
-- Refactored `cases/smartc-ai-delivery.html` around:
-  - direct value proposition
-  - proof strip
-  - executive summary
-  - recovery context
-  - Pavlo's PM role
-  - delivery architecture / workstreams
-  - controls and governance
-  - pilot readiness logic
-  - outcomes / scale evidence
-  - transferability
-  - recruiter takeaway
-- Added SmartC-specific responsive CSS.
-- Preserved no-overclaiming language: no claim that Pavlo engineered AI models, hardware architecture, algorithms, or product invention.
-- Kept generic public portfolio resume from v24.
-- Updated homepage SmartC preview and proof strip wording.
+## Preserved from v25
+- SmartC hiring-manager case structure.
+- No-overclaiming SmartC language.
+- Generic public portfolio resume.
+- Technical operations / implementation / process-improvement positioning.
+- Homepage proof structure and case-study architecture.
 
-## Resume PDF status
-Default public portfolio resume remains generic and aligned with:
-Project Manager | Technical Operations | Implementation Delivery | Process Improvement
+## Vibia-inspired changes
+- Warm architectural-light palette.
+- Deep graphite / warm black backgrounds.
+- Soft ivory text, champagne light accents, stone/taupe surfaces.
+- Collection-card style case cards.
+- Refined card hover states and soft light sweep.
+- Ambient hero light movement.
+- Increased breathing space without reducing recruiter clarity.
 
-## Deployment
-Upload the root contents to the GitHub Pages repository root. `index.html` must be at the root.
+## Motion and accessibility
+- CSS/IntersectionObserver reveal animation.
+- Staggered card reveal.
+- Soft hover motion only; no scroll hijacking or animation libraries.
+- prefers-reduced-motion disables non-essential animation.
+
+## QA checks
+- JS syntax checked with node --check.
+- Local links checked.
+- Resume exact-term scan checked for Apotex / ROW / LATAM / Rockwool / AECOM.

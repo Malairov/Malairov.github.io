@@ -2,6 +2,31 @@ const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
 
 
+
+function setupArchitecturalCaseReveals() {
+  const items = $$(".content-card, .proof-panel, .smartc-summary-grid article, .workstream-grid article, .pilot-grid article, .transfer-grid article, .governance-stack article, .related a");
+  items.forEach((item, index) => {
+    if (!item.classList.contains("reveal")) item.classList.add("reveal");
+    item.style.setProperty("--reveal-delay", `${Math.min(index * 45, 220)}ms`);
+  });
+
+  if (!("IntersectionObserver" in window)) {
+    items.forEach((item) => item.classList.add("visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  items.forEach((item) => observer.observe(item));
+}
+
 function setupMobileNav() {
   const toggle = $("#menuToggle");
   const nav = $("#primaryNav");
@@ -63,6 +88,7 @@ function setupFailureLab() {
 
 document.addEventListener("DOMContentLoaded", () => {
   setupMobileNav();
+  setupArchitecturalCaseReveals();
   setupCaseStage();
   setupFailureLab();
 });
