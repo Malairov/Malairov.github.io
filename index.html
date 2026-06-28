@@ -1,215 +1,184 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pavlo Malairov — Operations &amp; Implementation</title>
-<meta name="description" content="Operations and implementation builder. Stabilizes immature operations and builds the systems, controls, and automation that run them.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/base.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pavlo Malairov — Operations & Implementation Portfolio</title>
+  <meta name="description" content="Interactive portfolio for Pavlo Malairov, PMP-certified Operations and Implementation Project Manager focused on regulated technical environments, process improvement, service delivery, and technical operations." />
+  <link rel="preload" href="css/base.css" as="style" />
+  <link rel="stylesheet" href="css/base.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<div class="bg-grid" aria-hidden="true"></div>
-
-<header class="site-header">
-  <div class="wrap">
-    <div class="logo"><span class="pulse-dot" aria-hidden="true"></span>P.MALAIROV // OPS</div>
-    <nav class="site-nav" id="site-nav">
-      <a href="#cases">Cases</a>
-      <a href="#architecture">Architecture</a>
-      <a href="#lab">Lab</a>
-      <a href="#background">Background</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">&#9776;</button>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="wrap">
-    <div class="hero-grid">
-      <div>
-        <div class="hero-status"><span class="pulse-dot" aria-hidden="true"></span>SYSTEM STATUS: OPERATIONAL · WINNIPEG, MB</div>
-        <h1>I build the operating systems that keep <span class="accent">regulated supply chains</span> running while no one stops the line.</h1>
-        <p class="lede">Operations and implementation specialist. I walk into immature programs, stabilize what's running today, and build the master data, controls, and automation that let it scale tomorrow.</p>
-        <div class="hero-cta">
-          <a class="btn primary" href="#cases">View case studies</a>
-          <a class="btn" href="#architecture">See the system map</a>
-        </div>
-      </div>
-      <div class="node-graph-wrap" id="node-graph"></div>
+  <header class="site-header" aria-label="Primary navigation">
+    <div class="shell nav-shell">
+      <a class="brand" href="#top" aria-label="Pavlo Malairov portfolio home">
+        <span class="brand-mark">PM</span>
+        <span class="brand-copy">
+          <strong>Pavlo Malairov</strong>
+          <span>Operations / Implementation PM</span>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Section navigation">
+        <a href="#architecture">Architecture</a>
+        <a href="#cases">Cases</a>
+        <a href="#diagnostic">Diagnostic</a>
+        <a href="#timeline">Timeline</a>
+        <a class="nav-cta" href="assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
+      </nav>
     </div>
+  </header>
 
-    <div class="kpi-strip reveal">
-      <div class="kpi">
-        <div class="kpi-val">1,500+</div>
-        <div class="kpi-label">active SKUs standardized across 1,800+ tracked items</div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-val">~30 min</div>
-        <div class="kpi-label">manual ordering effort, down from ~5 hrs</div>
-      </div>
-      <div class="kpi">
-        <div class="kpi-val">460+</div>
-        <div class="kpi-label">installed locations on a prior rollout</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="cases">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow">Case studies</div>
-        <h2>Systems built on-site</h2>
-      </div>
-      <div class="meta">04 documented · click to expand</div>
-    </div>
-    <div class="case-grid" id="case-grid"></div>
-  </div>
-</section>
-
-<section id="architecture">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow">System map</div>
-        <h2>The full operations architecture</h2>
-      </div>
-      <div class="meta">interactive map · click nodes</div>
-    </div>
-    <p style="color: var(--text-dim); max-width: 600px; margin-bottom: 32px; font-size: 0.95rem;">Click any node to inspect the operating layer. The model shows how master data, governance, replenishment logic, issue tracking, and reporting controls connect into one execution system.</p>
-    <div class="arch-map" id="arch-map"></div>
-  </div>
-</section>
-
-<section id="lab">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow">Technical lab</div>
-        <h2>Safety-stock fix, live</h2>
-      </div>
-      <div class="meta">reconstructed logic · sample data</div>
-    </div>
-
-    <div class="lab-frame">
-      <div class="lab-intro">
-        <p>This reproduces the actual defect from case 03 using a simplified, anonymized version of the formula — no real SKUs, vendor names, or client data. Move the sliders to see why new items disappeared from reorder review, and how the fix catches them.</p>
-        <p class="note">ORIGINAL SYSTEM: SharePoint hub formula -&gt; Power Query (M) -&gt; VBA classification macro.<br>This demo isolates the core averaging logic that caused the failure.</p>
-      </div>
-
-      <div class="lab-controls">
-        <div class="lab-control">
-          <label>Weeks of usage history available</label>
-          <div class="lab-control-row">
-            <input type="range" id="usage-history" min="0" max="12" value="2" step="1">
-            <span id="usage-history-out" class="lab-control-out">2 wk</span>
+  <main id="main">
+    <section id="top" class="hero section-pad">
+      <div class="shell hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">PMP-Certified · Regulated Technical Environments · Canada</div>
+          <h1>I build operating systems for complex technical work.</h1>
+          <p class="hero-lede">Operations and implementation professional translating messy real-world constraints into governed workflows, diagnostic controls, stakeholder visibility, and measurable execution discipline.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#architecture">Explore operating system</a>
+            <a class="button button-secondary" href="#cases">Open case library</a>
+          </div>
+          <div class="cred-line" aria-label="positioning line">
+            Aerospace manufacturing service delivery · AI-enabled infrastructure projects · Maritime safety-critical operations
           </div>
         </div>
-        <div class="lab-control">
-          <label>Item age (time on the program)</label>
-          <div class="lab-control-row">
-            <input type="range" id="item-age" min="0" max="12" value="2" step="1">
-            <span id="item-age-out" class="lab-control-out">2 wk</span>
+
+        <aside class="command-panel reveal" aria-label="Operations command panel">
+          <div class="panel-topbar">
+            <span class="status-dot"></span>
+            <span>OPERATIONS CONTROL MODEL</span>
+            <span class="panel-code">v4</span>
           </div>
+          <div class="kpi-grid" id="heroMetrics"></div>
+          <div class="mini-flow" aria-label="Portfolio flow summary">
+            <span>Signal</span>
+            <i></i>
+            <span>Control</span>
+            <i></i>
+            <span>Execution</span>
+            <i></i>
+            <span>Evidence</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section-pad section-muted" aria-labelledby="metric-heading">
+      <div class="shell">
+        <div class="section-heading narrow reveal">
+          <p class="eyebrow">Evidence strip</p>
+          <h2 id="metric-heading">Metrics that explain the operating scale.</h2>
+          <p>Kept conservative and background-check safe. No inflated authority, no invented scope.</p>
+        </div>
+        <div class="metric-strip reveal" id="metricStrip"></div>
+      </div>
+    </section>
+
+    <section id="architecture" class="section-pad" aria-labelledby="architecture-heading">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Interactive operating architecture</p>
+          <h2 id="architecture-heading">Four loops, connected controls, one scalable system.</h2>
+          <p>This is the central case: separating demand signal, slot economics, replenishment logic, billing-state control, vendor/spec gates, and shortage tracking so each part of the program can improve independently.</p>
+        </div>
+
+        <div class="architecture-layout reveal">
+          <div class="arch-board" aria-label="Clickable operating architecture map">
+            <svg class="arch-lines" viewBox="0 0 1000 620" role="img" aria-label="Architecture connectors">
+              <path d="M120 95 C 250 95, 255 175, 390 175" />
+              <path d="M510 175 C 620 175, 620 255, 740 255" />
+              <path d="M740 320 C 620 320, 620 410, 510 410" />
+              <path d="M390 410 C 250 410, 250 500, 120 500" />
+              <path d="M220 500 C 135 420, 115 245, 120 95" />
+              <path d="M385 90 C 500 40, 620 70, 690 130" />
+              <path d="M690 450 C 555 555, 360 560, 220 500" />
+            </svg>
+            <div class="arch-node node-intake" data-arch="intake"></div>
+            <div class="arch-node node-feedback" data-arch="feedback"></div>
+            <div class="arch-node node-slot" data-arch="slot"></div>
+            <div class="arch-node node-jit" data-arch="jit"></div>
+            <div class="arch-node node-billing" data-arch="billing"></div>
+            <div class="arch-node node-governance" data-arch="governance"></div>
+            <div class="arch-node node-tracking" data-arch="tracking"></div>
+          </div>
+          <aside class="detail-panel" id="archDetail" aria-live="polite"></aside>
         </div>
       </div>
+    </section>
 
-      <div class="lab-panels">
-        <div class="lab-panel legacy">
-          <div class="lab-panel-tag">Legacy formula</div>
-          <div id="old-result" class="lab-result">—</div>
-          <div id="old-status" class="lab-status">—</div>
-          <div id="old-formula" class="lab-formula">—</div>
+    <section class="section-pad section-muted" aria-labelledby="sku-heading">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <p class="eyebrow">SKU lifecycle flow</p>
+          <h2 id="sku-heading">How one item moves through the control system.</h2>
+          <p>Click a step. The goal is to show the work as lifecycle governance, not as ad-hoc inventory activity.</p>
         </div>
-        <div class="lab-panel fixed">
-          <div class="lab-panel-tag">Corrected formula</div>
-          <div id="new-result" class="lab-result">—</div>
-          <div id="new-status" class="lab-status">—</div>
-          <div id="new-formula" class="lab-formula">—</div>
+        <div class="flow-layout reveal">
+          <div class="flowchart" id="skuFlow" aria-label="Clickable SKU lifecycle flowchart"></div>
+          <aside class="flow-detail" id="flowDetail" aria-live="polite"></aside>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section id="background">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow">Background</div>
-        <h2>Where this approach comes from</h2>
+    <section id="cases" class="section-pad" aria-labelledby="cases-heading">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Case library</p>
+          <h2 id="cases-heading">Proof of systems thinking across environments.</h2>
+          <p>Each case is structured as problem → system built → result → transferability. This keeps the story useful for hiring managers, not just recruiters.</p>
+        </div>
+        <div class="case-toolbar reveal" id="caseToolbar" aria-label="Case filters"></div>
+        <div class="case-grid reveal" id="caseGrid"></div>
       </div>
-    </div>
+    </section>
 
-    <div class="bg-grid-cols">
-      <div class="bg-col">
-        <div class="bg-tag">Current</div>
-        <ul>
-          <li>In-Plant Solution Specialist — MSC Industrial Supply</li>
-          <li>Embedded full-time at an aerospace manufacturing site</li>
-          <li>Sole on-site rep for a production-critical consignment program</li>
-          <li>PMP certified</li>
-        </ul>
+    <section id="diagnostic" class="section-pad section-diagnostic" aria-labelledby="diagnostic-heading">
+      <div class="shell diagnostic-grid">
+        <div class="diagnostic-copy reveal">
+          <p class="eyebrow">Interactive diagnostic</p>
+          <h2 id="diagnostic-heading">Why new SKUs disappeared from reorder review.</h2>
+          <p>The failure was not one bad formula. It was a chain across formula logic, extraction logic, workbook governance, and classification logic. Turn the failure modes on and watch the system explain the break.</p>
+          <div class="diagnostic-actions" id="diagnosticToggles"></div>
+        </div>
+        <div class="diagnostic-panel reveal">
+          <div class="diagnostic-status" id="diagnosticStatus"></div>
+          <div class="failure-chain" id="failureChain"></div>
+          <div class="fix-box" id="fixBox"></div>
+        </div>
       </div>
-      <div class="bg-col">
-        <div class="bg-tag">Prior</div>
-        <ul>
-          <li>Project Manager — SmartC (AI / computer vision, remote)</li>
-          <li>Platform scaled to 460+ installed locations</li>
-          <li>Lean Six Sigma Green Belt — in progress</li>
-        </ul>
-      </div>
-      <div class="bg-col">
-        <div class="bg-tag">Foundation</div>
-        <ul>
-          <li>8 years maritime operations</li>
-          <li>Officer in charge of a navigational watch, vessels &gt;500GRT</li>
-          <li>Delegated functional leadership of ~20-person crews</li>
-          <li>Vessels up to 40,000 GT</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section id="contact" style="border-bottom: none;">
-  <div class="wrap">
-    <div class="contact-grid">
-      <div class="contact-copy">
-        <h2>Working on a process that's outgrown its system?</h2>
-        <p>I'm looking at implementation, operations, and service delivery roles across aerospace, manufacturing, MRO, and industrial — anywhere a process has outgrown the system that was supposed to run it.</p>
+    <section id="timeline" class="section-pad" aria-labelledby="timeline-heading">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Experience foundation</p>
+          <h2 id="timeline-heading">Three environments, one operating pattern.</h2>
+          <p>Regulated execution, technical ambiguity, incomplete authority, and the need to make work visible and controllable.</p>
+        </div>
+        <div class="timeline reveal" id="timelineList"></div>
       </div>
-      <div class="contact-card">
-        <div class="row"><span>Location</span><span>Winnipeg, MB</span></div>
-        <div class="row"><span>Email</span><a href="mailto:pmalairov@gmail.com">pmalairov@gmail.com</a></div>
-        <div class="row"><span>LinkedIn</span><a href="https://www.linkedin.com/in/pavlo-malairov-b51840219" target="_blank" rel="noopener">View profile</a></div>
-        <div class="row"><span>Resume</span><a href="assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noopener">Download PDF</a></div>
+    </section>
+
+    <section class="section-pad final-cta" aria-labelledby="cta-heading">
+      <div class="shell cta-card reveal">
+        <div>
+          <p class="eyebrow">Next step</p>
+          <h2 id="cta-heading">Need an Operations / Implementation PM who can stabilize messy technical work?</h2>
+          <p>Available for roles in aerospace, manufacturing, MRO, industrial operations, supply chain, procurement, service delivery, and regulated technical environments.</p>
+        </div>
+        <div class="cta-actions">
+          <a class="button button-primary" href="assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Download resume</a>
+          <a class="button button-secondary" href="https://www.linkedin.com/in/pavlo-malairov-b51840219" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="button button-secondary" href="mailto:pmalairov@gmail.com">Email</a>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
+  </main>
 
-<footer>
-  <div class="wrap">
-    <div class="f-links">
-      <a href="mailto:pmalairov@gmail.com">Email</a>
-      <a href="https://www.linkedin.com/in/pavlo-malairov-b51840219" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noopener">Resume</a>
-    </div>
-    <div class="f-meta">Built and deployed from source · no template</div>
-  </div>
-</footer>
-
-<script src="js/node-graph.js"></script>
-<script src="js/cases.js"></script>
-<script src="js/architecture.js"></script>
-<script src="js/lab.js"></script>
-<script src="js/reveal.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
