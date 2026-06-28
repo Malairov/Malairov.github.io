@@ -46,16 +46,46 @@ function renderFlow() {
 }
 
 function renderFlowDetail() {
-  const step = PORTFOLIO_DATA.skuFlow[state.flow] || PORTFOLIO_DATA.skuFlow[0];
+  const steps = PORTFOLIO_DATA.skuFlow;
+  const step = steps[state.flow] || steps[0];
+  const isSlotDecision = /slot decision/i.test(step.title);
+  const isReentry = /re-entry/i.test(step.title);
+
+  const branch = isSlotDecision ? `
+    <div class="flow-branch">
+      <div class="branch-path branch-fail">
+        <span class="branch-label">If it fails the audit</span>
+        <div class="branch-body">Item is removed and the slot is freed for a candidate that earns the space.</div>
+      </div>
+      <div class="branch-path branch-pass">
+        <span class="branch-label">If it passes</span>
+        <div class="branch-body">Item continues to JIT tuning, then billing transition, then steady state.</div>
+      </div>
+    </div>` : '';
+
+  const reentryNote = isReentry ? `
+    <div class="flow-loopback">↻ Steady-state items keep re-entering floor feedback weekly, so the system never freezes around old assumptions.</div>` : '';
+
   qs('#flowDetail').innerHTML = `
-    <div class="flow-badge">Step ${state.flow + 1} of ${PORTFOLIO_DATA.skuFlow.length}</div>
+    <div class="flow-badge">Step ${state.flow + 1} of ${steps.length}</div>
     <h3>${step.title}</h3>
     <div class="detail-sub">${step.subtitle}</div>
     <p class="flow-copy">${step.detail}</p>
+    ${branch}
+    ${reentryNote}
     <div class="detail-metric">
       <span>Lifecycle framing</span>
       <div>This step exists to preserve governance visibility, not to let the item drift into the system without an explicit state.</div>
+    </div>
+    <div class="flow-controls">
+      <button class="flow-nav" id="flowPrev" ${state.flow === 0 ? 'disabled' : ''}>&larr; Previous</button>
+      <button class="flow-nav" id="flowNext" ${state.flow === steps.length - 1 ? 'disabled' : ''}>Next &rarr;</button>
     </div>`;
+
+  const prev = qs('#flowPrev');
+  const next = qs('#flowNext');
+  if (prev) prev.addEventListener('click', () => { if (state.flow > 0) { state.flow--; renderFlow(); } });
+  if (next) next.addEventListener('click', () => { if (state.flow < steps.length - 1) { state.flow++; renderFlow(); } });
 }
 
 function renderFilters() {
@@ -80,6 +110,7 @@ function renderCases() {
           <span class="case-tag">${c.category}</span>
           <h3 class="case-title">${c.title}</h3>
           <p class="case-summary">${c.summary}</p>
+          ${c.proves ? `<span class="case-proves">${c.proves}</span>` : ''}
         </div>
         <div class="case-metric">
           <span>Evidence</span>
@@ -151,6 +182,34 @@ function renderDiagnostic() {
       <li>Keep workbook governance strict so formulas are not overwritten with static values.</li>
       <li>Verify the running macro version matches the code being edited.</li>
     </ul>`;
+
+  // wire replay button (rendered in HTML)
+  const replayBtn = qs('#diagReplay');
+  if (replayBtn && !replayBtn.dataset.wired) {
+    replayBtn.dataset.wired = '1';
+    replayBtn.addEventListener('click', replayFailureChain);
+  }
+}
+
+function replayFailureChain() {
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const order = PORTFOLIO_DATA.diagnostic.map(d => d.id);
+  state.diagnostic = new Set();
+  renderDiagnostic();
+  if (reduceMotion) {
+    state.diagnostic = new Set(order);
+    renderDiagnostic();
+    return;
+  }
+  let i = 0;
+  function step() {
+    if (i >= order.length) return;
+    state.diagnostic.add(order[i]);
+    renderDiagnostic();
+    i++;
+    setTimeout(step, 750);
+  }
+  step();
 }
 
 function renderTimeline() {
@@ -480,23 +539,85 @@ document.addEventListener('DOMContentLoaded', init);
     });
   }
 
+  // Guided tour sequence: the 7-step walk through the system
+  const TOUR = ['intake', 'feedback', 'slot', 'jit', 'billing', 'tracking', 'governance'];
+  const TOUR_NOTE = {
+    intake: 'A new signal enters — the item must first clear qualification gates.',
+    feedback: 'Floor feedback catches friction fastest, before it becomes a shortage.',
+    slot: 'Slot economics decides whether the item earns its physical space.',
+    jit: 'JIT tuning adjusts reorder timing against real draw and hard constraints.',
+    billing: 'Billing-state tracking protects lifecycle accuracy through the transition.',
+    tracking: 'MWO tracking feeds shortage evidence back into the system.',
+    governance: 'Governance / spec control prevents non-compliant inputs from entering.'
+  };
+
   window.ArchSystem = {
     init() {
       const ctx = build();
       if (!ctx) return;
 
+      const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let idleTimer = null;
+      let tourTimer = null;
+      let userEngaged = false;
+      let cycleIdx = 0;
+
+      function stopIdle() { if (idleTimer) { clearInterval(idleTimer); idleTimer = null; } }
+      function stopTour() { if (tourTimer) { clearTimeout(tourTimer); tourTimer = null; } }
+
+      function startIdle() {
+        if (reduceMotion || userEngaged) return;
+        stopIdle();
+        idleTimer = setInterval(() => {
+          if (userEngaged) { stopIdle(); return; }
+          cycleIdx = (cycleIdx + 1) % TOUR.length;
+          setActive(TOUR[cycleIdx], ctx);
+        }, 3200);
+      }
+
+      function engage() {
+        userEngaged = true;
+        stopIdle();
+        stopTour();
+      }
+
       Array.prototype.slice.call(ctx.svg.querySelectorAll('.arch-node-g')).forEach((n) => {
         const id = n.getAttribute('data-arch');
-        n.addEventListener('click', () => setActive(id, ctx));
+        n.addEventListener('click', () => { engage(); setActive(id, ctx); });
         n.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(id, ctx); }
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); engage(); setActive(id, ctx); }
         });
         n.addEventListener('mouseenter', () => setHover(id, ctx, true));
         n.addEventListener('mouseleave', () => setHover(id, ctx, false));
       });
 
-      // default selection
+      // Guided tour button
+      const tourBtn = document.getElementById('archTourBtn');
+      if (tourBtn) {
+        tourBtn.addEventListener('click', () => {
+          engage();
+          let step = 0;
+          const cap = document.getElementById('boardCaption');
+          function next() {
+            if (step >= TOUR.length) {
+              if (cap) cap.textContent = 'Tour complete — click any node to inspect it directly.';
+              return;
+            }
+            const id = TOUR[step];
+            setActive(id, ctx);
+            if (cap) cap.textContent = `Step ${step + 1}/${TOUR.length}: ${TOUR_NOTE[id]}`;
+            step++;
+            tourTimer = setTimeout(next, reduceMotion ? 0 : 2600);
+          }
+          stopTour();
+          next();
+        });
+      }
+
+      // default selection + idle auto-cycle
       setActive('feedback', ctx);
+      cycleIdx = 1; // feedback is index 1 in TOUR
+      startIdle();
     }
   };
 })();

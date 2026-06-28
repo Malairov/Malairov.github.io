@@ -110,7 +110,8 @@ window.PORTFOLIO_DATA = {
       problem: "Demand signal, slot economics, vendor behavior, and billing state were competing for the same attention path.",
       built: "Separated the work into feedback, slot-economics, JIT tuning, and billing-state loops with distinct inputs and outputs.",
       result: "The system became easier to audit, tune, explain, and scale because each failure mode had a defined owner and signal path.",
-      transfer: "Directly transferable to implementation PM, service delivery, process improvement, and technical operations roles."
+      transfer: "Directly transferable to implementation PM, service delivery, process improvement, and technical operations roles.",
+      proves: "Proves process architecture."
     },
     {
       category: "Diagnostic",
@@ -120,7 +121,8 @@ window.PORTFOLIO_DATA = {
       problem: "New items with no usage history were being routed to dead status or hidden from review.",
       built: "Rebuilt logic in Power Query, added NO-USAGE classification, dynamic header lookup, and diagnostic query columns.",
       result: "New items stayed visible and controllable instead of silently disappearing behind spreadsheet logic.",
-      transfer: "Shows diagnostic thinking under imperfect tools, inherited workbooks, and partial authority."
+      transfer: "Shows diagnostic thinking under imperfect tools, inherited workbooks, and partial authority.",
+      proves: "Proves root-cause diagnosis."
     },
     {
       category: "Governance",
@@ -130,7 +132,8 @@ window.PORTFOLIO_DATA = {
       problem: "Availability and speed could not override customer-controlled technical requirements.",
       built: "Separated distributor availability, manufacturer match, customer/OEM spec requirements, and COC evidence gates.",
       result: "Only eligible items could enter the operating loops; non-compliant substitutions were blocked earlier.",
-      transfer: "Relevant to aerospace, pharma, MRO, manufacturing, procurement, and quality-sensitive supply chains."
+      transfer: "Relevant to aerospace, pharma, MRO, manufacturing, procurement, and quality-sensitive supply chains.",
+      proves: "Proves governance under constraints."
     },
     {
       category: "Operations",
@@ -140,7 +143,8 @@ window.PORTFOLIO_DATA = {
       problem: "Shortages existed as complaints without structured traceability to item, vendor, work order, or delay reason.",
       built: "Created event-level tracking with IDs, categories, state, follow-up visibility, and closure metrics.",
       result: "Shortage events became visible, measurable, and usable as inputs into slot economics and vendor follow-up.",
-      transfer: "Strong service-delivery PM evidence: intake, triage, escalation, root cause, and closure discipline."
+      transfer: "Strong service-delivery PM evidence: intake, triage, escalation, root cause, and closure discipline.",
+      proves: "Proves service-delivery discipline."
     },
     {
       category: "Technology",
@@ -150,7 +154,8 @@ window.PORTFOLIO_DATA = {
       problem: "A prior product version had field-reliability gaps and needed controlled redesign, testing, and pilot deployment.",
       built: "Coordinated hardware, software, QA, DevOps, and integration workstreams under scope, risk, milestone, and change control.",
       result: "The redesigned product moved through pilot readiness and scaled commercially across hundreds of locations.",
-      transfer: "Shows cross-functional technical delivery without claiming to be the engineer."
+      transfer: "Shows cross-functional technical delivery without claiming to be the engineer.",
+      proves: "Proves technical implementation delivery."
     },
     {
       category: "Foundation",
@@ -160,7 +165,8 @@ window.PORTFOLIO_DATA = {
       problem: "Navigation, emergency readiness, documentation, compliance, and time-critical operations had to function continuously.",
       built: "Executed navigation watchkeeping, voyage support, GMDSS/radio communications, bridge documentation, drills, and inspection readiness.",
       result: "Developed disciplined execution habits in zero-failure-tolerance environments with multinational crews.",
-      transfer: "Regulated operations, procedural control, risk visibility, and accountability under pressure."
+      transfer: "Regulated operations, procedural control, risk visibility, and accountability under pressure.",
+      proves: "Proves regulated execution discipline."
     }
   ],
   diagnostic: [

@@ -37,3 +37,14 @@ Static site. No framework. Deploys on GitHub Pages from the repository root.
   only the moving pulse dots would be absent — comprehension is preserved without them.
 - The hero command panel and KPI tiles use IntersectionObserver-driven reveals; these work in
   all current browsers.
+
+## v7 additions
+- Architecture: idle auto-cycle (loops highlight in sequence until you interact) and a
+  "Replay system flow" guided tour that walks the 7-step path with captions. Respects
+  prefers-reduced-motion (no auto-motion when reduced).
+- SKU lifecycle flow: Previous / Next step controls, a branch point at the slot-decision
+  step (fail → removed / pass → continue), and a weekly re-entry loopback note.
+- Case library: each case now shows a "Proves …" badge (process architecture, root-cause
+  diagnosis, governance under constraints, etc.).
+- Diagnostic simulator: "Replay failure chain" button that lights each failure layer in
+  sequence to show it was a multi-layer control failure, not one bad formula.
