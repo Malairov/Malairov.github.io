@@ -1,3 +1,3 @@
-# v34 clean rebuild readable
+# v35 proof hiring-copy fix
 
-Clean rebuild: one CSS system, readable sans typography, no dark panels, no related cards, no overlapping diagrams.
+Clean v34 rebuild with homepage proof cards rewritten to connect each metric to operating context and PM hiring relevance.
