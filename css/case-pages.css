@@ -197,3 +197,173 @@ body.nav-open .menu-toggle span:nth-child(3) { transform: translateY(-6px) rotat
   html { scroll-behavior:auto; }
   *, *::before, *::after { animation:none !important; transition:none !important; }
 }
+
+/* ===== v25 SmartC hiring-manager case polish ===== */
+.case-value {
+  color: var(--accent-primary-soft) !important;
+  font-size: clamp(1.08rem, 1.5vw, 1.28rem) !important;
+  line-height: 1.42;
+}
+.smartc-hero-card {
+  position: relative;
+  overflow: hidden;
+}
+.smartc-hero-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -80px -90px auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124,140,255,.16), transparent 70%);
+  pointer-events: none;
+}
+.smartc-proof-grid div {
+  border-color: rgba(124,140,255,.22);
+}
+.smartc-summary-grid,
+.workstream-grid,
+.pilot-grid,
+.transfer-grid,
+.role-scope-grid {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+.smartc-summary-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.smartc-summary-grid article,
+.workstream-grid article,
+.pilot-grid article,
+.transfer-grid article,
+.role-scope-grid article,
+.governance-stack article {
+  padding: 16px;
+  border-radius: 18px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+}
+.smartc-summary-grid span,
+.workstream-grid span,
+.pilot-grid span,
+.governance-stack span {
+  display: block;
+  color: var(--accent-primary-soft);
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.smartc-summary-grid strong,
+.workstream-grid strong,
+.pilot-grid strong,
+.transfer-grid strong,
+.governance-stack strong {
+  display: block;
+  margin-top: 8px;
+  line-height: 1.18;
+}
+.smartc-summary-grid small,
+.workstream-grid small,
+.pilot-grid small,
+.governance-stack small {
+  display: block;
+  margin-top: 7px;
+  color: var(--text-muted);
+}
+.role-scope-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.role-scope-grid h3 {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+}
+.role-scope-grid ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--text-secondary);
+}
+.role-scope-grid li + li {
+  margin-top: 8px;
+}
+.role-scope-grid article:nth-child(2) {
+  border-color: rgba(216,168,79,.26);
+}
+.role-scope-grid article:nth-child(2) h3 {
+  color: var(--status-warning);
+}
+.workstream-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.governance-stack {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+.governance-stack article {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+.governance-stack small {
+  grid-column: 2;
+  margin-top: -4px;
+}
+.pilot-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.pilot-grid article {
+  min-height: 150px;
+  border-color: rgba(79,180,119,.24);
+}
+.pilot-grid span {
+  color: var(--status-success);
+}
+.transfer-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.transfer-grid span {
+  display: block;
+  margin-top: 7px;
+  color: var(--text-secondary);
+}
+.smartc-bottom-cta {
+  margin-top: 18px;
+}
+.recruiter-takeaway {
+  border-color: rgba(124,140,255,.28);
+  background: linear-gradient(180deg, rgba(27,29,33,.98), rgba(15,16,18,.98));
+}
+
+@media (max-width: 980px) {
+  .smartc-summary-grid,
+  .workstream-grid,
+  .pilot-grid,
+  .transfer-grid,
+  .role-scope-grid {
+    grid-template-columns: 1fr;
+  }
+  .governance-stack article {
+    grid-template-columns: 1fr;
+  }
+  .governance-stack small {
+    grid-column: auto;
+    margin-top: 0;
+  }
+}
+@media (max-width: 768px) {
+  .smartc-hero .button-row,
+  .smartc-bottom-cta {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+  .smartc-hero .button,
+  .smartc-bottom-cta .button {
+    width: 100%;
+    min-height: 48px;
+    white-space: normal;
+  }
+}
