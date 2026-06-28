@@ -3,100 +3,169 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pavlo Malairov — Operations & Implementation Project Manager</title>
-  <meta name="description" content="Premium interactive portfolio for Pavlo Malairov, PMP-certified Operations & Implementation Project Manager for regulated technical environments." />
+  <title>Pavlo Malairov, PMP - Operations & Implementation PM Portfolio</title>
+  <meta name="description" content="Technical operations and implementation portfolio for Pavlo Malairov, PMP: Operations PM, Technical Operations PM, Implementation PM, Process Improvement PM." />
   <link rel="stylesheet" href="css/base.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
-    <div class="shell nav-shell">
-      <a class="brand" href="#top" aria-label="Pavlo Malairov home">
+    <div class="shell command-bar">
+      <a class="brand" href="#top" aria-label="Pavlo Malairov portfolio home">
         <span class="brand-mark">PM</span>
-        <span class="brand-copy"><strong>Pavlo Malairov</strong><span>Operations & Implementation Project Manager</span></span>
+        <span class="brand-copy">
+          <strong>Pavlo Malairov / PMP</strong>
+          <span>Operations PM · Implementation · Technical Operations</span>
+        </span>
       </a>
-      <nav class="nav-links" aria-label="Main navigation">
-        <a href="#scan">Scan</a>
-        <a href="#architecture">Architecture</a>
+      <nav class="nav-links" id="primaryNav" aria-label="Main navigation">
+        <a href="#fit">Fit</a>
+        <a href="#proof">Proof</a>
+        <a href="#architecture">System</a>
         <a href="#cases">Cases</a>
-        <a href="#smartc">SmartC</a>
-        <a href="#diagnostic">Diagnostic</a>
+        <a href="#contact">Contact</a>
       </nav>
       <div class="nav-actions">
-        <a class="button button-secondary" href="https://www.linkedin.com/in/pavlo-malairov-b51840219" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a class="nav-cta" href="assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
+        <a class="button button-secondary desktop-only" href="assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
+        <a class="button button-secondary desktop-only" href="https://www.linkedin.com/in/pavlo-malairov-b51840219" target="_blank" rel="noreferrer">LinkedIn</a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation menu" aria-controls="primaryNav" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
   </header>
 
   <main id="main">
     <section id="top" class="hero">
-      <div class="shell hero-inner">
-        <span class="eyebrow">PMP-certified · regulated technical environments · Canada</span>
-        <h1>Complex operations made controllable.</h1>
-        <p class="lede">I help technical teams turn fragmented work into clear controls, reliable execution, and measurable outcomes.</p>
-        <div class="positioning-card">
-          <span>Professional positioning</span>
-          <strong>PMP-certified delivery lead for regulated technical environments.</strong>
-          <small>Aerospace manufacturing service delivery · AI infrastructure implementation · maritime regulated operations</small>
-        </div>
-        <div class="button-row hero-actions">
-          <a class="button button-primary" href="assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">View resume</a>
-          <a class="button button-secondary" href="#cases">Explore case studies</a>
-        </div>
-        <div class="hero-metrics" id="heroMetrics" aria-label="Key metrics"></div>
-      </div>
-    </section>
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <span class="mono-label">Technical operations portfolio</span>
+          <h1>I build control, visibility, and execution discipline in complex technical operations.</h1>
+          <p class="lede">PMP-certified technical operations and implementation professional focused on aerospace manufacturing service delivery, AI-enabled transportation technology projects, regulated operations, process improvement, stakeholder coordination, and operating-system design.</p>
 
-    <section id="scan" class="section">
-      <div class="shell scan-grid">
-        <div class="scan-main card reveal">
-          <span class="eyebrow">Executive scan</span>
-          <h2>A quick read before the deep dive.</h2>
-          <p>Start here if you need the profile quickly. The case pages show the evidence behind the positioning.</p>
-          <div class="tabs" role="tablist" aria-label="Audience scan">
-            <button class="tab active" data-lens="recruiter" role="tab">Recruiter</button>
-            <button class="tab" data-lens="manager" role="tab">Hiring manager</button>
-            <button class="tab" data-lens="technical" role="tab">Technical reviewer</button>
+          <div class="role-strip" aria-label="Target roles">
+            <span>Operations PM</span>
+            <span>Technical Operations PM</span>
+            <span>Implementation PM</span>
+            <span>Process Improvement PM</span>
+            <span>Service Delivery PM</span>
           </div>
-          <div class="lens-panel" id="lensPanel" aria-live="polite"></div>
+
+          <div class="proof-strip" aria-label="Proof points">
+            <span>PMP</span>
+            <span>Aerospace manufacturing</span>
+            <span>AI transportation projects</span>
+            <span>Maritime regulated operations</span>
+            <span>1,500+ SKUs</span>
+            <span>17 vending systems</span>
+            <span>5 buildings</span>
+            <span>460+ installed locations</span>
+          </div>
+
+          <div class="button-row hero-actions">
+            <a class="button button-primary" href="mailto:pmalairov@gmail.com">Discuss Operations / Implementation PM fit</a>
+            <a class="button button-secondary" href="assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Download portfolio resume</a>
+            <a class="button button-secondary" href="#cases">View proof-of-work case studies</a>
+          </div>
         </div>
-        <aside class="scan-side card reveal">
-          <span class="eyebrow">How to read this portfolio</span>
-          <h3>Profile first, evidence second.</h3>
-          <p>The homepage gives the short version. The case pages provide the inspection layer for hiring managers and technical operations leaders.</p>
-          <div class="reading-path">
-            <span>Role fit</span>
-            <span>Results</span>
-            <span>Case studies</span>
-            <span>Resume</span>
+
+        <aside class="hero-panel" aria-label="Portfolio operating system summary">
+          <div class="panel-content">
+            <div class="status-row"><span>Portfolio OS</span><span>Executive proof layer</span></div>
+            <h2 class="panel-title">Not an inventory profile. A technical operations and implementation profile.</h2>
+            <div class="system-stack">
+              <div class="system-line"><span>Signal</span><strong>Stakeholder feedback, shortage events, technical constraints</strong></div>
+              <div class="system-line"><span>Control</span><strong>Operating loops, issue escalation, reporting infrastructure</strong></div>
+              <div class="system-line"><span>Execution</span><strong>Implementation delivery, governance, readiness, handoff</strong></div>
+              <div class="system-line"><span>Evidence</span><strong>Metrics, case studies, recruiter takeaways</strong></div>
+            </div>
+            <p class="panel-note">Designed for recruiter scan, hiring-manager inspection, and technical operations review.</p>
           </div>
         </aside>
       </div>
     </section>
 
-    <section class="section">
+    <section id="fit" class="section">
+      <div class="shell fit-grid">
+        <div class="fit-copy">
+          <span class="mono-label">Best-fit roles</span>
+          <h2>Role targeting is explicit, not implied.</h2>
+          <p>This portfolio is built for roles where operational work needs clearer control, better visibility, stronger stakeholder coordination, and measurable execution discipline.</p>
+        </div>
+        <div class="fit-cards" aria-label="Best-fit roles and environments">
+          <article class="fit-card">
+            <h3>Role targets</h3>
+            <ul>
+              <li>Operations Project Manager</li>
+              <li>Technical Operations Project Manager</li>
+              <li>Implementation Project Manager</li>
+              <li>Process Improvement Project Manager</li>
+              <li>Service Delivery Project Manager</li>
+              <li>Customer Programs / Technical Program roles</li>
+            </ul>
+          </article>
+          <article class="fit-card">
+            <h3>Best-fit environments</h3>
+            <ul>
+              <li>Aerospace manufacturing</li>
+              <li>MRO / industrial operations</li>
+              <li>Regulated service delivery</li>
+              <li>Supply chain transformation</li>
+              <li>Smart infrastructure / ITS</li>
+              <li>Technical implementation programs</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="proof" class="section">
       <div class="shell">
         <div class="section-head">
-          <span class="eyebrow">Evidence</span>
-          <h2>Measured improvements, not generic PM claims.</h2>
-          <p>The numbers are conservative anchors for the operating systems, delivery controls, and diagnostic work shown in the case studies.</p>
+          <span class="mono-label">Proof anchors</span>
+          <h2>Evidence beyond resume claims.</h2>
+          <p>Conservative proof points from the portfolio: credential, operating scale, system design, process improvement, and technical delivery context.</p>
         </div>
-        <div class="metric-strip" id="metricStrip"></div>
+        <div class="metric-grid" id="metricGrid"></div>
+      </div>
+    </section>
+
+    <section id="scan" class="section">
+      <div class="shell scan-grid">
+        <article class="card card-pad scan-card reveal">
+          <span class="mono-label">Executive scan</span>
+          <h2>Three readers, one proof system.</h2>
+          <p>Recruiters need role clarity. Hiring managers need proof. Technical operations leaders need to see the control logic behind the claims.</p>
+          <div class="tab-row" role="tablist" aria-label="Audience view selector">
+            <button class="tab active" type="button" data-lens="recruiter" role="tab">Recruiter</button>
+            <button class="tab" type="button" data-lens="hiring" role="tab">Hiring manager</button>
+            <button class="tab" type="button" data-lens="technical" role="tab">Technical reviewer</button>
+          </div>
+          <div class="lens-panel" id="lensPanel" aria-live="polite"></div>
+        </article>
+        <aside class="card card-pad reveal">
+          <span class="mono-label">Reading path</span>
+          <div class="reading-path">
+            <span>1. Confirm role fit above the fold.</span>
+            <span>2. Review proof anchors and metrics.</span>
+            <span>3. Inspect control-system case studies.</span>
+            <span>4. Download resume or make contact.</span>
+          </div>
+        </aside>
       </div>
     </section>
 
     <section id="architecture" class="section">
       <div class="shell">
         <div class="section-head">
-          <span class="eyebrow">Operating architecture</span>
-          <h2>A visible control model for complex work.</h2>
-          <p>Click a node to inspect its role, inputs, and outputs. The interactive layer is intentionally restrained: it supports the story instead of competing with it.</p>
+          <span class="mono-label">Operating-system design</span>
+          <h2>Technical operations shown as a control model.</h2>
+          <p>Click a node. The goal is not decoration - it is to show how signals, constraints, controls, and evidence connect.</p>
         </div>
-        <div class="arch-layout">
-          <div class="arch-map reveal" id="archMap" aria-label="Interactive operating architecture map"></div>
-          <aside class="detail-card reveal" id="archDetail" aria-live="polite"></aside>
+        <div class="arch-grid">
+          <div class="map reveal" id="architectureMap" aria-label="Interactive operating control model"></div>
+          <aside class="card card-pad detail-panel reveal" id="architectureDetail" aria-live="polite"></aside>
         </div>
       </div>
     </section>
@@ -104,77 +173,44 @@
     <section id="cases" class="section">
       <div class="shell">
         <div class="section-head">
-          <span class="eyebrow">Case studies</span>
-          <h2>Deep-dive proof on separate pages.</h2>
-          <p>The homepage stays readable. The case pages carry the detail: problem, system before/after, interactive model, controls built, results, and transferability.</p>
+          <span class="mono-label">Proof-of-work case studies</span>
+          <h2>Case studies structured for recruiter scan and hiring-manager inspection.</h2>
+          <p>Each case shows the problem, mechanism built, result, and why it matters for operations and implementation roles.</p>
         </div>
-        <div class="case-gateway">
-          <a class="case-card reveal" href="cases/four-operating-loops.html">
-            <span>Signature case</span>
-            <h3>Four Operating Loops</h3>
-            <p>Process architecture for a live consignment program: feedback, slot economics, JIT logic, and billing-state control.</p>
-            <strong class="case-link">Open case study →</strong>
-          </a>
-          <a class="case-card reveal" href="cases/smartc-ai-delivery.html">
-            <span>Technical delivery</span>
-            <h3>SmartC AI Delivery</h3>
-            <p>Recovery context, cross-functional workstreams, sponsor governance, QA readiness, pilot logic, and scale evidence.</p>
-            <strong class="case-link">Open case study →</strong>
-          </a>
-          <a class="case-card reveal" href="cases/safety-stock-diagnostic.html">
-            <span>Diagnostic case</span>
-            <h3>Safety-Stock Diagnostic</h3>
-            <p>Root-cause analysis across formula behavior, Power Query, VBA classification, filters, and workbook governance.</p>
-            <strong class="case-link">Open case study →</strong>
-          </a>
+        <div class="case-grid" id="caseGrid"></div>
+        <div class="case-cta card reveal">
+          <div>
+            <strong>Need the short version first?</strong>
+            <p>Download the generic portfolio resume, or inspect the case pages for proof of technical operations and implementation delivery.</p>
+          </div>
+          <div class="button-row">
+            <a class="button button-primary" href="assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Download portfolio resume</a>
+            <a class="button button-secondary" href="mailto:pmalairov@gmail.com">Discuss Operations / Implementation PM fit</a>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="smartc" class="section">
       <div class="shell preview-grid">
-        <div class="preview-card reveal">
-          <span class="eyebrow">Technical delivery</span>
-          <h2>SmartC technical delivery system.</h2>
-          <p>A technical delivery case showing recovery context, cross-functional workstreams, governance, QA readiness, pilot logic, and commercial-scale outcome. External product links are intentionally not exposed.</p>
-          <div class="button-row">
-            <a class="button button-primary" href="cases/smartc-ai-delivery.html">Open SmartC case</a>
-          </div>
-        </div>
+        <article class="card card-pad preview-card reveal">
+          <span class="mono-label">Technical delivery</span>
+          <h2>AI-enabled transportation delivery without overclaiming engineering authorship.</h2>
+          <p>The SmartC case is framed as implementation and delivery architecture: recovery context, workstreams, governance, QA readiness, pilot logic, and scale evidence.</p>
+          <a class="button button-primary" href="cases/smartc-ai-delivery.html">Open SmartC case study</a>
+        </article>
         <div class="preview-list reveal">
-          <div><strong>Recovery context</strong><span>Move from field-reliability gaps into a controlled delivery path.</span></div>
-          <div><strong>Governance</strong><span>RAID, milestone tracking, readiness checks, and sponsor-visible decisions.</span></div>
-          <div><strong>Scale evidence</strong><span>460+ installed locations used conservatively as the public scale anchor.</span></div>
+          <article><strong>Recovery context</strong><span>Move from reliability gaps to a visible delivery path.</span></article>
+          <article><strong>Governance</strong><span>RAID-style visibility, milestone control, readiness checks, and sponsor updates.</span></article>
+          <article><strong>Scale anchor</strong><span>460+ installed locations used as the conservative public proof point.</span></article>
         </div>
       </div>
     </section>
 
-    <section id="diagnostic" class="section dark-lab">
-      <div class="shell">
-        <div class="section-head">
-          <span class="eyebrow">Diagnostic lab</span>
-          <h2>Failure analysis across data, workbook, and automation layers.</h2>
-          <p>New SKUs did not disappear because of one bad formula. Several weak control layers interacted.</p>
-        </div>
-        <div class="preview-grid">
-          <div class="preview-card reveal">
-            <h2>Safety-stock root cause.</h2>
-            <p>The diagnostic case shows formula behavior, Power Query logic, VBA classification, hardcoded filters, overwritten formulas, and active macro version control.</p>
-            <a class="button button-primary" href="cases/safety-stock-diagnostic.html">Open diagnostic case</a>
-          </div>
-          <div class="preview-list reveal">
-            <div><strong>No usage history</strong><span>A new item can still be operationally required.</span></div>
-            <div><strong>DEAD classification</strong><span>Zero usage needs exception review, not automatic dead-demand routing.</span></div>
-            <div><strong>Wrong active logic</strong><span>The edited code is not always the running code.</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section final-cta">
-      <div class="shell cta-card reveal">
-        <div>
-          <span class="eyebrow">Selective opportunities</span>
+    <section id="contact" class="section">
+      <div class="shell cta-grid card">
+        <div class="cta-copy">
+          <span class="mono-label">Selective opportunities</span>
           <h2>Open to the right Operations or Implementation PM role.</h2>
           <p>I am most interested in environments where technical operations, manufacturing service delivery, implementation work, or process improvement need stronger structure, visibility, and execution control.</p>
           <div class="fit-line">
@@ -185,13 +221,27 @@
           </div>
         </div>
         <div class="cta-actions">
-          <a class="button button-primary" href="assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">View resume</a>
-          <a class="button button-secondary" href="https://www.linkedin.com/in/pavlo-malairov-b51840219" target="_blank" rel="noreferrer">LinkedIn profile</a>
-          <a class="button button-secondary" href="mailto:pmalairov@gmail.com">Email contact</a>
+          <a class="button button-primary" href="mailto:pmalairov@gmail.com">Discuss Operations / Implementation PM fit</a>
+          <a class="button button-secondary" href="assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Download portfolio resume</a>
+          <a class="button button-secondary" href="https://www.linkedin.com/in/pavlo-malairov-b51840219" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
         </div>
       </div>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div>
+        <strong>Pavlo Malairov, PMP</strong>
+        <p>Technical operations and implementation portfolio for Operations PM, Technical Operations PM, Implementation PM, Process Improvement PM, and Service Delivery PM roles.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href="assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Download portfolio resume</a>
+        <a href="https://www.linkedin.com/in/pavlo-malairov-b51840219" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
+        <a href="mailto:pmalairov@gmail.com">Discuss Operations / Implementation PM fit</a>
+      </nav>
+    </div>
+  </footer>
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>

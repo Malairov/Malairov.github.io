@@ -1,123 +1,154 @@
 const qs = (s, el = document) => el.querySelector(s);
 const qsa = (s, el = document) => Array.from(el.querySelectorAll(s));
 
-const state = {
-  lens: "recruiter",
-  arch: "feedback"
-};
+const state = { lens: "recruiter", arch: "feedback" };
 
 function renderMetrics() {
-  const hero = qs("#heroMetrics");
-  const strip = qs("#metricStrip");
-  const cards = PORTFOLIO_DATA.metrics.map(m => `
-    <article class="metric-mini">
-      <strong>${m.value}</strong>
-      <span>${m.label}</span>
-    </article>`).join("");
-  if (hero) hero.innerHTML = cards;
-  if (strip) strip.innerHTML = PORTFOLIO_DATA.metrics.map(m => `
+  const strip = qs("#metricGrid");
+  if (!strip) return;
+  strip.innerHTML = PORTFOLIO_DATA.metrics.map((m) => `
     <article class="metric-card reveal">
       <span>${m.label}</span>
       <strong>${m.value}</strong>
-      <p>${m.context}</p>
-    </article>`).join("");
+      <p>${m.detail}</p>
+    </article>
+  `).join("");
 }
 
 function renderLens() {
   const panel = qs("#lensPanel");
   if (!panel) return;
-  const item = PORTFOLIO_DATA.audienceLens[state.lens] || PORTFOLIO_DATA.audienceLens.recruiter;
+  const item = PORTFOLIO_DATA.lens[state.lens] || PORTFOLIO_DATA.lens.recruiter;
   panel.innerHTML = `
-    <span>${item.title}</span>
-    <strong>${item.headline}</strong>
-    <p>${item.summary}</p>
-    <div class="lens-bullets">${item.bullets.map(b => `<em>${b}</em>`).join("")}</div>
+    <span class="mono-label">${item.label}</span>
+    <h3>${item.headline}</h3>
+    <p>${item.body}</p>
+    <div class="chip-row">${item.points.map((p) => `<span>${p}</span>`).join("")}</div>
   `;
-  qsa("[data-lens]").forEach(btn => {
-    const active = btn.dataset.lens === state.lens;
-    btn.classList.toggle("active", active);
-    btn.setAttribute("aria-selected", active ? "true" : "false");
+  qsa("[data-lens]").forEach((button) => {
+    const active = button.dataset.lens === state.lens;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-selected", active ? "true" : "false");
   });
 }
 
+function renderArchitecture() {
+  const map = qs("#architectureMap");
+  const detail = qs("#architectureDetail");
+  if (!map || !detail) return;
+
+  const classes = {
+    feedback: "node-a",
+    slot: "node-b",
+    jit: "node-c",
+    billing: "node-d",
+    governance: "node-e",
+    intake: "node-f",
+    tracking: "node-g"
+  };
+
+  map.innerHTML = `
+    <svg class="map-lines" viewBox="0 0 1000 620" aria-hidden="true">
+      <path d="M500 92 C770 96 890 260 825 335 C760 493 615 528 500 528 C385 528 240 493 175 335 C110 260 230 96 500 92" />
+      <path d="M170 158 C320 248 680 248 830 158" />
+      <path d="M190 470 C350 365 650 365 810 470" />
+    </svg>
+    <div class="map-core">Control<br>System</div>
+    ${PORTFOLIO_DATA.architecture.map((node) => `
+      <button class="map-node ${classes[node.id] || ""} ${node.id === state.arch ? "active" : ""}" data-arch="${node.id}">
+        <span>${node.tag}</span>
+        <strong>${node.title}</strong>
+      </button>
+    `).join("")}
+  `;
+
+  qsa("[data-arch]", map).forEach((button) => {
+    button.addEventListener("click", () => {
+      state.arch = button.dataset.arch;
+      renderArchitecture();
+    });
+  });
+
+  const active = PORTFOLIO_DATA.architecture.find((node) => node.id === state.arch) || PORTFOLIO_DATA.architecture[0];
+  detail.innerHTML = `
+    <span class="mono-label">${active.tag}</span>
+    <h3>${active.title}</h3>
+    <p>${active.detail}</p>
+    <div class="proof-box"><span>PM / operations relevance</span><strong>${active.proof}</strong></div>
+  `;
+}
+
+function renderCases() {
+  const grid = qs("#caseGrid");
+  if (!grid) return;
+  grid.innerHTML = PORTFOLIO_DATA.cases.map((c) => `
+    <a class="case-card reveal" href="${c.url}">
+      <span class="mono-label">${c.tag}</span>
+      <h3>${c.title}</h3>
+      <dl>
+        <div><dt>Problem</dt><dd>${c.problem}</dd></div>
+        <div><dt>Control / mechanism</dt><dd>${c.mechanism}</dd></div>
+        <div><dt>Result</dt><dd>${c.result}</dd></div>
+      </dl>
+      <p class="case-relevance">${c.relevance}</p>
+      <strong>View proof-of-work case →</strong>
+    </a>
+  `).join("");
+}
+
 function setupLens() {
-  qsa("[data-lens]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      state.lens = btn.dataset.lens;
+  qsa("[data-lens]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.lens = button.dataset.lens;
       renderLens();
     });
   });
   renderLens();
 }
 
-function nodeClass(id) {
-  return {
-    feedback: "node-feedback",
-    slot: "node-slot",
-    jit: "node-jit",
-    billing: "node-billing",
-    governance: "node-governance",
-    intake: "node-intake",
-    tracking: "node-tracking"
-  }[id] || "";
-}
+function setupMobileNav() {
+  const toggle = qs("#menuToggle");
+  const nav = qs("#primaryNav");
+  if (!toggle || !nav) return;
 
-function renderArchitecture() {
-  const map = qs("#archMap");
-  const detail = qs("#archDetail");
-  if (!map || !detail) return;
-  map.innerHTML = `
-    <svg class="arch-svg" viewBox="0 0 1000 620" aria-hidden="true">
-      <path class="arch-wire" d="M500 104 C760 110, 860 260, 806 330 S630 520, 500 516 S194 410, 194 330 S270 110, 500 104"/>
-      <path class="arch-wire alt" d="M165 145 C330 250, 650 250, 835 330"/>
-      <path class="arch-wire alt" d="M835 145 C655 250, 345 250, 195 330"/>
-    </svg>
-    <div class="arch-core">Operating<br>System<br>Core</div>
-    ${PORTFOLIO_DATA.architecture.map(n => `
-      <button class="arch-node ${nodeClass(n.id)} ${n.id === state.arch ? "active" : ""}" data-arch="${n.id}">
-        <span>${n.tag}</span>
-        <strong>${n.title}</strong>
-        <small>${n.sub}</small>
-      </button>`).join("")}
-  `;
-  qsa("[data-arch]", map).forEach(btn => {
-    btn.addEventListener("click", () => {
-      state.arch = btn.dataset.arch;
-      renderArchitecture();
-    });
+  function setOpen(open) {
+    document.body.classList.toggle("nav-open", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    toggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+  }
+
+  toggle.addEventListener("click", () => setOpen(!document.body.classList.contains("nav-open")));
+  qsa("a", nav).forEach((link) => link.addEventListener("click", () => setOpen(false)));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setOpen(false);
   });
-  const node = PORTFOLIO_DATA.architecture.find(n => n.id === state.arch) || PORTFOLIO_DATA.architecture[0];
-  detail.innerHTML = `
-    <span class="tag">${node.tag}</span>
-    <h3>${node.title}</h3>
-    <p>${node.role}</p>
-    <div class="detail-grid">
-      <div><span>Inputs</span><strong>${node.inputs}</strong></div>
-      <div><span>Outputs</span><strong>${node.outputs}</strong></div>
-    </div>
-  `;
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 980) setOpen(false);
+  });
 }
 
 function setupReveal() {
   const items = qsa(".reveal");
   if (!("IntersectionObserver" in window)) {
-    items.forEach(i => i.classList.add("visible"));
+    items.forEach((item) => item.classList.add("visible"));
     return;
   }
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add("visible");
-        io.unobserve(e.target);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.12 });
-  items.forEach(i => io.observe(i));
+  items.forEach((item) => observer.observe(item));
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   renderMetrics();
   setupLens();
   renderArchitecture();
+  renderCases();
+  setupMobileNav();
   setupReveal();
 });

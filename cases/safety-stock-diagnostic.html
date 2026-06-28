@@ -3,64 +3,88 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Safety-Stock Diagnostic — Pavlo Malairov</title>
-  <meta name="description" content="Interactive case study on safety-stock root-cause diagnosis." />
+  <title>Safety-Stock Diagnostic - Pavlo Malairov, PMP</title>
+  <meta name="description" content="Root-cause diagnostic case study for process improvement and technical operations." />
   <link rel="stylesheet" href="../css/case-pages.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
-    <div class="shell nav-shell">
-      <a class="brand" href="../index.html">
+    <div class="shell command-bar">
+      <a class="brand" href="../index.html#top" aria-label="Pavlo Malairov portfolio home">
         <span class="brand-mark">PM</span>
-        <span class="brand-copy"><strong>Pavlo Malairov</strong><span>Operations & Implementation Project Manager</span></span>
+        <span class="brand-copy">
+          <strong>Pavlo Malairov / PMP</strong>
+          <span>Operations PM · Implementation · Technical Operations</span>
+        </span>
       </a>
-      <nav class="nav-links">
-        <a href="../index.html#scan">Scan</a>
-        <a href="../index.html#architecture">Architecture</a>
+      <nav class="nav-links" id="primaryNav" aria-label="Main navigation">
+        <a href="../index.html#fit">Fit</a>
+        <a href="../index.html#proof">Proof</a>
+        <a href="../index.html#architecture">System</a>
         <a href="../index.html#cases">Cases</a>
-        <a href="../index.html#diagnostic">Diagnostic</a>
+        <a href="../index.html#contact">Contact</a>
       </nav>
-      <a class="nav-cta" href="../assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
+      <div class="nav-actions">
+        <a class="button button-secondary desktop-only" href="../assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation menu" aria-controls="primaryNav" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
   <main id="main">
     
 <section class="case-hero">
   <div class="shell case-hero-grid">
-    <div class="case-hero-copy">
-      <span class="eyebrow">Diagnostic case</span>
+    <div class="card card-pad">
+      <span class="mono-label">Diagnostic case</span>
       <h1>Safety-Stock Diagnostic</h1>
-      <p>New SKUs disappeared from reorder review because several weak control layers interacted: formula behavior, extraction logic, classification logic, filters, workbook governance, and active macro version control.</p>
-      <div class="button-row"><a class="button button-primary" href="#lab">Open diagnostic lab</a><a class="button button-secondary" href="../index.html#cases">Back to cases</a></div>
+      <p>A root-cause case showing why new SKUs disappeared from review through interacting formula behavior, extraction logic, VBA classification, filters, workbook governance, and active macro version control.</p>
+      <div class="button-row"><a class="button button-primary" href="#lab">Open diagnostic lab</a><a class="button button-secondary" href="../assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Download resume</a></div>
     </div>
-    <aside class="proof-panel">
-      <span class="eyebrow">What this proves</span>
-      <h2>Root-cause diagnosis across data, workbook, and automation layers.</h2>
-      <p>This case demonstrates process-improvement depth: diagnosing why a system produces a bad outcome, then redesigning controls so the issue cannot silently recur.</p>
-      <div class="proof-metrics"><div><span>Root causes</span><strong>3+</strong></div><div><span>Layers</span><strong>Formula / PQ / VBA</strong></div><div><span>Fix</span><strong>NO-USAGE</strong></div><div><span>Control</span><strong>Dynamic headers</strong></div></div>
+    <aside class="card card-pad proof-panel">
+      <span class="mono-label">Proof anchor</span>
+      <h2>Root-cause analysis across data, workbook, and automation layers.</h2>
+      <p>The case shows process improvement depth: a bad outcome was traced through multiple weak controls, not blamed on one visible symptom.</p>
+      <div class="proof-grid"><div><span>Root causes</span><strong>3+</strong></div><div><span>Layers</span><strong>Formula / PQ / VBA</strong></div><div><span>Exception state</span><strong>NO-USAGE</strong></div><div><span>Control</span><strong>Dynamic headers</strong></div></div>
     </aside>
   </div>
 </section>
 <div class="shell case-layout">
-  <aside class="side-nav"><strong>Diagnostic path</strong><a href="#symptom">Symptom</a><a href="#lab">Failure chain</a><a href="#fix">Fix pattern</a><a href="#transfer">Transferability</a></aside>
+  <aside class="side-nav card"><strong>Case path</strong><a href="#summary">Summary</a><a href="#context">Context</a><a href="#problem">Problem</a><a href="#lab">Diagnostic lab</a><a href="#controls">Controls built</a><a href="#takeaway">Takeaway</a></aside>
   <div class="content">
-    <section id="symptom" class="content-card"><h2>The visible problem was a replenishment issue. The real issue was control failure.</h2><p>New SKUs with no usage history were treated as inactive or hidden. The system appeared stable because multiple silent failures reinforced each other.</p><div class="grid-3"><div class="mini-card"><span>Formula</span><strong>No usage history can collapse calculated safety stock.</strong><small>Near-zero output creates false confidence.</small></div><div class="mini-card"><span>Macro</span><strong>Zero usage was classified as DEAD.</strong><small>No explicit no-history state existed.</small></div><div class="mini-card"><span>Workbook</span><strong>Active logic was not always edited logic.</strong><small>Workbook-embedded code kept old behavior alive.</small></div></div></section>
-    <section id="lab" class="content-card dark"><h2>Interactive failure-chain lab</h2><p>Click each failure mode. Every text element in this dark lab uses light text for readable contrast.</p><div class="failure-grid">
-      <button data-failure="history" data-title="No usage history" data-detail="A new item can be required for service continuity even when historical draw is empty. Empty history should not equal dead demand."><span>01</span><strong>No usage history</strong></button>
-      <button data-failure="formula" data-title="Formula returns near-zero" data-detail="A statistical formula can output near-zero when history is absent or sparse, creating false confidence."><span>02</span><strong>Near-zero formula</strong></button>
-      <button data-failure="macro" data-title="Macro routes item to DEAD" data-detail="The VBA classification had no explicit no-history state, so zero usage could be routed into DEAD status."><span>03</span><strong>DEAD classification</strong></button>
-      <button data-failure="filter" data-title="Hardcoded AutoFilter hides items" data-detail="A hardcoded field number can silently hide valid items after a table structure shift."><span>04</span><strong>Hardcoded filter</strong></button>
-      <button data-failure="overwrite" data-title="Formula cells overwritten" data-detail="Static values replacing formulas freeze calculations, so corrected logic appears ineffective."><span>05</span><strong>Formula overwrite</strong></button>
-      <button data-failure="version" data-title="Wrong macro version active" data-detail="Workbook-embedded VBA can keep old behavior running while edited .bas files appear corrected."><span>06</span><strong>Wrong macro version</strong></button>
+    <section id="summary" class="content-card card card-pad"><span class="mono-label">Executive summary</span><h2>The issue was not one bad formula. It was a control-system failure.</h2><p>New SKUs with weak or no usage history were vulnerable to being treated as inactive or hidden. The operating risk came from several layers reinforcing the wrong outcome.</p></section>
+    <section id="context" class="content-card card card-pad"><h2>Operating context</h2><div class="grid-3"><div class="mini-card"><span>Tool layer</span><strong>Excel, Power Query, VBA.</strong><small>Inherited workbook logic carried hidden operating risk.</small></div><div class="mini-card"><span>Decision layer</span><strong>Safety-stock and review logic.</strong><small>The tool influenced replenishment planning decisions.</small></div><div class="mini-card"><span>Risk layer</span><strong>Silent exclusion of new items.</strong><small>Items could disappear before anyone reviewed them.</small></div></div></section>
+    <section id="problem" class="content-card card card-pad"><h2>Problem and constraints</h2><p>The visible issue looked like a replenishment problem. The actual problem was that formulas, classification logic, filters, overwritten cells, and active macro versions could interact and hide valid exceptions.</p><div class="grid-2"><div class="mini-card"><span>Constraint</span><strong>No usage history is not dead demand.</strong><small>New items needed exception handling.</small></div><div class="mini-card"><span>Constraint</span><strong>Worksheet formulas can be overwritten.</strong><small>Corrected logic may not run if cells are static values.</small></div><div class="mini-card"><span>Constraint</span><strong>Hardcoded filters are brittle.</strong><small>Column shifts can silently hide the wrong items.</small></div><div class="mini-card"><span>Constraint</span><strong>Macro version control matters.</strong><small>The edited code is not always the active code.</small></div></div></section>
+    <section id="lab" class="content-card card card-pad"><h2>Interactive failure-chain lab</h2><p>Click each failure mode to inspect how it affects operational visibility.</p><div class="failure-grid">
+      <button data-failure="01" data-title="No usage history" data-detail="A new item can be operationally required even when historical draw is empty. Empty history should trigger exception review, not dead-demand handling."><span>01</span><strong>No usage history</strong></button>
+      <button data-failure="02" data-title="Near-zero formula output" data-detail="A formula can output near-zero when history is absent or sparse, creating false confidence in the reorder review."><span>02</span><strong>Near-zero formula</strong></button>
+      <button data-failure="03" data-title="Macro routes item to DEAD" data-detail="The VBA classification had no explicit no-history state, so zero usage could be routed into an inactive category."><span>03</span><strong>DEAD classification</strong></button>
+      <button data-failure="04" data-title="Hardcoded AutoFilter hides items" data-detail="A hardcoded field number can silently hide valid items after a table structure shift."><span>04</span><strong>Hardcoded filter</strong></button>
+      <button data-failure="05" data-title="Formula cells overwritten" data-detail="Static values replacing formulas freeze calculations, so corrected logic appears ineffective."><span>05</span><strong>Formula overwrite</strong></button>
+      <button data-failure="06" data-title="Wrong macro version active" data-detail="Workbook-embedded VBA can keep old behavior running while edited files appear corrected."><span>06</span><strong>Wrong macro version</strong></button>
     </div><div class="failure-output" id="failureOutput" aria-live="polite"></div></section>
-    <section id="fix" class="content-card"><h2>Fix pattern</h2><div class="grid-2"><div class="mini-card"><span>Logic</span><strong>Rebuild fragile logic in Power Query.</strong><small>Less vulnerable to overwritten worksheet formulas.</small></div><div class="mini-card"><span>Classification</span><strong>Add NO-USAGE state.</strong><small>New items require exception review, not dead-demand routing.</small></div><div class="mini-card"><span>Resilience</span><strong>Use dynamic header lookup.</strong><small>Avoid silent filter failure from column shifts.</small></div><div class="mini-card"><span>Debugging</span><strong>Add diagnostic columns.</strong><small>Make intermediate logic visible during troubleshooting.</small></div></div></section>
-    <section id="transfer" class="content-card dark"><h2>Transferability</h2><p>This is relevant wherever operating decisions depend on fragile spreadsheets, inherited tools, partial automation, exception logic, and unclear ownership of data quality.</p><div class="pills"><span>Root-cause analysis</span><span>Data controls</span><span>Power Query</span><span>VBA governance</span><span>Exception logic</span></div></section>
+    <section id="controls" class="content-card card card-pad"><h2>Actions taken and controls built</h2><div class="grid-2"><div class="mini-card"><span>Power Query</span><strong>Move fragile logic out of worksheet formulas.</strong><small>Reduce exposure to overwritten cells.</small></div><div class="mini-card"><span>NO-USAGE</span><strong>Create explicit exception state.</strong><small>New items need review, not dead-demand routing.</small></div><div class="mini-card"><span>Dynamic headers</span><strong>Replace hardcoded field assumptions.</strong><small>Make logic resilient to column shifts.</small></div><div class="mini-card"><span>Diagnostics</span><strong>Add intermediate visibility columns.</strong><small>Make failure mode inspection possible.</small></div></div></section>
+    <section id="takeaway" class="content-card card card-pad"><h2>PM competencies demonstrated</h2><div class="pills"><span>Root-cause analysis</span><span>Process improvement</span><span>Data controls</span><span>Automation governance</span><span>Exception logic</span><span>Operational risk control</span></div><p><strong>Recruiter takeaway:</strong> this case supports Process Improvement PM and Technical Operations PM positioning by showing diagnostic thinking across system layers.</p></section>
   </div>
 </div>
 <div class="shell related"><a href="four-operating-loops.html"><span>Signature case</span><strong>Four Operating Loops</strong></a><a href="smartc-ai-delivery.html"><span>Technical delivery</span><strong>SmartC AI Delivery</strong></a><a href="../index.html#cases"><span>Back</span><strong>Case library</strong></a></div>
 
   </main>
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div>
+        <strong>Pavlo Malairov, PMP</strong>
+        <p>Technical operations and implementation portfolio for Operations PM, Technical Operations PM, Implementation PM, Process Improvement PM, and Service Delivery PM roles.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href="../assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Download portfolio resume</a>
+        <a href="https://www.linkedin.com/in/pavlo-malairov-b51840219" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
+        <a href="mailto:pmalairov@gmail.com">Discuss Operations / Implementation PM fit</a>
+      </nav>
+    </div>
+  </footer>
   <script src="../js/case-pages.js"></script>
 </body>
 </html>

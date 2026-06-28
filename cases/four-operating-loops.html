@@ -3,65 +3,157 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Four Operating Loops — Pavlo Malairov</title>
-  <meta name="description" content="Interactive case study on four operating loops." />
+  <title>Four Operating Loops - Pavlo Malairov, PMP</title>
+  <meta name="description" content="Operations control-system case study for aerospace manufacturing service delivery." />
   <link rel="stylesheet" href="../css/case-pages.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
-    <div class="shell nav-shell">
-      <a class="brand" href="../index.html">
+    <div class="shell command-bar">
+      <a class="brand" href="../index.html#top" aria-label="Pavlo Malairov portfolio home">
         <span class="brand-mark">PM</span>
-        <span class="brand-copy"><strong>Pavlo Malairov</strong><span>Operations & Implementation Project Manager</span></span>
+        <span class="brand-copy">
+          <strong>Pavlo Malairov / PMP</strong>
+          <span>Operations PM · Implementation · Technical Operations</span>
+        </span>
       </a>
-      <nav class="nav-links">
-        <a href="../index.html#scan">Scan</a>
-        <a href="../index.html#architecture">Architecture</a>
+      <nav class="nav-links" id="primaryNav" aria-label="Main navigation">
+        <a href="../index.html#fit">Fit</a>
+        <a href="../index.html#proof">Proof</a>
+        <a href="../index.html#architecture">System</a>
         <a href="../index.html#cases">Cases</a>
-        <a href="../index.html#diagnostic">Diagnostic</a>
+        <a href="../index.html#contact">Contact</a>
       </nav>
-      <a class="nav-cta" href="../assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
+      <div class="nav-actions">
+        <a class="button button-secondary desktop-only" href="../assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation menu" aria-controls="primaryNav" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
   <main id="main">
     
 <section class="case-hero">
   <div class="shell case-hero-grid">
-    <div class="case-hero-copy">
-      <span class="eyebrow">Signature case</span>
+    <div class="card card-pad">
+      <span class="mono-label">Signature operations case</span>
       <h1>Four Operating Loops</h1>
-      <p>A single-threaded consignment program was redesigned into four concurrent control loops so demand signal, slot economics, reorder logic, and billing-state accuracy could improve independently.</p>
-      <div class="button-row"><a class="button button-primary" href="#model">Open model</a><a class="button button-secondary" href="../index.html#cases">Back to cases</a></div>
+      <p>A production-critical industrial supply program was reframed as a technical operations control system: feedback, slot economics, JIT / safety-stock logic, billing-state tracking, vendor/spec governance, new SKU intake, and MWO shortage tracking.</p>
+      <div class="button-row">
+        <a class="button button-primary" href="#summary">Read executive summary</a>
+        <a class="button button-secondary" href="../assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Download resume</a>
+      </div>
     </div>
-    <aside class="proof-panel">
-      <span class="eyebrow">What this proves</span>
-      <h2>Process architecture under live operating constraints.</h2>
-      <p>This is the strongest evidence that the work was not inventory administration. It was a control-system build for a regulated technical service environment.</p>
-      <div class="proof-metrics"><div><span>System</span><strong>4 loops</strong></div><div><span>Signal scale</span><strong>60+ sources</strong></div><div><span>Planning effort</span><strong>5h → 30m</strong></div><div><span>Gap duration</span><strong>~16d → ~1w</strong></div></div>
+    <aside class="card card-pad proof-panel">
+      <span class="mono-label">Proof anchor</span>
+      <h2>Not inventory administration. Operating-system design under live service constraints.</h2>
+      <p>The case shows how fragmented signals became a managed service-delivery control model.</p>
+      <div class="proof-grid">
+        <div><span>Environment</span><strong>5 buildings</strong></div>
+        <div><span>Systems</span><strong>17 vending systems</strong></div>
+        <div><span>Scale</span><strong>1,500+ active SKUs</strong></div>
+        <div><span>Workflow</span><strong>5h -> 30m</strong></div>
+      </div>
     </aside>
   </div>
 </section>
 <div class="shell case-layout">
-  <aside class="side-nav"><strong>Case path</strong><a href="#problem">Problem</a><a href="#model">Interactive model</a><a href="#controls">Controls built</a><a href="#transfer">Transferability</a></aside>
+  <aside class="side-nav card">
+    <strong>Case path</strong>
+    <a href="#summary">Summary</a>
+    <a href="#context">Context</a>
+    <a href="#problem">Problem</a>
+    <a href="#model">Interactive model</a>
+    <a href="#controls">Controls built</a>
+    <a href="#outcomes">Outcomes</a>
+    <a href="#takeaway">Takeaway</a>
+  </aside>
   <div class="content">
-    <section id="problem" class="content-card"><h2>The issue was one overloaded attention path.</h2><p>Demand signals, physical capacity, vendor behavior, reorder logic, and billing-state tracking competed for the same operational attention. The fix was to split the work into clear loops with distinct inputs, outputs, and control logic.</p><div class="grid-3"><div class="mini-card"><span>Signal</span><strong>Floor friction appeared before formal shortage reports.</strong><small>Supervisors saw wrong, missing, unnecessary, or difficult-to-find items first.</small></div><div class="mini-card"><span>Capacity</span><strong>Vending and storage space were finite.</strong><small>Each item needed to earn its footprint.</small></div><div class="mini-card"><span>State</span><strong>Billing transitions needed control.</strong><small>First-batch/prepaid items needed clean transition to consignment.</small></div></div></section>
-    <section id="model" class="content-card dark"><h2>Interactive operating-loop model</h2><p>Click a loop to inspect what it controls. The 3D effect is intentionally subtle: depth, hover lift, and signal flow only.</p><div class="interactive-stage">
-      <svg class="stage-svg" viewBox="0 0 1000 620" aria-hidden="true"><path class="stage-wire" d="M500 104 C760 110, 860 260, 806 330 S630 520, 500 516 S194 410, 194 330 S270 110, 500 104"/><path class="stage-wire alt" d="M194 330 C355 245, 645 245, 806 330"/><circle class="stage-dot" r="5"><animateMotion dur="6s" repeatCount="indefinite" path="M500 104 C760 110, 860 260, 806 330 S630 520, 500 516 S194 410, 194 330 S270 110, 500 104"/></circle></svg>
-      <div class="stage-core">Operating<br>System<br>Core</div>
-      <button class="stage-node node-top" data-tag="Loop 01" data-title="Floor Supervisor Feedback" data-detail="Captures operational friction weekly and feeds SKU weeding, slot review, and shortage prevention."><span>Loop 01</span><strong>Floor Feedback</strong><small>Fastest demand signal.</small></button>
-      <button class="stage-node node-right" data-tag="Loop 02" data-title="Slot-Economics Audit" data-detail="Tests whether an item earns its physical footprint through draw behavior, service value, and capacity limits."><span>Loop 02</span><strong>Slot Economics</strong><small>Physical capacity control.</small></button>
-      <button class="stage-node node-bottom" data-tag="Loop 03" data-title="JIT / Safety-Stock Logic" data-detail="Tunes reorder timing against usage history, lead times, package size, MOQ, and no-history conditions."><span>Loop 03</span><strong>JIT Tuning</strong><small>Demand timing under constraints.</small></button>
-      <button class="stage-node node-left" data-tag="Loop 04" data-title="Billing-State Tracking" data-detail="Protects lifecycle-state accuracy through prepaid-to-consignment transition and support-team handoff."><span>Loop 04</span><strong>Billing State</strong><small>Lifecycle accuracy.</small></button>
-      <aside class="stage-detail" aria-live="polite"></aside>
-    </div></section>
-    <section id="controls" class="content-card"><h2>Controls built</h2><div class="grid-2"><div class="mini-card"><span>Before</span><strong>Single-threaded operational attention.</strong><small>Issues surfaced as complaints, shortages, or manual exceptions.</small></div><div class="mini-card"><span>After</span><strong>Concurrent loops with defined signal paths.</strong><small>Each failure mode had a clearer input and response path.</small></div><div class="mini-card"><span>Governance</span><strong>Spec and vendor controls supported the loops.</strong><small>Eligibility gates reduced unacceptable substitutions.</small></div><div class="mini-card"><span>Tracking</span><strong>MWO shortage events became measurable.</strong><small>Complaints became traceable events tied to work orders and closure timing.</small></div></div></section>
-    <section id="transfer" class="content-card dark"><h2>Transferability</h2><p>The pattern transfers to Operations PM, Implementation PM, Process Improvement, Service Delivery, MRO, aerospace manufacturing, regulated procurement, and technical operations.</p><div class="pills"><span>Operating model design</span><span>Control loops</span><span>Exception management</span><span>Stakeholder signal capture</span><span>Execution visibility</span></div></section>
+    <section id="summary" class="content-card card card-pad">
+      <span class="mono-label">Executive summary</span>
+      <h2>A live service program needed separate control loops, not more manual follow-up.</h2>
+      <p>The work supported a production-critical industrial supply program in an aerospace manufacturing environment. The operating challenge was not simply replenishment; it was weak visibility across demand signal, capacity, reorder logic, lifecycle state, supplier constraints, and issue escalation.</p>
+    </section>
+    <section id="context" class="content-card card card-pad">
+      <h2>Operating context</h2>
+      <div class="grid-3">
+        <div class="mini-card"><span>Environment</span><strong>Aerospace manufacturing service delivery.</strong><small>Embedded technical operations support inside a regulated production environment.</small></div>
+        <div class="mini-card"><span>Program scale</span><strong>5 buildings, 17 vending systems, 1,500+ active SKUs.</strong><small>High enough complexity to require process controls and operating visibility.</small></div>
+        <div class="mini-card"><span>Stakeholders</span><strong>Plant users, supervisors, suppliers, receiving, and internal support teams.</strong><small>Cross-functional coordination was part of the operating load.</small></div>
+      </div>
+    </section>
+    <section id="problem" class="content-card card card-pad">
+      <h2>Problem and constraints</h2>
+      <p>Signals were fragmented. Floor issues, service gaps, supplier behavior, lead-time risk, and billing-state transitions appeared as separate problems, but they affected the same production-critical service model.</p>
+      <div class="grid-2">
+        <div class="mini-card"><span>Constraint</span><strong>Physical capacity was limited.</strong><small>Vending and storage positions needed slot-economics review.</small></div>
+        <div class="mini-card"><span>Constraint</span><strong>Substitution was not purely commercial.</strong><small>Vendor/spec governance had to respect customer and OEM constraints.</small></div>
+        <div class="mini-card"><span>Constraint</span><strong>New items had weak history.</strong><small>No-history items needed exception logic, not automatic dead-demand treatment.</small></div>
+        <div class="mini-card"><span>Constraint</span><strong>Issues needed closure visibility.</strong><small>MWO shortage events required traceable escalation and follow-up.</small></div>
+      </div>
+    </section>
+    <section id="model" class="content-card card card-pad">
+      <h2>Interactive operating model</h2>
+      <p>Click a node to inspect the loop. The interaction shows the control-system logic behind the work.</p>
+      <div class="stage">
+        <svg class="stage-svg" viewBox="0 0 1000 620" aria-hidden="true"><path d="M500 92 C770 96 890 260 825 335 C760 493 615 528 500 528 C385 528 240 493 175 335 C110 260 230 96 500 92"/><path d="M170 158 C320 248 680 248 830 158"/><path d="M190 470 C350 365 650 365 810 470"/></svg>
+        <div class="stage-core">Control<br>System</div>
+        <button class="stage-node n1" data-tag="Loop 01" data-title="Floor Supervisor Feedback" data-detail="Captures operational friction before it becomes formal shortage escalation. Converts floor signal into SKU review and service-delivery visibility."><span>Loop 01</span><strong>Floor Feedback</strong></button>
+        <button class="stage-node n2" data-tag="Loop 02" data-title="Slot-Economics Audit" data-detail="Treats vending/storage capacity as a control point. Items need to justify physical footprint against service value and usage behavior."><span>Loop 02</span><strong>Slot Economics</strong></button>
+        <button class="stage-node n3" data-tag="Loop 03" data-title="JIT / Safety-Stock Logic" data-detail="Ties replenishment planning to usage, lead time, package size, MOQ, no-history exceptions, and service-risk visibility."><span>Loop 03</span><strong>JIT Logic</strong></button>
+        <button class="stage-node n4" data-tag="Loop 04" data-title="Billing-State Tracking" data-detail="Controls transition from first-batch/prepaid state into standard consignment billing to avoid ambiguity and duplicate handling."><span>Loop 04</span><strong>Billing State</strong></button>
+        <button class="stage-node n5" data-tag="Layer" data-title="Vendor / Spec Governance" data-detail="Separates available products from approved substitutions through customer/OEM-controlled specification gates."><span>Layer</span><strong>Spec Governance</strong></button>
+        <button class="stage-node n6" data-tag="Gate" data-title="New SKU Intake" data-detail="Keeps uncontrolled items out of the operating system until need, spec constraints, and initial state are clear."><span>Gate</span><strong>New SKU Intake</strong></button>
+        <button class="stage-node n7" data-tag="Layer" data-title="MWO Shortage Tracking" data-detail="Turns shortage complaints into traceable events tied to item, work order, vendor state, delay reason, and closure timing."><span>Layer</span><strong>MWO Tracking</strong></button>
+        <aside class="stage-detail" aria-live="polite"></aside>
+      </div>
+    </section>
+    <section id="controls" class="content-card card card-pad">
+      <h2>Actions taken and controls built</h2>
+      <div class="grid-3">
+        <div class="mini-card"><span>Data foundation</span><strong>Master data and searchable cross-reference logic.</strong><small>Built structure for catalog clarity and program control.</small></div>
+        <div class="mini-card"><span>Workflow</span><strong>Exception-based replenishment planning.</strong><small>Reduced manual review load from about 5 hours to about 30 minutes.</small></div>
+        <div class="mini-card"><span>Escalation</span><strong>MWO shortage tracking.</strong><small>Converted complaints into trackable events and closure visibility.</small></div>
+      </div>
+    </section>
+    <section id="outcomes" class="content-card card card-pad">
+      <h2>Outcomes and metrics</h2>
+      <div class="proof-grid">
+        <div><span>Catalog foundation</span><strong>~400 -> 1,800+ tracked items</strong></div>
+        <div><span>Active scale</span><strong>1,500+ active SKUs</strong></div>
+        <div><span>Ordering review</span><strong>~5h -> ~30m</strong></div>
+        <div><span>Critical gap duration</span><strong>~16d -> ~1w</strong></div>
+      </div>
+    </section>
+    <section id="takeaway" class="content-card card card-pad">
+      <h2>PM competencies demonstrated</h2>
+      <div class="pills"><span>Operating control model</span><span>Stakeholder coordination</span><span>Process controls</span><span>Issue escalation</span><span>Operational reporting</span><span>Service-delivery visibility</span></div>
+      <p><strong>Recruiter takeaway:</strong> this case positions the experience as technical operations support, implementation discipline, and process-improvement work - not warehouse or inventory-clerk activity.</p>
+    </section>
   </div>
 </div>
-<div class="shell related"><a href="smartc-ai-delivery.html"><span>Next case</span><strong>SmartC AI Delivery</strong></a><a href="safety-stock-diagnostic.html"><span>Diagnostic case</span><strong>Safety-Stock Diagnostic</strong></a><a href="../index.html#cases"><span>Back</span><strong>Case library</strong></a></div>
+<div class="shell related">
+  <a href="smartc-ai-delivery.html"><span>Next case</span><strong>SmartC AI Delivery</strong></a>
+  <a href="safety-stock-diagnostic.html"><span>Diagnostic case</span><strong>Safety-Stock Diagnostic</strong></a>
+  <a href="../index.html#cases"><span>Back</span><strong>Case library</strong></a>
+</div>
 
   </main>
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div>
+        <strong>Pavlo Malairov, PMP</strong>
+        <p>Technical operations and implementation portfolio for Operations PM, Technical Operations PM, Implementation PM, Process Improvement PM, and Service Delivery PM roles.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href="../assets/Pavlo_Malairov_Resume.pdf" target="_blank" rel="noreferrer">Download portfolio resume</a>
+        <a href="https://www.linkedin.com/in/pavlo-malairov-b51840219" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
+        <a href="mailto:pmalairov@gmail.com">Discuss Operations / Implementation PM fit</a>
+      </nav>
+    </div>
+  </footer>
   <script src="../js/case-pages.js"></script>
 </body>
 </html>
