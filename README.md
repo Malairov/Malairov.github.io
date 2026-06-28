@@ -1,3 +1,12 @@
-# v35 proof hiring-copy fix
+# v36 four loops case fix — Pavlo Malairov Portfolio
 
-Clean v34 rebuild with homepage proof cards rewritten to connect each metric to operating context and PM hiring relevance.
+Clean recruiter-facing GitHub Pages portfolio.
+
+This version specifically fixes the Four Operating Loops case page:
+- removes defensive wording;
+- removes decorative 3D / diagram language;
+- uses readable operating-control rows;
+- includes four primary loops plus two supporting controls;
+- removes bottom related-card blocks;
+- keeps the light visual system;
+- updates cache-busting CSS/JS query strings to v36.
