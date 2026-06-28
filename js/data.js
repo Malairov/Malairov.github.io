@@ -172,72 +172,120 @@ window.PORTFOLIO_DATA = {
   ],
 
   smartc: {
-    overview: "AI-enabled smart-city / intelligent-transportation delivery framed as project execution architecture: recovery context, redesign coordination, QA readiness, pilot validation, stakeholder governance, and commercial-scale transition.",
+    overview: "AI-enabled smart-city / intelligent-transportation delivery framed as a visible delivery system: recovery context, redesign coordination, governance, validation discipline, pilot readiness, and controlled transition toward scale.",
+    headline: "From unreliable field behavior to a governed delivery path with validated readiness and commercial-scale credibility.",
+    highlights: [
+      "AI-enabled pedestrian-safety delivery",
+      "Sponsor-controlled scope / change governance",
+      "Pilot validation across distinct operating conditions",
+      "Commercial-scale credibility anchored at 460+ installed locations"
+    ],
     metrics: [
       { value: "460+", label: "installed locations", note: "Commercial scale after pilot-stage turnaround and readiness work." },
       { value: "~7 → ~17", label: "contributors by stage", note: "Cross-functional delivery capacity scaled through testing and integration." },
       { value: "30–40d", label: "iteration cycles", note: "Adaptive delivery rhythm used to control MVP scope and validation work." },
       { value: "3", label: "pilot condition tracks", note: "Common MVP baseline tested across distinct operating conditions." }
     ],
+    evidence: [
+      { label: "Delivery model", value: "Adaptive cycles", note: "Short iterative delivery windows with visible scope and readiness control." },
+      { label: "Control style", value: "Sponsor-governed", note: "RAID, milestone status, MoSCoW, issue tracking, and change visibility kept ambiguity controlled." },
+      { label: "What changed", value: "Recovery → readiness", note: "The work moved from field-reliability concern into a controlled, pilot-ready execution path." }
+    ],
     phases: [
       {
         tag: "Recovery context",
         title: "Prior field-reliability gaps",
-        subtitle: "The project started from a product that needed controlled recovery, not a clean-sheet demo.",
-        detail: "The delivery challenge was to move from unreliable field behavior into a redesigned, testable, sponsor-controlled product path without overstating technical certainty.",
+        subtitle: "The story starts with a product that needed recovery discipline, not hype.",
+        detail: "The challenge was to convert unreliable field behavior into a sponsor-visible recovery path: clarify what was failing, protect credibility, and create a delivery frame that could support redesign, validation, and future deployment.",
+        axis: "Signal",
+        control: "Stabilize direction before scaling assumptions.",
+        outcome: "A visible recovery context and controlled next-step plan.",
+        risk: "Unclear failure boundaries could have led to random fixes and weak sponsor trust.",
+        outputs: ["recovery framing", "risk visibility", "re-baselined direction"],
+        controls: ["problem framing", "sponsor updates", "execution reset"],
         proof: "Shows recovery planning and execution under ambiguity.",
         links: ["risk control", "scope reset", "stakeholder alignment"]
       },
       {
         tag: "Redesign scope",
         title: "Computer-vision pedestrian safety system",
-        subtitle: "Hardware, software, computer-vision detection, alerting, and field integration had to move together.",
-        detail: "The work was coordinated as a multi-component technical delivery effort: detection logic, physical components, integration readiness, test feedback, and deployment preparation.",
+        subtitle: "Hardware, software, detection logic, and field integration had to move together.",
+        detail: "The work was coordinated as a multi-component delivery effort: physical components, software behaviors, computer-vision detection, integration readiness, field-installation constraints, and test feedback had to converge into one coherent path.",
+        axis: "Control",
+        control: "Keep interdependent workstreams aligned without pretending they are independent.",
+        outcome: "A coordinated redesign path instead of disconnected technical effort.",
+        risk: "Any single-track view would hide dependency failures between hardware, software, and field deployment.",
+        outputs: ["dependency mapping", "integration visibility", "delivery alignment"],
+        controls: ["cross-functional coordination", "milestone logic", "readiness checkpoints"],
         proof: "Shows cross-functional technical coordination without claiming engineering authorship.",
         links: ["hardware", "software", "integration"]
       },
       {
         tag: "Governance",
         title: "Sponsor-controlled change flow",
-        subtitle: "Scope, risk, schedule, and change decisions were controlled through structured delivery artifacts.",
-        detail: "RAID logs, milestone trackers, MoSCoW prioritization, readiness checks, issue tracking, and change-control records kept technical ambiguity visible to sponsors and delivery contributors.",
+        subtitle: "Scope, risk, schedule, and decisions were kept visible through structured PM controls.",
+        detail: "RAID logs, milestone trackers, MoSCoW prioritization, issue tracking, readiness checks, and change visibility helped maintain control over technical ambiguity. This was governance as an operating mechanism, not as paperwork.",
+        axis: "Governance",
+        control: "Translate ambiguity into decision-ready sponsor visibility.",
+        outcome: "A disciplined decision flow instead of ad-hoc coordination.",
+        risk: "Without this layer, technical work could drift faster than sponsor understanding.",
+        outputs: ["decision visibility", "scope discipline", "status transparency"],
+        controls: ["RAID", "MoSCoW", "milestones", "change records"],
         proof: "Shows PM governance, not ad-hoc coordination.",
         links: ["RAID", "MoSCoW", "CCB"]
       },
       {
         tag: "Pilot readiness",
         title: "QA, validation, and operating-condition testing",
-        subtitle: "A common MVP baseline was tested through distinct conditions rather than treated as one perfect lab scenario.",
-        detail: "Testing and readiness work translated field constraints into validation tasks, defect visibility, acceptance logic, and release discipline.",
+        subtitle: "One MVP baseline had to survive different operating conditions, not just a lab scenario.",
+        detail: "Testing and readiness work turned field constraints into validation tasks, defect visibility, acceptance logic, and release discipline. The key was controlled learning: what still fails, why, and whether it is ready to move.",
+        axis: "Validation",
+        control: "Make readiness evidence-based rather than assumed.",
+        outcome: "Pilot readiness grounded in visible QA and acceptance logic.",
+        risk: "A weak validation layer would make deployment look ready before it truly was.",
+        outputs: ["validation evidence", "defect visibility", "acceptance readiness"],
+        controls: ["QA cadence", "test feedback", "release discipline"],
         proof: "Shows readiness thinking and controlled validation.",
         links: ["QA", "pilot", "field constraints"]
       },
       {
         tag: "Dual-track delivery",
         title: "Legacy support + next-generation product path",
-        subtitle: "The old system had to remain managed while the redesigned product moved toward pilot and handoff.",
-        detail: "Delivery was coordinated as parallel workstreams: maintain service continuity, control next-generation dependencies, manage handoffs, and keep sponsor decisions grounded in visible status.",
+        subtitle: "The old system still had to be managed while the redesigned path moved forward.",
+        detail: "Delivery operated in parallel workstreams: maintain service continuity, manage next-generation dependencies, control handoffs, and ensure sponsors always saw what was legacy support versus forward-looking development.",
+        axis: "Execution",
+        control: "Protect live obligations while moving the future path forward.",
+        outcome: "Transition discipline under live-system constraints.",
+        risk: "Without separation and visibility, legacy drag could swallow the next-generation path.",
+        outputs: ["parallel workstream control", "handoff readiness", "transition visibility"],
+        controls: ["live-support tracking", "handoff planning", "dependency control"],
         proof: "Shows transition management under live-system constraints.",
         links: ["legacy", "next-gen", "handoff"]
       },
       {
         tag: "Scale outcome",
         title: "Commercial transition to 460+ installed locations",
-        subtitle: "The result is framed conservatively: delivery moved through pilot readiness toward a product later deployed at scale.",
-        detail: "The portfolio uses 460+ installed locations as the verified public-scale anchor while keeping exact website references and sensitive details out of the page.",
+        subtitle: "The portfolio uses a conservative public-scale anchor while keeping sensitive details out.",
+        detail: "The result is framed conservatively: the work moved through pilot readiness and transition support toward a product later deployed at 460+ locations. This demonstrates implementation credibility at scale without overstating technical authorship.",
+        axis: "Evidence",
+        control: "Use scale as evidence of delivery credibility, not hype.",
+        outcome: "A defensible proof point for implementation at commercial scale.",
+        risk: "Overclaiming scale would damage credibility; under-explaining it would waste a strong proof point.",
+        outputs: ["scale anchor", "commercial credibility", "implementation proof"],
+        controls: ["conservative framing", "evidence discipline", "public-safe narrative"],
         proof: "Shows implementation credibility at scale.",
         links: ["460+", "scale", "transition"]
       }
     ],
     tracks: [
-      { title: "Hardware", body: "Physical components, field constraints, installation readiness, and integration dependencies." },
-      { title: "Computer Vision", body: "Detection behavior, validation feedback, model-performance visibility, and acceptance logic." },
-      { title: "QA / Testing", body: "Readiness checkpoints, defect visibility, pilot validation, and release discipline." },
-      { title: "Integration", body: "Hardware-software dependency mapping, field configuration, and handoff coordination." },
-      { title: "Governance", body: "RAID, milestone tracking, MoSCoW prioritization, CCB-style change control, and sponsor updates." },
-      { title: "Deployment", body: "Pilot deployment coordination, operating-condition readiness, transition planning, and stabilization." }
+      { title: "Hardware", body: "Physical components, installation constraints, power/environment exposure, and deployment readiness.", tools: ["component constraints", "installation planning", "field tolerance"] },
+      { title: "Computer Vision", body: "Detection behavior, model-feedback visibility, scenario validation, and readiness to support real-world operating conditions.", tools: ["detection logic", "performance visibility", "acceptance logic"] },
+      { title: "QA / Testing", body: "Readiness checkpoints, defect visibility, scenario-based testing, and release discipline across pilot validation.", tools: ["readiness checks", "test evidence", "release control"] },
+      { title: "Integration", body: "Hardware-software dependency mapping, field configuration, and cross-team handoff coordination.", tools: ["dependency map", "configuration", "handoff"] },
+      { title: "Governance", body: "RAID, milestone tracking, MoSCoW prioritization, structured sponsor updates, and change-control visibility.", tools: ["RAID", "milestones", "MoSCoW", "CCB logic"] },
+      { title: "Deployment", body: "Pilot deployment coordination, operating-condition readiness, transition planning, and stabilization support.", tools: ["pilot coordination", "readiness", "stabilization"] }
     ],
-    artifacts: ["RAID logs", "Milestone trackers", "MoSCoW scope control", "Readiness checklists", "Issue trackers", "Sponsor updates", "Pilot handoff notes"]
+    artifacts: ["RAID logs", "Milestone trackers", "MoSCoW scope control", "Readiness checklists", "Issue trackers", "Sponsor updates", "Pilot handoff notes" ]
   },
   diagnostic: [
     {

@@ -7,6 +7,9 @@ const state = {
   filter: 'All',
   diagnostic: new Set(),
   caseFocus: null,
+  smartcPhase: 0,
+  smartcTrack: 0,
+  smartcReplayTimer: null,
 };
 
 function renderHeroMetrics() {
@@ -139,38 +142,75 @@ function caseWireSvg() {
 
 function smartcWireSvg() {
   return `
-    <svg class="smartc-wires" viewBox="0 0 1100 360" preserveAspectRatio="none" aria-hidden="true">
+    <svg class="smartc-wires" viewBox="0 0 1280 460" preserveAspectRatio="none" aria-hidden="true">
       <defs>
         <linearGradient id="smartcWireGrad" x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0%" stop-color="#6ee7ff" />
-          <stop offset="50%" stop-color="#4f8cff" />
-          <stop offset="100%" stop-color="#ffb454" />
+          <stop offset="0%" stop-color="rgba(255,181,84,.18)" />
+          <stop offset="50%" stop-color="rgba(110,231,255,.72)" />
+          <stop offset="100%" stop-color="rgba(81,129,255,.18)" />
         </linearGradient>
       </defs>
-      <path class="smartc-wire main" d="M 55 178 C 205 58, 360 52, 512 172 S 810 300, 1040 162" />
-      <path class="smartc-wire secondary" d="M 90 270 C 260 340, 430 285, 540 210 S 760 40, 1010 92" />
-      <path class="smartc-wire vertical" d="M 550 30 C 510 130, 595 220, 550 330" />
-      <circle class="smartc-pulse" r="5"><animateMotion dur="7.2s" repeatCount="indefinite" path="M 55 178 C 205 58, 360 52, 512 172 S 810 300, 1040 162" /></circle>
-      <circle class="smartc-pulse amber" r="4"><animateMotion dur="6.4s" repeatCount="indefinite" begin="1.1s" path="M 90 270 C 260 340, 430 285, 540 210 S 760 40, 1010 92" /></circle>
-      <circle class="smartc-pulse cyan" r="4"><animateMotion dur="5.6s" repeatCount="indefinite" begin=".55s" path="M 550 30 C 510 130, 595 220, 550 330" /></circle>
+      <path class="smartc-wire main" d="M 78 242 C 210 84, 390 72, 548 180 S 880 362, 1198 214" />
+      <path class="smartc-wire secondary" d="M 120 340 C 320 414, 470 354, 612 242 S 868 38, 1170 126" />
+      <path class="smartc-wire tertiary" d="M 116 132 C 300 188, 470 222, 636 110 S 920 84, 1180 276" />
+      <circle class="smartc-pulse" r="5"><animateMotion dur="6.5s" repeatCount="indefinite" path="M 78 242 C 210 84, 390 72, 548 180 S 880 362, 1198 214" /></circle>
+      <circle class="smartc-pulse amber" r="4.5"><animateMotion dur="5.4s" repeatCount="indefinite" begin=".8s" path="M 120 340 C 320 414, 470 354, 612 242 S 868 38, 1170 126" /></circle>
+      <circle class="smartc-pulse cyan" r="4"><animateMotion dur="4.8s" repeatCount="indefinite" begin="1.4s" path="M 116 132 C 300 188, 470 222, 636 110 S 920 84, 1180 276" /></circle>
     </svg>`;
 }
 
 function renderSmartC() {
   if (!PORTFOLIO_DATA.smartc) return;
   const smartc = PORTFOLIO_DATA.smartc;
+  const commandRoot = qs('#smartcCommand');
   const flowRoot = qs('#smartcFlow');
   const detailRoot = qs('#smartcDetail');
   const tracksRoot = qs('#smartcTracks');
   const artifactsRoot = qs('#smartcArtifacts');
-  if (!flowRoot || !detailRoot || !tracksRoot || !artifactsRoot) return;
+  const evidenceRoot = qs('#smartcEvidence');
+  if (!flowRoot || !detailRoot || !tracksRoot || !artifactsRoot || !commandRoot || !evidenceRoot) return;
+
+  const active = smartc.phases[state.smartcPhase] || smartc.phases[0];
+  const currentMetric = smartc.metrics[state.smartcPhase % smartc.metrics.length];
+
+  commandRoot.innerHTML = `
+    <div class="smartc-command-head">
+      <span class="smartc-overline">Delivery command surface</span>
+      <strong>SmartC implementation architecture</strong>
+      <p>${smartc.headline}</p>
+    </div>
+    <div class="smartc-command-core">
+      <div class="smartc-core-rings" aria-hidden="true">
+        <span class="core-ring ring-1"></span>
+        <span class="core-ring ring-2"></span>
+        <span class="core-ring ring-3"></span>
+        <span class="core-node">DELIVERY<br>CORE</span>
+        <span class="core-signal sig-a"></span>
+        <span class="core-signal sig-b"></span>
+        <span class="core-signal sig-c"></span>
+      </div>
+      <div class="smartc-command-stack">
+        <div class="smartc-chip-row">${smartc.highlights.map(h => `<span class="smartc-signal-chip">${h}</span>`).join('')}</div>
+        <div class="smartc-command-focus">
+          <span>Phase spotlight</span>
+          <strong>${active.title}</strong>
+          <small>${active.axis} · ${currentMetric.value} ${currentMetric.label}</small>
+        </div>
+      </div>
+    </div>
+    <div class="smartc-command-foot">
+      <article><span>Current axis</span><strong>${active.axis}</strong></article>
+      <article><span>Control</span><strong>${active.control}</strong></article>
+      <article><span>Outcome</span><strong>${active.outcome}</strong></article>
+    </div>`;
 
   flowRoot.innerHTML = smartcWireSvg() + smartc.phases.map((phase, idx) => `
-    <button class="smartc-phase ${idx === state.smartcPhase ? 'active' : ''}" type="button" data-smartc-phase="${idx}" aria-pressed="${idx === state.smartcPhase}">
+    <button class="smartc-phase phase-${idx + 1} ${idx === state.smartcPhase ? 'active' : ''}" type="button" data-smartc-phase="${idx}" aria-pressed="${idx === state.smartcPhase}">
       <span class="smartc-phase-index">0${idx + 1}</span>
       <span class="smartc-phase-tag">${phase.tag}</span>
       <strong>${phase.title}</strong>
       <small>${phase.subtitle}</small>
+      <span class="smartc-phase-axis">${phase.axis}</span>
     </button>
   `).join('');
 
@@ -179,22 +219,34 @@ function renderSmartC() {
     renderSmartC();
   }));
 
-  const active = smartc.phases[state.smartcPhase] || smartc.phases[0];
   detailRoot.innerHTML = `
     <div class="smartc-detail-head">
       <span>${active.tag}</span>
       <strong>${active.title}</strong>
+      <p>${active.detail}</p>
     </div>
-    <p>${active.detail}</p>
     <div class="smartc-proof"><span>What this proves</span><strong>${active.proof}</strong></div>
     <div class="smartc-link-grid">${active.links.map(link => `<span>${link}</span>`).join('')}</div>
-    <div class="smartc-metrics">${smartc.metrics.map(m => `<article><strong>${m.value}</strong><span>${m.label}</span><small>${m.note}</small></article>`).join('')}</div>
-  `;
+    <div class="smartc-detail-grid">
+      <article class="smartc-detail-card"><span>Control</span><strong>${active.control}</strong><small>${active.risk}</small></article>
+      <article class="smartc-detail-card"><span>Outcome</span><strong>${active.outcome}</strong><small>Phase axis: ${active.axis}</small></article>
+      <article class="smartc-detail-card"><span>Outputs</span><ul>${active.outputs.map(item => `<li>${item}</li>`).join('')}</ul></article>
+      <article class="smartc-detail-card"><span>Controls</span><ul>${active.controls.map(item => `<li>${item}</li>`).join('')}</ul></article>
+    </div>
+    <div class="smartc-nav-controls">
+      <button class="smartc-nav" id="smartcPrev" ${state.smartcPhase === 0 ? 'disabled' : ''}>&larr; Previous phase</button>
+      <button class="smartc-nav" id="smartcNext" ${state.smartcPhase === smartc.phases.length - 1 ? 'disabled' : ''}>Next phase &rarr;</button>
+    </div>`;
+  const smartcPrev = qs('#smartcPrev');
+  const smartcNext = qs('#smartcNext');
+  if (smartcPrev) smartcPrev.addEventListener('click', () => { if (state.smartcPhase > 0) { state.smartcPhase--; renderSmartC(); }});
+  if (smartcNext) smartcNext.addEventListener('click', () => { if (state.smartcPhase < smartc.phases.length - 1) { state.smartcPhase++; renderSmartC(); }});
 
   tracksRoot.innerHTML = `
     <div class="smartc-panel-title">Workstream console</div>
     <div class="smartc-track-tabs">${smartc.tracks.map((t, idx) => `<button type="button" class="smartc-track ${idx === state.smartcTrack ? 'active' : ''}" data-smartc-track="${idx}">${t.title}</button>`).join('')}</div>
     <p class="smartc-track-body">${smartc.tracks[state.smartcTrack].body}</p>
+    <div class="smartc-track-tools">${smartc.tracks[state.smartcTrack].tools.map(tool => `<span>${tool}</span>`).join('')}</div>
   `;
   qsa('[data-smartc-track]', tracksRoot).forEach(btn => btn.addEventListener('click', () => {
     state.smartcTrack = Number(btn.dataset.smartcTrack);
@@ -204,6 +256,13 @@ function renderSmartC() {
   artifactsRoot.innerHTML = `
     <div class="smartc-panel-title">Delivery controls</div>
     <div class="smartc-artifact-grid">${smartc.artifacts.map(a => `<span>${a}</span>`).join('')}</div>
+    <div class="smartc-artifact-note">The delivery story is framed as visible control: what changed, what was governed, what was validated, and what became credible at scale.</div>
+  `;
+
+  evidenceRoot.innerHTML = `
+    <div class="smartc-panel-title">Evidence stack</div>
+    <div class="smartc-evidence-grid">${smartc.evidence.map(item => `<article><span>${item.label}</span><strong>${item.value}</strong><small>${item.note}</small></article>`).join('')}</div>
+    <div class="smartc-metrics">${smartc.metrics.map(m => `<article><strong>${m.value}</strong><span>${m.label}</span><small>${m.note}</small></article>`).join('')}</div>
   `;
 }
 
@@ -222,7 +281,7 @@ function replaySmartC() {
     }
     state.smartcPhase = i;
     renderSmartC();
-  }, 850);
+  }, 1000);
 }
 
 function renderFilters() {
