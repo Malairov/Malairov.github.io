@@ -1,119 +1,86 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>SmartC Technical Delivery — Pavlo Malairov, PMP</title>
-<meta name="description" content="Implementation governance case study for AI-enabled transportation technology delivery, recovery, QA readiness, pilot logic, and scale transition.">
-<link rel="stylesheet" href="../css/case-pages.css?v=53">
+<meta content="Implementation governance case study for AI-enabled transportation technology delivery, recovery, QA readiness, pilot logic, and scale transition." name="description"/>
+<link href="../css/case-pages.css?v=54" rel="stylesheet"/>
 </head>
 <body class="smartc-case">
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header"><div class="shell command-bar"><a aria-label="Pavlo Malairov portfolio home" class="brand" href="../index.html#top"><span class="brand-mark">PM</span><span class="brand-copy"><strong>Pavlo Malairov / PMP</strong><span>Operations PM · Implementation · Technical Operations</span></span></a><nav aria-label="Main navigation" class="nav-links" id="primaryNav"><a href="../index.html#fit">Fit</a><a href="../index.html#proof">Proof</a><a href="../index.html#model">Model</a><a href="../index.html#cases">Cases</a><a href="../index.html#contact">Contact</a></nav><div class="nav-actions"><a class="button button-secondary desktop-only" href="https://www.linkedin.com/in/pavlo-malairov-b51840219" rel="noreferrer" target="_blank">LinkedIn</a><button aria-controls="primaryNav" aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle" id="menuToggle" type="button"><span></span><span></span><span></span></button></div></div></header>
 <main id="main">
 <section class="case-hero">
-  <div class="shell case-hero-grid">
-    <div class="card card-pad">
-      <span class="label">Technical delivery case</span>
-      <h1>SmartC technical delivery and scale transition.</h1>
-      <p>How I led implementation governance across recovery, technical workstreams, sponsor visibility, QA readiness, pilot logic, and commercial-scale transition.</p>
-      <div class="button-row"><a class="button button-primary" href="#summary">Read case</a></div></div>
-    <aside class="card card-pad">
-      <span class="label">Proof anchor</span>
-      <h2>Delivery governance across technical workstreams.</h2>
-      <div class="proof-grid">
-        <article class="proof-card"><span>Scale anchor</span><strong>460+ deployed locations</strong></article>
-        <article class="proof-card"><span>Team scale</span><strong>~7 → ~17 contributors</strong></article>
-        <article class="proof-card"><span>Delivery rhythm</span><strong>30–40 day cycles</strong></article>
-        <article class="proof-card"><span>Pilot model</span><strong>3 pilot tracks</strong></article></div>
-    </aside></div>
+<div class="shell case-hero-grid">
+<div class="card card-pad">
+<span class="label">Technical delivery case</span>
+<h1>SmartC technical delivery and scale transition.</h1>
+<p>How I led implementation governance across recovery, technical workstreams, sponsor visibility, QA readiness, pilot logic, and commercial-scale transition.</p>
+<div class="button-row"><a class="button button-primary" href="#summary">Read case</a></div></div>
+<aside class="card card-pad">
+<span class="label">Proof anchor</span>
+<h2>Technical implementation governance in a real Smart City / ITS product environment.</h2>
+<div class="proof-grid"><article class="proof-card"><span>Company scale evidence</span><strong>490 implemented projects</strong><p>Presented as SmartC product/company scale, not my personal delivery claim.</p></article><article class="proof-card"><span>Deployment footprint</span><strong>28 regions / 57 cities</strong><p>Public SmartC materials describe a broad deployment environment.</p></article><article class="proof-card"><span>Technical IP</span><strong>5 registered patents</strong><p>Useful context for product maturity and technical delivery complexity.</p></article><article class="proof-card"><span>Road-tech portfolio</span><strong>6 road-sector systems</strong><p>Shows that the work sat inside a wider intelligent-transport portfolio.</p></article></div>
+</aside></div>
 </section>
 <div class="shell case-layout">
-  <aside class="side-nav card"><strong>Case path</strong><nav class="case-path-list" aria-label="Case path"><a href="#summary">Summary</a><span class="case-path-separator" aria-hidden="true">·</span><a href="#recovery">Recovery</a><span class="case-path-separator" aria-hidden="true">·</span><a href="#role">PM role</a><span class="case-path-separator" aria-hidden="true">·</span><a href="#workstreams">Workstreams</a><span class="case-path-separator" aria-hidden="true">·</span><a href="#governance">Governance</a><span class="case-path-separator" aria-hidden="true">·</span><a href="#pilot">Pilot readiness</a><span class="case-path-separator" aria-hidden="true">·</span><a href="#outcomes">Outcomes</a><span class="case-path-separator" aria-hidden="true">·</span><a href="#transferability">Transferability</a><span class="case-path-separator" aria-hidden="true">·</span><a href="#role-boundary">Role boundary</a><span class="case-path-separator" aria-hidden="true">·</span><a href="#takeaway">Takeaway</a></nav></aside>
-  <div class="content">
-    <section id="summary" class="content-card card card-pad reveal">
-      <span class="label">Executive summary</span>
-      <h2>Technical delivery work had to become visible and governable.</h2>
-      <p>The SmartC work involved AI-enabled transportation safety, hardware readiness, computer-vision/software behavior, QA validation, field integration, and sponsor-controlled governance. My contribution was delivery leadership: making risks, dependencies, readiness gaps, and sponsor decisions visible enough to move recovery work toward pilot validation and scale transition.</p>
-    </section>
-
-    <section id="recovery" class="content-card card card-pad reveal">
-      <h2>Recovery context</h2>
-      <p>I worked through reliability and readiness gaps that created delivery risk across several technical streams. The operating need was not more decorative reporting; it was a clear governance layer showing what was ready, blocked, decision-dependent, or exposed to field-condition risk.</p>
-      <div class="mini-grid three">
-        <article class="mini-card card"><span>Risk pattern</span><strong>Readiness ambiguity</strong><small>Several workstreams could appear active while unresolved defects, dependencies, or validation gaps still affected pilot confidence.</small></article>
-        <article class="mini-card card"><span>Delivery need</span><strong>Common visibility layer</strong><small>Sponsors and delivery teams needed a shared view of scope, status, readiness, and decisions.</small></article>
-        <article class="mini-card card"><span>Governance constraint</span><strong>Sponsor-controlled change</strong><small>Scope, schedule, and budget-impacting changes required visible decision control rather than informal drift.</small></article></div>
-    </section>
-
-    <section id="role" class="content-card card card-pad reveal">
-      <h2>My PM role</h2>
-      <div class="mini-grid two">
-        <article class="mini-card card"><span>Coordinated</span><strong>Delivery rhythm</strong><small>Maintained workstream visibility across recovery tasks, technical dependencies, QA readiness, and sponsor-facing status.</small></article>
-        <article class="mini-card card"><span>Tracked</span><strong>Risks, issues, dependencies</strong><small>Kept readiness gaps and blockers visible so the team could separate execution work from decision-dependent work.</small></article>
-        <article class="mini-card card"><span>Structured</span><strong>Sponsor-facing status</strong><small>Translated technical progress into status, risks, next decisions, and readiness movement for sponsor review.</small></article>
-        <article class="mini-card card"><span>Connected</span><strong>Recovery to validation</strong><small>Helped connect redesign and recovery work to QA readiness, pilot validation logic, and scale-transition evidence.</small></article></div>
-    </section>
-
-    <section id="workstreams" class="content-card card card-pad reveal">
-      <h2>Delivery architecture / workstreams</h2>
-      <div class="mini-grid three">
-        <article class="mini-card card"><span>01</span><strong>Hardware readiness</strong><small>Physical device readiness, field constraints, and environmental reliability signals.</small></article>
-        <article class="mini-card card"><span>02</span><strong>Software / CV behavior</strong><small>Detection behavior, defect feedback, and readiness implications for the technical team.</small></article>
-        <article class="mini-card card"><span>03</span><strong>QA validation</strong><small>Test readiness, defect tracking, field-condition validation, and pilot confidence.</small></article>
-        <article class="mini-card card"><span>04</span><strong>Integration / field logic</strong><small>Cross-stream dependencies between hardware, software behavior, installation logic, and field use.</small></article>
-        <article class="mini-card card"><span>05</span><strong>Sponsor visibility</strong><small>Status, readiness, risks, decisions, and milestone movement made reviewable.</small></article>
-        <article class="mini-card card"><span>06</span><strong>Pilot readiness</strong><small>Pilot-track planning across climate/field conditions and commercial-scale transition evidence.</small></article></div>
-    </section>
-
-    <section id="governance" class="content-card card card-pad reveal">
-      <h2>Controls and governance</h2>
-      <div class="mini-grid three">
-        <article class="mini-card card"><span>Control</span><strong>RAID visibility</strong><small>Risks, assumptions, issues, and dependencies made explicit instead of buried inside technical discussion.</small></article>
-        <article class="mini-card card"><span>Control</span><strong>Milestone tracking</strong><small>Progress framed through delivery gates and readiness movement.</small></article>
-        <article class="mini-card card"><span>Control</span><strong>Sponsor updates</strong><small>Status reporting connected progress, blockers, decisions, and next actions.</small></article>
-        <article class="mini-card card"><span>Control</span><strong>Prioritization</strong><small>Recovery and validation work organized around sponsor-visible priorities and readiness impact.</small></article>
-        <article class="mini-card card"><span>Control</span><strong>QA readiness tracking</strong><small>Validation work connected to pilot confidence and field-condition learning.</small></article>
-        <article class="mini-card card"><span>Control</span><strong>Change visibility</strong><small>Scope/schedule/budget-impacting changes separated from neutral execution updates.</small></article></div>
-    </section>
-
-    <section id="pilot" class="content-card card card-pad reveal">
-      <h2>Pilot readiness logic</h2>
-      <p>I helped turn technical readiness into a controlled pilot-readiness view: what could be tested, what needed mitigation, what carried field exposure, and what sponsors needed to approve across different field conditions.</p>
-      <div class="pills"><span>Field-condition validation</span><span>QA readiness</span><span>Decision visibility</span><span>Scale-transition evidence</span></div>
-    </section>
-
-    <section id="outcomes" class="content-card card card-pad reveal">
-      <h2>Outcomes and scale evidence</h2>
-      <div class="proof-grid">
-        <article class="proof-card"><span>Scale anchor</span><strong>460+ deployed locations</strong><p>I use this as conservative public scale evidence for the broader commercial deployment footprint.</p></article>
-        <article class="proof-card"><span>Team scale</span><strong>~7 → ~17 contributors</strong><p>It shows my cross-functional delivery exposure as work moved from recovery into validation and scale transition.</p></article>
-        <article class="proof-card"><span>Delivery rhythm</span><strong>30–40 day cycles</strong><p>I supported iterative delivery control under sponsor-facing governance.</p></article>
-        <article class="proof-card"><span>Pilot model</span><strong>3 pilot tracks</strong><p>I helped structure validation logic across different field and climate conditions.</p></article></div>
-    </section>
-
-    <section id="transferability" class="content-card card card-pad reveal">
-      <h2>Transferability to PM roles</h2>
-      <p>I use this case to show fit for technical implementation environments where delivery depends on cross-functional coordination, sponsor visibility, readiness gates, risk control, and conversion of technical uncertainty into executable decisions.</p>
-      <div class="pills"><span>Implementation PM</span><span>Technical Operations PM</span><span>Technical PM</span><span>Service Delivery PM</span><span>Sponsor governance</span></div>
-    </section>
-
-    <section id="role-boundary" class="content-card card card-pad reveal">
-      <h2>Role boundary</h2>
-      <p>My role was delivery leadership and implementation governance. This case does not present me as the engineer of the AI model, hardware architecture, or computer-vision algorithms.</p>
-    </section>
-
-    <section id="takeaway" class="content-card card card-pad reveal">
-      <h2>Recruiter takeaway</h2>
-      <p>I use this case to demonstrate delivery leadership in a technical implementation environment: cross-functional workstream coordination, readiness tracking, sponsor governance, risk visibility, and controlled transition from recovery into pilot validation and scale evidence.</p>
-      <div class="pills"><span>Implementation governance</span><span>QA readiness</span><span>Workstream coordination</span><span>Sponsor visibility</span><span>Risk control</span><span>Scale transition</span></div>
-      <div class="button-row case-cta"><a class="button button-primary" href="mailto:pmalairov@gmail.com?subject=Operations%20%2F%20Implementation%20PM%20Opportunity">Email me about Operations / Implementation PM fit</a>
-        <a class="button button-secondary" href="../index.html#cases">Back to cases</a>
-        
-        <a class="button button-secondary" href="https://www.linkedin.com/in/pavlo-malairov-b51840219" target="_blank" rel="noreferrer">Connect on LinkedIn</a></div>
-    </section></div></div>
+<aside class="side-nav card"><strong>Case path</strong><nav aria-label="Case path" class="case-path-list"><a href="#summary">Summary</a><span aria-hidden="true" class="case-path-separator">·</span><a href="#recovery">Recovery</a><span aria-hidden="true" class="case-path-separator">·</span><a href="#role">PM role</a><span aria-hidden="true" class="case-path-separator">·</span><a href="#workstreams">Workstreams</a><span aria-hidden="true" class="case-path-separator">·</span><a href="#governance">Governance</a><span aria-hidden="true" class="case-path-separator">·</span><a href="#pilot">Pilot readiness</a><span aria-hidden="true" class="case-path-separator">·</span><a href="#outcomes">Outcomes</a><span aria-hidden="true" class="case-path-separator">·</span><a href="#transferability">Transferability</a><span aria-hidden="true" class="case-path-separator">·</span><a href="#role-boundary">Role boundary</a><span aria-hidden="true" class="case-path-separator">·</span><a href="#takeaway">Takeaway</a></nav></aside>
+<div class="content">
+<section class="content-card card card-pad reveal" id="summary"><span class="label">Executive summary</span><h2>Technical delivery work had to become visible, governable, and field-ready.</h2><p>The project was not only a software or hardware delivery problem. It sat inside a public-safety and smart-infrastructure implementation context where field reliability, stakeholder visibility, installation readiness, and measurable deployment outcomes mattered. My role was to help turn technical uncertainty into visible delivery controls: workstream readiness, issue and risk visibility, sponsor-facing status, pilot-readiness logic, and scale-transition discipline.</p><p>The implementation environment included AI-enabled pedestrian, vehicle, and micromobility detection; warning components; projected road-marking visibility; lighting and signage elements; V2I-readiness considerations; and integration logic for Smart City / ITS environments.</p></section>
+<section class="content-card card card-pad reveal" id="recovery">
+<h2>Recovery context</h2>
+<p>I worked through reliability and readiness gaps across several technical streams: detection behavior, field hardware, QA validation, integration dependencies, and sponsor-controlled decisions. The operating need was a clear governance layer showing what was ready, blocked, decision-dependent, or exposed to field-condition risk.</p>
+<div class="mini-grid three">
+<article class="mini-card card"><span>Risk pattern</span><strong>Readiness ambiguity</strong><small>Several workstreams could appear active while unresolved defects, dependencies, or validation gaps still affected pilot confidence.</small></article>
+<article class="mini-card card"><span>Delivery need</span><strong>Common visibility layer</strong><small>Sponsors and delivery teams needed a shared view of scope, status, readiness, and decisions.</small></article>
+<article class="mini-card card"><span>Governance constraint</span><strong>Sponsor-controlled change</strong><small>Scope, schedule, and budget-impacting changes required visible decision control rather than informal drift.</small></article></div>
+</section>
+<section class="content-card card card-pad reveal" id="role">
+<h2>My PM role</h2>
+<div class="mini-grid two">
+<article class="mini-card card"><span>Coordinated</span><strong>Delivery rhythm</strong><small>Maintained workstream visibility across recovery tasks, technical dependencies, QA readiness, and sponsor-facing status.</small></article>
+<article class="mini-card card"><span>Tracked</span><strong>Risks, issues, dependencies</strong><small>Kept readiness gaps and blockers visible so the team could separate execution work from decision-dependent work.</small></article>
+<article class="mini-card card"><span>Structured</span><strong>Sponsor-facing status</strong><small>Translated technical progress into status, risks, next decisions, and readiness movement for sponsor review.</small></article>
+<article class="mini-card card"><span>Connected</span><strong>Recovery to validation</strong><small>Helped connect redesign and recovery work to QA readiness, pilot validation logic, and scale-transition evidence.</small></article></div>
+</section>
+<section class="content-card card card-pad reveal" id="workstreams"><h2>Delivery architecture / workstreams</h2><p>I kept the delivery view organized around the technical streams that had to become ready together, not as isolated engineering tasks.</p><div class="mini-grid three"><article class="mini-card card"><span>01</span><strong>Detection logic</strong><small>I coordinated delivery visibility around pedestrian, vehicle, and micromobility detection behavior, movement-direction logic, and readiness risks around false positives / false negatives.</small></article><article class="mini-card card"><span>02</span><strong>Field hardware readiness</strong><small>I helped structure readiness visibility across projection, lighting, warning signs, T7 signal elements, camera placement, and real-road visibility conditions.</small></article><article class="mini-card card"><span>03</span><strong>Violation / event logic</strong><small>I supported implementation governance around driver non-yield scenarios, micromobility crossing behavior, incident capture, and event/archive requirements.</small></article><article class="mini-card card"><span>04</span><strong>ITS / Smart City integration</strong><small>I helped keep integration dependencies visible for regional ITS, Safe City, Smart City environments, and V2I-readiness considerations.</small></article><article class="mini-card card"><span>05</span><strong>Pilot environment readiness</strong><small>I helped connect validation logic to high-risk deployment contexts such as unregulated crossings, school zones, limited-visibility areas, transit stops, and other field-risk locations.</small></article><article class="mini-card card"><span>06</span><strong>Sponsor governance</strong><small>I maintained visibility over readiness, risks, dependencies, decisions, and validation status so sponsor-facing execution could move from recovery toward pilot and scale transition.</small></article></div></section>
+<section class="content-card card card-pad reveal" id="governance">
+<h2>Controls and governance</h2>
+<div class="mini-grid three">
+<article class="mini-card card"><span>Control</span><strong>RAID visibility</strong><small>Risks, assumptions, issues, and dependencies made explicit instead of buried inside technical discussion.</small></article>
+<article class="mini-card card"><span>Control</span><strong>Milestone tracking</strong><small>Progress framed through delivery gates and readiness movement.</small></article>
+<article class="mini-card card"><span>Control</span><strong>Sponsor updates</strong><small>Status reporting connected progress, blockers, decisions, and next actions.</small></article>
+<article class="mini-card card"><span>Control</span><strong>Prioritization</strong><small>Recovery and validation work organized around sponsor-visible priorities and readiness impact.</small></article>
+<article class="mini-card card"><span>Control</span><strong>QA readiness tracking</strong><small>Validation work connected to pilot confidence and field-condition learning.</small></article>
+<article class="mini-card card"><span>Control</span><strong>Change visibility</strong><small>Scope/schedule/budget-impacting changes separated from neutral execution updates.</small></article></div>
+</section>
+<section class="content-card card card-pad reveal" id="pilot">
+<h2>Pilot readiness logic</h2>
+<p>I helped turn technical readiness into a controlled pilot-readiness view: what could be tested, what needed mitigation, what carried field exposure, and what sponsors needed to approve across field conditions such as unregulated crossings, school zones, limited-visibility areas, transit stops, and other high-risk locations.</p>
+<div class="pills"><span>Field-condition validation</span><span>QA readiness</span><span>Decision visibility</span><span>Scale-transition evidence</span></div>
+</section>
+<section class="content-card card card-pad reveal" id="outcomes"><h2>Outcomes and scale evidence</h2><p>I separate SmartC product/company scale evidence from my personal delivery claim. The public scale supports the implementation context; my claim remains delivery leadership and implementation governance.</p><div class="proof-grid"><article class="proof-card"><span>Company scale evidence</span><strong>490 implemented projects</strong><p>Public SmartC materials describe this as product/company scale. I use it only to show the environment around the work.</p></article><article class="proof-card"><span>Deployment footprint</span><strong>28 regions / 57 cities</strong><p>This supports the scale and field-readiness context behind the Smart City / ITS implementation environment.</p></article><article class="proof-card"><span>Technical IP</span><strong>5 registered patents</strong><p>This supports the technical-product maturity context without claiming engineering authorship.</p></article><article class="proof-card"><span>Road-tech portfolio</span><strong>6 road-sector systems</strong><p>This shows the work sat inside a broader intelligent-transport product portfolio.</p></article><article class="proof-card"><span>My delivery exposure</span><strong>~7 → ~17 contributors</strong><p>I coordinated cross-functional delivery visibility as work moved from recovery into validation and scale transition.</p></article><article class="proof-card"><span>Delivery rhythm</span><strong>30–40 day cycles</strong><p>I supported iterative delivery control under sponsor-facing governance and readiness review.</p></article></div></section>
+<section class="content-card card card-pad reveal" id="transferability">
+<h2>Transferability to PM roles</h2>
+<p>I use this case to show fit for technical implementation environments where delivery depends on cross-functional coordination, sponsor visibility, readiness gates, risk control, field-readiness evidence, and conversion of technical uncertainty into executable decisions.</p>
+<div class="pills"><span>Implementation PM</span><span>Technical Operations PM</span><span>Technical PM</span><span>Service Delivery PM</span><span>Sponsor governance</span></div>
+</section>
+<section class="content-card card card-pad reveal" id="role-boundary">
+<h2>Role boundary</h2>
+<p>My role was delivery leadership and implementation governance. This case does not present me as the engineer of the AI model, hardware architecture, or computer-vision algorithms.</p>
+</section>
+<section class="content-card card card-pad reveal" id="takeaway">
+<h2>Recruiter takeaway</h2>
+<p>I use this case to demonstrate delivery leadership in a technical implementation environment with real field-readiness pressure: cross-functional workstream coordination, readiness tracking, sponsor governance, risk visibility, public-safety implementation context, ITS / Smart City integration dependencies, and controlled transition from recovery into pilot validation and scale evidence.</p>
+<div class="pills"><span>Implementation governance</span><span>Field readiness</span><span>ITS / Smart City</span><span>QA readiness</span><span>Sponsor visibility</span><span>Risk control</span><span>Scale transition</span></div>
+<div class="button-row case-cta"><a class="button button-primary" href="mailto:pmalairov@gmail.com?subject=Operations%20%2F%20Implementation%20PM%20Opportunity">Email me about Operations / Implementation PM fit</a>
+<a class="button button-secondary" href="../index.html#cases">Back to cases</a>
+<a class="button button-secondary" href="https://www.linkedin.com/in/pavlo-malairov-b51840219" rel="noreferrer" target="_blank">Connect on LinkedIn</a></div>
+</section></div></div>
 </main>
 <footer class="site-footer"><div class="shell footer-grid"><div><strong>Pavlo Malairov, PMP</strong><p>I use this portfolio to show fit for Operations PM, Implementation PM, Technical Operations PM, and Process Improvement PM roles.</p></div><nav aria-label="Footer navigation" class="footer-links"><a href="https://www.linkedin.com/in/pavlo-malairov-b51840219" rel="noreferrer" target="_blank">LinkedIn</a><a href="mailto:pmalairov@gmail.com?subject=Operations%20%2F%20Implementation%20PM%20Opportunity">Email</a></nav></div></footer>
-<script src="../js/case-pages.js?v=53"></script>
+<script src="../js/case-pages.js?v=54"></script>
 </body>
 </html>
