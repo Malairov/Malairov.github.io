@@ -1,8 +1,8 @@
-# v51 no public resume downloads — Pavlo Malairov Portfolio
+# v53 first-person portfolio copy — Pavlo Malairov Portfolio
 
 Clean recruiter-facing GitHub Pages portfolio for Pavlo Malairov, PMP.
 
-This build removes public resume-download links and the public resume PDF. The portfolio is positioned to sell the profile through case evidence, operating controls, and recruiter-facing proof rather than inviting anonymous resume downloads.
+This build keeps the no-public-resume approach and reviews visible portfolio copy so the narrative is written from Pavlo's first-person perspective rather than third person.
 
 Upload the CONTENTS of this folder to the GitHub Pages repository root:
 
@@ -11,5 +11,3 @@ Upload the CONTENTS of this folder to the GitHub Pages repository root:
 - cases/
 - css/
 - js/
-
-No `assets/` folder is required unless a future non-resume asset is added.
