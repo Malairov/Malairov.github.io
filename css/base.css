@@ -30,3 +30,11 @@ h1,h2,h3{margin:0;letter-spacing:-.035em;line-height:1.08}p{margin:0;color:var(-
 @media(max-width:820px){.ops-head{display:none}.ops-row{grid-template-columns:1fr;gap:6px;border:1px solid var(--line);border-radius:16px;margin-bottom:10px;padding:15px}.ops-row span[data-label]{display:block;padding-top:8px}.ops-row span[data-label]::before{content:attr(data-label);display:block;color:var(--muted);font:800 .62rem var(--mono);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}.ops-row .ops-name{padding-bottom:4px}}
 @media(max-width:760px){.case-cta{display:grid;grid-template-columns:1fr;width:100%}.case-cta .button{width:100%}}
 @media(prefers-reduced-motion:reduce){.card:hover,.mini-card:hover,.fit-card:hover,.case-card:hover,.button:hover{transform:none}}
+
+
+/* v51 readability: prevent operational control rows from becoming unreadable on narrow desktop widths. */
+.ops-table{overflow:visible}
+.ops-head,.ops-row{grid-template-columns:minmax(150px,1.05fr) repeat(4,minmax(155px,1fr));gap:18px}
+.ops-row span,.ops-row strong,.ops-row small{overflow-wrap:break-word;hyphens:auto}
+@media(max-width:1180px){.ops-layout{grid-template-columns:1fr}.ops-detail{position:relative;top:auto;max-width:760px}}
+@media(max-width:1120px){.ops-head{display:none}.ops-row{grid-template-columns:1fr;gap:8px;border:1px solid var(--line);border-radius:16px;margin-bottom:10px;padding:16px}.ops-row span[data-label]{display:block;padding-top:9px;border-top:1px solid var(--line)}.ops-row span[data-label]::before{content:attr(data-label);display:block;color:var(--muted);font:800 .62rem var(--mono);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}.ops-row .ops-name{padding-bottom:3px}}
