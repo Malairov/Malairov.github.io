@@ -178,3 +178,34 @@ h1,h2,h3{margin:0;letter-spacing:-.035em;line-height:1.08}p{margin:0;color:var(-
 .mini-card p {
   max-width: 70ch;
 }
+
+
+/* v59 public-safe final polish */
+.case-hero h1 {
+  font-size: clamp(2.15rem, 4.8vw, 3.75rem);
+  line-height: 1.03;
+  letter-spacing: -0.045em;
+}
+
+.case-hero .proof-grid {
+  grid-template-columns: 1fr;
+}
+
+.case-hero .proof-card {
+  padding: 18px 18px;
+}
+
+.case-hero .proof-card strong {
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+  line-height: 1.08;
+}
+
+.project-context-note {
+  max-width: 100%;
+}
+
+@media (min-width: 1100px) {
+  .case-hero-grid {
+    grid-template-columns: minmax(0, 1.65fr) minmax(320px, .85fr);
+  }
+}

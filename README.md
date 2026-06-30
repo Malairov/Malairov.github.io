@@ -1,27 +1,21 @@
-# Portfolio v58 Final Package — Pavlo Malairov, PMP
-
-This is the final recruiter-facing GitHub Pages package.
+# Portfolio v59 Public-Safe Final — Pavlo Malairov, PMP
 
 Upload the CONTENTS of this folder to the GitHub Pages repository root.
 
-Primary URLs after deployment:
+This build responds to final live-review issues:
 
-- https://malairov.github.io/
-- https://malairov.github.io/cases/four-operating-loops.html
-- https://malairov.github.io/cases/ai-transportation-delivery.html
-- https://malairov.github.io/cases/safety-stock-diagnostic.html
+- Removes visible SmartC company context from the AI transportation hero.
+- Removes 490 / 28 regions / 57 cities / 5 patents / 6 systems from the public case page.
+- Keeps the AI case defensible through personal delivery evidence only.
+- Fixes narrow right-column proof-card layout by making hero proof cards single-column.
+- Reduces case hero heading size for cleaner desktop rendering.
+- Keeps old /cases/smartc-ai-delivery.html as a noindex redirect.
+- Keeps sitemap.xml, robots.txt, canonical tags, Open Graph metadata, 404 page, and internal-link QA.
+- Cache string updated to v59.
 
-The old SmartC URL is preserved as a noindex redirect:
+Primary URLs:
 
-- /cases/smartc-ai-delivery.html → /cases/ai-transportation-delivery.html
-
-Final-readiness features:
-
-- Homepage hiring-manager scan.
-- Canadian aerospace service-delivery anchor case.
-- Neutral AI transportation case URL and positioning.
-- Replenishment diagnostic case positioned as process-improvement/control-system proof.
-- Public resume download removed.
-- Sensitive Russian/Sanctions-facing context removed from public-facing pages.
-- Sitemap, robots.txt, canonical tags, Open Graph metadata, 404 page, internal-link QA.
-- Cache string updated to v58.
+- /
+- /cases/four-operating-loops.html
+- /cases/ai-transportation-delivery.html
+- /cases/safety-stock-diagnostic.html
