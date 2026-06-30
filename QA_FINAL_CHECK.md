@@ -1,15 +1,16 @@
-# Final QA Report — v59
+# Final QA Report — v61
 
 ## Checks
-- [x] cache_v59_main_pages
-- [x] homepage_no_smartc
-- [x] ai_page_no_visible_smartc
-- [x] ai_page_no_company_scale_metrics
-- [x] ai_page_personal_delivery_evidence_present
-- [x] no_russia_ru_skolkovo_public
+- [x] cache_v61_main_pages
+- [x] no_smartc_visible_any_html
+- [x] no_project_context_pill
+- [x] image_based_tangible_chain_removed
+- [x] html_delivery_chain_present
+- [x] full_size_technical_link_present
+- [x] old_page_neutralized
+- [x] no_company_scale_metrics
+- [x] no_russia_ru_skolkovo
 - [x] no_public_resume_download
-- [x] old_redirect_exists
-- [x] visual_assets_exist
 - [x] no_broken_internal_links_or_assets
 
 ## Broken-link / asset checker
