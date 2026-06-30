@@ -1,18 +1,27 @@
-# v55 SmartC visual chain — Pavlo Malairov Portfolio
+# Portfolio v58 Final Package — Pavlo Malairov, PMP
 
-Clean recruiter-facing GitHub Pages portfolio for Pavlo Malairov, PMP.
+This is the final recruiter-facing GitHub Pages package.
 
-This build keeps the first-person / no-public-resume approach and adds SmartC case visual proof artifacts:
+Upload the CONTENTS of this folder to the GitHub Pages repository root.
 
-- a Canadian-neutral English technical system view;
-- an expandable tangible delivery chain visual;
-- a new SmartC case section that explains the visuals as implementation context, not engineering authorship.
+Primary URLs after deployment:
 
-Upload the CONTENTS of this folder to the GitHub Pages repository root:
+- https://malairov.github.io/
+- https://malairov.github.io/cases/four-operating-loops.html
+- https://malairov.github.io/cases/ai-transportation-delivery.html
+- https://malairov.github.io/cases/safety-stock-diagnostic.html
 
-- index.html
-- README.md
-- assets/
-- cases/
-- css/
-- js/
+The old SmartC URL is preserved as a noindex redirect:
+
+- /cases/smartc-ai-delivery.html → /cases/ai-transportation-delivery.html
+
+Final-readiness features:
+
+- Homepage hiring-manager scan.
+- Canadian aerospace service-delivery anchor case.
+- Neutral AI transportation case URL and positioning.
+- Replenishment diagnostic case positioned as process-improvement/control-system proof.
+- Public resume download removed.
+- Sensitive Russian/Sanctions-facing context removed from public-facing pages.
+- Sitemap, robots.txt, canonical tags, Open Graph metadata, 404 page, internal-link QA.
+- Cache string updated to v58.

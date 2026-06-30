@@ -139,3 +139,42 @@ h1,h2,h3{margin:0;letter-spacing:-.035em;line-height:1.08}p{margin:0;color:var(-
     aspect-ratio: 16 / 9;
   }
 }
+
+
+/* v56 risk-reduced SmartC polish */
+.project-context-note {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: rgba(176, 123, 50, .08);
+  border: 1px solid rgba(176, 123, 50, .20);
+  color: var(--text);
+  font-size: .98rem;
+}
+
+.mini-card span,
+.proof-card span {
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.mini-card h3,
+.proof-card strong {
+  display: block;
+}
+
+
+/* v57 final readiness polish */
+.case-hero h1,
+.content-card h2 {
+  text-wrap: balance;
+}
+
+.project-context-note + .project-context-note {
+  margin-top: 8px;
+}
+
+.proof-card p,
+.mini-card p {
+  max-width: 70ch;
+}
