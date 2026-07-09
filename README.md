@@ -1,28 +1,38 @@
-# Pavlo Malairov Portfolio — Full Deployment v68
+# Pavlo Malairov — Project Management Portfolio
 
-This archive is a complete GitHub Pages deployment. Remove the existing site contents and upload every file and folder from this archive to the repository root.
+A static, privacy-controlled portfolio focused on technical operations, implementation delivery, and operational control design.
 
-## Included
-- `index.html`
-- `cases/` — three public case studies plus a noindex legacy mirror
-- `css/`
-- `js/`
-- `404.html`
-- `robots.txt`
-- `sitemap.xml`
+## Public pages
 
-## v68 changes
-- Compact, non-stretched hero layout across all three case studies.
-- AI Transportation case reduced and consolidated from 11 content sections to 7.
-- AI hero changed to a compact 2×2 proof grid.
-- Aerospace interactive loop map now drives a persistent detail panel; the full matrix is optional and collapsed by default.
-- Replenishment Diagnostic now uses one integrated trace + failure inspector + shared output.
-- Metrics clarified: 1,800+ tracked records, including 1,500+ active standardized SKUs; representative critical-category gap duration stated precisely.
-- Correct email `pavlomalairov@gmail.com` applied throughout.
-- Mobile, keyboard, reduced-motion, canonical, noindex mirror, and internal-link checks included.
+- `index.html` — portfolio home
+- `cases/four-operating-loops.html` — aerospace service-delivery controls
+- `cases/ai-transportation-delivery.html` — AI transportation implementation
+- `cases/safety-stock-diagnostic.html` — operational control failure diagnostic
+- `cases/smartc-ai-delivery.html` — legacy noindex redirect
+- `404.html` — custom not-found page
+
+## Distribution model
+
+The public site demonstrates capability through selected case studies. Detailed employment documents are not included and are shared privately at the owner’s discretion.
+
+## Quality controls
+
+Run the repeatable static regression suite before deployment:
+
+```bash
+python tools/qa_portfolio.py
+```
+
+The suite checks public-page metadata, all internal links, social images, tab semantics, JavaScript syntax, email consistency, sitemap accuracy, and the absence of public career-document files or links.
+
+For optional layout and interaction regression testing in Chromium:
+
+```bash
+python tools/browser_qa.py
+```
+
+This second suite requires Playwright and checks 1440px, 820px, 390px, and 320px layouts, horizontal overflow, mobile-menu focus, keyboard tabs, current-section state, reading progress, no-JavaScript resilience, WCAG text spacing, and forced-colour rendering.
 
 ## Deployment
-1. Delete old files from the GitHub Pages repository root.
-2. Upload all files and folders from this archive without adding an extra parent directory.
-3. Confirm `index.html`, `css/`, `js/`, and `cases/` are directly in the repository root.
-4. Commit and wait for GitHub Pages to rebuild.
+
+Upload the contents of this folder directly to the repository root. Remove the old repository contents first so deleted files cannot remain accessible under legacy URLs. Keep the included `.nojekyll` marker in the root so GitHub Pages publishes the package as an unprocessed static site.
