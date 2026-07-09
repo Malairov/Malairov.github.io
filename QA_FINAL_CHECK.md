@@ -1,4 +1,4 @@
-# Final QA Report — v65
+# Final QA Report — v66
 
 ## Checks
 - [x] no_smartc_visible_any_html
@@ -28,4 +28,13 @@ See below (script output).
 - [x] prefers_reduced_motion_respected (animations gated, transitions disabled on reduce)
 - [x] keyboard_accessible_components (role=button, tabindex, Enter/Space)
 - [x] role_boundary_microcopy_present_in_widget
+- [x] mirror_page_synced
+
+## v66 additions
+- [x] raster_system_visual_removed (AI-generated PNG + disclosure block deleted)
+- [x] og_image_meta_removed
+- [x] assets_folder_removed_from_deploy (smartc-named PNG files no longer shipped, -4MB)
+- [x] animated_architecture_diagram_added (native SVG, signal-trace sequence, 8 clickable blocks)
+- [x] ar_svg_geometry_ok (viewBox 680x436, no overflow)
+- [x] prefers_reduced_motion_and_keyboard_supported
 - [x] mirror_page_synced

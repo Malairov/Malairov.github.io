@@ -44,3 +44,15 @@ v64 -> v65:
   pole components map to the delivery streams. Native inline SVG + page-scoped CSS/JS,
   zero libraries, zero raster images, mobile horizontal scroll, prefers-reduced-motion
   and keyboard access supported. base.css / js files untouched.
+
+v65 -> v66:
+- Removed the AI-generated raster "technical system view" PNG and its disclosure block
+  (off-brand artist rendering, 2.2MB, smartc-named asset URL). og:image meta removed.
+  The assets/ folder is intentionally absent from this build: deploying as a full
+  replacement removes both PNG files from the repository.
+- Added an animated system-architecture block diagram in its place: detection camera ->
+  microcomputer (on-site AI inference) inside the equipment cabinet (power/heating,
+  router) -> three warning outputs (LED sign, beacon, projection), plus telemetry to
+  the Phase 2 remote monitoring platform. "Trace signal path" animates the flow in four
+  captioned steps; all eight blocks are clickable with what/why explanations.
+  Native SVG + page-scoped CSS/JS, no libraries, reduced-motion and keyboard supported.
