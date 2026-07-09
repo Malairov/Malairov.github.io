@@ -1,4 +1,4 @@
-# Final QA Report — v64
+# Final QA Report — v65
 
 ## Checks
 - [x] no_smartc_visible_any_html
@@ -21,3 +21,11 @@ See below (script output).
 - [x] phase_timeline_svg_geometry_ok (viewBox 680x268, no overflow)
 - [x] phase_timeline_mobile_scroll (min-width 640px + overflow-x auto, text stays legible)
 - [x] mirror_page_synced_with_timeline
+
+## v65 additions
+- [x] interactive_system_walkthrough_added (native SVG+HTML+vanilla JS, no libraries, no rasters)
+- [x] fx_svg_geometry_ok (viewBox 680x372, no overflow)
+- [x] prefers_reduced_motion_respected (animations gated, transitions disabled on reduce)
+- [x] keyboard_accessible_components (role=button, tabindex, Enter/Space)
+- [x] role_boundary_microcopy_present_in_widget
+- [x] mirror_page_synced

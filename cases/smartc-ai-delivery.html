@@ -11,6 +11,55 @@
 .phase-timeline{margin-top:18px;border:1px solid rgba(20,20,20,.12);border-radius:18px;background:#fffdfa;padding:18px 16px 10px;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .phase-timeline svg{display:block;min-width:640px;width:100%;height:auto}
 .phase-timeline figcaption{font-size:.85rem;color:#7c7469;padding:8px 4px 6px}
+.fx-sys{margin-top:22px;border:1px solid rgba(20,20,20,.12);border-radius:18px;background:#fffdfa;padding:18px 16px 16px;overflow:hidden}
+.fx-head h3{margin:6px 0 6px}
+.fx-head p{margin:0 0 12px;color:#5f5548}
+.fx-steps{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.fx-step{border:1px solid rgba(176,123,50,.35);border-radius:999px;padding:6px 12px;font-size:.8rem;font-weight:800;color:#7c7469;background:#fffdf8;transition:color .3s,background .3s,border-color .3s}
+.fx-step.on{color:#7b4f18;background:#f3e7d3;border-color:#a77737}
+.fx-stage{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.fx-stage svg{display:block;min-width:640px;width:100%;height:auto}
+.fx-zebra rect{fill:#fffdf8;transition:fill .6s}
+.fx-cone{fill:rgba(167,119,55,.12);stroke:rgba(167,119,55,.55);stroke-width:1;stroke-dasharray:5 4;opacity:0;transition:opacity .5s}
+.fx-car{transition:transform 1.7s cubic-bezier(.2,.8,.3,1)}
+.fx-ped{transform:translateY(142px);transition:transform 2.4s linear}
+.fx-ring{opacity:0;transform-origin:404px 112px}
+.fx-leader{stroke:rgba(23,23,23,.25);stroke-width:.75;stroke-dasharray:3 3}
+.fx-comp{cursor:pointer}
+.fx-comp-bg{fill:#fffdf8;stroke:rgba(20,20,20,.12);stroke-width:1;transition:stroke .3s,fill .3s}
+.fx-comp:hover .fx-comp-bg,.fx-comp:focus-visible .fx-comp-bg{stroke:#a77737}
+.fx-comp.sel .fx-comp-bg{stroke:#a77737;stroke-width:1.5;fill:#fdf6ea}
+.fx-comp.lit .fx-comp-bg{stroke:#a77737;stroke-width:1.5;fill:#f8edda}
+.fx-ct{font-family:Inter,Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;fill:#171717}
+.fx-beacon{fill:#d9d2c5;transition:fill .3s}
+.fx-chip{opacity:0;transition:opacity .5s}
+.fx-chipt{font-family:Inter,Arial,Helvetica,sans-serif;font-size:11px;font-weight:800;fill:#7b4f18;text-anchor:middle}
+.fx-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:12px}
+.fx-play{border:1px solid rgba(176,123,50,.45);border-radius:999px;padding:10px 16px;background:#7b4f18;color:#fffdf8;font-weight:800;font-size:.85rem;cursor:pointer;transition:opacity .3s}
+.fx-play[disabled]{opacity:.55;cursor:default}
+.fx-caption{font-size:.85rem;color:#5f5548}
+.fx-detail{margin-top:12px;border:1px solid rgba(20,20,20,.1);border-radius:14px;background:#fffdf8;padding:12px 14px}
+.fx-detail strong{display:block;margin-bottom:4px}
+.fx-detail p{margin:0;color:#5f5548;font-size:.92rem}
+.fx-detail .fx-tag{display:inline-block;margin-top:8px;border:1px solid rgba(176,123,50,.35);border-radius:999px;padding:3px 10px;font-size:.72rem;font-weight:800;color:#7b4f18;background:#fdf6ea}
+.fxsys-st1 .fx-cone{opacity:1}
+.fxsys-st1 .fx-car{transform:translateX(72px)}
+.fxsys-st3 .fx-ped{transform:translateY(0)}
+.fxsys-st3 .fx-zebra rect{fill:#e9c789}
+.fxsys-st3 .fx-beacon{fill:#c8862f}
+.fxsys-st4 .fx-chip{opacity:1}
+@media (prefers-reduced-motion:no-preference){
+.fxsys-st1 .fx-ring{opacity:1;animation:fxring 1.4s ease-out infinite}
+.fxsys-st3 .fx-beacon{animation:fxflash .7s steps(2,jump-none) infinite}
+.fxsys-st3 .fx-zebra rect{animation:fxglow 1.6s ease-in-out infinite}
+}
+@media (prefers-reduced-motion:reduce){
+.fx-car,.fx-ped,.fx-zebra rect,.fx-cone,.fx-chip,.fx-step,.fx-comp-bg{transition:none}
+.fxsys-st1 .fx-ring{opacity:1}
+}
+@keyframes fxring{0%{transform:scale(1);opacity:.9}100%{transform:scale(2.4);opacity:0}}
+@keyframes fxflash{0%,100%{fill:#c8862f}50%{fill:#f0b45a}}
+@keyframes fxglow{0%,100%{opacity:1}50%{opacity:.72}}
 </style>
 <meta content="AI Transportation Delivery — Pavlo Malairov, PMP" property="og:title"/><meta content="Technical implementation case showing multi-phase delivery governance, readiness visibility, QA coordination, pilot logic, and scale-transition discipline (2022–2025)." property="og:description"/><meta content="website" property="og:type"/><link href="https://malairov.github.io/cases/ai-transportation-delivery.html" rel="canonical"/><meta content="noindex,follow" name="robots"/><meta content="https://malairov.github.io/cases/ai-transportation-delivery.html" property="og:url"/><meta content="Pavlo Malairov, PMP — Operations &amp; Implementation PM Portfolio" property="og:site_name"/><meta content="summary_large_image" name="twitter:card"/><meta content="https://malairov.github.io/assets/case-visuals/smartc-technical-system-view.png" property="og:image"/></head>
 <body class="smartc-case">
@@ -33,7 +82,37 @@
 <div class="shell case-layout">
 <aside class="side-nav card"><strong>Case path</strong><nav aria-label="Case path" class="case-path-list"><a href="#summary">Summary</a><a href="#technical-view">System view</a><a href="#recovery">Program phases</a><a href="#role">My PM role</a><a href="#workstreams">Workstreams</a><a href="#governance">Governance</a><a href="#pilot">Pilot readiness</a><a href="#outcomes">Outcomes</a><a href="#transferability">Transferability</a><a href="#role-boundary">Role boundary</a><a href="#takeaway">Takeaway</a></nav></aside>
 <div class="content">
-<section class="content-card card card-pad reveal" id="summary"><span class="label">Executive summary</span><h2>I made technical delivery visible enough to govern.</h2><p>Over just under three years (2022–2025) I managed a transportation-safety and smart-infrastructure program delivered in three phases: an AI-enabled pedestrian crossing detection system, an equipment-monitoring platform for the deployed field units, and a micromobility violation-detection module. Field reliability, stakeholder visibility, installation readiness, and measurable deployment outcomes mattered in every phase. My value was not engineering authorship; it was converting technical uncertainty into delivery controls: workstream readiness, issue and risk visibility, sponsor-facing status, pilot-readiness logic, and scale-transition discipline.</p><p>The implementation environment included AI-enabled pedestrian, vehicle, and micromobility detection; warning components; projected road-marking visibility; lighting and signage elements; V2I-readiness considerations; and integration logic for Smart City / ITS environments.</p></section><section class="content-card card card-pad reveal visual-proof-section" id="technical-view"><span class="label">Technical visual proof</span><h2>Technical system view and readable delivery chain.</h2><p>I use the visual only to show the field-system context. The delivery chain below is built as live HTML text, not a raster image, so it stays readable on desktop and mobile.</p><details class="case-visual-disclosure"><summary><img alt="" class="visual-summary-thumb" loading="lazy" src="../assets/case-visuals/smartc-technical-system-view.png"/><span class="visual-summary-copy"><strong>Expand technical system view</strong><small>Component-level view: projection unit, illumination, signs, beacon, warning display, and detection hardware.</small></span></summary><figure class="case-visual-figure"><img alt="English-language technical visual of an intelligent pedestrian crossing system showing projection source, projected crosswalk marking, illumination, LED signs, driver warning sign, beacon, and detection hardware." loading="lazy" src="../assets/case-visuals/smartc-technical-system-view.png"/><figcaption>A Canadian-neutral visual translation of the field-system concept. I use it to show the field-system environment I coordinated around, not to claim hardware or AI engineering authorship.</figcaption><a class="visual-open-link" href="../assets/case-visuals/smartc-technical-system-view.png" rel="noopener" target="_blank">Open technical visual full size</a></figure></details><div aria-label="Readable tangible delivery chain" class="delivery-chain-native"><div class="chain-native-head"><span class="label">Readable PM delivery chain</span><h3>How the implementation moved from field hardware to scalable delivery.</h3><p>This is the same delivery logic as the previous visual artifact, but expressed as readable web content.</p></div><div class="chain-steps"><article class="chain-step"><span class="chain-num">01</span><h4>Field hardware setup</h4><p>Projection unit, detection hardware, LED signs, beacon, illumination, pole infrastructure, and connectivity had to be understood as one field system.</p><p class="chain-signal">PM signal: readiness visibility across physical installation dependencies.</p></article><article class="chain-step"><span class="chain-num">02</span><h4>AI-enabled detection</h4><p>Pedestrian, vehicle, and micromobility detection behavior had to be validated against real movement patterns and field conditions.</p><p class="chain-signal">PM signal: make detection behavior testable, reviewable, and issue-trackable.</p></article><article class="chain-step"><span class="chain-num">03</span><h4>Crossing response logic</h4><p>Warnings, projected road marking, enhanced illumination, and driver-facing signals had to respond as one safety workflow.</p><p class="chain-signal">PM signal: connect technical behavior to user-visible response and safety context.</p></article><article class="chain-step"><span class="chain-num">04</span><h4>Pilot validation</h4><p>Pilot readiness depended on night conditions, weather exposure, traffic complexity, visibility, and testable field scenarios.</p><p class="chain-signal">PM signal: separate test-ready work from risk-exposed work.</p></article><article class="chain-step"><span class="chain-num">05</span><h4>QA readiness and sponsor visibility</h4><p>Issues, defects, readiness gaps, risks, and decision points had to be visible enough for sponsor review.</p><p class="chain-signal">PM signal: turn technical uncertainty into status, ownership, and decision gates.</p></article><article class="chain-step"><span class="chain-num">06</span><h4>Scale transition</h4><p>The delivery path had to move from pilot validation toward rollout readiness, scaled deployment, and operational support of the installed base.</p><p class="chain-signal">PM signal: connect pilot evidence to scale-transition discipline.</p></article></div></div></section>
+<section class="content-card card card-pad reveal" id="summary"><span class="label">Executive summary</span><h2>I made technical delivery visible enough to govern.</h2><p>Over just under three years (2022–2025) I managed a transportation-safety and smart-infrastructure program delivered in three phases: an AI-enabled pedestrian crossing detection system, an equipment-monitoring platform for the deployed field units, and a micromobility violation-detection module. Field reliability, stakeholder visibility, installation readiness, and measurable deployment outcomes mattered in every phase. My value was not engineering authorship; it was converting technical uncertainty into delivery controls: workstream readiness, issue and risk visibility, sponsor-facing status, pilot-readiness logic, and scale-transition discipline.</p><p>The implementation environment included AI-enabled pedestrian, vehicle, and micromobility detection; warning components; projected road-marking visibility; lighting and signage elements; V2I-readiness considerations; and integration logic for Smart City / ITS environments.</p></section><section class="content-card card card-pad reveal visual-proof-section" id="technical-view"><span class="label">Technical visual proof</span><h2>Technical system view and readable delivery chain.</h2><p>I use the visual only to show the field-system context. The delivery chain below is built as live HTML text, not a raster image, so it stays readable on desktop and mobile.</p><div class="fx-sys" id="fxsys">
+<div class="fx-head"><span class="label">Interactive system walkthrough</span><h3>How the crossing responds to a pedestrian.</h3><p>Press play to run one detection cycle, or select any component to see what it does and which delivery stream I governed around it.</p></div>
+<div class="fx-steps" role="list"><span class="fx-step" data-s="1" role="listitem">01 Detect</span><span class="fx-step" data-s="2" role="listitem">02 Decide</span><span class="fx-step" data-s="3" role="listitem">03 Warn</span><span class="fx-step" data-s="4" role="listitem">04 Capture</span></div>
+<div class="fx-stage">
+<svg aria-labelledby="fxtitle fxdesc" role="img" viewBox="0 0 680 372" xmlns="http://www.w3.org/2000/svg">
+<title id="fxtitle">Interactive schematic of the AI-enabled pedestrian crossing system</title>
+<desc id="fxdesc">Top-down road scene with a crosswalk, an approaching car, and a pedestrian, next to the pole equipment stack: detection camera, LED sign, warning beacon, projection unit, and equipment cabinet. Playing the sequence animates detection, decision, warning, and event capture.</desc>
+<rect fill="#efe8dd" height="14" rx="4" width="400" x="24" y="128"/>
+<rect fill="#e7e0d4" height="150" width="400" x="24" y="146"/>
+<rect fill="#efe8dd" height="14" rx="4" width="400" x="24" y="300"/>
+<line stroke="#fffdf8" stroke-dasharray="16 14" stroke-width="3" x1="30" x2="418" y1="221" y2="221"/>
+<g class="fx-zebra"><rect height="134" rx="3" width="14" x="212" y="154"/><rect height="134" rx="3" width="14" x="236" y="154"/><rect height="134" rx="3" width="14" x="260" y="154"/><rect height="134" rx="3" width="14" x="284" y="154"/></g>
+<path class="fx-cone" d="M404 118 L206 152 L206 292 Z"/>
+<g class="fx-car"><rect fill="#7c7469" height="32" rx="9" width="62" x="36" y="240"/><rect fill="#d9d2c5" height="12" rx="3" width="16" x="46" y="246"/><rect fill="#d9d2c5" height="12" rx="3" width="14" x="70" y="246"/><circle cx="50" cy="274" fill="#45413b" r="6"/><circle cx="84" cy="274" fill="#45413b" r="6"/></g>
+<g class="fx-ped"><circle cx="247" cy="168" fill="#45413b" r="7"/><rect fill="#45413b" height="17" rx="3.5" width="8" x="243" y="177"/><line stroke="#45413b" stroke-linecap="round" stroke-width="3" x1="245" x2="241" y1="194" y2="204"/><line stroke="#45413b" stroke-linecap="round" stroke-width="3" x1="249" x2="253" y1="194" y2="204"/></g>
+<g class="fx-ringwrap"><circle class="fx-ring" cx="404" cy="112" fill="none" r="9" stroke="#a77737" stroke-width="1.5"/></g>
+<rect fill="#5f5548" height="34" rx="2" width="4" x="402" y="118"/>
+<rect fill="#45413b" height="12" rx="3" width="16" x="396" y="102"/>
+<line class="fx-leader" x1="414" x2="452" y1="112" y2="112"/>
+<g class="fx-comp" data-key="camera" role="button" tabindex="0"><rect class="fx-comp-bg" height="44" rx="10" width="204" x="452" y="90"/><rect fill="#45413b" height="12" rx="3" width="18" x="466" y="106"/><circle cx="490" cy="112" fill="#a77737" r="4"/><text class="fx-ct" x="504" y="116">Detection camera</text></g>
+<g class="fx-comp" data-key="led" role="button" tabindex="0"><rect class="fx-comp-bg" height="44" rx="10" width="204" x="452" y="142"/><rect fill="none" height="16" rx="4" stroke="#45413b" stroke-width="1.5" width="22" x="464" y="156"/><circle cx="471" cy="164" fill="#a77737" r="1.8"/><circle cx="477" cy="164" fill="#a77737" r="1.8"/><circle cx="483" cy="164" fill="#a77737" r="1.8"/><text class="fx-ct" x="504" y="168">LED information sign</text></g>
+<g class="fx-comp" data-key="beacon" role="button" tabindex="0"><rect class="fx-comp-bg" height="44" rx="10" width="204" x="452" y="194"/><circle class="fx-beacon" cx="475" cy="216" r="8"/><text class="fx-ct" x="504" y="220">Warning beacon</text></g>
+<g class="fx-comp" data-key="projection" role="button" tabindex="0"><rect class="fx-comp-bg" height="44" rx="10" width="204" x="452" y="246"/><path d="M468 258 L484 258 L490 274 L462 274 Z" fill="#e9c789"/><text class="fx-ct" x="504" y="272">Projection unit</text></g>
+<g class="fx-comp" data-key="cabinet" role="button" tabindex="0"><rect class="fx-comp-bg" height="44" rx="10" width="204" x="452" y="298"/><rect fill="none" height="20" rx="3" stroke="#45413b" stroke-width="1.5" width="16" x="466" y="310"/><line stroke="#45413b" x1="469" x2="479" y1="316" y2="316"/><line stroke="#45413b" x1="469" x2="479" y1="321" y2="321"/><text class="fx-ct" x="504" y="324">Equipment cabinet</text></g>
+<g class="fx-chip"><rect fill="#f3e7d3" height="24" rx="12" width="118" x="452" y="348"/><text class="fx-chipt" x="511" y="364">Event archived</text></g>
+</svg>
+</div>
+<div class="fx-bar"><button class="fx-play" type="button">Play detection cycle</button><span aria-live="polite" class="fx-caption">Idle. The crossing is monitoring in normal state.</span></div>
+<div aria-live="polite" class="fx-detail"><strong>Select a component</strong><p>Each element maps to one of the six delivery streams described below. Engineering design sat with the technical team; my scope was readiness, risk, and sponsor-facing delivery control.</p></div>
+</div>
+<details class="case-visual-disclosure"><summary><img alt="" class="visual-summary-thumb" loading="lazy" src="../assets/case-visuals/smartc-technical-system-view.png"/><span class="visual-summary-copy"><strong>Expand technical system view</strong><small>Component-level view: projection unit, illumination, signs, beacon, warning display, and detection hardware.</small></span></summary><figure class="case-visual-figure"><img alt="English-language technical visual of an intelligent pedestrian crossing system showing projection source, projected crosswalk marking, illumination, LED signs, driver warning sign, beacon, and detection hardware." loading="lazy" src="../assets/case-visuals/smartc-technical-system-view.png"/><figcaption>A Canadian-neutral visual translation of the field-system concept. I use it to show the field-system environment I coordinated around, not to claim hardware or AI engineering authorship.</figcaption><a class="visual-open-link" href="../assets/case-visuals/smartc-technical-system-view.png" rel="noopener" target="_blank">Open technical visual full size</a></figure></details><div aria-label="Readable tangible delivery chain" class="delivery-chain-native"><div class="chain-native-head"><span class="label">Readable PM delivery chain</span><h3>How the implementation moved from field hardware to scalable delivery.</h3><p>This is the same delivery logic as the previous visual artifact, but expressed as readable web content.</p></div><div class="chain-steps"><article class="chain-step"><span class="chain-num">01</span><h4>Field hardware setup</h4><p>Projection unit, detection hardware, LED signs, beacon, illumination, pole infrastructure, and connectivity had to be understood as one field system.</p><p class="chain-signal">PM signal: readiness visibility across physical installation dependencies.</p></article><article class="chain-step"><span class="chain-num">02</span><h4>AI-enabled detection</h4><p>Pedestrian, vehicle, and micromobility detection behavior had to be validated against real movement patterns and field conditions.</p><p class="chain-signal">PM signal: make detection behavior testable, reviewable, and issue-trackable.</p></article><article class="chain-step"><span class="chain-num">03</span><h4>Crossing response logic</h4><p>Warnings, projected road marking, enhanced illumination, and driver-facing signals had to respond as one safety workflow.</p><p class="chain-signal">PM signal: connect technical behavior to user-visible response and safety context.</p></article><article class="chain-step"><span class="chain-num">04</span><h4>Pilot validation</h4><p>Pilot readiness depended on night conditions, weather exposure, traffic complexity, visibility, and testable field scenarios.</p><p class="chain-signal">PM signal: separate test-ready work from risk-exposed work.</p></article><article class="chain-step"><span class="chain-num">05</span><h4>QA readiness and sponsor visibility</h4><p>Issues, defects, readiness gaps, risks, and decision points had to be visible enough for sponsor review.</p><p class="chain-signal">PM signal: turn technical uncertainty into status, ownership, and decision gates.</p></article><article class="chain-step"><span class="chain-num">06</span><h4>Scale transition</h4><p>The delivery path had to move from pilot validation toward rollout readiness, scaled deployment, and operational support of the installed base.</p><p class="chain-signal">PM signal: connect pilot evidence to scale-transition discipline.</p></article></div></div></section>
 <section class="content-card card card-pad reveal" id="recovery">
 <h2>Program phases</h2>
 <p>The program moved through three delivery phases, each with its own team composition, technical risk profile, and readiness challenges. Across all three, the operating need was the same: a clear governance layer showing what was ready, blocked, decision-dependent, or exposed to field-condition risk.</p>
@@ -122,5 +201,36 @@
 </main>
 <footer class="site-footer"><div class="shell footer-grid"><div><strong>Pavlo Malairov, PMP</strong><p>I use this portfolio to show fit for Operations PM, Implementation PM, Technical Operations PM, and Process Improvement PM roles.</p></div><nav aria-label="Footer navigation" class="footer-links"><a href="https://www.linkedin.com/in/pavlomalairov" rel="noreferrer" target="_blank">LinkedIn</a><a href="mailto:pmalairov@gmail.com?subject=Operations%20%2F%20Implementation%20PM%20Opportunity">Email</a></nav></div></footer>
 <script src="../js/case-pages.js?v=61"></script>
+<script>
+(function(){
+var sys=document.getElementById('fxsys');if(!sys)return;
+var play=sys.querySelector('.fx-play'),cap=sys.querySelector('.fx-caption'),detail=sys.querySelector('.fx-detail');
+var steps=sys.querySelectorAll('.fx-step');var timers=[];
+var caps={1:'Detect: the camera identifies a pedestrian approaching the crossing; the vehicle is inside the monitored zone.',2:'Decide: movement direction and crossing intent are evaluated before any driver-facing warning is triggered.',3:'Warn: the beacon flashes, the LED sign activates, and the projected road marking illuminates while the pedestrian crosses.',4:'Capture: the event is logged and archived in the equipment cabinet for review, diagnostics, and evidence.'};
+var comps={
+camera:['Detection camera','AI-enabled detection of pedestrians, vehicles, and micromobility users, including movement-direction logic and false-positive risk.','Stream 01 · Detection logic'],
+led:['LED information sign','Driver-facing pedestrian warning display synchronized with detection output.','Stream 02 · Field hardware readiness'],
+beacon:['Warning beacon','Flashing alert triggered only on confirmed crossing intent, tuned against real-road visibility conditions.','Stream 02 · Field hardware readiness'],
+projection:['Projection unit','Projected road-marking visibility that reinforces the crossing in low light and adverse weather.','Stream 02 · Field hardware readiness'],
+cabinet:['Equipment cabinet','On-site microcomputer, power, heating, and connectivity; the point where events are captured and archived.','Stream 03 · Violation / event logic']};
+function setStep(n){sys.className=sys.className.replace(/\bfxsys-st\d\b/g,'').trim();for(var i=1;i<=n;i++){sys.classList.add('fxsys-st'+i);}steps.forEach(function(s){s.classList.toggle('on',+s.dataset.s<=n);});if(n>0)cap.textContent=caps[n];}
+function litComps(keys){sys.querySelectorAll('.fx-comp').forEach(function(c){c.classList.toggle('lit',keys.indexOf(c.dataset.key)>-1);});}
+play.addEventListener('click',function(){
+timers.forEach(clearTimeout);timers=[];play.disabled=true;setStep(0);litComps([]);
+cap.textContent='Starting cycle…';
+timers.push(setTimeout(function(){setStep(1);litComps(['camera']);},150));
+timers.push(setTimeout(function(){setStep(2);},1900));
+timers.push(setTimeout(function(){setStep(3);litComps(['camera','led','beacon','projection']);},3100));
+timers.push(setTimeout(function(){setStep(4);litComps(['cabinet']);},6100));
+timers.push(setTimeout(function(){play.disabled=false;play.textContent='Replay detection cycle';},7300));
+});
+sys.querySelectorAll('.fx-comp').forEach(function(c){
+function pick(){sys.querySelectorAll('.fx-comp').forEach(function(x){x.classList.remove('sel');});c.classList.add('sel');var d=comps[c.dataset.key];detail.innerHTML='<strong>'+d[0]+'</strong><p>'+d[1]+'</p><span class="fx-tag">'+d[2]+'</span>';}
+c.addEventListener('click',pick);
+c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pick();}});
+});
+})();
+</script>
+
 </body>
 </html>

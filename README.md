@@ -36,3 +36,11 @@ v63 -> v64:
   Implemented as inline SVG in site palette; page-scoped <style> only, base.css untouched.
   Mobile: horizontal scroll (min-width 640px) so label text stays legible.
 - noindex mirror (smartc-ai-delivery.html) regenerated from the updated page.
+
+v64 -> v65:
+- Interactive system walkthrough added to the AI Transportation case (top of System view section):
+  play button runs a Detect -> Decide -> Warn -> Capture cycle (car decelerates, pedestrian
+  crosses, projected marking illuminates, beacon flashes, event archived); five clickable
+  pole components map to the delivery streams. Native inline SVG + page-scoped CSS/JS,
+  zero libraries, zero raster images, mobile horizontal scroll, prefers-reduced-motion
+  and keyboard access supported. base.css / js files untouched.
