@@ -20,3 +20,8 @@ Applied on top of the deployed v70.1 build. Design system untouched (css/site.cs
 
 ## Untouched by design
 - Palette, typography (system serif stack), motion system, interactive widgets, prev/next case navigation, redirect stub, og images, favicon.
+
+## v71.1 — typography restraint (2026-07-10, user feedback)
+- Display scale reduced: home h1 clamp(3.25rem,7vw,6.8rem) -> clamp(2.6rem,5vw,4.6rem); case hero h1 6rem -> 4rem max; mobile h1 5rem -> 3.2rem max; display h2 4.2rem -> 3.4rem max. No other CSS touched.
+- Index proof bar: "1,800+ catalog records · 1,500+ active" -> "~400 -> 1,800+ catalog records standardized" (removes duplication with the hero stat "1,500+ active standardized SKUs" one screen above; growth story instead).
+- Cache strings bumped to v=71.1 on all pages (css+js) so visitors get the new sizes without hard refresh.
