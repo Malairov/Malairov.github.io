@@ -1,17 +1,23 @@
-# Final QA Report — v61
+# Final QA Report — v64
 
 ## Checks
-- [x] cache_v61_main_pages
 - [x] no_smartc_visible_any_html
-- [x] no_project_context_pill
-- [x] image_based_tangible_chain_removed
-- [x] html_delivery_chain_present
-- [x] full_size_technical_link_present
-- [x] old_page_neutralized
-- [x] no_company_scale_metrics
+- [x] no_recovery_narrative_visible (only anchor id remains, invisible)
+- [x] no_inflated_17_contributors (now ~7 -> ~11)
+- [x] no_30_40_day_cycles (replaced with sprint-based Jira cadence)
+- [x] no_t7_jurisdiction_token
 - [x] no_russia_ru_skolkovo
+- [x] no_company_scale_metrics (no 460+, no budget, no accident-%)
 - [x] no_public_resume_download
+- [x] old_page_noindex_mirror_synced
+- [x] sitemap_lastmod_2026-07-08
 - [x] no_broken_internal_links_or_assets
 
 ## Broken-link / asset checker
-No errors found.
+See below (script output).
+
+## v64 additions
+- [x] linkedin_url_updated_all_pages (15 occurrences -> /in/pavlomalairov, 0 old remnants)
+- [x] phase_timeline_svg_geometry_ok (viewBox 680x268, no overflow)
+- [x] phase_timeline_mobile_scroll (min-width 640px + overflow-x auto, text stays legible)
+- [x] mirror_page_synced_with_timeline
