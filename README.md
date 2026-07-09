@@ -1,58 +1,28 @@
-# Portfolio v64 SmartC Actualization + Timeline + LinkedIn URL — Pavlo Malairov, PMP
+# Pavlo Malairov Portfolio — Full Deployment v68
 
-Upload the CONTENTS of this folder to the GitHub Pages repository root.
-css/, js/, and assets/ are unchanged from v61 — only HTML content, sitemap, and docs changed.
+This archive is a complete GitHub Pages deployment. Remove the existing site contents and upload every file and folder from this archive to the repository root.
 
-Content changes (v61 -> v63), AI Transportation Delivery case + homepage:
-- Removed the unverified "recovery / redesigned product" narrative everywhere.
-  The case is now framed around the real, validated three-phase program:
-  Phase 1 (2022): AI-enabled pedestrian crossing detection system — prototype, city pilot, scaled deployment.
-  Phase 2 (2023–2024): equipment-monitoring platform for deployed field units.
-  Phase 3 (2024–2025): micromobility (e-scooter) violation-detection module.
-- Corrected contributor metric: ~7 -> ~11 (previous ~17 was flagged as inflated; validated peak 8–11).
-- Replaced "30–40 day cycles" with validated delivery method: sprint-based cycles in Jira,
-  MS Project baseline early on, weekly sponsor-facing syncs.
-- "Change visibility" control upgraded to the real sponsor-controlled change board,
-  with decision packages + impact analysis prepared by the PM.
-- Removed jurisdiction-specific "T7 signal elements" token (replaced with neutral
-  "flashing warning beacons").
-- Added program duration "just under three years (2022–2025)".
-- Homepage: case card, AI-delivery metric card, and duplicate hero chip updated to match.
-- Old /cases/smartc-ai-delivery.html path kept as noindex mirror with canonical to the new URL.
-- sitemap lastmod bumped to 2026-07-08. robots.txt and 404.html unchanged.
+## Included
+- `index.html`
+- `cases/` — three public case studies plus a noindex legacy mirror
+- `css/`
+- `js/`
+- `404.html`
+- `robots.txt`
+- `sitemap.xml`
 
-Guardrails preserved:
-- No visible SmartC in any HTML. No client, jurisdiction, or country references.
-- No company-scale metrics (no 460+ locations, no budget figures, no accident-% claims).
-- Role boundary intact: delivery leadership and implementation governance, no engineering authorship.
-- No public resume download. Conservative, verifiable metrics only.
+## v68 changes
+- Compact, non-stretched hero layout across all three case studies.
+- AI Transportation case reduced and consolidated from 11 content sections to 7.
+- AI hero changed to a compact 2×2 proof grid.
+- Aerospace interactive loop map now drives a persistent detail panel; the full matrix is optional and collapsed by default.
+- Replenishment Diagnostic now uses one integrated trace + failure inspector + shared output.
+- Metrics clarified: 1,800+ tracked records, including 1,500+ active standardized SKUs; representative critical-category gap duration stated precisely.
+- Correct email `pavlomalairov@gmail.com` applied throughout.
+- Mobile, keyboard, reduced-motion, canonical, noindex mirror, and internal-link checks included.
 
-v63 -> v64:
-- LinkedIn URL replaced everywhere (header, footer, CTA on all 5 pages):
-  /in/pavlo-malairov-b51840219 -> /in/pavlomalairov (15 occurrences).
-- Native SVG phase timeline added to the AI Transportation case (Program phases section):
-  three phase bars 2022–2025 with milestone markers (city pilot, scaled deployment,
-  platform client testing, detection validation) and a tools footnote.
-  Implemented as inline SVG in site palette; page-scoped <style> only, base.css untouched.
-  Mobile: horizontal scroll (min-width 640px) so label text stays legible.
-- noindex mirror (smartc-ai-delivery.html) regenerated from the updated page.
-
-v64 -> v65:
-- Interactive system walkthrough added to the AI Transportation case (top of System view section):
-  play button runs a Detect -> Decide -> Warn -> Capture cycle (car decelerates, pedestrian
-  crosses, projected marking illuminates, beacon flashes, event archived); five clickable
-  pole components map to the delivery streams. Native inline SVG + page-scoped CSS/JS,
-  zero libraries, zero raster images, mobile horizontal scroll, prefers-reduced-motion
-  and keyboard access supported. base.css / js files untouched.
-
-v65 -> v66:
-- Removed the AI-generated raster "technical system view" PNG and its disclosure block
-  (off-brand artist rendering, 2.2MB, smartc-named asset URL). og:image meta removed.
-  The assets/ folder is intentionally absent from this build: deploying as a full
-  replacement removes both PNG files from the repository.
-- Added an animated system-architecture block diagram in its place: detection camera ->
-  microcomputer (on-site AI inference) inside the equipment cabinet (power/heating,
-  router) -> three warning outputs (LED sign, beacon, projection), plus telemetry to
-  the Phase 2 remote monitoring platform. "Trace signal path" animates the flow in four
-  captioned steps; all eight blocks are clickable with what/why explanations.
-  Native SVG + page-scoped CSS/JS, no libraries, reduced-motion and keyboard supported.
+## Deployment
+1. Delete old files from the GitHub Pages repository root.
+2. Upload all files and folders from this archive without adding an extra parent directory.
+3. Confirm `index.html`, `css/`, `js/`, and `cases/` are directly in the repository root.
+4. Commit and wait for GitHub Pages to rebuild.

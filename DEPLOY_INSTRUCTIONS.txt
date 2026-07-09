@@ -1,0 +1,17 @@
+FULL REPLACEMENT DEPLOYMENT
+
+1. Delete the old files from the root of your GitHub Pages repository.
+2. Extract this ZIP.
+3. Upload every extracted file and folder directly to the repository root.
+4. Do not upload the parent folder itself.
+5. After committing, verify these paths:
+   - /index.html
+   - /css/base.css
+   - /css/case-pages.css
+   - /js/app.js
+   - /js/case-pages.js
+   - /cases/four-operating-loops.html
+   - /cases/ai-transportation-delivery.html
+   - /cases/safety-stock-diagnostic.html
+
+Correct public email: pavlomalairov@gmail.com

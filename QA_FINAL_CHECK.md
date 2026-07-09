@@ -1,40 +1,40 @@
-# Final QA Report — v66
+# QA Final Check — v68
 
-## Checks
-- [x] no_smartc_visible_any_html
-- [x] no_recovery_narrative_visible (only anchor id remains, invisible)
-- [x] no_inflated_17_contributors (now ~7 -> ~11)
-- [x] no_30_40_day_cycles (replaced with sprint-based Jira cadence)
-- [x] no_t7_jurisdiction_token
-- [x] no_russia_ru_skolkovo
-- [x] no_company_scale_metrics (no 460+, no budget, no accident-%)
-- [x] no_public_resume_download
-- [x] old_page_noindex_mirror_synced
-- [x] sitemap_lastmod_2026-07-08
-- [x] no_broken_internal_links_or_assets
+## Structure
+- Complete replacement deployment package: PASS
+- Root `index.html`: PASS
+- Required `css`, `js`, and `cases` directories: PASS
+- Canonical AI page plus noindex legacy mirror: PASS
 
-## Broken-link / asset checker
-See below (script output).
+## Content and consistency
+- Correct email across all pages: PASS
+- LinkedIn URL consistency: PASS
+- 1,800+ tracked / 1,500+ active distinction: PASS
+- Representative ~16 days → ~1 week wording: PASS
+- Engineering-authorship boundary retained: PASS
 
-## v64 additions
-- [x] linkedin_url_updated_all_pages (15 occurrences -> /in/pavlomalairov, 0 old remnants)
-- [x] phase_timeline_svg_geometry_ok (viewBox 680x268, no overflow)
-- [x] phase_timeline_mobile_scroll (min-width 640px + overflow-x auto, text stays legible)
-- [x] mirror_page_synced_with_timeline
+## Interaction
+- Aerospace loop-map keys match all six matrix rows: PASS
+- Persistent detail panel available while matrix is collapsed: PASS
+- Replenishment trace stages and six failure modes share one output: PASS
+- Keyboard-capable buttons and SVG controls retained: PASS
+- `prefers-reduced-motion` handling retained: PASS
 
-## v65 additions
-- [x] interactive_system_walkthrough_added (native SVG+HTML+vanilla JS, no libraries, no rasters)
-- [x] fx_svg_geometry_ok (viewBox 680x372, no overflow)
-- [x] prefers_reduced_motion_respected (animations gated, transitions disabled on reduce)
-- [x] keyboard_accessible_components (role=button, tabindex, Enter/Space)
-- [x] role_boundary_microcopy_present_in_widget
-- [x] mirror_page_synced
+## Layout
+- Hero cards no longer forced to equal height: PASS
+- AI proof cards use compact 2×2 desktop layout: PASS
+- AI case consolidated to seven primary content sections: PASS
+- Responsive single-column fallbacks: PASS
 
-## v66 additions
-- [x] raster_system_visual_removed (AI-generated PNG + disclosure block deleted)
-- [x] og_image_meta_removed
-- [x] assets_folder_removed_from_deploy (smartc-named PNG files no longer shipped, -4MB)
-- [x] animated_architecture_diagram_added (native SVG, signal-trace sequence, 8 clickable blocks)
-- [x] ar_svg_geometry_ok (viewBox 680x436, no overflow)
-- [x] prefers_reduced_motion_and_keyboard_supported
-- [x] mirror_page_synced
+## Technical
+- JavaScript syntax check: PASS
+- Internal relative link existence check: PASS
+- Duplicate HTML IDs check: PASS
+- Broken local asset reference check: PASS
+
+## Render verification
+- Desktop visual render checked at 1440 px for all three case pages: PASS
+- Responsive overflow checked at 320, 390, 768, 1024, and 1440 px: PASS
+- Aerospace loop-map selection updates the persistent detail panel: PASS
+- Aerospace detailed matrix collapsed by default: PASS
+- Diagnostic failure-mode selection updates the shared output: PASS
