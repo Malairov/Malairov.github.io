@@ -6,10 +6,8 @@
   const menuButton = document.querySelector(".menu-toggle");
   const nav = document.querySelector(".nav-links");
   const analyticsOptOutKey = "pm_portfolio_analytics_opt_out";
-  // Replace this placeholder with the real Cloudflare Web Analytics token.
-  const cloudflareAnalyticsToken = "YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN";
-  const cloudflareAnalyticsPlaceholder =
-    "YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN";
+  const cloudflareAnalyticsToken = "bcb63e8bd75048248da5e03af697c7ea";
+  const cloudflareAnalyticsPlaceholder = "";
   const cloudflareBeaconUrl =
     "https://static.cloudflareinsights.com/beacon.min.js";
 
