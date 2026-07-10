@@ -5,6 +5,96 @@
   const mobileNavigation = window.matchMedia("(max-width: 1020px)");
   const menuButton = document.querySelector(".menu-toggle");
   const nav = document.querySelector(".nav-links");
+  const analyticsOptOutKey = "pm_portfolio_analytics_opt_out";
+  // Replace this placeholder with the real Cloudflare Web Analytics token.
+  const cloudflareAnalyticsToken = "YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN";
+  const cloudflareAnalyticsPlaceholder =
+    "YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN";
+  const cloudflareBeaconUrl =
+    "https://static.cloudflareinsights.com/beacon.min.js";
+
+  const getStoredAnalyticsOptOut = () => {
+    try {
+      return window.localStorage.getItem(analyticsOptOutKey) === "1";
+    } catch {
+      return false;
+    }
+  };
+
+  const setStoredAnalyticsOptOut = (optedOut) => {
+    try {
+      if (optedOut) window.localStorage.setItem(analyticsOptOutKey, "1");
+      else window.localStorage.removeItem(analyticsOptOutKey);
+    } catch {
+      return;
+    }
+  };
+
+  const removeAnalyticsParameter = () => {
+    const url = new URL(window.location.href);
+    if (!url.searchParams.has("analytics")) return;
+
+    url.searchParams.delete("analytics");
+    const nextUrl = `${url.pathname}${url.search}${url.hash}`;
+    window.history.replaceState(window.history.state, "", nextUrl);
+  };
+
+  const processAnalyticsPreference = () => {
+    const params = new URLSearchParams(window.location.search);
+    const preference = params.get("analytics");
+    if (preference !== "off" && preference !== "on") {
+      if (params.has("analytics")) removeAnalyticsParameter();
+      return false;
+    }
+
+    setStoredAnalyticsOptOut(preference === "off");
+    removeAnalyticsParameter();
+    return true;
+  };
+
+  const loadCloudflareAnalytics = () => {
+    if (document.querySelector(`script[src="${cloudflareBeaconUrl}"]`)) return;
+    if (
+      !cloudflareAnalyticsToken ||
+      cloudflareAnalyticsToken === cloudflareAnalyticsPlaceholder
+    ) {
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.defer = true;
+    script.src = cloudflareBeaconUrl;
+    script.dataset.cfBeacon = JSON.stringify({
+      token: cloudflareAnalyticsToken,
+    });
+    document.head.append(script);
+  };
+
+  const analyticsPreferenceChanged = processAnalyticsPreference();
+  if (!analyticsPreferenceChanged && !getStoredAnalyticsOptOut()) {
+    loadCloudflareAnalytics();
+  }
+
+  const getCampaignRef = () => {
+    const value = new URLSearchParams(window.location.search).get("ref");
+    if (!value) return "";
+    const normalized = value.trim();
+    return /^[A-Za-z0-9_-]{1,64}$/.test(normalized) ? normalized : "";
+  };
+  const campaignRef = getCampaignRef();
+
+  if (campaignRef) {
+    document.querySelectorAll("[data-preserve-ref]").forEach((link) => {
+      const href = link.getAttribute("href");
+      if (!href || href.startsWith("#") || href.startsWith("mailto:")) return;
+
+      const url = new URL(href, window.location.href);
+      if (url.origin !== window.location.origin) return;
+
+      url.searchParams.set("ref", campaignRef);
+      link.setAttribute("href", `${url.pathname}${url.search}${url.hash}`);
+    });
+  }
 
   const setMenuState = (open, { moveFocus = false } = {}) => {
     if (!menuButton || !nav) return;
@@ -292,23 +382,23 @@
   const architectureData = {
     detect: {
       title: "Detection and direction logic",
-      text: "Computer-vision workstreams identified pedestrians and movement direction. The delivery requirement was clear ownership, test evidence, dependency visibility, and readiness criteria across the technical team.",
+      text: "Computer-vision teams identified pedestrians and movement direction. The PM requirement was ownership, test records, dependency tracking, and acceptance criteria.",
     },
     compute: {
-      title: "Edge-computing and enclosure readiness",
-      text: "Camera, microcomputer, heating, and enclosure components had to operate as one field-ready unit. Procurement and integration dependencies were tracked as delivery risks rather than isolated engineering tasks.",
+      title: "Edge-computing and enclosure package",
+      text: "Camera, microcomputer, heating, and enclosure components had to operate as one field-ready unit. Procurement and integration dependencies were tracked as project risks, not isolated engineering tasks.",
     },
     alert: {
       title: "Driver-warning output",
-      text: "The system translated a verified pedestrian event into a visible warning state. Acceptance required defined warning behaviour, failure handling, and test evidence.",
+      text: "The system translated a verified pedestrian event into a driver-warning state. Acceptance required defined warning behaviour, failure handling, and test records.",
     },
     monitor: {
       title: "Remote equipment monitoring",
-      text: "Operational telemetry and exception visibility were required so field failures could be identified, assigned, and resolved without relying only on public reports or site visits.",
+      text: "Operational telemetry and exception visibility helped field failures be identified, assigned, and resolved without relying only on public reports or site visits.",
     },
     pilot: {
-      title: "City pilot, field evidence, and scale transition",
-      text: "One city pilot tested the product under live field conditions. Readiness decisions connected night-time sign glare, wind-related camera displacement, winter survivability, installation evidence, sponsor acceptance, and lessons for the next delivery stage.",
+      title: "City pilot, field records, and scale transition",
+      text: "One city pilot tested the product under live field conditions. Go/no-go decisions connected night-time sign glare, wind-related camera displacement, winter survivability, installation records, sponsor acceptance, and lessons for the next phase.",
     },
   };
 

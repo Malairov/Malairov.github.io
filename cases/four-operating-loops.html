@@ -1,9 +1,9 @@
 <!doctype html>
 
-<html lang="en" data-build="v73">
+<html lang="en" data-build="v74">
   <head>
     <meta charset="utf-8" />
-    <meta content="v73" name="build-version" />
+    <meta content="v74" name="build-version" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>Aerospace Service Delivery Controls | Pavlo Malairov, PMP</title>
     <meta
@@ -67,7 +67,7 @@
       name="twitter:image"
     />
     <meta content="image/png" property="og:image:type" />
-    <link href="../css/site.css?v=73" rel="stylesheet" />
+    <link href="../css/site.css?v=74" rel="stylesheet" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -89,7 +89,7 @@
       }
     </script>
   </head>
-  <body class="case-page">
+  <body class="case-page" data-analytics-page="case-aerospace">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="shell header-inner">
@@ -548,23 +548,38 @@
       <section class="case-next">
         <div class="shell case-inquiry">
           <div>
-            <span class="eyebrow">Project discussion</span>
+            <span class="eyebrow">Discuss an opportunity</span>
             <p>
-              Full CV and references are available on request. For aerospace
-              service delivery or implementation work, contact Pavlo directly.
+              For service delivery, technical operations, or implementation
+              opportunities, contact me directly. Full CV and references are
+              available on request.
             </p>
           </div>
           <a
             class="button button-secondary"
+            data-analytics-case="aerospace"
+            data-analytics-event="discuss_opportunity_click"
+            data-analytics-location="case_cta"
             href="mailto:pavlomalairov@gmail.com?subject=Project%20Management%20Opportunity"
             >Discuss an opportunity</a
           >
         </div>
         <div class="shell case-next-grid">
-          <a class="next-link" href="../index.html#work"
+          <a
+            class="next-link"
+            data-analytics-event="return_to_selected_work"
+            data-analytics-location="case_navigation"
+            data-preserve-ref=""
+            href="../index.html#work"
             ><span>Return</span><strong>Selected work</strong></a
           >
-          <a class="next-link" href="ai-transportation-delivery.html"
+          <a
+            class="next-link"
+            data-analytics-case="ai"
+            data-analytics-event="next_case_navigation"
+            data-analytics-location="case_navigation"
+            data-preserve-ref=""
+            href="ai-transportation-delivery.html"
             ><span>Next case</span
             ><strong>AI Transportation Implementation →</strong></a
           >
@@ -573,20 +588,18 @@
     </main>
     <footer class="site-footer">
       <div class="shell footer-grid">
-        <p>
-          © <span data-current-year="">2026</span> Pavlo Malairov, PMP.
-        </p>
+        <p>© 2026 Pavlo Malairov, PMP.</p>
         <div class="footer-links">
-          <a href="mailto:pavlomalairov@gmail.com">Email</a
-          ><a
-            href="https://www.linkedin.com/in/pavlomalairov"
-            rel="noopener noreferrer"
-            target="_blank"
-            >LinkedIn<span class="sr-only"> (opens in a new tab)</span></a
+          <a
+            data-analytics-event="privacy_link_click"
+            data-analytics-location="footer"
+            data-preserve-ref=""
+            href="../privacy.html"
+            >Privacy</a
           >
         </div>
       </div>
     </footer>
-    <script defer="" src="../js/site.js?v=73"></script>
+    <script defer="" src="../js/site.js?v=74"></script>
   </body>
 </html>

@@ -1,9 +1,9 @@
 <!doctype html>
 
-<html lang="en" data-build="v73">
+<html lang="en" data-build="v74">
   <head>
     <meta charset="utf-8" />
-    <meta content="v73" name="build-version" />
+    <meta content="v74" name="build-version" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>
       Pavlo Malairov, PMP | Technical Program &amp; Implementation Delivery
@@ -63,7 +63,7 @@
     <link href="assets/favicon.svg" rel="icon" type="image/svg+xml" />
     <link href="assets/apple-touch-icon.png" rel="apple-touch-icon" />
     <meta content="image/png" property="og:image:type" />
-    <link href="css/site.css?v=73" rel="stylesheet" />
+    <link href="css/site.css?v=74" rel="stylesheet" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -107,7 +107,7 @@
       }
     </script>
   </head>
-  <body class="home-page">
+  <body class="home-page" data-analytics-page="home">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="shell header-inner">
@@ -161,6 +161,8 @@
               <a class="button" href="#work">View selected work</a>
               <a
                 class="button button-secondary"
+                data-analytics-event="discuss_opportunity_click"
+                data-analytics-location="home_hero"
                 href="mailto:pavlomalairov@gmail.com?subject=Project%20Management%20Opportunity"
                 >Discuss an opportunity</a
               >
@@ -236,7 +238,13 @@
                 <li>1,500+ active SKUs</li>
                 <li>30+ suppliers</li>
               </ul>
-              <a class="button-text" href="cases/four-operating-loops.html"
+              <a
+                class="button-text"
+                data-analytics-case="aerospace"
+                data-analytics-event="case_open"
+                data-analytics-location="home_featured"
+                data-preserve-ref=""
+                href="cases/four-operating-loops.html"
                 >Open case study</a
               >
             </div>
@@ -270,6 +278,10 @@
               </div>
               <a
                 class="button-text"
+                data-analytics-case="ai"
+                data-analytics-event="case_open"
+                data-analytics-location="home_selected_work"
+                data-preserve-ref=""
                 href="cases/ai-transportation-delivery.html"
                 >Open case study</a
               >
@@ -286,7 +298,13 @@
                 <span></span><span></span><span></span><span></span
                 ><span></span>
               </div>
-              <a class="button-text" href="cases/safety-stock-diagnostic.html"
+              <a
+                class="button-text"
+                data-analytics-case="diagnostic"
+                data-analytics-event="case_open"
+                data-analytics-location="home_selected_work"
+                data-preserve-ref=""
+                href="cases/safety-stock-diagnostic.html"
                 >Open case study</a
               >
             </article>
@@ -428,11 +446,15 @@
           <div class="cta-actions">
             <a
               class="button"
+              data-analytics-event="email_click"
+              data-analytics-location="home_contact"
               href="mailto:pavlomalairov@gmail.com?subject=Project%20Management%20Opportunity"
               >Email Pavlo</a
             >
             <a
               class="button button-secondary"
+              data-analytics-event="linkedin_click"
+              data-analytics-location="home_contact"
               href="https://www.linkedin.com/in/pavlomalairov"
               rel="noopener noreferrer"
               target="_blank"
@@ -444,20 +466,18 @@
     </main>
     <footer class="site-footer">
       <div class="shell footer-grid">
-        <p>
-          © <span data-current-year="">2026</span> Pavlo Malairov, PMP.
-        </p>
+        <p>© 2026 Pavlo Malairov, PMP.</p>
         <div class="footer-links">
-          <a href="mailto:pavlomalairov@gmail.com">Email</a
-          ><a
-            href="https://www.linkedin.com/in/pavlomalairov"
-            rel="noopener noreferrer"
-            target="_blank"
-            >LinkedIn<span class="sr-only"> (opens in a new tab)</span></a
+          <a
+            data-analytics-event="privacy_link_click"
+            data-analytics-location="footer"
+            data-preserve-ref=""
+            href="privacy.html"
+            >Privacy</a
           >
         </div>
       </div>
     </footer>
-    <script defer="" src="js/site.js?v=73"></script>
+    <script defer="" src="js/site.js?v=74"></script>
   </body>
 </html>
