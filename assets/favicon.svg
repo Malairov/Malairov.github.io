@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="PM monogram">
+  <rect width="64" height="64" fill="#f4f0e7"/>
+  <rect x="5.5" y="5.5" width="53" height="53" fill="none" stroke="#76542d"/>
+  <text x="32" y="40" text-anchor="middle" font-family="Georgia, serif" font-size="25" fill="#17202a">PM</text>
+</svg>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /PROGRESS.md
+
+Sitemap: https://malairov.github.io/sitemap.xml

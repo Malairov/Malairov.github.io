@@ -1,0 +1,592 @@
+<!doctype html>
+
+<html lang="en" data-build="v73">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="v73" name="build-version" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Aerospace Service Delivery Controls | Pavlo Malairov, PMP</title>
+    <meta
+      content="Case study: operating controls, replenishment logic, issue visibility, supplier governance, and shortage recovery across a production-critical aerospace service program."
+      name="description"
+    />
+    <link
+      href="https://malairov.github.io/cases/four-operating-loops.html"
+      rel="canonical"
+    />
+    <meta content="index,follow" name="robots" />
+    <meta content="article" property="og:type" />
+    <meta
+      content="Aerospace Service Delivery Controls | Pavlo Malairov, PMP"
+      property="og:title"
+    />
+    <meta
+      content="How fragmented production-support signals became a visible operating control system."
+      property="og:description"
+    />
+    <meta
+      content="https://malairov.github.io/cases/four-operating-loops.html"
+      property="og:url"
+    />
+    <meta
+      content="https://malairov.github.io/assets/og-aerospace.png"
+      property="og:image"
+    />
+    <meta
+      content="Aerospace service delivery controls case study"
+      property="og:image:alt"
+    />
+    <meta content="summary_large_image" name="twitter:card" />
+    <script data-js-class="true">
+      document.documentElement.classList.add("js");
+    </script>
+    <meta content="Pavlo Malairov" name="author" />
+    <meta content="#f4f0e7" name="theme-color" />
+    <meta content="light" name="color-scheme" />
+    <meta content="strict-origin-when-cross-origin" name="referrer" />
+    <meta content="Pavlo Malairov, PMP" property="og:site_name" />
+    <meta content="en_CA" property="og:locale" />
+    <meta content="1200" property="og:image:width" />
+    <meta content="630" property="og:image:height" />
+    <meta
+      content="Aerospace Service Delivery Controls | Pavlo Malairov, PMP"
+      name="twitter:title"
+    />
+    <meta
+      content="How fragmented production-support signals became a visible operating control system."
+      name="twitter:description"
+    />
+    <meta
+      content="Aerospace service delivery controls case study"
+      name="twitter:image:alt"
+    />
+    <link href="../assets/favicon.svg" rel="icon" type="image/svg+xml" />
+    <link href="../assets/apple-touch-icon.png" rel="apple-touch-icon" />
+    <meta
+      content="https://malairov.github.io/assets/og-aerospace.png"
+      name="twitter:image"
+    />
+    <meta content="image/png" property="og:image:type" />
+    <link href="../css/site.css?v=73" rel="stylesheet" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        "headline": "Aerospace Service Delivery Controls",
+        "author": {
+          "@type": "Person",
+          "name": "Pavlo Malairov"
+        },
+        "url": "https://malairov.github.io/cases/four-operating-loops.html",
+        "description": "Operating control case study for a production-critical aerospace service program.",
+        "dateModified": "2026-07-09",
+        "inLanguage": "en-CA",
+        "image": "https://malairov.github.io/assets/og-aerospace.png",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://malairov.github.io/cases/four-operating-loops.html"
+        }
+      }
+    </script>
+  </head>
+  <body class="case-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a
+          aria-label="Pavlo Malairov portfolio home"
+          class="brand"
+          href="../index.html"
+          ><span aria-hidden="true" class="brand-mark">PM</span
+          ><span class="brand-copy"
+            ><strong>Pavlo Malairov, PMP</strong
+            ><span>Technical program · implementation delivery</span></span
+          ></a
+        >
+        <nav aria-label="Primary navigation" class="nav-links" id="primaryNav">
+          <a aria-current="location" href="../index.html#work">Selected work</a
+          ><a href="../index.html#approach">Approach</a
+          ><a href="../index.html#background">Background</a
+          ><a class="mobile-nav-only" href="../index.html#contact">Contact</a>
+        </nav>
+        <div class="header-actions">
+          <a
+            class="button button-secondary desktop-only"
+            href="../index.html#contact"
+            >Contact</a
+          ><button
+            aria-controls="primaryNav"
+            aria-expanded="false"
+            aria-label="Open navigation menu"
+            class="menu-toggle"
+            type="button"
+          >
+            <span></span>
+          </button>
+        </div>
+      </div>
+      <div aria-hidden="true" class="reading-progress"><span></span></div>
+    </header>
+    <main id="main" tabindex="-1">
+      <section class="case-hero">
+        <div class="shell">
+          <nav aria-label="Breadcrumb" class="case-breadcrumb">
+            <ol>
+              <li><a href="../index.html#work">Selected work</a></li>
+              <li aria-current="page">Aerospace service delivery</li>
+            </ol>
+          </nav>
+          <div class="case-hero-grid">
+            <div class="case-hero-copy reveal">
+              <span class="eyebrow"
+                >Case 01 · Canadian aerospace operations</span
+              >
+              <h1>Aerospace Service Delivery Controls</h1>
+              <p class="lede">
+                I built the operating foundation for a production-critical
+                industrial supply program: structured data, exception-based
+                planning, supplier and specification gates, issue ownership,
+                lifecycle visibility, and shortage recovery.
+              </p>
+            </div>
+            <aside class="case-hero-aside reveal">
+              <ul class="case-fact-list">
+                <li>
+                  <strong>Environment</strong
+                  ><span>Aerospace manufacturing</span>
+                </li>
+                <li>
+                  <strong>Role</strong
+                  ><span>Sole on-site supplier representative</span>
+                </li>
+                <li>
+                  <strong>Focus</strong
+                  ><span>Stabilization + continuous improvement</span>
+                </li>
+                <li>
+                  <strong>Method</strong
+                  ><span>Exception-based operating controls</span>
+                </li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+      </section>
+      <section aria-label="Case evidence" class="proof-bar">
+        <div class="shell case-proof-grid">
+          <div class="case-proof">
+            <strong>5</strong><span>client buildings</span>
+          </div>
+          <div class="case-proof">
+            <strong>17</strong><span>vending systems</span>
+          </div>
+          <div class="case-proof">
+            <strong>1,800+</strong><span>catalog items · 1,500+ active</span>
+          </div>
+          <div class="case-proof">
+            <strong>~400 → 1,800+</strong><span>catalog expansion</span>
+          </div>
+          <div class="case-proof">
+            <strong>30+</strong><span>suppliers</span>
+          </div>
+          <div class="case-proof">
+            <strong>5h → 30m</strong><span>review cycle</span>
+          </div>
+        </div>
+      </section>
+      <section class="case-section">
+        <div class="shell case-section-grid">
+          <div class="case-section-title reveal">
+            <span class="section-number">01 / Mandate</span>
+            <h2>Stabilize the work while building the system.</h2>
+          </div>
+          <div class="case-section-body reveal">
+            <p class="lead">
+              The program required daily service continuity, but its operating
+              information was fragmented across portal exports, supplier
+              communication, local knowledge, physical locations, and manual
+              follow-up.
+            </p>
+            <p>
+              The mandate was not a clean-sheet software project. The system had
+              to be constructed while orders, receipts, replenishment,
+              stakeholder requests, shortages, and production-support issues
+              continued in real time.
+            </p>
+            <div class="before-after">
+              <article>
+                <span class="label">Before</span>
+                <h3>Work existed, but the operating state was hard to see.</h3>
+                <ul>
+                  <li>Fragmented item data and inconsistent descriptors</li>
+                  <li>Manual review across large item volumes</li>
+                  <li>Informal issue follow-up and unclear closure</li>
+                  <li>
+                    Availability, approval, and ordering treated as one state
+                  </li>
+                  <li>Limited evidence for recurring shortage analysis</li>
+                </ul>
+              </article>
+              <article>
+                <span class="label">After</span>
+                <h3>A connected operating control system.</h3>
+                <ul>
+                  <li>Structured master-data and cross-reference logic</li>
+                  <li>Exception-based replenishment review</li>
+                  <li>Explicit lifecycle, ownership, and escalation states</li>
+                  <li>Separated supplier, specification, and approval gates</li>
+                  <li>Measurable recovery and preventive follow-up</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="case-section" id="control-system">
+        <div class="shell case-section-grid">
+          <div class="case-section-title reveal">
+            <span class="section-number">02 / Control system</span>
+            <h2>
+              Six operating paths replaced one undifferentiated stream of noise.
+            </h2>
+          </div>
+          <div class="case-section-body reveal">
+            <p class="lead">
+              Each path answered a different management question. Select a
+              control to see the operating problem, mechanism, decision logic,
+              and business value.
+            </p>
+            <div class="control-lab">
+              <div
+                aria-label="Operating controls"
+                aria-orientation="vertical"
+                class="control-tabs"
+                role="tablist"
+              >
+                <button
+                  aria-controls="control-panel"
+                  aria-selected="true"
+                  class="control-tab"
+                  data-control-key="feedback"
+                  id="control-tab-feedback"
+                  role="tab"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span class="index">01</span><strong>Floor feedback</strong>
+                </button>
+                <button
+                  aria-controls="control-panel"
+                  aria-selected="false"
+                  class="control-tab"
+                  data-control-key="slot"
+                  id="control-tab-slot"
+                  role="tab"
+                  tabindex="-1"
+                  type="button"
+                >
+                  <span class="index">02</span><strong>Slot economics</strong>
+                </button>
+                <button
+                  aria-controls="control-panel"
+                  aria-selected="false"
+                  class="control-tab"
+                  data-control-key="replenish"
+                  id="control-tab-replenish"
+                  role="tab"
+                  tabindex="-1"
+                  type="button"
+                >
+                  <span class="index">03</span
+                  ><strong>Replenishment logic</strong>
+                </button>
+                <button
+                  aria-controls="control-panel"
+                  aria-selected="false"
+                  class="control-tab"
+                  data-control-key="lifecycle"
+                  id="control-tab-lifecycle"
+                  role="tab"
+                  tabindex="-1"
+                  type="button"
+                >
+                  <span class="index">04</span><strong>Lifecycle state</strong>
+                </button>
+                <button
+                  aria-controls="control-panel"
+                  aria-selected="false"
+                  class="control-tab"
+                  data-control-key="vendor"
+                  id="control-tab-vendor"
+                  role="tab"
+                  tabindex="-1"
+                  type="button"
+                >
+                  <span class="index">05</span
+                  ><strong>Vendor / specification gate</strong>
+                </button>
+                <button
+                  aria-controls="control-panel"
+                  aria-selected="false"
+                  class="control-tab"
+                  data-control-key="shortage"
+                  id="control-tab-shortage"
+                  role="tab"
+                  tabindex="-1"
+                  type="button"
+                >
+                  <span class="index">06</span
+                  ><strong>Shortage recovery</strong>
+                </button>
+              </div>
+              <div
+                aria-atomic="true"
+                aria-labelledby="control-tab-feedback"
+                aria-live="polite"
+                class="control-panel"
+                data-control-panel=""
+                id="control-panel"
+                role="tabpanel"
+                tabindex="0"
+              >
+                <h3>Floor feedback became an operating signal</h3>
+                <p>
+                  Informal production-floor concerns were converted into a
+                  visible review path with explicit ownership and follow-up.
+                </p>
+                <div class="panel-grid">
+                  <div class="panel-block">
+                    <span>Operating problem</span>
+                    <p>
+                      Issues could remain anecdotal until they developed into
+                      shortage or service escalations.
+                    </p>
+                  </div>
+                  <div class="panel-block">
+                    <span>Control introduced</span>
+                    <p>
+                      A structured review signal connected item, location,
+                      impact, owner, status, and next action.
+                    </p>
+                  </div>
+                  <div class="panel-block">
+                    <span>Management decision</span>
+                    <p>
+                      Separate urgent recovery from recurring-pattern analysis
+                      so immediate service and systemic correction could proceed
+                      in parallel.
+                    </p>
+                  </div>
+                  <div class="panel-block">
+                    <span>Business value</span>
+                    <p>
+                      Earlier visibility, cleaner escalation, and less
+                      dependence on memory or informal conversations.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="case-section">
+        <div class="shell case-section-grid">
+          <div class="case-section-title reveal">
+            <span class="section-number">03 / Management decisions</span>
+            <h2>The value was in the rules, not the spreadsheet.</h2>
+          </div>
+          <div class="case-section-body reveal">
+            <p class="lead">
+              Automation accelerated review only after the underlying management
+              decisions were defined.
+            </p>
+            <div class="decision-grid">
+              <article class="decision">
+                <span class="index">01</span>
+                <h3>Automate visibility, retain judgement.</h3>
+                <p>
+                  The workflow surfaced exceptions and context. It did not
+                  replace operational decisions with a formula that could not
+                  interpret production impact.
+                </p>
+              </article>
+              <article class="decision">
+                <span class="index">02</span>
+                <h3>Separate commercial and technical gates.</h3>
+                <p>
+                  Product availability, acceptable specification, stakeholder
+                  approval, order status, and physical receipt became distinct
+                  states.
+                </p>
+              </article>
+              <article class="decision">
+                <span class="index">03</span>
+                <h3>Close the issue and the recurrence path.</h3>
+                <p>
+                  Restoring supply resolved the event. A preventive action,
+                  owner, and evidence were required to address the repeating
+                  pattern.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="case-section">
+        <div class="shell case-section-grid">
+          <div class="case-section-title reveal">
+            <span class="section-number">04 / Results</span>
+            <h2>Operational improvement tied to evidence.</h2>
+          </div>
+          <div class="case-section-body reveal">
+            <p class="lead">
+              The strongest result was not a single metric. It was a repeatable
+              control layer that made scale, exceptions, ownership, and
+              follow-up manageable.
+            </p>
+            <table class="outcome-table">
+              <caption class="sr-only">
+                Case-study outcomes and management value
+              </caption>
+              <thead>
+                <tr>
+                  <th>Outcome</th>
+                  <th>What changed</th>
+                  <th>Management signal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Outcome">~5 hours → ~30 minutes</td>
+                  <td data-label="What changed">
+                    Manual ordering review became an exception-based workflow
+                    connected to usage, lead time, package constraints, and
+                    open-order state.
+                  </td>
+                  <td data-label="Management signal">
+                    Efficiency and decision focus
+                  </td>
+                </tr>
+                <tr>
+                  <td data-label="Outcome">
+                    ~400 → 1,800+ catalog items (1,500+ active)
+                  </td>
+                  <td data-label="What changed">
+                    The operating data foundation expanded and was standardized,
+                    including 1,500+ active SKUs with searchable descriptors and
+                    cross-reference logic.
+                  </td>
+                  <td data-label="Management signal">
+                    Scalable information control
+                  </td>
+                </tr>
+                <tr>
+                  <td data-label="Outcome">Shortage exposure roughly halved</td>
+                  <td data-label="What changed">
+                    Exception-based review and operating controls were strengthened
+                    around key production-critical items after root-cause
+                    analysis.
+                  </td>
+                  <td data-label="Management signal">Risk reduction</td>
+                </tr>
+                <tr>
+                  <td data-label="Outcome">Clearer issue movement</td>
+                  <td data-label="What changed">
+                    Unique identifiers, categories, owners, dates, actions,
+                    escalation points, and closure evidence replaced fragmented
+                    follow-up.
+                  </td>
+                  <td data-label="Management signal">
+                    Accountability and recovery
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="hero-note">
+              Figures reflect operating records and workflow measurements.
+              Confidential client and product information has been removed.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="case-section">
+        <div class="shell case-section-grid">
+          <div class="case-section-title reveal">
+            <span class="section-number">05 / Transferability</span>
+            <h2>Transferable management capability.</h2>
+          </div>
+          <div class="case-section-body reveal">
+            <div class="transfer-grid">
+              <article>
+                <h3>Implementation</h3>
+                <p>
+                  Built the operating foundation while live work continued,
+                  sequencing data, workflow, stakeholder, and adoption changes
+                  without interrupting service.
+                </p>
+              </article>
+              <article>
+                <h3>Technical operations</h3>
+                <p>
+                  Connected system behaviour, physical constraints, supplier
+                  dependencies, demand signals, and operating risk into one
+                  decision model.
+                </p>
+              </article>
+              <article>
+                <h3>Continuous improvement</h3>
+                <p>
+                  Used exception data and recurring failures to redesign the
+                  system rather than repeatedly treating individual symptoms.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="case-next">
+        <div class="shell case-inquiry">
+          <div>
+            <span class="eyebrow">Project discussion</span>
+            <p>
+              Full CV and references are available on request. For aerospace
+              service delivery or implementation work, contact Pavlo directly.
+            </p>
+          </div>
+          <a
+            class="button button-secondary"
+            href="mailto:pavlomalairov@gmail.com?subject=Project%20Management%20Opportunity"
+            >Discuss an opportunity</a
+          >
+        </div>
+        <div class="shell case-next-grid">
+          <a class="next-link" href="../index.html#work"
+            ><span>Return</span><strong>Selected work</strong></a
+          >
+          <a class="next-link" href="ai-transportation-delivery.html"
+            ><span>Next case</span
+            ><strong>AI Transportation Implementation →</strong></a
+          >
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <p>
+          © <span data-current-year="">2026</span> Pavlo Malairov, PMP.
+        </p>
+        <div class="footer-links">
+          <a href="mailto:pavlomalairov@gmail.com">Email</a
+          ><a
+            href="https://www.linkedin.com/in/pavlomalairov"
+            rel="noopener noreferrer"
+            target="_blank"
+            >LinkedIn<span class="sr-only"> (opens in a new tab)</span></a
+          >
+        </div>
+      </div>
+    </footer>
+    <script defer="" src="../js/site.js?v=73"></script>
+  </body>
+</html>
