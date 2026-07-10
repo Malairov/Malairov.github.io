@@ -307,8 +307,8 @@
       text: "Operational telemetry and exception visibility were required so field failures could be identified, assigned, and resolved without relying only on public reports or site visits.",
     },
     pilot: {
-      title: "Pilot, climate validation, and scale transition",
-      text: "Three pilot tracks tested a common baseline under different environmental conditions. Readiness decisions connected defects, climate hardening, installation evidence, sponsor acceptance, and lessons for scale.",
+      title: "City pilot, field evidence, and scale transition",
+      text: "One city pilot tested the product under live field conditions. Readiness decisions connected night-time sign glare, wind-related camera displacement, winter survivability, installation evidence, sponsor acceptance, and lessons for the next delivery stage.",
     },
   };
 
@@ -353,7 +353,7 @@
       control:
         "Separate mathematical output from decision classification; no-history items receive a review flag, not a false zero-risk signal.",
       evidence:
-        "Scenario testing for null, zero, sparse, and mature demand histories.",
+        "Four core scenarios tested: null, zero, sparse, and mature demand histories; abnormal states routed to exception review.",
     },
     automation: {
       title: "Automation state: VBA and dynamic ranges",
