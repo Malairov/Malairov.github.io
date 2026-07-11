@@ -565,30 +565,11 @@ h4 {
   background: var(--navy);
   color: var(--white);
   display: grid;
-  align-content: end;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
   position: relative;
   overflow: hidden;
-}
-.case-visual-frame::before,
-.case-visual-frame::after {
-  content: "";
-  position: absolute;
-  inset: auto;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-}
-.case-visual-frame::before {
-  width: 290px;
-  height: 290px;
-  border-radius: 50%;
-  top: 38px;
-  right: 44px;
-}
-.case-visual-frame::after {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  top: 104px;
-  right: 108px;
 }
 .case-visual-frame .visual-index {
   position: absolute;
@@ -1934,8 +1915,6 @@ h4 {
   .nav-links a::after {
     background: CanvasText;
   }
-  .case-visual-frame::before,
-  .case-visual-frame::after,
   .control-panel::after {
     display: none;
   }
