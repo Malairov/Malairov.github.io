@@ -984,12 +984,15 @@ h4 {
 }
 .case-section-title {
   grid-column: 1 / span 3;
+  min-width: 0;
 }
 .case-section-body {
   grid-column: 4 / span 8;
+  min-width: 0;
 }
 .case-section-note {
   grid-column: 12 / span 1;
+  min-width: 0;
 }
 .case-section-title .section-number {
   font-family: var(--font-mono);
