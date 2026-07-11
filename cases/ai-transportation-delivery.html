@@ -391,6 +391,191 @@
                 </p>
               </article>
             </div>
+
+            <figure
+              class="ccb-diagram"
+              role="img"
+              aria-label="Change control flow: a change is raised, Pavlo prepares the impact package, the sponsor board reviews it, and the board — not Pavlo — approves or rejects it."
+              style="margin-top: 44px"
+            >
+              <svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg">
+                <style>
+                  .ccb-node {
+                    fill: var(--paper-soft);
+                    stroke: var(--rule-strong);
+                    stroke-width: 1;
+                  }
+                  .ccb-role-node {
+                    fill: var(--paper);
+                    stroke: var(--brass);
+                    stroke-width: 1.4;
+                    stroke-dasharray: 4 3;
+                  }
+                  .ccb-label {
+                    font-family: var(--font-mono);
+                    font-size: 11px;
+                    letter-spacing: 0.08em;
+                    fill: var(--brass);
+                    text-transform: uppercase;
+                  }
+                  .ccb-title {
+                    font-family: var(--font-display);
+                    font-size: 16px;
+                    fill: var(--ink);
+                  }
+                  .ccb-body {
+                    font-family: var(--font-body);
+                    font-size: 12px;
+                    fill: var(--muted);
+                  }
+                  .ccb-note {
+                    font-family: var(--font-body);
+                    font-style: italic;
+                    font-size: 12px;
+                    fill: var(--ink-soft);
+                  }
+                  .ccb-arrow {
+                    stroke: var(--rule-strong);
+                    stroke-width: 1.5;
+                    fill: none;
+                  }
+                </style>
+                <defs>
+                  <marker
+                    id="ccbArrow"
+                    viewBox="0 0 10 10"
+                    refX="8"
+                    refY="5"
+                    markerWidth="7"
+                    markerHeight="7"
+                    orient="auto-start-reverse"
+                  >
+                    <path d="M0,0 L10,5 L0,10 z" fill="var(--rule-strong)" />
+                  </marker>
+                </defs>
+
+                <rect class="ccb-node" x="10" y="110" width="170" height="110" />
+                <text class="ccb-label" x="26" y="136">01 · Input</text>
+                <text class="ccb-title" x="26" y="162">Change raised</text>
+                <text class="ccb-body" x="26" y="184">Schedule, cost, or</text>
+                <text class="ccb-body" x="26" y="200">technical impact is</text>
+                <text class="ccb-body" x="26" y="216">flagged.</text>
+
+                <path
+                  class="ccb-arrow"
+                  d="M180,165 L228,165"
+                  marker-end="url(#ccbArrow)"
+                />
+
+                <rect
+                  class="ccb-role-node"
+                  x="230"
+                  y="70"
+                  width="220"
+                  height="190"
+                />
+                <text class="ccb-label" x="246" y="96">02 · Prepares</text>
+                <text class="ccb-title" x="246" y="122">Pavlo compiles the</text>
+                <text class="ccb-title" x="246" y="142">package</text>
+                <text class="ccb-body" x="246" y="168">Schedule, cost, risk,</text>
+                <text class="ccb-body" x="246" y="184">technical, and</text>
+                <text class="ccb-body" x="246" y="200">acceptance impact.</text>
+                <text class="ccb-note" x="246" y="228">Input only — no vote.</text>
+
+                <path
+                  class="ccb-arrow"
+                  d="M450,165 L498,165"
+                  marker-end="url(#ccbArrow)"
+                />
+
+                <rect class="ccb-node" x="500" y="40" width="260" height="220" />
+                <text class="ccb-label" x="516" y="66">03 · Review</text>
+                <text class="ccb-title" x="516" y="92">Sponsor board</text>
+                <text class="ccb-body" x="516" y="120">Sponsor rep</text>
+                <text class="ccb-body" x="516" y="140">Technical Director</text>
+                <text class="ccb-body" x="516" y="160">Independent electronics</text>
+                <text class="ccb-body" x="516" y="176">engineer</text>
+                <text class="ccb-note" x="516" y="204">Vote and final call</text>
+                <text class="ccb-note" x="516" y="220">sit here.</text>
+
+                <path
+                  class="ccb-arrow"
+                  d="M760,165 L808,165"
+                  marker-end="url(#ccbArrow)"
+                />
+
+                <rect class="ccb-node" x="810" y="90" width="180" height="140" />
+                <text class="ccb-label" x="826" y="116">04 · Outcome</text>
+                <text class="ccb-title" x="826" y="142">Approve or reject</text>
+                <text class="ccb-body" x="826" y="166">Phase 1: 3 of 3</text>
+                <text class="ccb-body" x="826" y="182">requests rejected —</text>
+                <text class="ccb-body" x="826" y="198">documented, closed.</text>
+              </svg>
+              <figcaption class="hero-note">
+                Prepared and documented by Pavlo. Approved and rejected by the
+                sponsor board — Technical Director and an independent
+                electronics engineer.
+              </figcaption>
+            </figure>
+
+            <table class="outcome-table" style="margin-top: 44px">
+              <caption class="sr-only">
+                Example RAID log structure from the city pilot
+              </caption>
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Item</th>
+                  <th>Owner</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Type">Issue</td>
+                  <td data-label="Item">
+                    LED sign cycle interfered with the camera's detection
+                    window at night.
+                  </td>
+                  <td data-label="Owner">CV / hardware lead</td>
+                  <td data-label="Status">Resolved — retest recorded</td>
+                </tr>
+                <tr>
+                  <td data-label="Type">Risk</td>
+                  <td data-label="Item">
+                    Wind-related camera displacement could cause detection
+                    failure at other sites.
+                  </td>
+                  <td data-label="Owner">Installation lead</td>
+                  <td data-label="Status">Mitigated — mounting corrected</td>
+                </tr>
+                <tr>
+                  <td data-label="Type">Dependency</td>
+                  <td data-label="Item">
+                    Cabinet heating and cold-start behaviour required before
+                    winter installation.
+                  </td>
+                  <td data-label="Owner">Electronics engineer</td>
+                  <td data-label="Status">Closed — acceptance recorded</td>
+                </tr>
+                <tr>
+                  <td data-label="Type">Assumption</td>
+                  <td data-label="Item">
+                    Lab test conditions would match live field conditions at
+                    the pilot site.
+                  </td>
+                  <td data-label="Owner">Pavlo (PM)</td>
+                  <td data-label="Status">
+                    Invalidated — split into product-defect and
+                    site-adaptation paths
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="hero-note">
+              Example structure only. Item text is representative of the city
+              pilot; source data and identifiers are not reproduced.
+            </p>
           </div>
         </div>
       </section>
