@@ -604,8 +604,8 @@ h4 {
   z-index: 1;
   margin: 0;
   font-family: var(--font-display);
-  font-size: var(--type-section);
-  line-height: 1.05;
+  font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+  line-height: 1.15;
   max-width: 520px;
 }
 .case-visual-frame p {
