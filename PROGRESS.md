@@ -1,6 +1,6 @@
 # PROGRESS — Pavlo Malairov portfolio
 
-## Current version: v74 (2026-07-10)
+## Current version: v77 (2026-07-24)
 
 ## Scores (0–100, honest, re-audited every iteration)
 Factual integrity: 99 · Metric consistency: 99 · Positioning: 98 · Typography: 99 ·
@@ -17,7 +17,7 @@ Performance: 99 · SEO/meta: 99 · Recruiter path: 99 · Page balance: 98
 - No gradients, glow, stock imagery, AI imagery, or raster content images.
 - One meaningful interactive per case, native HTML/SVG, keyboard-operable, and reduced-motion safe.
 - Homepage sequence: positioning → evidence → selected work → operating approach → career arc → credentials → contact.
-- Three-case structure and order: Aerospace Service Delivery Controls → AI Transportation Implementation → Operational Control Failure Diagnostic.
+- Three-case structure and order: Prepaid-to-Consignment Operating Model Transformation → AI Transportation Implementation → Replenishment Control Redesign.
 - Next/previous case navigation, direct case inquiry path, and old AI URL noindex redirect.
 - AI factual baseline: one city pilot; validated team range; Microsoft Project Phase 1; Jira Scrum Phases 2–3; debunked narratives and restricted company-scale claims remain excluded.
 - Metric pairing: 1,800+ catalog items / 1,500+ active.
@@ -25,6 +25,11 @@ Performance: 99 · SEO/meta: 99 · Recruiter path: 99 · Page balance: 98
 - Visible footer copy is limited to “© 2026 Pavlo Malairov, PMP.”; minimal utility links such as Privacy are permitted. Confidentiality language appears only where it explains a specific reconstructed case artifact.
 
 ## CHANGED THIS ITERATION
+- URL/filename stability fix: public case URLs remain `cases/four-operating-loops.html` and `cases/safety-stock-diagnostic.html`; visible case titles changed without renaming public paths.
+- Case 01 repositioned as the 11-month prepaid-to-consignment client-account operating-model transformation, with the diagnostic case retained as a transformation deep dive.
+- Homepage case titles and summaries updated to match the new framing while preserving the existing href targets.
+- Browser/download suffixes such as `(1)` and descriptive download filenames are NOT deployment filenames; production root files use `index.html`, `404.html`, `robots.txt`, and `sitemap.xml`.
+- Sitemap last-modified dates updated to 2026-07-24.
 - Files changed: index.html; privacy.html; 404.html; cases/four-operating-loops.html; cases/ai-transportation-delivery.html; cases/safety-stock-diagnostic.html; cases/smartc-ai-delivery.html; css/site.css; js/site.js; sitemap.xml; PROGRESS.md; _config.yml; .nojekyll removed.
 - Removed the public AI product name from production-facing page copy; the public phase wording is now "Pedestrian-warning system." The legacy noindex redirect filename remains because the validated fact sheet requires that old URL to keep redirecting.
 - Preserved validated AI facts: one city pilot, ~7 to ~11 team range, Microsoft Project in Phase 1, Jira Scrum in Phases 2-3, three rejected Phase 1 change requests, weekly sponsor syncs, LED sign glare, wind-related camera displacement, winter adaptations, product/site adaptation separation, and sponsor-controlled approval governance.

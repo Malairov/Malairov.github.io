@@ -1,0 +1,27 @@
+GitHub Pages deployment paths
+
+IMPORTANT: Keep these exact filenames and folders. Do not upload the case files under the descriptive download names.
+
+Repository root:
+  index.html
+  404.html
+  privacy.html
+  robots.txt
+  sitemap.xml
+  _config.yml
+  PROGRESS.md (excluded from Pages by _config.yml)
+
+Cases folder:
+  cases/four-operating-loops.html
+  cases/safety-stock-diagnostic.html
+
+The public URLs intentionally remain:
+  https://malairov.github.io/cases/four-operating-loops.html
+  https://malairov.github.io/cases/safety-stock-diagnostic.html
+
+The visible page titles can change without changing these URL filenames. This avoids broken homepage links, canonical URLs, sitemap entries, bookmarks, and search indexing.
+
+Do not rename them to:
+  Case-01-Consignment-Transformation.html
+  Case-03-Replenishment-Deep-Dive.html
+unless every internal link, canonical URL, sitemap entry, and external bookmark is also migrated.
