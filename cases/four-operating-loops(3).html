@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" data-build="v78-business-delivery">
+<head>
+<meta charset="utf-8"/>
+<meta content="v78-business-delivery" name="build-version"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Business Process Transformation | Pavlo Malairov, PMP</title>
+<meta content="Case study: translating a prepaid industrial-supply model into a controlled consignment operating system across business processes, hardware, data, analytics, stakeholder workflows, validation, and stabilization." name="description"/>
+<link href="https://malairov.github.io/cases/four-operating-loops.html" rel="canonical"/>
+<meta content="index,follow" name="robots"/>
+<meta content="article" property="og:type"/>
+<meta content="Business Process Transformation | Pavlo Malairov, PMP" property="og:title"/>
+<meta content="Case study: translating a prepaid industrial-supply model into a controlled consignment operating system across business processes, hardware, data, analytics, stakeholder workflows, validation, and stabilization." property="og:description"/>
+<meta content="https://malairov.github.io/cases/four-operating-loops.html" property="og:url"/>
+<meta content="https://malairov.github.io/assets/og-aerospace.png" property="og:image"/>
+<meta content="Business process transformation case study" property="og:image:alt"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Pavlo Malairov" name="author"/>
+<meta content="#f4f0e7" name="theme-color"/>
+<meta content="light" name="color-scheme"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="Pavlo Malairov, PMP" property="og:site_name"/>
+<meta content="en_CA" property="og:locale"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="Business Process Transformation | Pavlo Malairov, PMP" name="twitter:title"/>
+<meta content="Case study: translating a prepaid industrial-supply model into a controlled consignment operating system across business processes, hardware, data, analytics, stakeholder workflows, validation, and stabilization." name="twitter:description"/>
+<meta content="Business process transformation case study" name="twitter:image:alt"/>
+<meta content="https://malairov.github.io/assets/og-aerospace.png" name="twitter:image"/>
+<meta content="image/png" property="og:image:type"/>
+<link href="../assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../assets/apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="../css/site.css?v=76" rel="stylesheet"/>
+<script>document.documentElement.classList.add("js");</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"CreativeWork",
+  "headline":"Business Process Transformation",
+  "author":{"@type":"Person","name":"Pavlo Malairov"},
+  "url":"https://malairov.github.io/cases/four-operating-loops.html",
+  "description":"Case study: translating a prepaid industrial-supply model into a controlled consignment operating system across business processes, hardware, data, analytics, stakeholder workflows, validation, and stabilization.",
+  "dateModified":"2026-09-23",
+  "inLanguage":"en-CA",
+  "image":"https://malairov.github.io/assets/og-aerospace.png",
+  "mainEntityOfPage":{"@type":"WebPage","@id":"https://malairov.github.io/cases/four-operating-loops.html"}
+}
+</script>
+
+<style id="business-delivery-overrides">
+.business-delivery-case .case-hero h1 { max-width: 980px; }
+.business-delivery-case .case-hero .lede { max-width: 880px; }
+.delivery-system {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+}
+.delivery-step {
+  position: relative;
+  border: 1px solid var(--rule, #d6d0c5);
+  background: var(--paper-soft, #f8f5ee);
+  padding: 22px 20px 20px;
+  min-height: 185px;
+}
+.delivery-step .step-no {
+  display: block;
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--brass, #8d6f3e);
+  margin-bottom: 12px;
+}
+.delivery-step h3 { margin: 0 0 9px; }
+.delivery-step p { margin: 0; }
+.delivery-step .output {
+  display: block;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule, #d6d0c5);
+  font-size: 13px;
+  color: var(--ink-soft, #4f4b44);
+}
+.signal-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--rule, #d6d0c5);
+  border: 1px solid var(--rule, #d6d0c5);
+  margin-top: 26px;
+}
+.signal-strip article { background: var(--paper, #fffdf8); padding: 18px; }
+.signal-strip strong { display:block; margin-bottom:6px; }
+.value-chain {
+  margin-top: 32px;
+  padding: 24px;
+  border-left: 3px solid var(--brass, #8d6f3e);
+  background: var(--paper-soft, #f8f5ee);
+}
+.value-chain strong { display:block; margin-bottom:8px; }
+@media (max-width: 900px) {
+  .delivery-system { grid-template-columns: 1fr 1fr; }
+  .signal-strip { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 620px) {
+  .delivery-system, .signal-strip { grid-template-columns: 1fr; }
+  .delivery-step { min-height: auto; }
+}
+</style>
+
+</head>
+<body class="case-page business-delivery-case " data-analytics-page="case-aerospace-business-transformation">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="shell header-inner">
+    <a aria-label="Pavlo Malairov portfolio home" class="brand" href="../index.html">
+      <span aria-hidden="true" class="brand-mark">PM</span>
+      <span class="brand-copy"><strong>Pavlo Malairov, PMP</strong><span>Business delivery · transformation · implementation</span></span>
+    </a>
+    <nav aria-label="Primary navigation" class="nav-links" id="primaryNav">
+      <a aria-current="location" href="../index.html#work">Selected work</a>
+      <a href="../index.html#approach">Approach</a>
+      <a href="../index.html#background">Background</a>
+      <a class="mobile-nav-only" href="../index.html#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="button button-secondary desktop-only" href="../index.html#contact">Contact</a>
+      <button aria-controls="primaryNav" aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle" type="button"><span></span></button>
+    </div>
+  </div>
+  <div aria-hidden="true" class="reading-progress"><span></span></div>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="case-hero">
+  <div class="shell">
+    <nav aria-label="Breadcrumb" class="case-breadcrumb"><ol><li><a href="../index.html#work">Selected work</a></li><li aria-current="page">Business process transformation</li></ol></nav>
+    <div class="case-hero-grid">
+      <div class="case-hero-copy reveal">
+        <span class="eyebrow">Case 01 · Business transformation · Aerospace manufacturing</span>
+        <h1>From Prepaid Supply to a Controlled Consignment Operating Model</h1>
+        <p class="lede">Led the site-level implementation system behind an 18-month business-model transformation: requirements, workflow design, hardware vending infrastructure, data and analytics, cross-functional communication, testing, acceptance, stabilization, and transition into continuous improvement — while live production support continued.</p>
+      </div>
+      <aside class="case-hero-aside reveal">
+        <ul class="case-fact-list">
+          <li><strong>Business change</strong><span>Prepaid → consignment</span></li>
+          <li><strong>Role</strong><span>Sole embedded on-site implementation lead</span></li>
+          <li><strong>Delivery cycle</strong><span>18 months · implementation + stabilization</span></li>
+          <li><strong>Environment</strong><span>Production-critical aerospace manufacturing</span></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section aria-label="Case evidence" class="proof-bar">
+  <div class="shell case-proof-grid">
+    <div class="case-proof"><strong>5</strong><span>buildings</span></div>
+    <div class="case-proof"><strong>17</strong><span>automated vending systems</span></div>
+    <div class="case-proof"><strong>1,500+</strong><span>active technical items</span></div>
+    <div class="case-proof"><strong>30+</strong><span>supplier channels</span></div>
+    <div class="case-proof"><strong>~40%</strong><span>planning accuracy improvement</span></div>
+    <div class="case-proof"><strong>4–5h → ~30m</strong><span>recurring review cycle</span></div>
+  </div>
+</section>
+
+<section class="case-section">
+  <div class="shell case-section-grid">
+    <div class="case-section-title reveal"><span class="section-number">01 / Business challenge</span><h2>A commercial model change only works when every operational dependency changes with it.</h2></div>
+    <div class="case-section-body reveal">
+      <p class="lead">The business objective was not to optimize one replenishment task. It was to make a different commercial model executable at site level without interrupting support to manufacturing.</p>
+      <p>The new model changed ownership, point-of-use behaviour, receiving, user attribution, workflow responsibilities, reporting, exception handling, and the information needed for decisions. My role was to turn those interdependent requirements into a working delivery system and keep the transition controlled until the new process could operate reliably.</p>
+      <div class="before-after">
+        <article><span class="label">Legacy state</span><h3>Processes existed, but they belonged to the prepaid model.</h3><ul>
+          <li>Fragmented data and paper-based references</li><li>Manual, person-dependent planning and follow-up</li><li>Limited ownership-state visibility</li><li>Small point-of-use footprint</li><li>Communication and exceptions distributed across functions</li>
+        </ul></article>
+        <article><span class="label">Target state</span><h3>A controlled operating system for consignment.</h3><ul>
+          <li>Structured workflows and ownership states</li><li>Expanded hardware point-of-use infrastructure</li><li>Central data and analytical controls</li><li>Traceable communication, issue, and escalation paths</li><li>Acceptance-based handoff into continuous improvement</li>
+        </ul></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case-section">
+  <div class="shell case-section-grid">
+    <div class="case-section-title reveal"><span class="section-number">02 / Transformation process</span><h2>Seven connected delivery processes moved the account from commercial decision to stable operation.</h2></div>
+    <div class="case-section-body reveal">
+      <p class="lead">The transformation was managed as an integrated sequence rather than a single launch. Each process created the conditions required for the next one.</p>
+      <div class="delivery-system">
+        <article class="delivery-step"><span class="step-no">01 · Discover</span><h3>Requirements & current state</h3><p>Interview stakeholders, map pain points, define ownership boundaries, identify risks, and translate business requirements into deliverables.</p><span class="output"><strong>Output:</strong> scope, workstreams, acceptance logic</span></article>
+        <article class="delivery-step"><span class="step-no">02 · Design</span><h3>Future-state workflows</h3><p>Design the process logic connecting physical stock, users, vending, receiving, procurement, billing, communication, and reporting.</p><span class="output"><strong>Output:</strong> target operating model</span></article>
+        <article class="delivery-step"><span class="step-no">03 · Build</span><h3>Infrastructure & controls</h3><p>Implement hardware vending expansion, digital item/location structure, reporting, issue controls, and analytical decision tools.</p><span class="output"><strong>Output:</strong> executable business processes</span></article>
+        <article class="delivery-step"><span class="step-no">04 · Validate</span><h3>Test against acceptance</h3><p>Use test scripts, stakeholder review, short feedback cycles, exception checks, and acceptance criteria before retiring legacy methods.</p><span class="output"><strong>Output:</strong> accepted process state</span></article>
+        <article class="delivery-step"><span class="step-no">05 · Deploy</span><h3>Controlled transition</h3><p>Move workflows into live use while monitoring prepaid-to-consignment ownership states, dependencies, communications, and service continuity.</p><span class="output"><strong>Output:</strong> live target process</span></article>
+        <article class="delivery-step"><span class="step-no">06 · Stabilize</span><h3>Exceptions & adoption</h3><p>Track failures, ownership, escalations, timing, recurring patterns, and user behaviour until the process becomes predictable.</p><span class="output"><strong>Output:</strong> operational readiness</span></article>
+        <article class="delivery-step"><span class="step-no">07 · Improve</span><h3>Continuous improvement</h3><p>Move accepted processes into recurring review, measure performance, and redesign controls where evidence shows recurring friction or risk.</p><span class="output"><strong>Output:</strong> controlled improvement backlog</span></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case-section">
+  <div class="shell case-section-grid">
+    <div class="case-section-title reveal"><span class="section-number">03 / Delivery governance</span><h2>The process became manageable when every exception had an owner, state, and decision path.</h2></div>
+    <div class="case-section-body reveal">
+      <div class="decision-grid">
+        <article class="decision"><span class="index">01</span><h3>Milestones over activity</h3><p>Tracked delivery through accepted sub-projects and implementation milestones rather than counting operational tasks.</p></article>
+        <article class="decision"><span class="index">02</span><h3>Risk before escalation</h3><p>Risks were assessed by probability and impact, assigned owners, mitigated where the long-term value justified action, and escalated when thresholds were crossed.</p></article>
+        <article class="decision"><span class="index">03</span><h3>Acceptance before handoff</h3><p>Department representatives validated processes against acceptance criteria before work moved into the continuous-improvement stage.</p></article>
+        <article class="decision"><span class="index">04</span><h3>One controlled data view</h3><p>Preferred controlled source data and governed views over fragile multi-owner spreadsheets that could break silently and increase communication load.</p></article>
+      </div>
+      <div class="signal-strip">
+        <article><strong>Scope</strong><span>Workstreams, requirements, deliverables, acceptance</span></article>
+        <article><strong>Execution</strong><span>Kanban, actions, dependencies, testing</span></article>
+        <article><strong>Control</strong><span>Risks, issues, changes, escalation</span></article>
+        <article><strong>Handover</strong><span>Stabilization, acceptance, CIM review</span></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case-section">
+  <div class="shell case-section-grid">
+    <div class="case-section-title reveal"><span class="section-number">04 / Business outcomes</span><h2>The outcome was a leaner operating model with stronger control and lower coordination load.</h2></div>
+    <div class="case-section-body reveal">
+      <table class="outcome-table">
+        <thead><tr><th>Outcome</th><th>What changed</th><th>Business signal</th></tr></thead>
+        <tbody>
+          <tr><td>~40% planning accuracy improvement</td><td>Forecasting, usage, lead time, package constraints, open orders, and exception logic were integrated into a controlled review process.</td><td>Better decision quality</td></tr>
+          <tr><td>~50% lower critical service-disruption exposure</td><td>Root-cause analysis and layered controls replaced repeated symptom treatment in representative critical areas.</td><td>Operational risk reduction</td></tr>
+          <tr><td>~55% fewer communication/search gaps</td><td>Structured issue ownership, searchable data, IDs, action tracking, and escalation visibility replaced fragmented follow-up.</td><td>Lower coordination friction</td></tr>
+          <tr><td>4–5 hours → ~30 minutes</td><td>Manual review became exception-based decision support rather than item-by-item checking.</td><td>Scalable operating capacity</td></tr>
+        </tbody>
+      </table>
+      <div class="value-chain"><strong>Management value</strong>The site moved from fragmented process knowledge toward a controlled system that one embedded representative could manage across multiple functions, buildings, systems, suppliers, and users.</div>
+    </div>
+  </div>
+</section>
+
+<section class="case-section">
+  <div class="shell case-section-grid">
+    <div class="case-section-title reveal"><span class="section-number">05 / Transferability</span><h2>This is business delivery: convert strategy into a system people can actually operate.</h2></div>
+    <div class="case-section-body reveal">
+      <div class="transfer-grid">
+        <article><h3>Business transformation</h3><p>Translate a commercial or operating-model decision into workflows, controls, data, hardware, roles, acceptance, and adoption.</p></article>
+        <article><h3>Implementation management</h3><p>Sequence interdependent workstreams under live-service constraints and manage the transition until the target state is stable.</p></article>
+        <article><h3>Project governance</h3><p>Create enough structure around scope, risk, decisions, testing, ownership, and handover that leadership can see and control delivery.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case-next">
+  <div class="shell case-inquiry">
+    <div><span class="eyebrow">Discuss an opportunity</span>
+      <p>For project management, business transformation, implementation, or technical-operations opportunities, contact me directly. Full CV and references are available on request.</p>
+    </div>
+    <a class="button button-secondary" href="mailto:pavlomalairov@gmail.com?subject=Project%20Management%20Opportunity">Discuss an opportunity</a>
+  </div>
+  <div class="shell case-next-grid"><a class="next-link" href="../index.html#work"><span>Return</span><strong>Selected work</strong></a><a class="next-link" href="ai-transportation-delivery.html"><span>Next case</span><strong>Product Delivery & Scale-Up →</strong></a></div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="shell footer-grid">
+    <p>© 2026 Pavlo Malairov, PMP.</p>
+    <div class="footer-links"><a href="../privacy.html">Privacy</a></div>
+  </div>
+</footer>
+<script defer src="../js/site.js?v=76"></script>
+</body>
+</html>

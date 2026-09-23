@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html data-build="v77-business-delivery" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="v77-business-delivery" name="build-version"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Business Delivery &amp; Product Scale-Up | Pavlo Malairov, PMP</title>
+<meta content="Case study: translating a multidisciplinary AI transportation initiative into a governed business delivery system, a product with six configurations, and deployment across approximately 400 locations." name="description"/>
+<link href="https://malairov.github.io/cases/ai-transportation-delivery.html" rel="canonical"/>
+<meta content="index,follow" name="robots"/>
+<meta content="article" property="og:type"/>
+<meta content="Business Delivery &amp; Product Scale-Up | Pavlo Malairov, PMP" property="og:title"/>
+<meta content="Business delivery governance from requirements and integrated planning through validation, productization, scale, and handover." property="og:description"/>
+<meta content="https://malairov.github.io/cases/ai-transportation-delivery.html" property="og:url"/>
+<meta content="https://malairov.github.io/assets/og-ai.png" property="og:image"/>
+<meta content="Business delivery and AI transportation product scale-up case study" property="og:image:alt"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<script data-js-class="true">
+      document.documentElement.classList.add("js");
+    </script>
+<meta content="Pavlo Malairov" name="author"/>
+<meta content="#f4f0e7" name="theme-color"/>
+<meta content="light" name="color-scheme"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="Pavlo Malairov, PMP" property="og:site_name"/>
+<meta content="en_CA" property="og:locale"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="Business Delivery &amp; Product Scale-Up | Pavlo Malairov, PMP" name="twitter:title"/>
+<meta content="Business delivery governance from requirements and integrated planning through validation, productization, scale, and handover." name="twitter:description"/>
+<meta content="Business delivery and AI transportation product scale-up case study" name="twitter:image:alt"/>
+<link href="../assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../assets/apple-touch-icon.png" rel="apple-touch-icon"/>
+<meta content="https://malairov.github.io/assets/og-ai.png" name="twitter:image"/>
+<meta content="image/png" property="og:image:type"/>
+<link href="../css/site.css?v=76" rel="stylesheet"/>
+<script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        "headline": "Business Delivery & Product Scale-Up",
+        "author": {
+          "@type": "Person",
+          "name": "Pavlo Malairov"
+        },
+        "url": "https://malairov.github.io/cases/ai-transportation-delivery.html",
+        "description": "Business delivery and project-governance case study showing how a multidisciplinary AI transportation initiative moved from requirements through validation, productization, scale, and handover.",
+        "dateModified": "2026-09-23",
+        "inLanguage": "en-CA",
+        "image": "https://malairov.github.io/assets/og-ai.png",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://malairov.github.io/cases/ai-transportation-delivery.html"
+        }
+      }
+    </script>
+<style id="business-delivery-overrides">
+.business-delivery-case .case-hero h1 { max-width: 980px; }
+.business-delivery-case .case-hero .lede { max-width: 860px; }
+.delivery-system {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+}
+.delivery-step {
+  position: relative;
+  border: 1px solid var(--rule, #d6d0c5);
+  background: var(--paper-soft, #f8f5ee);
+  padding: 22px 20px 20px;
+  min-height: 185px;
+}
+.delivery-step .step-no,
+.business-flow .flow-no {
+  display: block;
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--brass, #8d6f3e);
+  margin-bottom: 12px;
+}
+.delivery-step h3 { margin: 0 0 9px; }
+.delivery-step p { margin: 0; }
+.delivery-step .output {
+  display: block;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule, #d6d0c5);
+  font-size: 13px;
+  color: var(--ink-soft, #4f4b44);
+}
+.business-flow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin: 30px 0 10px;
+}
+.business-flow .flow-step {
+  border-top: 2px solid var(--brass, #8d6f3e);
+  padding: 15px 12px 12px 0;
+}
+.business-flow h3 { font-size: 16px; margin: 0 0 7px; }
+.business-flow p { font-size: 14px; margin: 0; }
+.signal-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--rule, #d6d0c5);
+  border: 1px solid var(--rule, #d6d0c5);
+  margin-top: 26px;
+}
+.signal-strip article {
+  background: var(--paper, #fffdf8);
+  padding: 18px;
+}
+.signal-strip strong { display: block; margin-bottom: 5px; }
+.value-chain {
+  margin-top: 32px;
+  padding: 24px;
+  border-left: 3px solid var(--brass, #8d6f3e);
+  background: var(--paper-soft, #f8f5ee);
+}
+.value-chain strong { display:block; margin-bottom:8px; }
+@media (max-width: 900px) {
+  .delivery-system { grid-template-columns: 1fr 1fr; }
+  .business-flow { grid-template-columns: 1fr 1fr; }
+  .signal-strip { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 620px) {
+  .delivery-system, .business-flow, .signal-strip { grid-template-columns: 1fr; }
+  .delivery-step { min-height: auto; }
+}
+</style></head>
+<body class="case-page ai-case business-delivery-case" data-analytics-page="case-business-delivery-ai">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="shell header-inner">
+<a aria-label="Pavlo Malairov portfolio home" class="brand" href="../index.html"><span aria-hidden="true" class="brand-mark">PM</span><span class="brand-copy"><strong>Pavlo Malairov, PMP</strong><span>Business delivery · transformation · implementation</span></span></a>
+<nav aria-label="Primary navigation" class="nav-links" id="primaryNav">
+<a aria-current="location" href="../index.html#work">Selected work</a><a href="../index.html#approach">Approach</a><a href="../index.html#background">Background</a><a class="mobile-nav-only" href="../index.html#contact">Contact</a>
+</nav>
+<div class="header-actions">
+<a class="button button-secondary desktop-only" href="../index.html#contact">Contact</a><button aria-controls="primaryNav" aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle" type="button">
+<span></span>
+</button>
+</div>
+</div>
+<div aria-hidden="true" class="reading-progress"><span></span></div>
+</header>
+<main id="main" tabindex="-1">
+<section class="case-hero">
+<div class="shell">
+<nav aria-label="Breadcrumb" class="case-breadcrumb">
+<ol>
+<li><a href="../index.html#work">Selected work</a></li>
+<li aria-current="page">Business delivery &amp; product scale-up</li>
+</ol>
+</nav>
+<div class="case-hero-grid">
+<div class="case-hero-copy reveal">
+<span class="eyebrow">Case 02 · Business delivery &amp; product scale-up · Jul 2022–Apr 2025</span>
+<h1>From Technical Project to Scalable Business Product</h1>
+<p class="lede">
+            Directed the delivery system that moved a multidisciplinary AI transportation initiative from requirements and technical integration through field validation, productization, sponsor acceptance, and scale — resulting in six product configurations and deployment across approximately 400 locations.
+          </p>
+</div>
+<aside class="case-hero-aside reveal">
+<ul class="case-fact-list">
+<li><strong>Business objective</strong><span>Turn a technical concept into a deployable product</span></li>
+<li><strong>Role</strong><span>Project Manager</span></li>
+<li><strong>Operating model</strong><span>Hybrid delivery + sponsor governance</span></li>
+<li><strong>Scale</strong><span>6 configurations · ≈400 locations</span></li>
+</ul>
+</aside>
+</div>
+</div>
+</section>
+<section aria-label="Case evidence" class="proof-bar">
+<div class="shell case-proof-grid">
+<div class="case-proof"><strong>6</strong><span>product configurations</span></div>
+<div class="case-proof"><strong>≈400</strong><span>deployment locations</span></div>
+<div class="case-proof"><strong>3</strong><span>sequential delivery phases</span></div>
+<div class="case-proof"><strong>~7 → ~11</strong><span>planning to peak team size</span></div>
+<div class="case-proof"><strong>MS Project + Jira</strong><span>hybrid delivery controls</span></div>
+<div class="case-proof"><strong>Weekly</strong><span>sponsor decision cadence</span></div>
+</div>
+</section>
+<section class="case-section">
+<div class="shell case-section-grid">
+<div class="case-section-title reveal">
+<span class="section-number">01 / Business challenge</span>
+<h2>The hard part was not building features. It was turning specialist work into one controllable delivery system.</h2>
+</div>
+<div class="case-section-body reveal">
+<p class="lead">
+          Computer vision, hardware, software, procurement, QA, installation, field conditions, and sponsor expectations all moved on different clocks. Business value depended on making them converge at the same decision points.
+        </p>
+<p>
+          I structured the work around a single delivery model: requirements became baselines, baselines became integrated plans, risks and changes had owners, tests produced acceptance evidence, field learning fed controlled decisions, and approved outcomes moved into product configurations that could scale.
+        </p>
+<div class="role-boundary">
+<strong>Delivery remit</strong>I owned the management system around the work — planning, dependencies, RAID, change impact, QA gates, sponsor reporting, pilot coordination, and handover. Engineering design remained with technical leads.
+        </div>
+<div class="before-after">
+<article>
+<span class="label">Without a delivery system</span>
+<h3>Technical progress could exist without business readiness.</h3>
+<ul>
+<li>Teams progressed at different speeds</li>
+<li>Dependencies surfaced late</li>
+<li>Field issues mixed product defects with site conditions</li>
+<li>Sponsor decisions lacked one consolidated view</li>
+</ul>
+</article>
+<article>
+<span class="label">Business delivery model</span>
+<h3>Every phase ended in evidence, a decision, or a controlled handoff.</h3>
+<ul>
+<li>Integrated milestones and dependency ownership</li>
+<li>Risk, issue, defect, and change separation</li>
+<li>Acceptance criteria and readiness gates</li>
+<li>Decision packages translated technical work into business choices</li>
+</ul>
+</article>
+</div>
+</div>
+</div>
+</section>
+<section class="case-section" id="architecture">
+<div class="shell case-section-grid">
+<div class="case-section-title reveal">
+<span class="section-number">02 / Delivery operating model</span>
+<h2>Six processes moved the product from ambiguity to repeatable delivery.</h2>
+</div>
+<div class="case-section-body reveal">
+<p class="lead">
+          The operating model connected business intent, technical execution, governance, and field evidence instead of treating project management as a reporting layer around engineering work.
+        </p>
+<div class="delivery-system">
+<article class="delivery-step">
+<span class="step-no">01 · Frame</span>
+<h3>Requirements &amp; baseline</h3>
+<p>Convert sponsor needs, constraints, interfaces, and acceptance expectations into a controlled delivery baseline.</p>
+<span class="output"><strong>Output:</strong> agreed scope, priorities, acceptance logic</span>
+</article>
+<article class="delivery-step">
+<span class="step-no">02 · Integrate</span>
+<h3>Plan &amp; dependencies</h3>
+<p>Sequence hardware, software, procurement, QA, installation, and sponsor dependencies against milestones.</p>
+<span class="output"><strong>Output:</strong> integrated schedule and ownership map</span>
+</article>
+<article class="delivery-step">
+<span class="step-no">03 · Control</span>
+<h3>Risk, issues &amp; change</h3>
+<p>Separate risks, defects, assumptions, dependencies, and changes; assign owners and quantify delivery impact.</p>
+<span class="output"><strong>Output:</strong> decision-ready RAID and change packages</span>
+</article>
+<article class="delivery-step">
+<span class="step-no">04 · Validate</span>
+<h3>QA &amp; acceptance gates</h3>
+<p>Connect requirements to test evidence, defect status, retest results, site readiness, and go/no-go conditions.</p>
+<span class="output"><strong>Output:</strong> evidence-based release decisions</span>
+</article>
+<article class="delivery-step">
+<span class="step-no">05 · Learn</span>
+<h3>Pilot &amp; field feedback</h3>
+<p>Classify live-site failures as product defects or site adaptations so the baseline stays clean and scalable.</p>
+<span class="output"><strong>Output:</strong> controlled corrective actions and lessons</span>
+</article>
+<article class="delivery-step">
+<span class="step-no">06 · Scale</span>
+<h3>Productization &amp; handover</h3>
+<p>Stabilize approved configurations, transfer decisions and evidence, and move from project activity to repeatable deployment.</p>
+<span class="output"><strong>Output:</strong> scalable product configurations and operating handoff</span>
+</article>
+</div>
+<div class="value-chain">
+<strong>Management logic</strong>
+          Business need → controlled baseline → coordinated execution → evidence → sponsor decision → product configuration → scale.
+        </div>
+</div>
+</div>
+</section>
+<section class="case-section">
+<div class="shell case-section-grid">
+<div class="case-section-title reveal">
+<span class="section-number">03 / Governance &amp; decision rights</span>
+<h2>Meetings did not govern the project. Explicit decision rights did.</h2>
+</div>
+<div class="case-section-body reveal">
+<div class="decision-grid decision-grid-four">
+<article class="decision">
+<span class="index">01</span>
+<h3>Integrated planning</h3>
+<p>Microsoft Project controlled the milestone-driven hardware baseline; Jira managed iterative software and monitoring work. Procurement, QA, installation, and sponsor dependencies remained visible across both.</p>
+</article>
+<article class="decision">
+<span class="index">02</span>
+<h3>Change impact</h3>
+<p>Changes were translated into schedule, cost, risk, technical, and acceptance impact before sponsor review instead of entering delivery as informal requests.</p>
+</article>
+<article class="decision">
+<span class="index">03</span>
+<h3>Acceptance gates</h3>
+<p>Requirements, test evidence, defects, retest status, site conditions, and exceptions formed a clear readiness state for release and pilot decisions.</p>
+</article>
+<article class="decision">
+<span class="index">04</span>
+<h3>Sponsor decisions</h3>
+<p>Weekly sponsor syncs reduced technical detail to the decisions that mattered: current state, delivery risk, impact, options, and next priority.</p>
+</article>
+</div>
+<div aria-label="Business decision flow" class="business-flow">
+<article class="flow-step"><span class="flow-no">01</span><h3>Signal</h3><p>Risk, defect, dependency, or request is raised.</p></article>
+<article class="flow-step"><span class="flow-no">02</span><h3>Assess</h3><p>Impact on scope, schedule, cost, risk, and acceptance is consolidated.</p></article>
+<article class="flow-step"><span class="flow-no">03</span><h3>Recommend</h3><p>Options and delivery consequences are prepared for decision.</p></article>
+<article class="flow-step"><span class="flow-no">04</span><h3>Decide</h3><p>Sponsor-controlled governance approves, rejects, or redirects.</p></article>
+<article class="flow-step"><span class="flow-no">05</span><h3>Control</h3><p>Baseline, owners, actions, and evidence are updated and tracked to closure.</p></article>
+</div>
+<p class="hero-note">Decision authority remained with the sponsor board. My role was to make the decision complete, traceable, and executable.</p>
+</div>
+</div>
+</section>
+<section class="case-section">
+<div class="shell case-section-grid">
+<div class="case-section-title reveal">
+<span class="section-number">04 / Field-to-business feedback loop</span>
+<h2>Field failures became structured business learning instead of uncontrolled rework.</h2>
+</div>
+<div class="case-section-body reveal">
+<p class="lead">
+          Live deployment exposed conditions that lab testing could not fully reproduce. The management task was to classify what changed, assign the right owner, and protect the product baseline while still moving the pilot forward.
+        </p>
+<div class="timeline">
+<article class="timeline-item"><time>Detect</time><div><h3>Capture the actual operating failure</h3><p>Examples included night glare, wind-related camera movement, and winter survivability constraints.</p></div></article>
+<article class="timeline-item"><time>Classify</time><div><h3>Separate product defect from site adaptation</h3><p>This prevented one local condition from silently redefining the product baseline.</p></div></article>
+<article class="timeline-item"><time>Control</time><div><h3>Assign owner, impact, action, and retest path</h3><p>Technical work was linked to delivery risk, evidence, and acceptance rather than tracked as an isolated engineering task.</p></div></article>
+<article class="timeline-item"><time>Learn</time><div><h3>Feed validated learning into the next configuration</h3><p>Approved adaptations and fixes became part of controlled product evolution and future deployment readiness.</p></div></article>
+</div>
+</div>
+</div>
+</section>
+<section class="case-section">
+<div class="shell case-section-grid">
+<div class="case-section-title reveal">
+<span class="section-number">05 / Business outcomes</span>
+<h2>The outcome was not a completed project plan. It was a product that could be deployed repeatedly.</h2>
+</div>
+<div class="case-section-body reveal">
+<table class="outcome-table">
+<caption class="sr-only">Business delivery outcomes and management value</caption>
+<thead><tr><th>Business outcome</th><th>What changed</th><th>Delivery capability demonstrated</th></tr></thead>
+<tbody>
+<tr><td data-label="Business outcome">Six product configurations</td><td data-label="What changed">Field learning and controlled technical adaptations matured into defined deployment variants rather than one-off fixes.</td><td data-label="Delivery capability demonstrated">Productization &amp; configuration control</td></tr>
+<tr><td data-label="Business outcome">≈400 deployment locations</td><td data-label="What changed">The work progressed beyond pilot activity into repeatable deployment at scale.</td><td data-label="Delivery capability demonstrated">Scale transition</td></tr>
+<tr><td data-label="Business outcome">Three sequential delivery phases</td><td data-label="What changed">Distinct product initiatives were run with separate baselines, testing, governance, and refinement while preserving one management discipline.</td><td data-label="Delivery capability demonstrated">Lifecycle governance</td></tr>
+<tr><td data-label="Business outcome">Hybrid PM operating model</td><td data-label="What changed">Milestone-driven hardware and iterative software used different execution methods while dependencies and sponsor reporting stayed integrated.</td><td data-label="Delivery capability demonstrated">Adaptive delivery management</td></tr>
+</tbody>
+</table>
+<div class="signal-strip">
+<article><strong>Scope</strong><span>Requirements → controlled baseline</span></article>
+<article><strong>Risk</strong><span>Field signals → owned mitigation</span></article>
+<article><strong>Decision</strong><span>Technical detail → sponsor choice</span></article>
+<article><strong>Scale</strong><span>Accepted learning → repeatable deployment</span></article>
+</div>
+<p class="hero-note">Portfolio-safe summary. Proprietary engineering detail and confidential sponsor information are excluded.</p>
+</div>
+</div>
+</section>
+<section class="case-section">
+<div class="shell case-section-grid">
+<div class="case-section-title reveal">
+<span class="section-number">06 / Transferability</span>
+<h2 class="h2-compact">The same delivery system applies beyond AI.</h2>
+</div>
+<div class="case-section-body reveal">
+<div class="transfer-grid">
+<article><h3>Business delivery</h3><p>Turn objectives into baselines, workstreams, ownership, decisions, acceptance, and measurable handoffs.</p></article>
+<article><h3>Process transformation</h3><p>Replace fragmented activity with explicit workflows, controls, decision rights, and operating visibility.</p></article>
+<article><h3>Technical implementation</h3><p>Coordinate specialists without pretending to own their engineering design; manage the interfaces that determine delivery.</p></article>
+<article><h3>Operational handover</h3><p>Move accepted project outputs into a repeatable operating model with evidence, ownership, and continuous-improvement inputs.</p></article>
+</div>
+</div>
+</div>
+</section>
+<section class="case-next">
+<div class="shell case-inquiry">
+<div>
+<span class="eyebrow">Discuss a business delivery role</span>
+<p>For Project Manager, Implementation, Transformation, or Technical Operations opportunities, contact me directly. Full CV and references are available on request.</p>
+</div>
+<a class="button button-secondary" data-analytics-case="ai" data-analytics-event="discuss_opportunity_click" data-analytics-location="case_cta" href="mailto:pavlomalairov@gmail.com?subject=Project%20Management%20Opportunity">Discuss an opportunity</a>
+</div>
+<div class="shell case-next-grid">
+<a class="next-link" data-analytics-case="aerospace" data-analytics-event="previous_case_navigation" data-analytics-location="case_navigation" data-preserve-ref="" href="four-operating-loops.html"><span>Previous case</span><strong>← Business Process Transformation</strong></a>
+<a class="next-link" data-analytics-case="diagnostic" data-analytics-event="next_case_navigation" data-analytics-location="case_navigation" data-preserve-ref="" href="safety-stock-diagnostic.html"><span>Next case</span><strong>Operational Control & Decision Assurance →</strong></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="shell footer-grid">
+<p>© 2026 Pavlo Malairov, PMP.</p>
+<div class="footer-links">
+<a data-analytics-event="privacy_link_click" data-analytics-location="footer" data-preserve-ref="" href="../privacy.html">Privacy</a>
+</div>
+</div>
+</footer>
+<script defer="" src="../js/site.js?v=76"></script>
+</body>
+</html>

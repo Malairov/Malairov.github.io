@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" data-build="v78-business-delivery">
+<head>
+<meta charset="utf-8"/>
+<meta content="v78-business-delivery" name="build-version"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Operational Control & Decision Assurance | Pavlo Malairov, PMP</title>
+<meta content="Case study: diagnosing a silent decision-control failure, tracing the end-to-end process, redesigning exception logic, validating scenarios, and establishing preventive governance." name="description"/>
+<link href="https://malairov.github.io/cases/safety-stock-diagnostic.html" rel="canonical"/>
+<meta content="index,follow" name="robots"/>
+<meta content="article" property="og:type"/>
+<meta content="Operational Control & Decision Assurance | Pavlo Malairov, PMP" property="og:title"/>
+<meta content="Case study: diagnosing a silent decision-control failure, tracing the end-to-end process, redesigning exception logic, validating scenarios, and establishing preventive governance." property="og:description"/>
+<meta content="https://malairov.github.io/cases/safety-stock-diagnostic.html" property="og:url"/>
+<meta content="https://malairov.github.io/assets/og-diagnostic.png" property="og:image"/>
+<meta content="Operational control and decision assurance case study" property="og:image:alt"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Pavlo Malairov" name="author"/>
+<meta content="#f4f0e7" name="theme-color"/>
+<meta content="light" name="color-scheme"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="Pavlo Malairov, PMP" property="og:site_name"/>
+<meta content="en_CA" property="og:locale"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="Operational Control & Decision Assurance | Pavlo Malairov, PMP" name="twitter:title"/>
+<meta content="Case study: diagnosing a silent decision-control failure, tracing the end-to-end process, redesigning exception logic, validating scenarios, and establishing preventive governance." name="twitter:description"/>
+<meta content="Operational control and decision assurance case study" name="twitter:image:alt"/>
+<meta content="https://malairov.github.io/assets/og-diagnostic.png" name="twitter:image"/>
+<meta content="image/png" property="og:image:type"/>
+<link href="../assets/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../assets/apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="../css/site.css?v=76" rel="stylesheet"/>
+<script>document.documentElement.classList.add("js");</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"CreativeWork",
+  "headline":"Operational Control and Decision Assurance",
+  "author":{"@type":"Person","name":"Pavlo Malairov"},
+  "url":"https://malairov.github.io/cases/safety-stock-diagnostic.html",
+  "description":"Case study: diagnosing a silent decision-control failure, tracing the end-to-end process, redesigning exception logic, validating scenarios, and establishing preventive governance.",
+  "dateModified":"2026-09-23",
+  "inLanguage":"en-CA",
+  "image":"https://malairov.github.io/assets/og-diagnostic.png",
+  "mainEntityOfPage":{"@type":"WebPage","@id":"https://malairov.github.io/cases/safety-stock-diagnostic.html"}
+}
+</script>
+
+<style id="business-delivery-overrides">
+.business-delivery-case .case-hero h1 { max-width: 980px; }
+.business-delivery-case .case-hero .lede { max-width: 880px; }
+.delivery-system {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+}
+.delivery-step {
+  position: relative;
+  border: 1px solid var(--rule, #d6d0c5);
+  background: var(--paper-soft, #f8f5ee);
+  padding: 22px 20px 20px;
+  min-height: 185px;
+}
+.delivery-step .step-no {
+  display: block;
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--brass, #8d6f3e);
+  margin-bottom: 12px;
+}
+.delivery-step h3 { margin: 0 0 9px; }
+.delivery-step p { margin: 0; }
+.delivery-step .output {
+  display: block;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule, #d6d0c5);
+  font-size: 13px;
+  color: var(--ink-soft, #4f4b44);
+}
+.signal-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--rule, #d6d0c5);
+  border: 1px solid var(--rule, #d6d0c5);
+  margin-top: 26px;
+}
+.signal-strip article { background: var(--paper, #fffdf8); padding: 18px; }
+.signal-strip strong { display:block; margin-bottom:6px; }
+.value-chain {
+  margin-top: 32px;
+  padding: 24px;
+  border-left: 3px solid var(--brass, #8d6f3e);
+  background: var(--paper-soft, #f8f5ee);
+}
+.value-chain strong { display:block; margin-bottom:8px; }
+@media (max-width: 900px) {
+  .delivery-system { grid-template-columns: 1fr 1fr; }
+  .signal-strip { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 620px) {
+  .delivery-system, .signal-strip { grid-template-columns: 1fr; }
+  .delivery-step { min-height: auto; }
+}
+</style>
+
+</head>
+<body class="case-page business-delivery-case " data-analytics-page="case-operational-assurance">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="shell header-inner">
+    <a aria-label="Pavlo Malairov portfolio home" class="brand" href="../index.html">
+      <span aria-hidden="true" class="brand-mark">PM</span>
+      <span class="brand-copy"><strong>Pavlo Malairov, PMP</strong><span>Business delivery · transformation · implementation</span></span>
+    </a>
+    <nav aria-label="Primary navigation" class="nav-links" id="primaryNav">
+      <a aria-current="location" href="../index.html#work">Selected work</a>
+      <a href="../index.html#approach">Approach</a>
+      <a href="../index.html#background">Background</a>
+      <a class="mobile-nav-only" href="../index.html#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="button button-secondary desktop-only" href="../index.html#contact">Contact</a>
+      <button aria-controls="primaryNav" aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle" type="button"><span></span></button>
+    </div>
+  </div>
+  <div aria-hidden="true" class="reading-progress"><span></span></div>
+</header>
+<main id="main" tabindex="-1">
+
+<section class="case-hero">
+  <div class="shell">
+    <nav aria-label="Breadcrumb" class="case-breadcrumb"><ol><li><a href="../index.html#work">Selected work</a></li><li aria-current="page">Operational control & decision assurance</li></ol></nav>
+    <div class="case-hero-grid">
+      <div class="case-hero-copy reveal">
+        <span class="eyebrow">Case 03 · Operational assurance · Process improvement</span>
+        <h1>Rebuilding a Decision Process That Could Silently Hide Risk</h1>
+        <p class="lede">A technically successful automated workflow could still remove new or low-history exceptions before human review. I treated the problem as an end-to-end business-control failure: traced the complete decision chain, isolated where uncertainty was being converted into false confidence, rebuilt the exception logic, validated the scenarios, and added preventive governance.</p>
+      </div>
+      <aside class="case-hero-aside reveal">
+        <ul class="case-fact-list">
+          <li><strong>Problem</strong><span>Silent exception loss</span></li>
+          <li><strong>Risk</strong><span>Decision-makers could miss unresolved work</span></li>
+          <li><strong>Method</strong><span>End-to-end process & control tracing</span></li>
+          <li><strong>Outcome</strong><span>Visible, explainable exception decisions</span></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section aria-label="Case evidence" class="proof-bar">
+  <div class="shell case-proof-grid">
+    <div class="case-proof"><strong>5</strong><span>control stages traced</span></div>
+    <div class="case-proof"><strong>4</strong><span>core scenarios validated</span></div>
+    <div class="case-proof"><strong>1</strong><span>central exception-review path</span></div>
+    <div class="case-proof"><strong>End-to-end</strong><span>reconciliation</span></div>
+    <div class="case-proof"><strong>Visible</strong><span>failure states</span></div>
+    <div class="case-proof"><strong>Preventive</strong><span>governance</span></div>
+  </div>
+</section>
+
+<section class="case-section">
+  <div class="shell case-section-grid">
+    <div class="case-section-title reveal"><span class="section-number">01 / Management failure</span><h2>The system was technically valid. The decision process was not.</h2></div>
+    <div class="case-section-body reveal">
+      <p class="lead">The defect was not simply a bad formula or macro. Several individually reasonable rules combined to turn “insufficient evidence” into “no action required.” The final output looked clean precisely because the unresolved work had disappeared.</p>
+      <div class="before-after">
+        <article><span class="label">Failure state</span><h3>Uncertainty was interpreted as absence of demand.</h3><ul>
+          <li>New item had little or no history</li><li>Calculation produced blank, zero, or neutral state</li><li>Classification downgraded the item</li><li>Filter removed it from the manager’s review surface</li>
+        </ul></article>
+        <article><span class="label">Control principle</span><h3>Uncertainty must remain visible until someone resolves it.</h3><ul>
+          <li>Preserve a distinct uncertainty state</li><li>Assign review reason and ownership</li><li>Use temporary protection when evidence is incomplete</li><li>Close only after an explicit business disposition</li>
+        </ul></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case-section">
+  <div class="shell case-section-grid">
+    <div class="case-section-title reveal"><span class="section-number">02 / Assurance process</span><h2>Six control processes turned a hidden defect into an explainable decision chain.</h2></div>
+    <div class="case-section-body reveal">
+      <div class="delivery-system">
+        <article class="delivery-step"><span class="step-no">01 · Detect</span><h3>Find the management symptom</h3><p>Identify why expected exceptions are absent from the decision surface rather than assuming the final output is complete.</p><span class="output"><strong>Output:</strong> observable failure condition</span></article>
+        <article class="delivery-step"><span class="step-no">02 · Trace</span><h3>Follow the full process</h3><p>Trace records through source input, transformation, formulas, automation, classification, and final filters.</p><span class="output"><strong>Output:</strong> stage-by-stage evidence</span></article>
+        <article class="delivery-step"><span class="step-no">03 · Diagnose</span><h3>Separate defect from decision logic</h3><p>Determine whether the failure comes from data, structure, calculation, automation, business rules, or the interaction between them.</p><span class="output"><strong>Output:</strong> root-cause model</span></article>
+        <article class="delivery-step"><span class="step-no">04 · Redesign</span><h3>Make uncertainty explicit</h3><p>Introduce visible exception states, ownership, exclusion reasons, dynamic structure, and fail-visible controls.</p><span class="output"><strong>Output:</strong> corrected control design</span></article>
+        <article class="delivery-step"><span class="step-no">05 · Validate</span><h3>Test scenarios, not just code</h3><p>Validate null, zero, sparse, and mature-history scenarios and reconcile record counts and keys between stages.</p><span class="output"><strong>Output:</strong> evidence that the decision chain holds</span></article>
+        <article class="delivery-step"><span class="step-no">06 · Govern</span><h3>Prevent silent regression</h3><p>Make structural changes testable, preserve exclusion reasons, and require visible errors when a stage stops reconciling.</p><span class="output"><strong>Output:</strong> preventive assurance</span></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case-section">
+  <div class="shell case-section-grid">
+    <div class="case-section-title reveal"><span class="section-number">03 / Corrective decisions</span><h2>The strongest controls were managerial rules expressed through the system.</h2></div>
+    <div class="case-section-body reveal">
+      <div class="decision-grid">
+        <article class="decision"><span class="index">01</span><h3>No silent exclusions</h3><p>An item may leave the review surface only when the system records why, by which rule, and where the decision can be audited.</p></article>
+        <article class="decision"><span class="index">02</span><h3>Reconcile every stage</h3><p>Counts and keys are compared across source, transformed data, calculated state, automated output, and the final review view.</p></article>
+        <article class="decision"><span class="index">03</span><h3>Fail visibly</h3><p>Missing headers, structural changes, duplicate keys, or reconciliation gaps create a visible error instead of a plausible partial result.</p></article>
+        <article class="decision"><span class="index">04</span><h3>Protect abnormal states</h3><p>New and sparse-history cases remain visible until evidence supports a normal classification or deliberate disposition.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case-section">
+  <div class="shell case-section-grid">
+    <div class="case-section-title reveal"><span class="section-number">04 / Business value</span><h2>Control assurance made the automated process trustworthy enough to support decisions.</h2></div>
+    <div class="case-section-body reveal">
+      <table class="outcome-table">
+        <thead><tr><th>Level</th><th>What changed</th><th>Management value</th></tr></thead>
+        <tbody>
+          <tr><td>Decision quality</td><td>Unknown and abnormal states remained visible instead of being converted into “no action.”</td><td>Lower false-confidence risk</td></tr>
+          <tr><td>Operational control</td><td>Exceptions followed one explicit review path with reason, state, and ownership.</td><td>More reliable follow-through</td></tr>
+          <tr><td>Technical assurance</td><td>Data transformations, formulas, automation, and filters were reconciled as one chain.</td><td>Fewer silent failures</td></tr>
+          <tr><td>Governance</td><td>Scenario tests and structural checks made future changes verifiable.</td><td>Repeatable control assurance</td></tr>
+        </tbody>
+      </table>
+      <div class="value-chain"><strong>Management principle</strong>Automation is valuable only when a manager can explain what the system included, excluded, blocked, classified as uncertain, and surfaced for action.</div>
+    </div>
+  </div>
+</section>
+
+<section class="case-section">
+  <div class="shell case-section-grid">
+    <div class="case-section-title reveal"><span class="section-number">05 / Transferability</span><h2>The method applies anywhere an automated workflow influences operational decisions.</h2></div>
+    <div class="case-section-body reveal">
+      <div class="transfer-grid">
+        <article><h3>Process improvement</h3><p>Diagnose the complete system that produces the outcome instead of repeatedly repairing the most visible symptom.</p></article>
+        <article><h3>Implementation assurance</h3><p>Validate data, interfaces, automation, business rules, exceptions, and user-facing decision states as one delivery chain.</p></article>
+        <article><h3>Operational risk</h3><p>Prevent technically valid logic from hiding unresolved business risk behind a clean dashboard or report.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case-next">
+  <div class="shell case-inquiry">
+    <div><span class="eyebrow">Discuss an opportunity</span>
+      <p>For project management, business transformation, implementation, or technical-operations opportunities, contact me directly. Full CV and references are available on request.</p>
+    </div>
+    <a class="button button-secondary" href="mailto:pavlomalairov@gmail.com?subject=Project%20Management%20Opportunity">Discuss an opportunity</a>
+  </div>
+  <div class="shell case-next-grid"><a class="next-link" href="ai-transportation-delivery.html"><span>Previous case</span><strong>← Product Delivery & Scale-Up</strong></a><a class="next-link" href="../index.html#work"><span>Return</span><strong>Selected work</strong></a></div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="shell footer-grid">
+    <p>© 2026 Pavlo Malairov, PMP.</p>
+    <div class="footer-links"><a href="../privacy.html">Privacy</a></div>
+  </div>
+</footer>
+<script defer src="../js/site.js?v=76"></script>
+</body>
+</html>
