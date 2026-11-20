@@ -482,6 +482,60 @@
     },
   });
 
+  const revealElements = [...document.querySelectorAll(".reveal")];
+  if (revealElements.length && "IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px 60px 0px" });
+    revealElements.forEach((element) => revealObserver.observe(element));
+  } else {
+    revealElements.forEach((element) => element.classList.add("is-visible"));
+  }
+
+  const flowDescriptions = {
+    "work-order": ["Work-order requests", "Requests become structured records before matching or action occurs."],
+    receipts: ["Daily receipts", "Confirmed arrivals update shared records for reconciliation and lead-time measurement."],
+    orders: ["Weekly purchase orders", "Order records enter the shared system with statuses that can be checked and traced."],
+    items: ["Item requests", "Item requests are normalized so ownership, status and exceptions stay visible."],
+    usage: ["Daily usage", "Point-of-use events become structured inputs for ordering and exception review."],
+    counts: ["Cycle counts", "Physical counts can be compared with recorded stock to expose differences."],
+    snapshots: ["Stock snapshots", "Stock snapshots provide a consistent state to compare with new events."],
+    site: ["Second-site data", "A second site follows the same field and status rules before data is reconciled."],
+  };
+  const flowNodes = [...document.querySelectorAll("[data-flow-node]")];
+  const architectureBoard = document.querySelector("[data-architecture]");
+  const flowTitle = document.querySelector("[data-flow-title]");
+  const flowDescription = document.querySelector("[data-flow-description]");
+  if (flowNodes.length && flowTitle && flowDescription) {
+    const showFlow = (node) => {
+      const content = flowDescriptions[node.dataset.flowNode];
+      if (!content) return;
+      flowNodes.forEach((item) => {
+        const active = item === node;
+        item.classList.toggle("is-active", active);
+        item.setAttribute("aria-pressed", String(active));
+      });
+      architectureBoard?.classList.add("is-path-active");
+      flowTitle.textContent = content[0];
+      flowDescription.textContent = content[1];
+    };
+    flowNodes.forEach((node) => {
+      node.addEventListener("click", () => showFlow(node));
+      node.addEventListener("pointerenter", () => showFlow(node));
+      node.addEventListener("focus", () => showFlow(node));
+      node.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          showFlow(node);
+        }
+      });
+    });
+  }
+
   document.querySelectorAll("[data-current-year]").forEach((year) => {
     year.textContent = String(new Date().getFullYear());
   });

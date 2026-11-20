@@ -4,13 +4,13 @@
 <meta charset="utf-8"/>
 <meta content="v78-business-delivery" name="build-version"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Operational Control & Decision Assurance | Pavlo Malairov, PMP</title>
-<meta content="Case study: diagnosing a silent decision-control failure, tracing the end-to-end process, redesigning exception logic, validating scenarios, and establishing preventive governance." name="description"/>
+<title>Rebuilding a Decision Process That Could Silently Hide Risk | Pavlo Malairov, PMP</title>
+<meta content="Tracing a silent decision-control failure through source data, automation and exception logic, then making uncertain cases visible for human review." name="description"/>
 <link href="https://malairov.github.io/cases/safety-stock-diagnostic.html" rel="canonical"/>
 <meta content="index,follow" name="robots"/>
 <meta content="article" property="og:type"/>
-<meta content="Operational Control & Decision Assurance | Pavlo Malairov, PMP" property="og:title"/>
-<meta content="Case study: diagnosing a silent decision-control failure, tracing the end-to-end process, redesigning exception logic, validating scenarios, and establishing preventive governance." property="og:description"/>
+<meta content="Rebuilding a Decision Process That Could Silently Hide Risk | Pavlo Malairov, PMP" property="og:title"/>
+<meta content="Tracing a silent decision-control failure through source data, automation and exception logic, then making uncertain cases visible for human review." property="og:description"/>
 <meta content="https://malairov.github.io/cases/safety-stock-diagnostic.html" property="og:url"/>
 <meta content="https://malairov.github.io/assets/og-diagnostic.png" property="og:image"/>
 <meta content="Operational control and decision assurance case study" property="og:image:alt"/>
@@ -23,24 +23,24 @@
 <meta content="en_CA" property="og:locale"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
-<meta content="Operational Control & Decision Assurance | Pavlo Malairov, PMP" name="twitter:title"/>
-<meta content="Case study: diagnosing a silent decision-control failure, tracing the end-to-end process, redesigning exception logic, validating scenarios, and establishing preventive governance." name="twitter:description"/>
+<meta content="Rebuilding a Decision Process That Could Silently Hide Risk | Pavlo Malairov, PMP" name="twitter:title"/>
+<meta content="Tracing a silent decision-control failure through source data, automation and exception logic, then making uncertain cases visible for human review." name="twitter:description"/>
 <meta content="Operational control and decision assurance case study" name="twitter:image:alt"/>
 <meta content="https://malairov.github.io/assets/og-diagnostic.png" name="twitter:image"/>
 <meta content="image/png" property="og:image:type"/>
 <link href="../assets/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="../assets/apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="../css/site.css?v=76" rel="stylesheet"/>
+<link href="../css/site.css?v=78" rel="stylesheet"/>
 <script>document.documentElement.classList.add("js");</script>
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
   "@type":"CreativeWork",
-  "headline":"Operational Control and Decision Assurance",
+  "headline":"Rebuilding a Decision Process That Could Silently Hide Risk",
   "author":{"@type":"Person","name":"Pavlo Malairov"},
   "url":"https://malairov.github.io/cases/safety-stock-diagnostic.html",
-  "description":"Case study: diagnosing a silent decision-control failure, tracing the end-to-end process, redesigning exception logic, validating scenarios, and establishing preventive governance.",
-  "dateModified":"2026-09-23",
+  "description":"Tracing a silent decision-control failure through source data, automation and exception logic, then making uncertain cases visible for human review.",
+  "dateModified":"2026-11-19",
   "inLanguage":"en-CA",
   "image":"https://malairov.github.io/assets/og-diagnostic.png",
   "mainEntityOfPage":{"@type":"WebPage","@id":"https://malairov.github.io/cases/safety-stock-diagnostic.html"}
@@ -110,16 +110,17 @@
 </style>
 
 </head>
-<body class="case-page business-delivery-case " data-analytics-page="case-operational-assurance">
+<body class="case-page business-delivery-case portfolio-case" data-analytics-page="case-operational-assurance">
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="shell header-inner">
     <a aria-label="Pavlo Malairov portfolio home" class="brand" href="../index.html">
       <span aria-hidden="true" class="brand-mark">PM</span>
-      <span class="brand-copy"><strong>Pavlo Malairov, PMP</strong><span>Business delivery · transformation · implementation</span></span>
+      <span class="brand-copy"><strong>Pavlo Malairov, PMP</strong><span>Technical delivery · working systems</span></span>
     </a>
     <nav aria-label="Primary navigation" class="nav-links" id="primaryNav">
       <a aria-current="location" href="../index.html#work">Selected work</a>
+      <a href="../index.html#skills">Skills</a>
       <a href="../index.html#approach">Approach</a>
       <a href="../index.html#background">Background</a>
       <a class="mobile-nav-only" href="../index.html#contact">Contact</a>
@@ -162,6 +163,20 @@
     <div class="case-proof"><strong>End-to-end</strong><span>reconciliation</span></div>
     <div class="case-proof"><strong>Visible</strong><span>failure states</span></div>
     <div class="case-proof"><strong>Preventive</strong><span>governance</span></div>
+  </div>
+</section>
+
+<section class="case-visual-section" aria-labelledby="case03-visual-title">
+  <div class="shell">
+    <div class="case-visual-heading"><span class="eyebrow">Decision trace / 03</span><h2 id="case03-visual-title">Follow the record to the decision surface.</h2></div>
+    <div class="case-map" role="img" aria-label="Source records flow through transformation, calculation, automation and classification to a human review view; uncertain records remain visible">
+      <div class="case-map-node"><span>01 / Source</span><strong>Input records</strong><small>Counts and keys</small></div>
+      <div class="case-map-node"><span>02 / Transform</span><strong>Structured data</strong><small>Preserve identity</small></div>
+      <div class="case-map-node"><span>03 / Calculate</span><strong>Evidence state</strong><small>Unknown stays distinct</small></div>
+      <div class="case-map-node"><span>04 / Classify</span><strong>Automation rules</strong><small>Explain exclusions</small></div>
+      <div class="case-map-node"><span>05 / Review</span><strong>Decision surface</strong><small>Uncertainty visible</small></div>
+    </div>
+    <p class="case-map-note">Uncertain records → explicit review reason, owner and decision path.</p>
   </div>
 </section>
 
@@ -212,10 +227,11 @@
   </div>
 </section>
 
-<section class="case-section">
+<section class="case-section case-results-section section-navy">
   <div class="shell case-section-grid">
     <div class="case-section-title reveal"><span class="section-number">04 / Business value</span><h2>Control assurance made the automated process trustworthy enough to support decisions.</h2></div>
     <div class="case-section-body reveal">
+      <div class="case-result-grid" aria-label="Control assurance evidence"><div><strong>5</strong><span>control stages traced</span></div><div><strong>4</strong><span>core scenarios validated</span></div><div><strong>1</strong><span>central exception-review path</span></div></div>
       <table class="outcome-table">
         <thead><tr><th>Level</th><th>What changed</th><th>Management value</th></tr></thead>
         <tbody>
@@ -250,7 +266,7 @@
     </div>
     <a class="button button-secondary" href="mailto:pavlomalairov@gmail.com?subject=Project%20Management%20Opportunity">Discuss an opportunity</a>
   </div>
-  <div class="shell case-next-grid"><a class="next-link" href="ai-transportation-delivery.html"><span>Previous case</span><strong>← Product Delivery & Scale-Up</strong></a><a class="next-link" href="../index.html#work"><span>Return</span><strong>Selected work</strong></a></div>
+  <div class="shell case-next-grid"><a class="next-link" href="ai-transportation-delivery.html"><span>Previous case</span><strong>← From Technical Concept to Accepted Product</strong></a><a class="next-link" href="automation-ai-delivery.html"><span>Next case</span><strong>Automation and AI-Enabled Delivery With Existing Tools →</strong></a></div>
 </section>
 </main>
 <footer class="site-footer">
@@ -259,6 +275,6 @@
     <div class="footer-links"><a href="../privacy.html">Privacy</a></div>
   </div>
 </footer>
-<script defer src="../js/site.js?v=76"></script>
+<script defer src="../js/site.js?v=78"></script>
 </body>
 </html>
